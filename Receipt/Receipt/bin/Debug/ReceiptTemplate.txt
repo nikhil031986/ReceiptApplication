@@ -1,0 +1,29 @@
+
+
+
+
+
+
+
+
+RECEIPT NO		  :- _DBReceiptNO					DATE	:- _DBReceiptDate
+
+NAME			  :- _DBCustomerName
+
+FLAT / SHOP NO 	  :- _DBFlatShopNo
+
+RS.(IN WORDS)		  :- _DBAmountInWord
+
+CH./RTGS/NEFT/IMPS NO  :- _DBCheqRtgsNeftImps					DATE	:- _DBDate
+
+BANK NAME		  :- _DBBankName
+
+BRANCH		  :- _DBBranch
+
+Received As Deposit	  :- (_DBReceivedAs)
+
+RS.			  :- _DBAmount					FOR, RIDHAM ENTRPRISE
+										----------
+Subject To The Realization of Cheque					
+Subject To The Ahmedabad Jurisdiction					
+										----------

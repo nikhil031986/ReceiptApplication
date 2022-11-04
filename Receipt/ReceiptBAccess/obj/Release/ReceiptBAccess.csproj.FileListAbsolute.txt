@@ -1,0 +1,17 @@
+D:\Projects\Karanavti5\Receipt\ReceiptBAccess\bin\Release\x86\sqlite3.dll
+D:\Projects\Karanavti5\Receipt\ReceiptBAccess\bin\Release\x64\sqlite3.dll
+D:\Projects\Karanavti5\Receipt\ReceiptBAccess\bin\Release\x64\SQLite.Interop.dll
+D:\Projects\Karanavti5\Receipt\ReceiptBAccess\bin\Release\x86\SQLite.Interop.dll
+D:\Projects\Karanavti5\Receipt\ReceiptBAccess\bin\Release\ReceiptBAccess.dll
+D:\Projects\Karanavti5\Receipt\ReceiptBAccess\bin\Release\ReceiptBAccess.pdb
+D:\Projects\Karanavti5\Receipt\ReceiptBAccess\bin\Release\ReceiptDataAcess.dll
+D:\Projects\Karanavti5\Receipt\ReceiptBAccess\bin\Release\ReceiptEntity.dll
+D:\Projects\Karanavti5\Receipt\ReceiptBAccess\bin\Release\System.Data.SQLite.dll
+D:\Projects\Karanavti5\Receipt\ReceiptBAccess\bin\Release\ReceiptDataAcess.pdb
+D:\Projects\Karanavti5\Receipt\ReceiptBAccess\bin\Release\ReceiptEntity.pdb
+D:\Projects\Karanavti5\Receipt\ReceiptBAccess\bin\Release\System.Data.SQLite.xml
+D:\Projects\Karanavti5\Receipt\ReceiptBAccess\obj\Release\ReceiptBAccess.csproj.AssemblyReference.cache
+D:\Projects\Karanavti5\Receipt\ReceiptBAccess\obj\Release\ReceiptBAccess.csproj.CoreCompileInputs.cache
+D:\Projects\Karanavti5\Receipt\ReceiptBAccess\obj\Release\ReceiptBAccess.csproj.CopyComplete
+D:\Projects\Karanavti5\Receipt\ReceiptBAccess\obj\Release\ReceiptBAccess.dll
+D:\Projects\Karanavti5\Receipt\ReceiptBAccess\obj\Release\ReceiptBAccess.pdb

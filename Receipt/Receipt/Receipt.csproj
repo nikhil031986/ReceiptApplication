@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9C0AA4D5-CBB6-4934-A4C4-F8DF678B4629}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Receipt</RootNamespace>
+    <AssemblyName>Receipt</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ClsUtil.cs" />
+    <Compile Include="frmCheqDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCheqDetail.Designer.cs">
+      <DependentUpon>frmCheqDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCheqDetailsList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCheqDetailsList.Designer.cs">
+      <DependentUpon>frmCheqDetailsList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCustomer.Designer.cs">
+      <DependentUpon>frmCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmImportData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmImportData.Designer.cs">
+      <DependentUpon>frmImportData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReceiptEntry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReceiptEntry.Designer.cs">
+      <DependentUpon>frmReceiptEntry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReceiptList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReceiptList.Designer.cs">
+      <DependentUpon>frmReceiptList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRecipt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRecipt.Designer.cs">
+      <DependentUpon>frmRecipt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReport.Designer.cs">
+      <DependentUpon>frmReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSiteMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSiteMaster.Designer.cs">
+      <DependentUpon>frmSiteMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUser.Designer.cs">
+      <DependentUpon>frmUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Wing_Master.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Wing_Master.Designer.cs">
+      <DependentUpon>Wing_Master.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="frmCheqDetail.resx">
+      <DependentUpon>frmCheqDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCheqDetailsList.resx">
+      <DependentUpon>frmCheqDetailsList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCustomer.resx">
+      <DependentUpon>frmCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmImportData.resx">
+      <DependentUpon>frmImportData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReceiptEntry.resx">
+      <DependentUpon>frmReceiptEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReceiptList.resx">
+      <DependentUpon>frmReceiptList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRecipt.resx">
+      <DependentUpon>frmRecipt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReport.resx">
+      <DependentUpon>frmReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSiteMaster.resx">
+      <DependentUpon>frmSiteMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUser.resx">
+      <DependentUpon>frmUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Wing_Master.resx">
+      <DependentUpon>Wing_Master.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ReceiptBAccess\ReceiptBAccess.csproj">
+      <Project>{2c1bb81c-425e-47a2-b908-52e0d0890f36}</Project>
+      <Name>ReceiptBAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ReceiptEntity\ReceiptEntity.csproj">
+      <Project>{19368975-6939-4c85-9860-40d94ba8f0f7}</Project>
+      <Name>ReceiptEntity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ReceiptLog\ReceiptLog.csproj">
+      <Project>{ce4f2d03-e3b0-469c-9ff6-162b20fd5a67}</Project>
+      <Name>ReceiptLog</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Login.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

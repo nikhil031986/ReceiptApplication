@@ -1,0 +1,6 @@
+D:\Projects\Karanavti5\Receipt\ReceiptEntity\bin\Debug\ReceiptEntity.dll
+D:\Projects\Karanavti5\Receipt\ReceiptEntity\bin\Debug\ReceiptEntity.pdb
+D:\Projects\Karanavti5\Receipt\ReceiptEntity\obj\Debug\ReceiptEntity.csproj.AssemblyReference.cache
+D:\Projects\Karanavti5\Receipt\ReceiptEntity\obj\Debug\ReceiptEntity.csproj.CoreCompileInputs.cache
+D:\Projects\Karanavti5\Receipt\ReceiptEntity\obj\Debug\ReceiptEntity.dll
+D:\Projects\Karanavti5\Receipt\ReceiptEntity\obj\Debug\ReceiptEntity.pdb
