@@ -19,13 +19,13 @@ namespace ReceiptDataAcess
             try
             {
                 cmd.CommandText = @"SELECT CM.Customer_Id,CM.Wing_Master_Id,CM.Wing_Details_Id,WM.Wing_Name,WD.FlatNo,CM.Customer_Name,CM.Address,
-                                        CM.Con_Details,CM.Email_Id,CM.Customer_Wing_Name 
+                                        CM.Con_Details,CM.Email_Id,CM.Customer_Wing_Name,CM.Pan,CM.Aadhar,CM.Customer1,CM.Pan1,CM.Aadhar1,CM.Customer2,CM.Pan2,CM.Aadhar2,CM.Customer3,CM.Pan3,CM.Aadhar3
                                     FROM Customer_Master CM
                                     INNER JOIN Wing_Master WM
                                         ON WM.Wing_Master_Id = CM.Wing_Master_Id
                                     INNER JOIN Wing_Details WD
                                         ON WM.Wing_Master_Id = WD.Wing_MasterId
-                                    AND CM.Wing_Details_Id = WD.Wing_DetailsId "+ (customerId == 0 ? ";" : " WHERE Customer_Id=@Customer_Id;");
+                                    AND CM.Wing_Details_Id = WD.Wing_DetailsId " + (customerId == 0 ? ";" : " WHERE Customer_Id=@Customer_Id;");
                 if (customerId > 0)
                 {
                     cmd.Parameters.Clear();
@@ -36,7 +36,8 @@ namespace ReceiptDataAcess
                 {
                     dtCustomer.AsEnumerable().ToList().ForEach(firstRow =>
                     {
-                        lstCustomers.Add(new EnCustomer(Convert.ToInt32(firstRow["Customer_Id"]),
+                        lstCustomers.Add(new EnCustomer(
+                            Convert.ToInt32(firstRow["Customer_Id"]),
                                                         Convert.ToInt32(firstRow["Wing_Master_Id"]),
                                                         Convert.ToInt32(firstRow["Wing_Details_Id"]),
                                                         Convert.ToString(firstRow["Wing_Name"]),
@@ -45,7 +46,20 @@ namespace ReceiptDataAcess
                                                         Convert.ToString(firstRow["Address"]),
                                                         Convert.ToString(firstRow["Con_Details"]),
                                                         Convert.ToString(firstRow["Email_Id"]),
-                                                        Convert.ToString(firstRow["Customer_Wing_Name"])));
+                                                        Convert.ToString(firstRow["Customer_Wing_Name"]),
+
+                                                        Convert.ToString(firstRow["Pan"]),
+                                                        Convert.ToString(firstRow["Aadhar"]),
+                                                        Convert.ToString(firstRow["Customer1"]),
+                                                        Convert.ToString(firstRow["Pan1"]),
+                                                        Convert.ToString(firstRow["Aadhar1"]),
+                                                        Convert.ToString(firstRow["Customer2"]),
+                                                        Convert.ToString(firstRow["Pan2"]),
+                                                         Convert.ToString(firstRow["Aadhar2"]),
+                                                        Convert.ToString(firstRow["Customer3"]),
+                                                        Convert.ToString(firstRow["Pan3"]),
+                                                        Convert.ToString(firstRow["Aadhar3"])
+                                                        ));
                     });
                 }
                 return lstCustomers;
@@ -70,8 +84,8 @@ namespace ReceiptDataAcess
                 bool isEdit = false;
                 if (string.IsNullOrEmpty(Convert.ToString(enCustomer.Customer_Id)) || enCustomer.Customer_Id == 0)
                 {
-                    strCommand = @"Insert into Customer_Master (Wing_Master_Id,Wing_Details_Id,Customer_Name,Address,Con_Details,Email_Id,Customer_Wing_Name,Entry_By,Entry_DateTime) VALUES
-                                    (@Wing_Master_Id,@Wing_Details_Id,@Customer_Name,@Address,@Con_Details,@Email_Id,@Customer_Wing_Name,@Entry_By,@Entry_DateTime); 
+                    strCommand = @"Insert into Customer_Master (Wing_Master_Id,Wing_Details_Id,Customer_Name,Address,Con_Details,Email_Id,Customer_Wing_Name,Entry_By,Entry_DateTime,Pan,Aadhar,Customer1,Pan1,Aadhar1,Customer2,Pan2,Aadhar2,Customer3,Pan3,Aadhar3) VALUES
+                                    (@Wing_Master_Id,@Wing_Details_Id,@Customer_Name,@Address,@Con_Details,@Email_Id,@Customer_Wing_Name,@Entry_By,@Entry_DateTime,@Pan,@Aadhar,@Customer1,@Pan1,@Aadhar1,@Customer2,@Pan2,@Aadhar2,@Customer3,@Pan3,@Aadhar3); 
                                     SELECT last_insert_rowid() FROM Customer_Master;";
                 }
                 else
@@ -79,7 +93,10 @@ namespace ReceiptDataAcess
                     isEdit = true;
                     strCommand = @"Update Customer_Master set Wing_Master_Id=@Wing_Master_Id,Wing_Details_Id=@Wing_Details_Id,
                                 Customer_Name=@Customer_Name,Address=@Address,Con_Details=@Con_Details,Email_Id=@Email_Id,
-                                Customer_Wing_Name=@Customer_Wing_Name, Update_By=@Update_By, Update_DateTime=@Update_DateTime WHERE Customer_Id=@Customer_Id; SELECT @Customer_Id;";
+                                Customer_Wing_Name=@Customer_Wing_Name, Update_By=@Update_By, Update_DateTime=@Update_DateTime, 
+                                Pan=@Pan,Aadhar=@Aadhar,Customer1=@Customer1,Pan1=@Pan1,Aadhar1=@Aadhar1,
+                                Customer2=@Customer2,Pan2=@Pan2,Aadhar2=@Aadhar2,Customer3=@Customer3,Pan3=@Pan3,Aadhar3=@Aadhar3
+                                WHERE Customer_Id=@Customer_Id; SELECT @Customer_Id;";
                 }
                 cmd.CommandText = strCommand;
                 cmd.CommandType = System.Data.CommandType.Text;
@@ -91,7 +108,19 @@ namespace ReceiptDataAcess
                 cmd.Parameters.AddWithValue("@Con_Details", enCustomer.Con_Details);
                 cmd.Parameters.AddWithValue("@Email_Id", enCustomer.Email_Id);
                 cmd.Parameters.AddWithValue("@Customer_Wing_Name", enCustomer.Customer_Wing_Name);
-                if(!isEdit)
+                cmd.Parameters.AddWithValue("@Pan", enCustomer.Pan);
+                cmd.Parameters.AddWithValue("@Aadhar", enCustomer.Aadhar);
+                cmd.Parameters.AddWithValue("@Customer1", enCustomer.Customer1);
+                cmd.Parameters.AddWithValue("@Pan1", enCustomer.Pan1);
+                cmd.Parameters.AddWithValue("@Aadhar1", enCustomer.Aadhar1);
+                cmd.Parameters.AddWithValue("@Customer2", enCustomer.Customer2);
+                cmd.Parameters.AddWithValue("@Pan2", enCustomer.Pan2);
+                cmd.Parameters.AddWithValue("@Aadhar2", enCustomer.Aadhar2);
+                cmd.Parameters.AddWithValue("@Customer3", enCustomer.Customer3);
+                cmd.Parameters.AddWithValue("@Pan3", enCustomer.Pan3);
+                cmd.Parameters.AddWithValue("@Aadhar3", enCustomer.Aadhar3);
+
+                if (!isEdit)
                 {
                     cmd.Parameters.AddWithValue("@Entry_By", 1);
                     cmd.Parameters.AddWithValue("@Entry_DateTime", DateTime.Now.ToString("dd/MM/yyyy hh:mm tt"));

@@ -67,6 +67,17 @@ namespace Receipt
                         dr["Con_Details"] = customer.Con_Details;
                         dr["Email_Id"] = customer.Email_Id;
                         dr["Customer_Wing_Name"] = customer.Customer_Wing_Name;
+                        dr["Pan"] = customer.Pan;
+                        dr["Aadhar"] = customer.Aadhar;
+                        dr["Customer1"] = customer.Customer1;
+                        dr["Pan1"] = customer.Pan1;
+                        dr["Aadhar1"] = customer.Aadhar1;
+                        dr["Customer2"] = customer.Customer2;
+                        dr["Pan2"] = customer.Pan2;
+                        dr["Aadhar2"] = customer.Aadhar2;
+                        dr["Customer3"] = customer.Customer3;
+                        dr["Pan3"] = customer.Pan3;
+                        dr["Aadhar3"] = customer.Aadhar3;
                     });
                     dtCustomer.AcceptChanges();
                 }
@@ -83,6 +94,17 @@ namespace Receipt
                     drNew["Con_Details"] = customer.Con_Details;
                     drNew["Email_Id"] = customer.Email_Id;
                     drNew["Customer_Wing_Name"] = customer.Customer_Wing_Name;
+                    drNew["Pan"] = customer.Pan;
+                    drNew["Aadhar"] = customer.Aadhar;
+                    drNew["Customer1"] = customer.Customer1;
+                    drNew["Pan1"] = customer.Pan1;
+                    drNew["Aadhar1"] = customer.Aadhar1;
+                    drNew["Customer2"] = customer.Customer2;
+                    drNew["Pan2"] = customer.Pan2;
+                    drNew["Aadhar2"] = customer.Aadhar2;
+                    drNew["Customer3"] = customer.Customer3;
+                    drNew["Pan3"] = customer.Pan3;
+                    drNew["Aadhar3"] = customer.Aadhar3;
                     dtCustomer.Rows.Add(drNew);
                 }
             });
@@ -100,6 +122,19 @@ namespace Receipt
             await ClsUtil.AddColumn(dtCustomer, "Con_Details", ClsUtil.ColumnType.dbString, "");
             await ClsUtil.AddColumn(dtCustomer, "Email_Id", ClsUtil.ColumnType.dbString, "");
             await ClsUtil.AddColumn(dtCustomer, "Customer_Wing_Name", ClsUtil.ColumnType.dbString, "");
+            await ClsUtil.AddColumn(dtCustomer, "Pan", ClsUtil.ColumnType.dbString, "0");
+            await ClsUtil.AddColumn(dtCustomer, "Aadhar", ClsUtil.ColumnType.dbString, "0");
+            await ClsUtil.AddColumn(dtCustomer, "Customer1", ClsUtil.ColumnType.dbString, "");
+            await ClsUtil.AddColumn(dtCustomer, "Pan1", ClsUtil.ColumnType.dbString, "");
+            await ClsUtil.AddColumn(dtCustomer, "Aadhar1", ClsUtil.ColumnType.dbString, "");
+            await ClsUtil.AddColumn(dtCustomer, "Customer2", ClsUtil.ColumnType.dbString, "");
+            await ClsUtil.AddColumn(dtCustomer, "Pan2", ClsUtil.ColumnType.dbString, "");
+            await ClsUtil.AddColumn(dtCustomer, "Aadhar2", ClsUtil.ColumnType.dbString, "");
+            await ClsUtil.AddColumn(dtCustomer, "Customer3", ClsUtil.ColumnType.dbString, "");
+            await ClsUtil.AddColumn(dtCustomer, "Pan3", ClsUtil.ColumnType.dbString, "");
+            await ClsUtil.AddColumn(dtCustomer, "Aadhar3", ClsUtil.ColumnType.dbString, "");
+
+
             dgCustomer.DataSource = dtCustomer;
             GetCustomerDetails();
         }
@@ -207,6 +242,17 @@ namespace Receipt
             txtContactNo.Text = String.Empty;
             txtCustomerWingName.Text = String.Empty;
             txtEmailId.Text = String.Empty;
+            txtPan.Text = String.Empty;
+            txtAadhar.Text = String.Empty;
+            txtCustomer1.Text = String.Empty;
+            txtPan1.Text = String.Empty;
+            txtAadhar1.Text = String.Empty;
+            txtCustomer2.Text = String.Empty;
+            txtPan2.Text = String.Empty;
+            txtAadhar2.Text = String.Empty;
+            txtCustomer3.Text = String.Empty;
+            txtPan3.Text = String.Empty;
+            txtAadhar3.Text = String.Empty;
         }
         private async void btnSave_Click(object sender, EventArgs e)
         {
@@ -225,7 +271,18 @@ namespace Receipt
                 txtAddress.Text,
                 txtContactNo.Text,
                 txtEmailId.Text,
-                txtCustomerWingName.Text);
+                txtCustomerWingName.Text,
+                txtPan.Text,
+                txtAadhar.Text,
+                txtCustomer1.Text,
+                txtPan1.Text,
+                txtAadhar1.Text,
+                txtCustomer2.Text,
+                txtPan2.Text,
+                txtAadhar2.Text,
+                txtCustomer3.Text,
+                txtPan3.Text,
+                txtAadhar3.Text);
             customerId = await BACustomerMaster.InsertUpdateCustomer(customer);
 
             GetCustomerDetails(Convert.ToInt32(customerId));
@@ -253,12 +310,23 @@ namespace Receipt
                         txtCustomerName.Tag = selectedCustomer;
                         txtCustomerName.Text = selectedRow.Customer_Name;
                         cmbWingName.SelectedValue = selectedRow.Wing_Master_Id;
-                        await FillWing(false,selectedRow.Wing_Master_Id);
+                        await FillWing(false, selectedRow.Wing_Master_Id);
                         cmbFlatNo.SelectedValue = selectedRow.Wing_Details_Id;
                         txtEmailId.Text = selectedRow.Email_Id;
                         txtAddress.Text = selectedRow.Address;
                         txtContactNo.Text = selectedRow.Con_Details;
                         txtCustomerWingName.Text = selectedRow.Customer_Wing_Name;
+                        txtPan.Text = selectedRow.Pan;
+                        txtAadhar.Text = selectedRow.Aadhar;
+                        txtCustomer1.Text = selectedRow.Customer1;
+                        txtPan1.Text = selectedRow.Pan1;
+                        txtAadhar1.Text = selectedRow.Aadhar1;
+                        txtCustomer2.Text = selectedRow.Customer2;
+                        txtPan2.Text = selectedRow.Pan2;
+                        txtAadhar2.Text = selectedRow.Aadhar2;
+                        txtCustomer3.Text = selectedRow.Customer3;
+                        txtPan3.Text = selectedRow.Pan3;
+                        txtAadhar3.Text = selectedRow.Aadhar3;
                     }
                 }
             }
@@ -267,5 +335,6 @@ namespace Receipt
                 MessageBox.Show(ex.Message.ToString());
             }
         }
+
     }
 }

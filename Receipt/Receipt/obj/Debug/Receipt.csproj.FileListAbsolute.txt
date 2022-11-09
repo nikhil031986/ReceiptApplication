@@ -35,3 +35,77 @@ D:\Projects\Karanavti5\Receipt\Receipt\obj\Debug\Receipt.pdb
 D:\Projects\Karanavti5\Receipt\Receipt\bin\Debug\ReceiptLog.dll
 D:\Projects\Karanavti5\Receipt\Receipt\bin\Debug\ReceiptLog.pdb
 D:\Projects\Karanavti5\Receipt\Receipt\obj\Debug\Receipt.frmImportData.resources
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\Receipt\bin\Debug\x86\sqlite3.dll
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\Receipt\bin\Debug\x64\sqlite3.dll
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\Receipt\bin\Debug\x64\SQLite.Interop.dll
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\Receipt\bin\Debug\x86\SQLite.Interop.dll
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\Receipt\bin\Debug\Receipt.exe.config
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\Receipt\bin\Debug\Receipt.exe
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\Receipt\bin\Debug\Receipt.pdb
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\Receipt\bin\Debug\ReceiptBAccess.dll
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\Receipt\bin\Debug\ReceiptEntity.dll
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\Receipt\bin\Debug\ReceiptLog.dll
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\Receipt\bin\Debug\ReceiptDataAcess.dll
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\Receipt\bin\Debug\System.Data.SQLite.dll
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\Receipt\bin\Debug\ReceiptBAccess.pdb
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\Receipt\bin\Debug\ReceiptEntity.pdb
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\Receipt\bin\Debug\ReceiptLog.pdb
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\Receipt\bin\Debug\ReceiptDataAcess.pdb
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\Receipt\bin\Debug\System.Data.SQLite.xml
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\Receipt\obj\Debug\Receipt.csprojAssemblyReference.cache
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\Receipt\obj\Debug\Receipt.frmCheqDetail.resources
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\Receipt\obj\Debug\Receipt.frmCheqDetailsList.resources
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\Receipt\obj\Debug\Receipt.frmCustomer.resources
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\Receipt\obj\Debug\Receipt.frmImportData.resources
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\Receipt\obj\Debug\Receipt.frmLogin.resources
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\Receipt\obj\Debug\Receipt.frmReceiptEntry.resources
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\Receipt\obj\Debug\Receipt.frmReceiptList.resources
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\Receipt\obj\Debug\Receipt.frmRecipt.resources
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\Receipt\obj\Debug\Receipt.frmReport.resources
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\Receipt\obj\Debug\Receipt.frmSiteMaster.resources
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\Receipt\obj\Debug\Receipt.frmUser.resources
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\Receipt\obj\Debug\Receipt.Properties.Resources.resources
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\Receipt\obj\Debug\Receipt.Wing_Master.resources
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\Receipt\obj\Debug\Receipt.csproj.GenerateResource.cache
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\Receipt\obj\Debug\Receipt.csproj.CoreCompileInputs.cache
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\Receipt\obj\Debug\Receipt.csproj.CopyComplete
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\Receipt\obj\Debug\Receipt.exe
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\Receipt\obj\Debug\Receipt.pdb
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\bin\Debug\x86\sqlite3.dll
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\bin\Debug\x64\sqlite3.dll
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\bin\Debug\x64\SQLite.Interop.dll
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\bin\Debug\x86\SQLite.Interop.dll
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\bin\Debug\Receipt.exe.config
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\bin\Debug\Receipt.exe
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\bin\Debug\Receipt.pdb
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\bin\Debug\ReceiptBAccess.dll
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\bin\Debug\ReceiptEntity.dll
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\bin\Debug\ReceiptLog.dll
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\bin\Debug\ReceiptDataAcess.dll
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\bin\Debug\System.Data.SQLite.dll
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\bin\Debug\ReceiptBAccess.pdb
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\bin\Debug\ReceiptEntity.pdb
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\bin\Debug\ReceiptLog.pdb
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\bin\Debug\ReceiptDataAcess.pdb
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\bin\Debug\System.Data.SQLite.xml
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.csproj.AssemblyReference.cache
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.csproj.SuggestedBindingRedirects.cache
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.frmCheqDetail.resources
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.frmCheqDetailsList.resources
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.frmCustomer.resources
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.frmImportData.resources
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.frmLogin.resources
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.frmReceiptEntry.resources
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.frmReceiptList.resources
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.frmRecipt.resources
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.frmReport.resources
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.frmSiteMaster.resources
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.frmUser.resources
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.Properties.Resources.resources
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.Wing_Master.resources
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.csproj.GenerateResource.cache
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.csproj.CoreCompileInputs.cache
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.csproj.CopyComplete
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.exe
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.pdb
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.frmBanakhat.resources

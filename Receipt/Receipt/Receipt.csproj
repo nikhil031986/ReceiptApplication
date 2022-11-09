@@ -51,6 +51,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClsUtil.cs" />
+    <Compile Include="frmBanakhat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBanakhat.Designer.cs">
+      <DependentUpon>frmBanakhat.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmCheqDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,6 +131,9 @@
     <Compile Include="Wing_Master.Designer.cs">
       <DependentUpon>Wing_Master.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="frmBanakhat.resx">
+      <DependentUpon>frmBanakhat.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmCheqDetail.resx">
       <DependentUpon>frmCheqDetail.cs</DependentUpon>
     </EmbeddedResource>

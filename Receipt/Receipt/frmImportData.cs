@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.OleDb;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -40,7 +41,7 @@ namespace Receipt
         {
             var xlApp = new Microsoft.Office.Interop.Excel.Application();
             var xlWorkBook = xlApp.Workbooks.Open(sFile);           // WORKBOOK TO OPEN THE EXCEL FILE.
-            foreach(Worksheet xlsheet in xlWorkBook.Worksheets)
+            foreach (Worksheet xlsheet in xlWorkBook.Worksheets)
             {
                 cmbSelectSheet.Items.Add(xlsheet.Name);
             }
@@ -49,66 +50,34 @@ namespace Receipt
         }
         private void GetDataFromExcel(string fileName,string sheetName)
         {
-            var xlApp = new Microsoft.Office.Interop.Excel.Application();
-            var xlWorkBook = xlApp.Workbooks.Open(fileName);           // WORKBOOK TO OPEN THE EXCEL FILE.
-            var xlSheet = xlWorkBook.Worksheets[sheetName];
-            Microsoft.Office.Interop.Excel.Range excelRange = xlSheet.UsedRange;
-            System.Data.DataTable dt = new System.Data.DataTable();
-            int rows = excelRange.Rows.Count;
-            int cols = excelRange.Columns.Count;
-            for (int i = 1; i <= rows-1; i++)
-            {
-                DataRow myNewRow =null;
-                if (i>1)
-                {
+            string connectionString = @"Provider = Microsoft.ACE.OLEDB.12.0;" +
+            "Data Source='" + fileName + "';Extended Properties=Excel 12.0;";
 
-                    myNewRow = dt.NewRow();
-                }
-                for (int j = 1; j <= cols-1; j++)
+            // Select using a Named Range
+
+            // Select using a Worksheet name
+            string selectString = "SELECT * FROM ["+sheetName+"$]";
+
+            OleDbConnection con = new OleDbConnection(connectionString);
+            OleDbCommand cmd = new OleDbCommand(selectString, con);
+            DataSet dsExcel = new DataSet();
+            try
+            {
+                con.Open();
+                using(OleDbDataAdapter adp = new OleDbDataAdapter(cmd))
                 {
-                    if (i == 1)
-                    {
-                        DataColumn dcNewColumn = new DataColumn();
-                        dcNewColumn.DataType = typeof(string);
-                        string columnName = "";
-                        if(string.IsNullOrEmpty(excelRange.Cells[i, j].Value2))
-                        {
-                            columnName = "_New"+j.ToString();
-                        }
-                        else
-                        {
-                            columnName= excelRange.Cells[i, j].Value2.ToString();
-                        }
-                        dcNewColumn.ColumnName = columnName;
-                        dcNewColumn.DefaultValue = string.Empty;
-                        if(dt.Columns.Contains(dcNewColumn.ColumnName))
-                        {
-                            dcNewColumn.ColumnName = dcNewColumn.ColumnName + "_New";
-                        }
-                        dt.Columns.Add(dcNewColumn);
-                    }
-                    else
-                    {
-                        string excelCellValue = string.Empty;
-                        if (!string.IsNullOrEmpty(Convert.ToString(excelRange.Cells[i, j].Value2)))
-                        {
-                            excelCellValue = excelRange.Cells[i, j].Value2.ToString();
-                        }
-                        myNewRow[j-1] = excelCellValue; //string
-                    }
-                }
-                if (i != 1)
-                {
-                    dt.Rows.Add(myNewRow);
+                    adp.Fill(dsExcel);
                 }
             }
-            dgvImportData.DataSource = dt;
-            //foreach (var xlsheet in xlWorkBook.Worksheets)
-            //{
-            //    cmbSelectSheet.Items.Add(xlsheet);
-            //}
-            xlWorkBook.Close();
-            xlApp.Quit();
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                con.Dispose();
+            }
+            dgvImportData.DataSource = dsExcel.Tables[0];
         }
         private void btnShowData_Click(object sender, EventArgs e)
         {

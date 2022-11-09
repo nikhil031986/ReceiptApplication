@@ -61,6 +61,58 @@ namespace ReceiptDataAcess
                 cmd.Dispose();
             }
         }
+        public static async Task<List<EnReceiptDetails>> GetReceiptByCustomer(int CustomerID)
+        {
+            List<EnReceiptDetails> lstCustomers = new List<EnReceiptDetails>();
+            DataTable dtCustomer = new DataTable();
+            SQLiteCommand cmd = new SQLiteCommand();
+            try
+            {
+                cmd.CommandText = @"SELECT RD.Receipt_Id,RD.Receipt_No,
+                                    RD.Receipt_Date,RD.Customer_Id,CM.Customer_Name,RD.Flate_ShopNo,RD.Cheq_Rtgs_Neft_ImpsNo,
+                                    RD.Year_Id,RD.Bank_Name,RD.Branch_Name,RD.ReceivedAs,RD.Amount,RD.Amount_Word, RD.Payment_Date, RD.ReceiptDateNo FROM 
+                                    ReceiptDetail RD
+                                    INNER JOIN Customer_Master CM
+                                    ON RD.Customer_Id = CM.Customer_Id " + (CustomerID == 0 ? ";" : " WHERE CM.Customer_Id=@Customer_Id;");
+                if (CustomerID > 0)
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@Customer_Id", CustomerID);
+                }
+                dtCustomer = await DaDatabaseConnection.GetDataTable(cmd);
+                if (dtCustomer != null && dtCustomer.AsEnumerable().Count() > 0)
+                {
+                    dtCustomer.AsEnumerable().ToList().ForEach(firstRow =>
+                    {
+                        lstCustomers.Add(new EnReceiptDetails(Convert.ToInt32(firstRow["Receipt_Id"]),
+                                                        Convert.ToString(firstRow["Receipt_No"]),
+                                                        Convert.ToString(firstRow["Receipt_Date"]),
+                                                        Convert.ToInt32(firstRow["Customer_Id"]),
+                                                        Convert.ToString(firstRow["Flate_ShopNo"]),
+                                                        Convert.ToString(firstRow["Cheq_Rtgs_Neft_ImpsNo"]),
+                                                        Convert.ToInt32(firstRow["Year_Id"]),
+                                                        Convert.ToString(firstRow["Bank_Name"]),
+                                                        Convert.ToString(firstRow["Branch_Name"]),
+                                                        Convert.ToString(firstRow["ReceivedAs"]),
+                                                        Convert.ToDecimal(firstRow["Amount"]),
+                                                        Convert.ToString(firstRow["Amount_Word"]),
+                                                        Convert.ToString(firstRow["Customer_Name"]),
+                                                        Convert.ToString(firstRow["Payment_Date"]),
+                                                        Convert.ToInt32(firstRow["ReceiptDateNo"])));
+                    });
+                }
+                return lstCustomers;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                dtCustomer.Dispose();
+                cmd.Dispose();
+            }
+        }
         public static async Task<List<EnReceiptDetails>> GetReceiptDetails(int ReceiptId)
         {
             List<EnReceiptDetails> lstCustomers = new List<EnReceiptDetails>();

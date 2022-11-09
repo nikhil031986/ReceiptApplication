@@ -297,7 +297,6 @@ namespace Receipt
                             dcNewColumn.DefaultValue = Convert.ToDecimal(DefaultValue);
                         }
                         break;
-                        break;
                 }
                 dtAddColumn.Columns.Add(dcNewColumn);
             }

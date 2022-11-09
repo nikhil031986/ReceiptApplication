@@ -17,3 +17,41 @@ D:\Projects\Karanavti5\Receipt\ReceiptBAccess\obj\Debug\ReceiptBAccess.dll
 D:\Projects\Karanavti5\Receipt\ReceiptBAccess\obj\Debug\ReceiptBAccess.pdb
 D:\Projects\Karanavti5\Receipt\ReceiptBAccess\bin\Debug\ReceiptLog.dll
 D:\Projects\Karanavti5\Receipt\ReceiptBAccess\bin\Debug\ReceiptLog.pdb
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\ReceiptBAccess\bin\Debug\x86\sqlite3.dll
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\ReceiptBAccess\bin\Debug\x64\sqlite3.dll
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\ReceiptBAccess\bin\Debug\x64\SQLite.Interop.dll
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\ReceiptBAccess\bin\Debug\x86\SQLite.Interop.dll
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\ReceiptBAccess\bin\Debug\ReceiptBAccess.dll
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\ReceiptBAccess\bin\Debug\ReceiptBAccess.pdb
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\ReceiptBAccess\bin\Debug\ReceiptDataAcess.dll
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\ReceiptBAccess\bin\Debug\ReceiptEntity.dll
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\ReceiptBAccess\bin\Debug\System.Data.SQLite.dll
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\ReceiptBAccess\bin\Debug\ReceiptLog.dll
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\ReceiptBAccess\bin\Debug\ReceiptDataAcess.pdb
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\ReceiptBAccess\bin\Debug\ReceiptEntity.pdb
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\ReceiptBAccess\bin\Debug\System.Data.SQLite.xml
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\ReceiptBAccess\bin\Debug\ReceiptLog.pdb
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\ReceiptBAccess\obj\Debug\ReceiptBAccess.csprojAssemblyReference.cache
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\ReceiptBAccess\obj\Debug\ReceiptBAccess.csproj.CoreCompileInputs.cache
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\ReceiptBAccess\obj\Debug\ReceiptBAccess.csproj.CopyComplete
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\ReceiptBAccess\obj\Debug\ReceiptBAccess.dll
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\ReceiptBAccess\obj\Debug\ReceiptBAccess.pdb
+D:\Hemang_Project\ReceiptApplication\Receipt\ReceiptBAccess\bin\Debug\x86\sqlite3.dll
+D:\Hemang_Project\ReceiptApplication\Receipt\ReceiptBAccess\bin\Debug\x64\sqlite3.dll
+D:\Hemang_Project\ReceiptApplication\Receipt\ReceiptBAccess\bin\Debug\x64\SQLite.Interop.dll
+D:\Hemang_Project\ReceiptApplication\Receipt\ReceiptBAccess\bin\Debug\x86\SQLite.Interop.dll
+D:\Hemang_Project\ReceiptApplication\Receipt\ReceiptBAccess\bin\Debug\ReceiptBAccess.dll
+D:\Hemang_Project\ReceiptApplication\Receipt\ReceiptBAccess\bin\Debug\ReceiptBAccess.pdb
+D:\Hemang_Project\ReceiptApplication\Receipt\ReceiptBAccess\bin\Debug\ReceiptDataAcess.dll
+D:\Hemang_Project\ReceiptApplication\Receipt\ReceiptBAccess\bin\Debug\ReceiptEntity.dll
+D:\Hemang_Project\ReceiptApplication\Receipt\ReceiptBAccess\bin\Debug\System.Data.SQLite.dll
+D:\Hemang_Project\ReceiptApplication\Receipt\ReceiptBAccess\bin\Debug\ReceiptLog.dll
+D:\Hemang_Project\ReceiptApplication\Receipt\ReceiptBAccess\bin\Debug\ReceiptDataAcess.pdb
+D:\Hemang_Project\ReceiptApplication\Receipt\ReceiptBAccess\bin\Debug\ReceiptEntity.pdb
+D:\Hemang_Project\ReceiptApplication\Receipt\ReceiptBAccess\bin\Debug\System.Data.SQLite.xml
+D:\Hemang_Project\ReceiptApplication\Receipt\ReceiptBAccess\bin\Debug\ReceiptLog.pdb
+D:\Hemang_Project\ReceiptApplication\Receipt\ReceiptBAccess\obj\Debug\ReceiptBAccess.csproj.AssemblyReference.cache
+D:\Hemang_Project\ReceiptApplication\Receipt\ReceiptBAccess\obj\Debug\ReceiptBAccess.csproj.CoreCompileInputs.cache
+D:\Hemang_Project\ReceiptApplication\Receipt\ReceiptBAccess\obj\Debug\ReceiptBAccess.csproj.CopyComplete
+D:\Hemang_Project\ReceiptApplication\Receipt\ReceiptBAccess\obj\Debug\ReceiptBAccess.dll
+D:\Hemang_Project\ReceiptApplication\Receipt\ReceiptBAccess\obj\Debug\ReceiptBAccess.pdb

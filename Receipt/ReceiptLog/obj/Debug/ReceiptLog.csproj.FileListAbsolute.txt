@@ -4,3 +4,8 @@ D:\Projects\Karanavti5\Receipt\ReceiptLog\bin\Debug\ReceiptLog.dll
 D:\Projects\Karanavti5\Receipt\ReceiptLog\bin\Debug\ReceiptLog.pdb
 D:\Projects\Karanavti5\Receipt\ReceiptLog\obj\Debug\ReceiptLog.dll
 D:\Projects\Karanavti5\Receipt\ReceiptLog\obj\Debug\ReceiptLog.pdb
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\ReceiptLog\bin\Debug\ReceiptLog.dll
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\ReceiptLog\bin\Debug\ReceiptLog.pdb
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\ReceiptLog\obj\Debug\ReceiptLog.csproj.CoreCompileInputs.cache
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\ReceiptLog\obj\Debug\ReceiptLog.dll
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\ReceiptLog\obj\Debug\ReceiptLog.pdb

@@ -14,6 +14,9 @@ namespace ReceiptEntity
         public int Hous_Count { get; set; }
         public int Start_Number { get; set; }
         public int End_Number { get; set; }
+
+
+ 
         public List<EnWingDetails> enWingDetails { get; set; }
         public EnWingMaster()
         { }

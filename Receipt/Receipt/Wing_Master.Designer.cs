@@ -42,10 +42,6 @@
             this.txtEndNo = new System.Windows.Forms.TextBox();
             this.btnCreateFloarNumber = new System.Windows.Forms.Button();
             this.dgWingDetails = new System.Windows.Forms.DataGridView();
-            this.Wing_DetailsId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Wing_MasterId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FlatNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Wing_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvWingMaster = new System.Windows.Forms.DataGridView();
             this.Wing_Master_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Wing_Names = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -57,6 +53,20 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.Wing_DetailsId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Wing_MasterId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FlatNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Wing_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Land = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Carpet = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.WB = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EAST = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.WEST = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NORTH = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SOUTH = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FlorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tblWingMaster.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgWingDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvWingMaster)).BeginInit();
@@ -69,11 +79,11 @@
             this.tblWingMaster.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tblWingMaster.ColumnCount = 6;
             this.tblWingMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tblWingMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.tblWingMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tblWingMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tblWingMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tblWingMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
             this.tblWingMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tblWingMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 45F));
+            this.tblWingMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 49F));
             this.tblWingMaster.Controls.Add(this.lblWing_Master, 0, 0);
             this.tblWingMaster.Controls.Add(this.lblWingName, 0, 1);
             this.tblWingMaster.Controls.Add(this.lblFloarCount, 0, 2);
@@ -114,7 +124,7 @@
             this.lblWing_Master.Location = new System.Drawing.Point(10, 5);
             this.lblWing_Master.Margin = new System.Windows.Forms.Padding(10, 0, 3, 0);
             this.lblWing_Master.Name = "lblWing_Master";
-            this.lblWing_Master.Size = new System.Drawing.Size(741, 20);
+            this.lblWing_Master.Size = new System.Drawing.Size(737, 20);
             this.lblWing_Master.TabIndex = 0;
             this.lblWing_Master.Text = "Wing Master";
             this.lblWing_Master.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -174,7 +184,7 @@
             this.txtwingName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtwingName.Location = new System.Drawing.Point(78, 33);
             this.txtwingName.Name = "txtwingName";
-            this.txtwingName.Size = new System.Drawing.Size(369, 20);
+            this.txtwingName.Size = new System.Drawing.Size(154, 20);
             this.txtwingName.TabIndex = 2;
             // 
             // txtFloar_Count
@@ -182,7 +192,7 @@
             this.txtFloar_Count.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFloar_Count.Location = new System.Drawing.Point(78, 59);
             this.txtFloar_Count.Name = "txtFloar_Count";
-            this.txtFloar_Count.Size = new System.Drawing.Size(369, 20);
+            this.txtFloar_Count.Size = new System.Drawing.Size(154, 20);
             this.txtFloar_Count.TabIndex = 4;
             this.txtFloar_Count.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumberOnly_KeyPress);
             // 
@@ -191,7 +201,7 @@
             this.txtHouseCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtHouseCount.Location = new System.Drawing.Point(78, 85);
             this.txtHouseCount.Name = "txtHouseCount";
-            this.txtHouseCount.Size = new System.Drawing.Size(369, 20);
+            this.txtHouseCount.Size = new System.Drawing.Size(154, 20);
             this.txtHouseCount.TabIndex = 6;
             this.txtHouseCount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumberOnly_KeyPress);
             // 
@@ -200,7 +210,7 @@
             this.txtStartNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtStartNo.Location = new System.Drawing.Point(78, 111);
             this.txtStartNo.Name = "txtStartNo";
-            this.txtStartNo.Size = new System.Drawing.Size(369, 20);
+            this.txtStartNo.Size = new System.Drawing.Size(154, 20);
             this.txtStartNo.TabIndex = 8;
             this.txtStartNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumberOnly_KeyPress);
             // 
@@ -209,14 +219,14 @@
             this.txtEndNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtEndNo.Location = new System.Drawing.Point(78, 138);
             this.txtEndNo.Name = "txtEndNo";
-            this.txtEndNo.Size = new System.Drawing.Size(369, 20);
+            this.txtEndNo.Size = new System.Drawing.Size(154, 20);
             this.txtEndNo.TabIndex = 10;
             this.txtEndNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumberOnly_KeyPress);
             // 
             // btnCreateFloarNumber
             // 
             this.tblWingMaster.SetColumnSpan(this.btnCreateFloarNumber, 3);
-            this.btnCreateFloarNumber.Location = new System.Drawing.Point(453, 137);
+            this.btnCreateFloarNumber.Location = new System.Drawing.Point(238, 137);
             this.btnCreateFloarNumber.Name = "btnCreateFloarNumber";
             this.btnCreateFloarNumber.Size = new System.Drawing.Size(153, 23);
             this.btnCreateFloarNumber.TabIndex = 11;
@@ -233,49 +243,27 @@
             this.Wing_DetailsId,
             this.Wing_MasterId,
             this.FlatNo,
-            this.Wing_Name});
+            this.Wing_Name,
+            this.Land,
+            this.Carpet,
+            this.WB,
+            this.Amount,
+            this.Total,
+            this.EAST,
+            this.WEST,
+            this.NORTH,
+            this.SOUTH,
+            this.FlorName});
             this.tblWingMaster.SetColumnSpan(this.dgWingDetails, 3);
             this.dgWingDetails.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgWingDetails.Location = new System.Drawing.Point(473, 33);
+            this.dgWingDetails.Location = new System.Drawing.Point(258, 33);
             this.dgWingDetails.Name = "dgWingDetails";
-            this.dgWingDetails.ReadOnly = true;
             this.dgWingDetails.RowHeadersVisible = false;
             this.tblWingMaster.SetRowSpan(this.dgWingDetails, 4);
-            this.dgWingDetails.Size = new System.Drawing.Size(324, 98);
+            this.dgWingDetails.Size = new System.Drawing.Size(539, 98);
             this.dgWingDetails.TabIndex = 14;
-            // 
-            // Wing_DetailsId
-            // 
-            this.Wing_DetailsId.DataPropertyName = "Wing_DetailsId";
-            this.Wing_DetailsId.HeaderText = "Wing_DetailsId";
-            this.Wing_DetailsId.Name = "Wing_DetailsId";
-            this.Wing_DetailsId.ReadOnly = true;
-            this.Wing_DetailsId.Visible = false;
-            // 
-            // Wing_MasterId
-            // 
-            this.Wing_MasterId.DataPropertyName = "Wing_MasterId";
-            this.Wing_MasterId.HeaderText = "Wing_MasterId";
-            this.Wing_MasterId.Name = "Wing_MasterId";
-            this.Wing_MasterId.ReadOnly = true;
-            this.Wing_MasterId.Visible = false;
-            // 
-            // FlatNo
-            // 
-            this.FlatNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.FlatNo.DataPropertyName = "Flat_No";
-            this.FlatNo.HeaderText = "Flat No";
-            this.FlatNo.Name = "FlatNo";
-            this.FlatNo.ReadOnly = true;
-            // 
-            // Wing_Name
-            // 
-            this.Wing_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.Wing_Name.DataPropertyName = "Wing_Name";
-            this.Wing_Name.HeaderText = "Wing_Name";
-            this.Wing_Name.Name = "Wing_Name";
-            this.Wing_Name.ReadOnly = true;
-            this.Wing_Name.Width = 91;
+            this.dgWingDetails.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgWingDetails_CellLeave);
+            this.dgWingDetails.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgWingDetails_EditingControlShowing);
             // 
             // dgvWingMaster
             // 
@@ -346,7 +334,7 @@
             // btnClose
             // 
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnClose.Location = new System.Drawing.Point(757, 3);
+            this.btnClose.Location = new System.Drawing.Point(753, 3);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(34, 24);
             this.btnClose.TabIndex = 15;
@@ -384,6 +372,98 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // Wing_DetailsId
+            // 
+            this.Wing_DetailsId.DataPropertyName = "Wing_DetailsId";
+            this.Wing_DetailsId.HeaderText = "Wing_DetailsId";
+            this.Wing_DetailsId.Name = "Wing_DetailsId";
+            this.Wing_DetailsId.Visible = false;
+            // 
+            // Wing_MasterId
+            // 
+            this.Wing_MasterId.DataPropertyName = "Wing_MasterId";
+            this.Wing_MasterId.HeaderText = "Wing_MasterId";
+            this.Wing_MasterId.Name = "Wing_MasterId";
+            this.Wing_MasterId.Visible = false;
+            // 
+            // FlatNo
+            // 
+            this.FlatNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.FlatNo.DataPropertyName = "Flat_No";
+            this.FlatNo.HeaderText = "Flat No";
+            this.FlatNo.Name = "FlatNo";
+            this.FlatNo.Width = 66;
+            // 
+            // Wing_Name
+            // 
+            this.Wing_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.Wing_Name.DataPropertyName = "Wing_Name";
+            this.Wing_Name.HeaderText = "Wing_Name";
+            this.Wing_Name.Name = "Wing_Name";
+            this.Wing_Name.ReadOnly = true;
+            this.Wing_Name.Width = 91;
+            // 
+            // Land
+            // 
+            this.Land.DataPropertyName = "Land";
+            this.Land.HeaderText = "Land";
+            this.Land.Name = "Land";
+            // 
+            // Carpet
+            // 
+            this.Carpet.DataPropertyName = "Carpet";
+            this.Carpet.HeaderText = "Carpet";
+            this.Carpet.Name = "Carpet";
+            // 
+            // WB
+            // 
+            this.WB.DataPropertyName = "WB";
+            this.WB.HeaderText = "W/B";
+            this.WB.Name = "WB";
+            // 
+            // Amount
+            // 
+            this.Amount.DataPropertyName = "Amount";
+            this.Amount.HeaderText = "Amount";
+            this.Amount.Name = "Amount";
+            // 
+            // Total
+            // 
+            this.Total.DataPropertyName = "Total";
+            this.Total.HeaderText = "Total";
+            this.Total.Name = "Total";
+            this.Total.ReadOnly = true;
+            // 
+            // EAST
+            // 
+            this.EAST.DataPropertyName = "EAST";
+            this.EAST.HeaderText = "EAST";
+            this.EAST.Name = "EAST";
+            // 
+            // WEST
+            // 
+            this.WEST.DataPropertyName = "WEST";
+            this.WEST.HeaderText = "WEST";
+            this.WEST.Name = "WEST";
+            // 
+            // NORTH
+            // 
+            this.NORTH.DataPropertyName = "NORTH";
+            this.NORTH.HeaderText = "NORTH";
+            this.NORTH.Name = "NORTH";
+            // 
+            // SOUTH
+            // 
+            this.SOUTH.DataPropertyName = "SOUTH";
+            this.SOUTH.HeaderText = "SOUTH";
+            this.SOUTH.Name = "SOUTH";
+            // 
+            // FlorName
+            // 
+            this.FlorName.DataPropertyName = "FlorName";
+            this.FlorName.HeaderText = "FlorName";
+            this.FlorName.Name = "FlorName";
+            // 
             // Wing_Master
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -407,7 +487,6 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tblWingMaster;
-        private System.Windows.Forms.Label lblWing_Master;
         private System.Windows.Forms.Label lblWingName;
         private System.Windows.Forms.Label lblFloarCount;
         private System.Windows.Forms.Label lblHouseCount;
@@ -422,18 +501,29 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.DataGridView dgWingDetails;
-        private System.Windows.Forms.DataGridView dgvWingMaster;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Wing_DetailsId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Wing_MasterId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FlatNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Wing_Name;
+        private System.Windows.Forms.Label lblWing_Master;
+        private System.Windows.Forms.DataGridView dgvWingMaster;
         private System.Windows.Forms.DataGridViewTextBoxColumn Wing_Master_Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Wing_Names;
         private System.Windows.Forms.DataGridViewTextBoxColumn Floar_Count;
         private System.Windows.Forms.DataGridViewTextBoxColumn House_Count;
         private System.Windows.Forms.DataGridViewTextBoxColumn Start_Number;
         private System.Windows.Forms.DataGridViewTextBoxColumn End_Number;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Wing_DetailsId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Wing_MasterId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FlatNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Wing_Name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Land;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Carpet;
+        private System.Windows.Forms.DataGridViewTextBoxColumn WB;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Total;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EAST;
+        private System.Windows.Forms.DataGridViewTextBoxColumn WEST;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NORTH;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SOUTH;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FlorName;
     }
 }

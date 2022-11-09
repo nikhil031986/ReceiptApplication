@@ -4,3 +4,14 @@ D:\Projects\Karanavti5\Receipt\ReceiptEntity\obj\Debug\ReceiptEntity.csproj.Asse
 D:\Projects\Karanavti5\Receipt\ReceiptEntity\obj\Debug\ReceiptEntity.csproj.CoreCompileInputs.cache
 D:\Projects\Karanavti5\Receipt\ReceiptEntity\obj\Debug\ReceiptEntity.dll
 D:\Projects\Karanavti5\Receipt\ReceiptEntity\obj\Debug\ReceiptEntity.pdb
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\ReceiptEntity\bin\Debug\ReceiptEntity.dll
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\ReceiptEntity\bin\Debug\ReceiptEntity.pdb
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\ReceiptEntity\obj\Debug\ReceiptEntity.csproj.CoreCompileInputs.cache
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\ReceiptEntity\obj\Debug\ReceiptEntity.dll
+D:\Karunashankar Pandey\Documents\Projects\ReceiptApplication-main\ReceiptApplication-main\Receipt\ReceiptEntity\obj\Debug\ReceiptEntity.pdb
+D:\Hemang_Project\ReceiptApplication\Receipt\ReceiptEntity\bin\Debug\ReceiptEntity.dll
+D:\Hemang_Project\ReceiptApplication\Receipt\ReceiptEntity\bin\Debug\ReceiptEntity.pdb
+D:\Hemang_Project\ReceiptApplication\Receipt\ReceiptEntity\obj\Debug\ReceiptEntity.csproj.AssemblyReference.cache
+D:\Hemang_Project\ReceiptApplication\Receipt\ReceiptEntity\obj\Debug\ReceiptEntity.csproj.CoreCompileInputs.cache
+D:\Hemang_Project\ReceiptApplication\Receipt\ReceiptEntity\obj\Debug\ReceiptEntity.dll
+D:\Hemang_Project\ReceiptApplication\Receipt\ReceiptEntity\obj\Debug\ReceiptEntity.pdb

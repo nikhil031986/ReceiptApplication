@@ -71,22 +71,42 @@ namespace Receipt
         }
         private async Task AddContrial()
         {
-            dtWingDetails = new DataTable();
-            await ClsUtil.AddColumn(dtWingDetails, "Wing_DetailsId", ClsUtil.ColumnType.dbLong, "0");
-            await ClsUtil.AddColumn(dtWingDetails, "Wing_MasterId", ClsUtil.ColumnType.dbLong, "0");
-            await ClsUtil.AddColumn(dtWingDetails, "Flat_No", ClsUtil.ColumnType.dbString, "");
-            await ClsUtil.AddColumn(dtWingDetails, "Wing_Name", ClsUtil.ColumnType.dbString, "");
-            dgWingDetails.DataSource = dtWingDetails;
-            dtWingMaster = new DataTable();
-            await ClsUtil.AddColumn(dtWingMaster, "Wing_Master_Id", ClsUtil.ColumnType.dbLong, "0");
-            await ClsUtil.AddColumn(dtWingMaster, "Wing_Names", ClsUtil.ColumnType.dbString, "");
-            await ClsUtil.AddColumn(dtWingMaster, "Floar_Count", ClsUtil.ColumnType.dbInt, "");
-            await ClsUtil.AddColumn(dtWingMaster, "House_Count", ClsUtil.ColumnType.dbInt, "");
-            await ClsUtil.AddColumn(dtWingMaster, "Start_Number", ClsUtil.ColumnType.dbInt, "");
-            await ClsUtil.AddColumn(dtWingMaster, "End_Number", ClsUtil.ColumnType.dbInt, "");
-            dgvWingMaster.DataSource = dtWingMaster;
-            await FillGridWingMaster();
-            dgvWingMaster.Columns["Wing_Master_Id"].Visible = false;
+            try
+            {
+                dtWingDetails = new DataTable();
+                await ClsUtil.AddColumn(dtWingDetails, "Wing_DetailsId", ClsUtil.ColumnType.dbLong, "0");
+                await ClsUtil.AddColumn(dtWingDetails, "Wing_MasterId", ClsUtil.ColumnType.dbLong, "0");
+                await ClsUtil.AddColumn(dtWingDetails, "Flat_No", ClsUtil.ColumnType.dbString, "");
+                await ClsUtil.AddColumn(dtWingDetails, "Wing_Name", ClsUtil.ColumnType.dbString, "");
+                await ClsUtil.AddColumn(dtWingDetails, "Land", ClsUtil.ColumnType.dbDecimal, "");
+                await ClsUtil.AddColumn(dtWingDetails, "Carpet", ClsUtil.ColumnType.dbDecimal, "");
+                await ClsUtil.AddColumn(dtWingDetails, "WB", ClsUtil.ColumnType.dbDecimal, "");
+                await ClsUtil.AddColumn(dtWingDetails, "Amount", ClsUtil.ColumnType.dbDecimal, "");
+                await ClsUtil.AddColumn(dtWingDetails, "Total", ClsUtil.ColumnType.dbDecimal, "");
+                await ClsUtil.AddColumn(dtWingDetails, "EAST", ClsUtil.ColumnType.dbString, "");
+                await ClsUtil.AddColumn(dtWingDetails, "WEST", ClsUtil.ColumnType.dbString, "");
+                await ClsUtil.AddColumn(dtWingDetails, "NORTH", ClsUtil.ColumnType.dbString, "");
+                await ClsUtil.AddColumn(dtWingDetails, "SOUTH", ClsUtil.ColumnType.dbString, "");
+                await ClsUtil.AddColumn(dtWingDetails, "FlorName", ClsUtil.ColumnType.dbString, "");
+                dgWingDetails.DataSource = dtWingDetails;
+                dtWingMaster = new DataTable();
+                await ClsUtil.AddColumn(dtWingMaster, "Wing_Master_Id", ClsUtil.ColumnType.dbLong, "0");
+                await ClsUtil.AddColumn(dtWingMaster, "Wing_Names", ClsUtil.ColumnType.dbString, "");
+                await ClsUtil.AddColumn(dtWingMaster, "Floar_Count", ClsUtil.ColumnType.dbInt, "");
+                await ClsUtil.AddColumn(dtWingMaster, "House_Count", ClsUtil.ColumnType.dbInt, "");
+                await ClsUtil.AddColumn(dtWingMaster, "Start_Number", ClsUtil.ColumnType.dbInt, "");
+                await ClsUtil.AddColumn(dtWingMaster, "End_Number", ClsUtil.ColumnType.dbInt, "");
+
+                dgvWingMaster.DataSource = dtWingMaster;
+                await FillGridWingMaster();
+                dgvWingMaster.Columns["Wing_Master_Id"].Visible = false;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -104,11 +124,13 @@ namespace Receipt
             int FlateCount = Convert.ToInt32(txtHouseCount.Text);
             int TotalFloar = Convert.ToInt32(txtFloar_Count.Text);
             int FlatNo = 0;
+            int florNumber = 0;
             await Task.Run(() =>
             {
                 for (int i = 1; i <= TotalFloar; i++)
                 {
                     FlatNo = 0;
+                    florNumber = florNumber + 1;
                     for (int b = 1; b <= FlateCount; b++)
                     {
                         FlatNo = StartNo + b;
@@ -119,6 +141,16 @@ namespace Receipt
                             drNew["Wing_MasterId"] = 0;
                             drNew["Flat_No"] = FlatNo.ToString();
                             drNew["Wing_Name"] = txtwingName.Text;
+                            drNew["Land"] = 0;
+                            drNew["Carpet"] = 0;
+                            drNew["WB"] = 0;
+                            drNew["Amount"] = 0;
+                            drNew["Total"] = 0;
+                            drNew["EAST"] = 0;
+                            drNew["WEST"] = 0;
+                            drNew["NORTH"] = 0;
+                            drNew["SOUTH"] = 0;
+                            drNew["FlorName"] = ClsUtil.ConvertWord(florNumber);
                             dtWingDetails.Rows.Add(drNew);
                         }
                         else
@@ -129,6 +161,7 @@ namespace Receipt
                                 {
                                     x["Flat_No"] = FlatNo.ToString();
                                     x["Wing_Name"] = txtwingName.Text;
+                                    x["FlorName"] = ClsUtil.ConvertWord(florNumber);
                                 });
                             }
                         }
@@ -141,16 +174,16 @@ namespace Receipt
         }
         private async Task ClearControlData()
         {
-            await Task.Run(()=>this.Invoke(new MethodInvoker(() =>
-            {
-                dtWingDetails.Rows.Clear();
-                txtEndNo.Text = "0";
-                txtStartNo.Text = "0";
-                txtFloar_Count.Text = "0";
-                txtHouseCount.Text = "0";
-                txtwingName.Text = "";
-                txtwingName.Tag = null;
-            })));
+            await Task.Run(() => this.Invoke(new MethodInvoker(() =>
+              {
+                  dtWingDetails.Rows.Clear();
+                  txtEndNo.Text = "0";
+                  txtStartNo.Text = "0";
+                  txtFloar_Count.Text = "0";
+                  txtHouseCount.Text = "0";
+                  txtwingName.Text = "";
+                  txtwingName.Tag = null;
+              })));
         }
         private async void btnCancel_Click(object sender, EventArgs e)
         {
@@ -183,12 +216,27 @@ namespace Receipt
                 Convert.ToInt32(txtHouseCount.Text),
                 Convert.ToInt32(txtStartNo.Text),
                 Convert.ToInt32(txtEndNo.Text));
+
+
             List<EnWingDetails> enWingDetails = new List<EnWingDetails>();
             dtWingDetails.AsEnumerable().ToList().ForEach(x =>
             {
-                enWingDetails.Add(new EnWingDetails(Convert.ToInt32(x["Wing_DetailsId"]),
-                    wingMasterId, Convert.ToString(x["Flat_No"]),
-                    enWingMaster.Wing_Name));
+                enWingDetails.Add(new EnWingDetails(
+                    Convert.ToInt32(x["Wing_DetailsId"]),
+                    wingMasterId,
+                    Convert.ToString(x["Flat_No"]),
+                    enWingMaster.Wing_Name,
+                    Convert.ToDecimal(x["Land"]),
+                    Convert.ToDecimal(x["Carpet"]),
+                    Convert.ToDecimal(x["WB"]),
+                    Convert.ToDecimal(x["Amount"]),
+                    Convert.ToDecimal(x["Total"]),
+                    Convert.ToString(x["EAST"]),
+                    Convert.ToString(x["WEST"]),
+                    Convert.ToString(x["NORTH"]),
+                    Convert.ToString(x["SOUTH"]),
+                    Convert.ToString(x["FlorName"])
+                    ));
             });
             var result = await BaWingMaster.InsertWingMaster(enWingMaster, enWingDetails, 1);
             if (result > 0)
@@ -212,7 +260,7 @@ namespace Receipt
             {
                 await ClearControlData();
                 int selectedWingMasterId = Convert.ToInt32(dgvWingMaster[0, e.RowIndex].Value);
-                var selectedRow =  await ReceiptBAccess.BaWingMaster.getWingMaster(selectedWingMasterId);
+                var selectedRow = await ReceiptBAccess.BaWingMaster.getWingMaster(selectedWingMasterId);
                 if (selectedRow != null)
                 {
                     txtwingName.Tag = selectedWingMasterId;
@@ -221,6 +269,7 @@ namespace Receipt
                     txtHouseCount.Text = selectedRow.Hous_Count.ToString();
                     txtStartNo.Text = selectedRow.Start_Number.ToString();
                     txtEndNo.Text = selectedRow.End_Number.ToString();
+
                     selectedRow.enWingDetails.ForEach(wingDetails =>
                     {
                         var drNew = dtWingDetails.NewRow();
@@ -228,6 +277,16 @@ namespace Receipt
                         drNew["Wing_MasterId"] = selectedRow.Wing_Master_Id;
                         drNew["Flat_No"] = wingDetails.FlatNo;
                         drNew["Wing_Name"] = wingDetails.Wing_Name;
+                        drNew["Land"] = wingDetails.Land;
+                        drNew["Carpet"] = wingDetails.Carpet;
+                        drNew["WB"] = wingDetails.WB;
+                        drNew["Amount"] = wingDetails.Amount;
+                        drNew["Total"] = wingDetails.Total;
+                        drNew["EAST"] = wingDetails.EAST;
+                        drNew["WEST"] = wingDetails.WEST;
+                        drNew["NORTH"] = wingDetails.NORTH;
+                        drNew["SOUTH"] = wingDetails.SOUTH;
+                        drNew["FlorName"]=wingDetails.FlorName;
                         dtWingDetails.Rows.Add(drNew);
                     });
                 }
@@ -235,6 +294,40 @@ namespace Receipt
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString());
+            }
+        }
+
+        private void dgWingDetails_CellLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            decimal total = 0;
+            var cell = dgWingDetails[e.ColumnIndex, e.RowIndex];
+            if (cell.OwningColumn.Name == "Land" || cell.OwningColumn.Name == "Carpet" || cell.OwningColumn.Name == "WB")
+            {
+                //update the Amount cell
+                cell.OwningRow.Cells["Total"].Value = Convert.ToDecimal(cell.OwningRow.Cells["Carpet"].Value) +
+                                                      Convert.ToDecimal(cell.OwningRow.Cells["WB"].Value);
+            }
+        }
+
+        private void dgWingDetails_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            e.Control.KeyPress -= new KeyPressEventHandler(Column1_KeyPress);
+            if (dgWingDetails.CurrentCell.OwningColumn.Name == "Land" ||
+                dgWingDetails.CurrentCell.OwningColumn.Name == "Carpet" ||
+                dgWingDetails.CurrentCell.OwningColumn.Name == "WB" || dgWingDetails.CurrentCell.OwningColumn.Name == "Amount") //Desired Column
+            {
+                TextBox tb = e.Control as TextBox;
+                if (tb != null)
+                {
+                    tb.KeyPress += new KeyPressEventHandler(Column1_KeyPress);
+                }
+            }
+        }
+        private void Column1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
             }
         }
     }

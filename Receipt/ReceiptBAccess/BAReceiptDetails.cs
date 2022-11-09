@@ -18,5 +18,7 @@ namespace ReceiptBAccess
 
          public static async Task<List<EnReceiptDetails>> GetReceiptDetailsFromDateToDate(int fromDate, int Todate)
             => await DAReciptDetails.GetReceiptDetailsFromDateToDate(fromDate,Todate);
+        public static async Task<List<EnReceiptDetails>> GetReceiptByCustomer(int CustomerID)
+            => await DAReciptDetails.GetReceiptByCustomer(CustomerID);
     }
 }

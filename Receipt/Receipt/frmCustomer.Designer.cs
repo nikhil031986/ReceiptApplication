@@ -29,17 +29,6 @@
         private void InitializeComponent()
         {
             this.tblMainCustomerDetails = new System.Windows.Forms.TableLayoutPanel();
-            this.dgCustomer = new System.Windows.Forms.DataGridView();
-            this.Customer_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Wing_Master_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Wing_Details_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Customer_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Wing_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Flate_No = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Con_Details = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Email_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Customer_Wing_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.txtCustomerWingName = new System.Windows.Forms.TextBox();
             this.txtContactNo = new System.Windows.Forms.TextBox();
@@ -55,17 +44,50 @@
             this.lblCustomerName = new System.Windows.Forms.Label();
             this.cmbWingName = new System.Windows.Forms.ComboBox();
             this.txtEmailId = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnClose = new System.Windows.Forms.Button();
             this.lblCustomer = new System.Windows.Forms.Label();
+            this.lblPan = new System.Windows.Forms.Label();
+            this.lblAadhar = new System.Windows.Forms.Label();
+            this.lblPan1 = new System.Windows.Forms.Label();
+            this.lblCustomer1 = new System.Windows.Forms.Label();
+            this.lblaadhar1 = new System.Windows.Forms.Label();
+            this.lblCustomer2 = new System.Windows.Forms.Label();
+            this.lblPan2 = new System.Windows.Forms.Label();
+            this.lblAadhar2 = new System.Windows.Forms.Label();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.lblcustomer3 = new System.Windows.Forms.Label();
+            this.lblPan3 = new System.Windows.Forms.Label();
+            this.lblAadhar3 = new System.Windows.Forms.Label();
+            this.txtPan = new System.Windows.Forms.TextBox();
+            this.txtAadhar = new System.Windows.Forms.TextBox();
+            this.txtCustomer1 = new System.Windows.Forms.TextBox();
+            this.txtPan1 = new System.Windows.Forms.TextBox();
+            this.txtAadhar1 = new System.Windows.Forms.TextBox();
+            this.txtCustomer2 = new System.Windows.Forms.TextBox();
+            this.txtPan2 = new System.Windows.Forms.TextBox();
+            this.txtAadhar2 = new System.Windows.Forms.TextBox();
+            this.txtCustomer3 = new System.Windows.Forms.TextBox();
+            this.txtAadhar3 = new System.Windows.Forms.TextBox();
+            this.txtPan3 = new System.Windows.Forms.TextBox();
+            this.dgCustomer = new System.Windows.Forms.DataGridView();
+            this.Customer_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Wing_Master_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Wing_Details_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Customer_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Wing_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Flate_No = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Con_Details = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Email_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Customer_Wing_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tblMainCustomerDetails.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgCustomer)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgCustomer)).BeginInit();
             this.SuspendLayout();
             // 
             // tblMainCustomerDetails
@@ -74,8 +96,8 @@
             this.tblMainCustomerDetails.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tblMainCustomerDetails.ColumnCount = 1;
             this.tblMainCustomerDetails.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblMainCustomerDetails.Controls.Add(this.dgCustomer, 0, 1);
             this.tblMainCustomerDetails.Controls.Add(this.tableLayoutPanel2, 0, 0);
+            this.tblMainCustomerDetails.Controls.Add(this.dgCustomer, 0, 1);
             this.tblMainCustomerDetails.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblMainCustomerDetails.Location = new System.Drawing.Point(0, 0);
             this.tblMainCustomerDetails.Name = "tblMainCustomerDetails";
@@ -84,107 +106,6 @@
             this.tblMainCustomerDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tblMainCustomerDetails.Size = new System.Drawing.Size(1050, 624);
             this.tblMainCustomerDetails.TabIndex = 0;
-            // 
-            // dgCustomer
-            // 
-            this.dgCustomer.AllowUserToAddRows = false;
-            this.dgCustomer.AllowUserToDeleteRows = false;
-            this.dgCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgCustomer.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Customer_Id,
-            this.Wing_Master_Id,
-            this.Wing_Details_Id,
-            this.Customer_Name,
-            this.Wing_Name,
-            this.Flate_No,
-            this.Address,
-            this.Con_Details,
-            this.Email_Id,
-            this.Customer_Wing_Name});
-            this.dgCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgCustomer.Location = new System.Drawing.Point(3, 186);
-            this.dgCustomer.Name = "dgCustomer";
-            this.dgCustomer.ReadOnly = true;
-            this.dgCustomer.Size = new System.Drawing.Size(1044, 435);
-            this.dgCustomer.TabIndex = 1;
-            this.dgCustomer.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCustomer_CellClick);
-            // 
-            // Customer_Id
-            // 
-            this.Customer_Id.DataPropertyName = "Customer_Id";
-            this.Customer_Id.HeaderText = "Customer_Id";
-            this.Customer_Id.Name = "Customer_Id";
-            this.Customer_Id.ReadOnly = true;
-            this.Customer_Id.Visible = false;
-            // 
-            // Wing_Master_Id
-            // 
-            this.Wing_Master_Id.DataPropertyName = "Wing_Master_Id";
-            this.Wing_Master_Id.HeaderText = "Wing_Master_Id";
-            this.Wing_Master_Id.Name = "Wing_Master_Id";
-            this.Wing_Master_Id.ReadOnly = true;
-            this.Wing_Master_Id.Visible = false;
-            // 
-            // Wing_Details_Id
-            // 
-            this.Wing_Details_Id.DataPropertyName = "Wing_Details_Id";
-            this.Wing_Details_Id.HeaderText = "Wing_Details_Id";
-            this.Wing_Details_Id.Name = "Wing_Details_Id";
-            this.Wing_Details_Id.ReadOnly = true;
-            this.Wing_Details_Id.Visible = false;
-            // 
-            // Customer_Name
-            // 
-            this.Customer_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Customer_Name.DataPropertyName = "Customer_Name";
-            this.Customer_Name.HeaderText = "Customer Name";
-            this.Customer_Name.Name = "Customer_Name";
-            this.Customer_Name.ReadOnly = true;
-            // 
-            // Wing_Name
-            // 
-            this.Wing_Name.DataPropertyName = "Wing_Name";
-            this.Wing_Name.HeaderText = "Wing Name";
-            this.Wing_Name.Name = "Wing_Name";
-            this.Wing_Name.ReadOnly = true;
-            // 
-            // Flate_No
-            // 
-            this.Flate_No.DataPropertyName = "FlatNo";
-            this.Flate_No.HeaderText = "Flate No";
-            this.Flate_No.Name = "Flate_No";
-            this.Flate_No.ReadOnly = true;
-            // 
-            // Address
-            // 
-            this.Address.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Address.DataPropertyName = "Address";
-            this.Address.HeaderText = "Address";
-            this.Address.Name = "Address";
-            this.Address.ReadOnly = true;
-            // 
-            // Con_Details
-            // 
-            this.Con_Details.DataPropertyName = "Con_Details";
-            this.Con_Details.HeaderText = "Con. Details";
-            this.Con_Details.Name = "Con_Details";
-            this.Con_Details.ReadOnly = true;
-            // 
-            // Email_Id
-            // 
-            this.Email_Id.DataPropertyName = "Email_Id";
-            this.Email_Id.HeaderText = "Email Id";
-            this.Email_Id.Name = "Email_Id";
-            this.Email_Id.ReadOnly = true;
-            // 
-            // Customer_Wing_Name
-            // 
-            this.Customer_Wing_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.Customer_Wing_Name.DataPropertyName = "Customer_Wing_Name";
-            this.Customer_Wing_Name.HeaderText = "Customer Wing Name";
-            this.Customer_Wing_Name.Name = "Customer_Wing_Name";
-            this.Customer_Wing_Name.ReadOnly = true;
-            this.Customer_Wing_Name.Width = 98;
             // 
             // tableLayoutPanel2
             // 
@@ -210,20 +131,49 @@
             this.tableLayoutPanel2.Controls.Add(this.lblCustomerName, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.cmbWingName, 4, 1);
             this.tableLayoutPanel2.Controls.Add(this.txtEmailId, 1, 4);
-            this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel1, 3, 5);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel1, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.lblPan, 0, 5);
+            this.tableLayoutPanel2.Controls.Add(this.lblAadhar, 3, 5);
+            this.tableLayoutPanel2.Controls.Add(this.lblPan1, 3, 6);
+            this.tableLayoutPanel2.Controls.Add(this.lblCustomer1, 0, 6);
+            this.tableLayoutPanel2.Controls.Add(this.lblaadhar1, 0, 7);
+            this.tableLayoutPanel2.Controls.Add(this.lblCustomer2, 3, 7);
+            this.tableLayoutPanel2.Controls.Add(this.lblPan2, 0, 8);
+            this.tableLayoutPanel2.Controls.Add(this.lblAadhar2, 3, 8);
+            this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel2, 4, 10);
+            this.tableLayoutPanel2.Controls.Add(this.lblcustomer3, 0, 9);
+            this.tableLayoutPanel2.Controls.Add(this.lblPan3, 3, 9);
+            this.tableLayoutPanel2.Controls.Add(this.lblAadhar3, 0, 10);
+            this.tableLayoutPanel2.Controls.Add(this.txtPan, 1, 5);
+            this.tableLayoutPanel2.Controls.Add(this.txtAadhar, 4, 5);
+            this.tableLayoutPanel2.Controls.Add(this.txtCustomer1, 1, 6);
+            this.tableLayoutPanel2.Controls.Add(this.txtPan1, 4, 6);
+            this.tableLayoutPanel2.Controls.Add(this.txtAadhar1, 1, 7);
+            this.tableLayoutPanel2.Controls.Add(this.txtCustomer2, 4, 7);
+            this.tableLayoutPanel2.Controls.Add(this.txtPan2, 1, 8);
+            this.tableLayoutPanel2.Controls.Add(this.txtAadhar2, 4, 8);
+            this.tableLayoutPanel2.Controls.Add(this.txtCustomer3, 1, 9);
+            this.tableLayoutPanel2.Controls.Add(this.txtAadhar3, 1, 10);
+            this.tableLayoutPanel2.Controls.Add(this.txtPan3, 4, 9);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 6;
+            this.tableLayoutPanel2.RowCount = 12;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1044, 177);
-            this.tableLayoutPanel2.TabIndex = 0;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1044, 304);
+            this.tableLayoutPanel2.TabIndex = 1;
             // 
             // txtCustomerWingName
             // 
@@ -359,39 +309,6 @@
             this.txtEmailId.TabIndex = 12;
             this.txtEmailId.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmailId_Validating);
             // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowLayoutPanel1.AutoSize = true;
-            this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel2.SetColumnSpan(this.flowLayoutPanel1, 2);
-            this.flowLayoutPanel1.Controls.Add(this.btnSave);
-            this.flowLayoutPanel1.Controls.Add(this.btnCancel);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(879, 145);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(162, 29);
-            this.flowLayoutPanel1.TabIndex = 15;
-            // 
-            // btnSave
-            // 
-            this.btnSave.Location = new System.Drawing.Point(3, 3);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 0;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Location = new System.Drawing.Point(84, 3);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 1;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.AutoSize = true;
@@ -434,6 +351,346 @@
             this.lblCustomer.Text = "Customer Details";
             this.lblCustomer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // lblPan
+            // 
+            this.lblPan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblPan.AutoSize = true;
+            this.lblPan.Location = new System.Drawing.Point(3, 148);
+            this.lblPan.Name = "lblPan";
+            this.lblPan.Size = new System.Drawing.Size(82, 13);
+            this.lblPan.TabIndex = 15;
+            this.lblPan.Text = "Pan";
+            // 
+            // lblAadhar
+            // 
+            this.lblAadhar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAadhar.AutoSize = true;
+            this.lblAadhar.Location = new System.Drawing.Point(521, 148);
+            this.lblAadhar.Name = "lblAadhar";
+            this.lblAadhar.Size = new System.Drawing.Size(110, 13);
+            this.lblAadhar.TabIndex = 17;
+            this.lblAadhar.Text = "Addhar";
+            // 
+            // lblPan1
+            // 
+            this.lblPan1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblPan1.AutoSize = true;
+            this.lblPan1.Location = new System.Drawing.Point(521, 174);
+            this.lblPan1.Name = "lblPan1";
+            this.lblPan1.Size = new System.Drawing.Size(110, 13);
+            this.lblPan1.TabIndex = 21;
+            this.lblPan1.Text = "Pan 1";
+            // 
+            // lblCustomer1
+            // 
+            this.lblCustomer1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCustomer1.AutoSize = true;
+            this.lblCustomer1.Location = new System.Drawing.Point(3, 174);
+            this.lblCustomer1.Name = "lblCustomer1";
+            this.lblCustomer1.Size = new System.Drawing.Size(82, 13);
+            this.lblCustomer1.TabIndex = 19;
+            this.lblCustomer1.Text = "Customer 1";
+            // 
+            // lblaadhar1
+            // 
+            this.lblaadhar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblaadhar1.AutoSize = true;
+            this.lblaadhar1.Location = new System.Drawing.Point(3, 200);
+            this.lblaadhar1.Name = "lblaadhar1";
+            this.lblaadhar1.Size = new System.Drawing.Size(82, 13);
+            this.lblaadhar1.TabIndex = 23;
+            this.lblaadhar1.Text = "Addhar 1";
+            // 
+            // lblCustomer2
+            // 
+            this.lblCustomer2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCustomer2.AutoSize = true;
+            this.lblCustomer2.Location = new System.Drawing.Point(521, 200);
+            this.lblCustomer2.Name = "lblCustomer2";
+            this.lblCustomer2.Size = new System.Drawing.Size(110, 13);
+            this.lblCustomer2.TabIndex = 25;
+            this.lblCustomer2.Text = "Customer 2";
+            // 
+            // lblPan2
+            // 
+            this.lblPan2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblPan2.AutoSize = true;
+            this.lblPan2.Location = new System.Drawing.Point(3, 226);
+            this.lblPan2.Name = "lblPan2";
+            this.lblPan2.Size = new System.Drawing.Size(82, 13);
+            this.lblPan2.TabIndex = 27;
+            this.lblPan2.Text = "Pan 2";
+            // 
+            // lblAadhar2
+            // 
+            this.lblAadhar2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAadhar2.AutoSize = true;
+            this.lblAadhar2.Location = new System.Drawing.Point(521, 226);
+            this.lblAadhar2.Name = "lblAadhar2";
+            this.lblAadhar2.Size = new System.Drawing.Size(110, 13);
+            this.lblAadhar2.TabIndex = 29;
+            this.lblAadhar2.Text = "Addhar 2";
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.flowLayoutPanel2.Controls.Add(this.btnSave);
+            this.flowLayoutPanel2.Controls.Add(this.btnCancel);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(871, 275);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(170, 26);
+            this.flowLayoutPanel2.TabIndex = 36;
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(3, 3);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.TabIndex = 0;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(84, 3);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 1;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // lblcustomer3
+            // 
+            this.lblcustomer3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblcustomer3.AutoSize = true;
+            this.lblcustomer3.Location = new System.Drawing.Point(3, 252);
+            this.lblcustomer3.Name = "lblcustomer3";
+            this.lblcustomer3.Size = new System.Drawing.Size(82, 13);
+            this.lblcustomer3.TabIndex = 19;
+            this.lblcustomer3.Text = "Customer 3";
+            // 
+            // lblPan3
+            // 
+            this.lblPan3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblPan3.AutoSize = true;
+            this.lblPan3.Location = new System.Drawing.Point(521, 252);
+            this.lblPan3.Name = "lblPan3";
+            this.lblPan3.Size = new System.Drawing.Size(110, 13);
+            this.lblPan3.TabIndex = 32;
+            this.lblPan3.Text = "Pan 3";
+            // 
+            // lblAadhar3
+            // 
+            this.lblAadhar3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAadhar3.AutoSize = true;
+            this.lblAadhar3.Location = new System.Drawing.Point(3, 281);
+            this.lblAadhar3.Name = "lblAadhar3";
+            this.lblAadhar3.Size = new System.Drawing.Size(82, 13);
+            this.lblAadhar3.TabIndex = 34;
+            this.lblAadhar3.Text = "Addhar 3";
+            // 
+            // txtPan
+            // 
+            this.txtPan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPan.Location = new System.Drawing.Point(91, 145);
+            this.txtPan.Name = "txtPan";
+            this.txtPan.Size = new System.Drawing.Size(404, 20);
+            this.txtPan.TabIndex = 16;
+            this.txtPan.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmailId_Validating);
+            // 
+            // txtAadhar
+            // 
+            this.txtAadhar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtAadhar.Location = new System.Drawing.Point(637, 145);
+            this.txtAadhar.Name = "txtAadhar";
+            this.txtAadhar.Size = new System.Drawing.Size(404, 20);
+            this.txtAadhar.TabIndex = 18;
+            this.txtAadhar.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmailId_Validating);
+            // 
+            // txtCustomer1
+            // 
+            this.txtCustomer1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCustomer1.Location = new System.Drawing.Point(91, 171);
+            this.txtCustomer1.Name = "txtCustomer1";
+            this.txtCustomer1.Size = new System.Drawing.Size(404, 20);
+            this.txtCustomer1.TabIndex = 20;
+            this.txtCustomer1.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmailId_Validating);
+            // 
+            // txtPan1
+            // 
+            this.txtPan1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPan1.Location = new System.Drawing.Point(637, 171);
+            this.txtPan1.Name = "txtPan1";
+            this.txtPan1.Size = new System.Drawing.Size(404, 20);
+            this.txtPan1.TabIndex = 22;
+            this.txtPan1.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmailId_Validating);
+            // 
+            // txtAadhar1
+            // 
+            this.txtAadhar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtAadhar1.Location = new System.Drawing.Point(91, 197);
+            this.txtAadhar1.Name = "txtAadhar1";
+            this.txtAadhar1.Size = new System.Drawing.Size(404, 20);
+            this.txtAadhar1.TabIndex = 24;
+            this.txtAadhar1.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmailId_Validating);
+            // 
+            // txtCustomer2
+            // 
+            this.txtCustomer2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCustomer2.Location = new System.Drawing.Point(637, 197);
+            this.txtCustomer2.Name = "txtCustomer2";
+            this.txtCustomer2.Size = new System.Drawing.Size(404, 20);
+            this.txtCustomer2.TabIndex = 26;
+            this.txtCustomer2.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmailId_Validating);
+            // 
+            // txtPan2
+            // 
+            this.txtPan2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPan2.Location = new System.Drawing.Point(91, 223);
+            this.txtPan2.Name = "txtPan2";
+            this.txtPan2.Size = new System.Drawing.Size(404, 20);
+            this.txtPan2.TabIndex = 28;
+            this.txtPan2.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmailId_Validating);
+            // 
+            // txtAadhar2
+            // 
+            this.txtAadhar2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtAadhar2.Location = new System.Drawing.Point(637, 223);
+            this.txtAadhar2.Name = "txtAadhar2";
+            this.txtAadhar2.Size = new System.Drawing.Size(404, 20);
+            this.txtAadhar2.TabIndex = 30;
+            this.txtAadhar2.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmailId_Validating);
+            // 
+            // txtCustomer3
+            // 
+            this.txtCustomer3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCustomer3.Location = new System.Drawing.Point(91, 249);
+            this.txtCustomer3.Name = "txtCustomer3";
+            this.txtCustomer3.Size = new System.Drawing.Size(404, 20);
+            this.txtCustomer3.TabIndex = 31;
+            this.txtCustomer3.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmailId_Validating);
+            // 
+            // txtAadhar3
+            // 
+            this.txtAadhar3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtAadhar3.Location = new System.Drawing.Point(91, 278);
+            this.txtAadhar3.Name = "txtAadhar3";
+            this.txtAadhar3.Size = new System.Drawing.Size(404, 20);
+            this.txtAadhar3.TabIndex = 35;
+            this.txtAadhar3.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmailId_Validating);
+            // 
+            // txtPan3
+            // 
+            this.txtPan3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPan3.Location = new System.Drawing.Point(637, 249);
+            this.txtPan3.Name = "txtPan3";
+            this.txtPan3.Size = new System.Drawing.Size(404, 20);
+            this.txtPan3.TabIndex = 33;
+            this.txtPan3.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmailId_Validating);
+            // 
+            // dgCustomer
+            // 
+            this.dgCustomer.AllowUserToAddRows = false;
+            this.dgCustomer.AllowUserToDeleteRows = false;
+            this.dgCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgCustomer.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Customer_Id,
+            this.Wing_Master_Id,
+            this.Wing_Details_Id,
+            this.Customer_Name,
+            this.Wing_Name,
+            this.Flate_No,
+            this.Address,
+            this.Con_Details,
+            this.Email_Id,
+            this.Customer_Wing_Name});
+            this.dgCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgCustomer.Location = new System.Drawing.Point(3, 313);
+            this.dgCustomer.Name = "dgCustomer";
+            this.dgCustomer.ReadOnly = true;
+            this.dgCustomer.Size = new System.Drawing.Size(1044, 308);
+            this.dgCustomer.TabIndex = 0;
+            this.dgCustomer.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCustomer_CellClick);
+            // 
+            // Customer_Id
+            // 
+            this.Customer_Id.DataPropertyName = "Customer_Id";
+            this.Customer_Id.HeaderText = "Customer_Id";
+            this.Customer_Id.Name = "Customer_Id";
+            this.Customer_Id.ReadOnly = true;
+            this.Customer_Id.Visible = false;
+            // 
+            // Wing_Master_Id
+            // 
+            this.Wing_Master_Id.DataPropertyName = "Wing_Master_Id";
+            this.Wing_Master_Id.HeaderText = "Wing_Master_Id";
+            this.Wing_Master_Id.Name = "Wing_Master_Id";
+            this.Wing_Master_Id.ReadOnly = true;
+            this.Wing_Master_Id.Visible = false;
+            // 
+            // Wing_Details_Id
+            // 
+            this.Wing_Details_Id.DataPropertyName = "Wing_Details_Id";
+            this.Wing_Details_Id.HeaderText = "Wing_Details_Id";
+            this.Wing_Details_Id.Name = "Wing_Details_Id";
+            this.Wing_Details_Id.ReadOnly = true;
+            this.Wing_Details_Id.Visible = false;
+            // 
+            // Customer_Name
+            // 
+            this.Customer_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Customer_Name.DataPropertyName = "Customer_Name";
+            this.Customer_Name.HeaderText = "Customer Name";
+            this.Customer_Name.Name = "Customer_Name";
+            this.Customer_Name.ReadOnly = true;
+            // 
+            // Wing_Name
+            // 
+            this.Wing_Name.DataPropertyName = "Wing_Name";
+            this.Wing_Name.HeaderText = "Wing Name";
+            this.Wing_Name.Name = "Wing_Name";
+            this.Wing_Name.ReadOnly = true;
+            // 
+            // Flate_No
+            // 
+            this.Flate_No.DataPropertyName = "FlatNo";
+            this.Flate_No.HeaderText = "Flate No";
+            this.Flate_No.Name = "Flate_No";
+            this.Flate_No.ReadOnly = true;
+            // 
+            // Address
+            // 
+            this.Address.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Address.DataPropertyName = "Address";
+            this.Address.HeaderText = "Address";
+            this.Address.Name = "Address";
+            this.Address.ReadOnly = true;
+            // 
+            // Con_Details
+            // 
+            this.Con_Details.DataPropertyName = "Con_Details";
+            this.Con_Details.HeaderText = "Con. Details";
+            this.Con_Details.Name = "Con_Details";
+            this.Con_Details.ReadOnly = true;
+            // 
+            // Email_Id
+            // 
+            this.Email_Id.DataPropertyName = "Email_Id";
+            this.Email_Id.HeaderText = "Email Id";
+            this.Email_Id.Name = "Email_Id";
+            this.Email_Id.ReadOnly = true;
+            // 
+            // Customer_Wing_Name
+            // 
+            this.Customer_Wing_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.Customer_Wing_Name.DataPropertyName = "Customer_Wing_Name";
+            this.Customer_Wing_Name.HeaderText = "Customer Wing Name";
+            this.Customer_Wing_Name.Name = "Customer_Wing_Name";
+            this.Customer_Wing_Name.ReadOnly = true;
+            this.Customer_Wing_Name.Width = 98;
+            // 
             // frmCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -447,12 +704,12 @@
             this.Text = "frmCustomer";
             this.tblMainCustomerDetails.ResumeLayout(false);
             this.tblMainCustomerDetails.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgCustomer)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            this.flowLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.flowLayoutPanel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgCustomer)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -461,11 +718,9 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tblMainCustomerDetails;
-        private System.Windows.Forms.DataGridView dgCustomer;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TextBox txtCustomerWingName;
         private System.Windows.Forms.TextBox txtContactNo;
-        private System.Windows.Forms.TextBox txtAddress;
         private System.Windows.Forms.TextBox txtCustomerName;
         private System.Windows.Forms.ComboBox cmbFlatNo;
         private System.Windows.Forms.Label lblCustomerWingName;
@@ -478,11 +733,12 @@
         private System.Windows.Forms.Label lblCustomer;
         private System.Windows.Forms.ComboBox cmbWingName;
         private System.Windows.Forms.TextBox txtEmailId;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.TextBox txtAddress;
+        private System.Windows.Forms.DataGridView dgCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn Customer_Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Wing_Master_Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Wing_Details_Id;
@@ -493,5 +749,28 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Con_Details;
         private System.Windows.Forms.DataGridViewTextBoxColumn Email_Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Customer_Wing_Name;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.Label lblPan;
+        private System.Windows.Forms.Label lblAadhar;
+        private System.Windows.Forms.Label lblPan1;
+        private System.Windows.Forms.Label lblCustomer1;
+        private System.Windows.Forms.Label lblaadhar1;
+        private System.Windows.Forms.Label lblCustomer2;
+        private System.Windows.Forms.Label lblPan2;
+        private System.Windows.Forms.Label lblAadhar2;
+        private System.Windows.Forms.Label lblcustomer3;
+        private System.Windows.Forms.Label lblPan3;
+        private System.Windows.Forms.Label lblAadhar3;
+        private System.Windows.Forms.TextBox txtPan;
+        private System.Windows.Forms.TextBox txtAadhar;
+        private System.Windows.Forms.TextBox txtCustomer1;
+        private System.Windows.Forms.TextBox txtPan1;
+        private System.Windows.Forms.TextBox txtAadhar1;
+        private System.Windows.Forms.TextBox txtCustomer2;
+        private System.Windows.Forms.TextBox txtPan2;
+        private System.Windows.Forms.TextBox txtAadhar2;
+        private System.Windows.Forms.TextBox txtCustomer3;
+        private System.Windows.Forms.TextBox txtAadhar3;
+        private System.Windows.Forms.TextBox txtPan3;
     }
 }

@@ -21,7 +21,8 @@ namespace Receipt
             ReceiptDetails=4,
             CheqDetails=5,
             Report=6,
-            ImportData=7
+            ImportData=7,
+            Banakhat=8
         }
         private Form myForm;
         private Form_Name FormName ;
@@ -92,6 +93,12 @@ namespace Receipt
                 case Form_Name.ImportData:
                     ((frmImportData)myForm).CloseUserDetails -= MyForm_CloseUserDetails;
                     btnImport.Text = btnImport.Text.Replace(">", "<");
+                    myForm = null;
+                    GC.Collect();
+                    break;
+                case Form_Name.Banakhat:
+                    ((frmBanakhat)myForm).CloseUserDetails -= MyForm_CloseUserDetails;
+                    btnBanakhat.Text = btnBanakhat.Text.Replace(">", "<");
                     myForm = null;
                     GC.Collect();
                     break;
@@ -207,6 +214,24 @@ namespace Receipt
             btnImport.Text = btnImport.Text.Replace("<", ">");
             myForm = new frmImportData();
             ((frmImportData)myForm).CloseUserDetails += MyForm_CloseUserDetails;
+            myForm.TopLevel = false;
+            myForm.AutoScroll = true;
+            myForm.Dock = DockStyle.Fill;
+            this.PlnMainForm.Controls.Add(myForm);
+            myForm.Show();
+        }
+
+        private void btnBanakhat_Click(object sender, EventArgs e)
+        {
+            if (myForm != null)
+            {
+                myForm.Close();
+                MyForm_CloseUserDetails(null, null);
+            }
+            FormName = Form_Name.Banakhat;
+            btnBanakhat.Text = btnBanakhat.Text.Replace("<", ">");
+            myForm = new frmBanakhat();
+            ((frmBanakhat)myForm).CloseUserDetails += MyForm_CloseUserDetails;
             myForm.TopLevel = false;
             myForm.AutoScroll = true;
             myForm.Dock = DockStyle.Fill;

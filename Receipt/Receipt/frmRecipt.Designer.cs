@@ -30,15 +30,16 @@
         {
             this.plnMenuItem = new System.Windows.Forms.Panel();
             this.tblMenuItem = new System.Windows.Forms.TableLayoutPanel();
-            this.btnLogout = new System.Windows.Forms.Button();
+            this.btnImport = new System.Windows.Forms.Button();
             this.btnUserDetails = new System.Windows.Forms.Button();
             this.btnWingDetails = new System.Windows.Forms.Button();
             this.btnCustomer = new System.Windows.Forms.Button();
             this.btnReceiptDetails = new System.Windows.Forms.Button();
             this.btnChqDetails = new System.Windows.Forms.Button();
             this.btnReport = new System.Windows.Forms.Button();
+            this.btnLogout = new System.Windows.Forms.Button();
             this.PlnMainForm = new System.Windows.Forms.Panel();
-            this.btnImport = new System.Windows.Forms.Button();
+            this.btnBanakhat = new System.Windows.Forms.Button();
             this.plnMenuItem.SuspendLayout();
             this.tblMenuItem.SuspendLayout();
             this.SuspendLayout();
@@ -58,6 +59,7 @@
             this.tblMenuItem.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tblMenuItem.ColumnCount = 1;
             this.tblMenuItem.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tblMenuItem.Controls.Add(this.btnBanakhat, 0, 8);
             this.tblMenuItem.Controls.Add(this.btnImport, 0, 6);
             this.tblMenuItem.Controls.Add(this.btnUserDetails, 0, 0);
             this.tblMenuItem.Controls.Add(this.btnWingDetails, 0, 1);
@@ -65,11 +67,11 @@
             this.tblMenuItem.Controls.Add(this.btnReceiptDetails, 0, 4);
             this.tblMenuItem.Controls.Add(this.btnChqDetails, 0, 5);
             this.tblMenuItem.Controls.Add(this.btnReport, 0, 6);
-            this.tblMenuItem.Controls.Add(this.btnLogout, 0, 8);
+            this.tblMenuItem.Controls.Add(this.btnLogout, 0, 9);
             this.tblMenuItem.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblMenuItem.Location = new System.Drawing.Point(0, 0);
             this.tblMenuItem.Name = "tblMenuItem";
-            this.tblMenuItem.RowCount = 9;
+            this.tblMenuItem.RowCount = 10;
             this.tblMenuItem.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tblMenuItem.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tblMenuItem.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -78,22 +80,25 @@
             this.tblMenuItem.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tblMenuItem.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tblMenuItem.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tblMenuItem.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
+            this.tblMenuItem.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
             this.tblMenuItem.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tblMenuItem.Size = new System.Drawing.Size(192, 521);
             this.tblMenuItem.TabIndex = 0;
             // 
-            // btnLogout
+            // btnImport
             // 
-            this.btnLogout.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.btnImport.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLogout.Location = new System.Drawing.Point(3, 473);
-            this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(186, 45);
-            this.btnLogout.TabIndex = 6;
-            this.btnLogout.Text = "Log Out";
-            this.btnLogout.UseVisualStyleBackColor = true;
-            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            this.btnImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnImport.Location = new System.Drawing.Point(3, 283);
+            this.btnImport.Name = "btnImport";
+            this.btnImport.Size = new System.Drawing.Size(186, 50);
+            this.btnImport.TabIndex = 7;
+            this.btnImport.Text = "Import Data <";
+            this.btnImport.UseVisualStyleBackColor = true;
+            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
             // 
             // btnUserDetails
             // 
@@ -169,13 +174,26 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReport.Location = new System.Drawing.Point(3, 283);
+            this.btnReport.Location = new System.Drawing.Point(3, 339);
             this.btnReport.Name = "btnReport";
             this.btnReport.Size = new System.Drawing.Size(186, 50);
             this.btnReport.TabIndex = 5;
             this.btnReport.Text = "Report <";
             this.btnReport.UseVisualStyleBackColor = true;
             this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
+            // 
+            // btnLogout
+            // 
+            this.btnLogout.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogout.Location = new System.Drawing.Point(3, 473);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(186, 45);
+            this.btnLogout.TabIndex = 6;
+            this.btnLogout.Text = "Log Out";
+            this.btnLogout.UseVisualStyleBackColor = true;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
             // PlnMainForm
             // 
@@ -186,19 +204,16 @@
             this.PlnMainForm.Size = new System.Drawing.Size(608, 521);
             this.PlnMainForm.TabIndex = 1;
             // 
-            // btnImport
+            // btnBanakhat
             // 
-            this.btnImport.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnImport.Location = new System.Drawing.Point(3, 339);
-            this.btnImport.Name = "btnImport";
-            this.btnImport.Size = new System.Drawing.Size(186, 50);
-            this.btnImport.TabIndex = 7;
-            this.btnImport.Text = "Import Data <";
-            this.btnImport.UseVisualStyleBackColor = true;
-            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
+            this.btnBanakhat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBanakhat.Location = new System.Drawing.Point(3, 395);
+            this.btnBanakhat.Name = "btnBanakhat";
+            this.btnBanakhat.Size = new System.Drawing.Size(186, 50);
+            this.btnBanakhat.TabIndex = 0;
+            this.btnBanakhat.Text = "BANAKHAT >";
+            this.btnBanakhat.UseVisualStyleBackColor = true;
+            this.btnBanakhat.Click += new System.EventHandler(this.btnBanakhat_Click);
             // 
             // frmRecipt
             // 
@@ -231,5 +246,6 @@
         private System.Windows.Forms.Button btnReport;
         private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.Button btnImport;
+        private System.Windows.Forms.Button btnBanakhat;
     }
 }
