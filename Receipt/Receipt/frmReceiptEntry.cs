@@ -170,7 +170,7 @@ namespace Receipt
             pdocument.PrinterSettings.PrinterName = "Microsoft XPS Document Writer";
             pdocument.PrinterSettings.PrintToFile = false;
             pdocument.DefaultPageSettings.Landscape = true;
-            pdocument.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("PaperA4", 750, 1024);
+            pdocument.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("PaperA5", 750, 1024);
             pdocument.DefaultPageSettings.Margins = new Margins(0, 0, 0, 0);
             pdocument.PrintPage += Pdocument_PrintPage;
             prntprvControl.Document = pdocument;

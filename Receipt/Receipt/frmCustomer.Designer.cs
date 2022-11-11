@@ -621,6 +621,7 @@
             this.Customer_Id.Name = "Customer_Id";
             this.Customer_Id.ReadOnly = true;
             this.Customer_Id.Visible = false;
+            this.Customer_Id.Width = 180;
             // 
             // Wing_Master_Id
             // 
@@ -640,11 +641,11 @@
             // 
             // Customer_Name
             // 
-            this.Customer_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Customer_Name.DataPropertyName = "Customer_Name";
             this.Customer_Name.HeaderText = "Customer Name";
             this.Customer_Name.Name = "Customer_Name";
             this.Customer_Name.ReadOnly = true;
+            this.Customer_Name.Width = 180;
             // 
             // Wing_Name
             // 
@@ -662,11 +663,11 @@
             // 
             // Address
             // 
-            this.Address.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Address.DataPropertyName = "Address";
             this.Address.HeaderText = "Address";
             this.Address.Name = "Address";
             this.Address.ReadOnly = true;
+            this.Address.Width = 120;
             // 
             // Con_Details
             // 
@@ -739,16 +740,6 @@
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.TextBox txtAddress;
         private System.Windows.Forms.DataGridView dgCustomer;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Customer_Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Wing_Master_Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Wing_Details_Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Customer_Name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Wing_Name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Flate_No;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Address;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Con_Details;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Email_Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Customer_Wing_Name;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Label lblPan;
         private System.Windows.Forms.Label lblAadhar;
@@ -772,5 +763,15 @@
         private System.Windows.Forms.TextBox txtCustomer3;
         private System.Windows.Forms.TextBox txtAadhar3;
         private System.Windows.Forms.TextBox txtPan3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Customer_Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Wing_Master_Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Wing_Details_Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Customer_Name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Wing_Name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Flate_No;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Address;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Con_Details;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Email_Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Customer_Wing_Name;
     }
 }

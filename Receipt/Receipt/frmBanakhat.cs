@@ -25,6 +25,8 @@ namespace Receipt
         {
             InitializeComponent();
             FillCustomer();
+            string FileName = ClsUtil.getCurrentPath() + "BlankFile.html";
+            wbHtmlView.Url = new Uri("file:///" + FileName);
         }
         private async Task FillCustomer()
         {
@@ -164,6 +166,13 @@ namespace Receipt
                 strNewHTMLFile.AppendLine(@"						<td colspan='3' rowspan = '1' > " + ((EnCustomer)selectedCustomer).Aadhar3 + "</ td > ");
                 strNewHTMLFile.AppendLine(@"					</tr>");
             }
+            if(!string.IsNullOrWhiteSpace(((EnCustomer)selectedCustomer).Address))
+            {
+                strNewHTMLFile.AppendLine(@"					<tr>");
+                strNewHTMLFile.AppendLine(@"						<td style='background-color:#E8E8E8;'><strong>ADDRESS.:-</strong></td>");
+                strNewHTMLFile.AppendLine(@"						<td colspan='3' rowspan='2'>" + ((EnCustomer)selectedCustomer).Address.ToUpper() + "</td>");
+                strNewHTMLFile.AppendLine(@"					</tr>");
+            }
             strNewHTMLFile.AppendLine(@"				</tbody>");
             strNewHTMLFile.AppendLine(@"			</table>");
             strNewHTMLFile.AppendLine(@"			</td>");
@@ -265,6 +274,42 @@ namespace Receipt
         private void btnPrint_Click(object sender, EventArgs e)
         {
             wbHtmlView.ShowPrintDialog();
+        }
+
+        private void txtFlatNo_Validated(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txtFlatNo.Text.ToString().ToUpper().Contains("-"))
+                {
+                    int selectedindex = 0;
+                    string[] strWingFlat = txtFlatNo.Text.Split('-');
+                    if (strWingFlat.Length >= 1)
+                    {
+                        foreach (EnCustomer items in cmbCustomer.Items)
+                        {
+                            if (items.Wing_Name.Trim().ToUpper() == strWingFlat[0].Trim().ToUpper() && items.FlatNo.ToUpper() == strWingFlat[1].ToUpper())
+                            {
+                                cmbCustomer.SelectedIndex = selectedindex;
+                                break;
+                            }
+                            selectedindex = selectedindex + 1;
+                        }
+                    }
+                    else
+                    {
+                        cmbCustomer.SelectedIndex = -1;
+                    }
+                }
+                else
+                {
+                    cmbCustomer.SelectedIndex = -1;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

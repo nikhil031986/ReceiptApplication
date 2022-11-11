@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>system-icon-clipart-3.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -209,6 +212,19 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Login.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Close.png" />
+    <None Include="Resources\logout.png" />
+    <None Include="Resources\Banakhat.png" />
+    <None Include="Resources\Report.png" />
+    <None Include="Resources\ImportData.png" />
+    <None Include="Resources\CheckDetails.png" />
+    <None Include="Resources\CustomerDetails.png" />
+    <None Include="Resources\wingDetails.png" />
+    <None Include="Resources\ReceiptImage.png" />
+    <None Include="Resources\userimage.jpeg" />
+    <Content Include="system-icon-clipart-3.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

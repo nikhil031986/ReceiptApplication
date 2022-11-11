@@ -175,6 +175,7 @@ namespace Receipt
         private void txtCustomerName_TextChanged(object sender, EventArgs e)
         {
             CreateWingCustomerName();
+            txtCustomer1.Text = txtCustomerName.Text;
         }
 
         private void cmbFlatNo_SelectedIndexChanged(object sender, EventArgs e)

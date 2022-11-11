@@ -31,10 +31,12 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.lblBANAKHATPRINT = new System.Windows.Forms.Label();
             this.cmbCustomer = new System.Windows.Forms.ComboBox();
-            this.btnprintprivew = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
+            this.btnprintprivew = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.wbHtmlView = new System.Windows.Forms.WebBrowser();
+            this.lblEnterFlaotNO = new System.Windows.Forms.Label();
+            this.txtFlatNo = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,16 +44,20 @@
             // 
             this.tableLayoutPanel1.AutoSize = true;
             this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnCount = 5;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.Controls.Add(this.lblBANAKHATPRINT, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.cmbCustomer, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btnPrint, 2, 3);
-            this.tableLayoutPanel1.Controls.Add(this.btnprintprivew, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.wbHtmlView, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.btnprintprivew, 4, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblEnterFlaotNO, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.txtFlatNo, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnPrint, 4, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -67,7 +73,7 @@
             // 
             this.lblBANAKHATPRINT.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblBANAKHATPRINT.AutoSize = true;
-            this.tableLayoutPanel1.SetColumnSpan(this.lblBANAKHATPRINT, 3);
+            this.tableLayoutPanel1.SetColumnSpan(this.lblBANAKHATPRINT, 5);
             this.lblBANAKHATPRINT.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBANAKHATPRINT.Location = new System.Drawing.Point(3, 0);
             this.lblBANAKHATPRINT.Name = "lblBANAKHATPRINT";
@@ -83,18 +89,8 @@
             this.cmbCustomer.FormattingEnabled = true;
             this.cmbCustomer.Location = new System.Drawing.Point(121, 22);
             this.cmbCustomer.Name = "cmbCustomer";
-            this.cmbCustomer.Size = new System.Drawing.Size(683, 21);
-            this.cmbCustomer.TabIndex = 1;
-            // 
-            // btnprintprivew
-            // 
-            this.btnprintprivew.Location = new System.Drawing.Point(810, 21);
-            this.btnprintprivew.Name = "btnprintprivew";
-            this.btnprintprivew.Size = new System.Drawing.Size(111, 23);
-            this.btnprintprivew.TabIndex = 2;
-            this.btnprintprivew.Text = "PRINT PRIVEW";
-            this.btnprintprivew.UseVisualStyleBackColor = true;
-            this.btnprintprivew.Click += new System.EventHandler(this.btnprintprivew_Click);
+            this.cmbCustomer.Size = new System.Drawing.Size(292, 21);
+            this.cmbCustomer.TabIndex = 2;
             // 
             // btnPrint
             // 
@@ -103,10 +99,20 @@
             this.btnPrint.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(75, 23);
-            this.btnPrint.TabIndex = 3;
+            this.btnPrint.TabIndex = 7;
             this.btnPrint.Text = "PRINT";
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
+            // btnprintprivew
+            // 
+            this.btnprintprivew.Location = new System.Drawing.Point(810, 21);
+            this.btnprintprivew.Name = "btnprintprivew";
+            this.btnprintprivew.Size = new System.Drawing.Size(111, 23);
+            this.btnprintprivew.TabIndex = 5;
+            this.btnprintprivew.Text = "PRINT PRIVEW";
+            this.btnprintprivew.UseVisualStyleBackColor = true;
+            this.btnprintprivew.Click += new System.EventHandler(this.btnprintprivew_Click);
             // 
             // label2
             // 
@@ -115,18 +121,37 @@
             this.label2.Location = new System.Drawing.Point(3, 26);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(112, 13);
-            this.label2.TabIndex = 4;
+            this.label2.TabIndex = 1;
             this.label2.Text = "SELECT CUSTOMER";
             // 
             // wbHtmlView
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.wbHtmlView, 3);
+            this.tableLayoutPanel1.SetColumnSpan(this.wbHtmlView, 5);
             this.wbHtmlView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.wbHtmlView.Location = new System.Drawing.Point(3, 50);
             this.wbHtmlView.MinimumSize = new System.Drawing.Size(20, 20);
             this.wbHtmlView.Name = "wbHtmlView";
             this.wbHtmlView.Size = new System.Drawing.Size(918, 547);
-            this.wbHtmlView.TabIndex = 5;
+            this.wbHtmlView.TabIndex = 6;
+            // 
+            // lblEnterFlaotNO
+            // 
+            this.lblEnterFlaotNO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblEnterFlaotNO.AutoSize = true;
+            this.lblEnterFlaotNO.Location = new System.Drawing.Point(419, 26);
+            this.lblEnterFlaotNO.Name = "lblEnterFlaotNO";
+            this.lblEnterFlaotNO.Size = new System.Drawing.Size(87, 13);
+            this.lblEnterFlaotNO.TabIndex = 3;
+            this.lblEnterFlaotNO.Text = "FLAT/SHOP NO";
+            // 
+            // txtFlatNo
+            // 
+            this.txtFlatNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtFlatNo.Location = new System.Drawing.Point(512, 22);
+            this.txtFlatNo.Name = "txtFlatNo";
+            this.txtFlatNo.Size = new System.Drawing.Size(292, 20);
+            this.txtFlatNo.TabIndex = 4;
+            this.txtFlatNo.Validated += new System.EventHandler(this.txtFlatNo_Validated);
             // 
             // frmBanakhat
             // 
@@ -153,5 +178,7 @@
         private System.Windows.Forms.Button btnprintprivew;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.WebBrowser wbHtmlView;
+        private System.Windows.Forms.Label lblEnterFlaotNO;
+        private System.Windows.Forms.TextBox txtFlatNo;
     }
 }

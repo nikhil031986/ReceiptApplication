@@ -60,8 +60,8 @@
             this.Land = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Carpet = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.WB = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EAST = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.WEST = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NORTH = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -83,7 +83,7 @@
             this.tblWingMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tblWingMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
             this.tblWingMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tblWingMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 49F));
+            this.tblWingMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tblWingMaster.Controls.Add(this.lblWing_Master, 0, 0);
             this.tblWingMaster.Controls.Add(this.lblWingName, 0, 1);
             this.tblWingMaster.Controls.Add(this.lblFloarCount, 0, 2);
@@ -124,7 +124,7 @@
             this.lblWing_Master.Location = new System.Drawing.Point(10, 5);
             this.lblWing_Master.Margin = new System.Windows.Forms.Padding(10, 0, 3, 0);
             this.lblWing_Master.Name = "lblWing_Master";
-            this.lblWing_Master.Size = new System.Drawing.Size(737, 20);
+            this.lblWing_Master.Size = new System.Drawing.Size(736, 20);
             this.lblWing_Master.TabIndex = 0;
             this.lblWing_Master.Text = "Wing Master";
             this.lblWing_Master.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -247,8 +247,8 @@
             this.Land,
             this.Carpet,
             this.WB,
-            this.Amount,
             this.Total,
+            this.Amount,
             this.EAST,
             this.WEST,
             this.NORTH,
@@ -334,7 +334,7 @@
             // btnClose
             // 
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnClose.Location = new System.Drawing.Point(753, 3);
+            this.btnClose.Location = new System.Drawing.Point(752, 3);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(34, 24);
             this.btnClose.TabIndex = 15;
@@ -421,18 +421,18 @@
             this.WB.HeaderText = "W/B";
             this.WB.Name = "WB";
             // 
-            // Amount
-            // 
-            this.Amount.DataPropertyName = "Amount";
-            this.Amount.HeaderText = "Amount";
-            this.Amount.Name = "Amount";
-            // 
             // Total
             // 
             this.Total.DataPropertyName = "Total";
             this.Total.HeaderText = "Total";
             this.Total.Name = "Total";
             this.Total.ReadOnly = true;
+            // 
+            // Amount
+            // 
+            this.Amount.DataPropertyName = "Amount";
+            this.Amount.HeaderText = "Amount";
+            this.Amount.Name = "Amount";
             // 
             // EAST
             // 
@@ -518,8 +518,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Land;
         private System.Windows.Forms.DataGridViewTextBoxColumn Carpet;
         private System.Windows.Forms.DataGridViewTextBoxColumn WB;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
         private System.Windows.Forms.DataGridViewTextBoxColumn Total;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
         private System.Windows.Forms.DataGridViewTextBoxColumn EAST;
         private System.Windows.Forms.DataGridViewTextBoxColumn WEST;
         private System.Windows.Forms.DataGridViewTextBoxColumn NORTH;

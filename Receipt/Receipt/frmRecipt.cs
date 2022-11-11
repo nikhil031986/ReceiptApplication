@@ -8,6 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
+using Application = System.Windows.Forms.Application;
+using Image = System.Drawing.Image;
 
 namespace Receipt
 {
@@ -30,8 +33,28 @@ namespace Receipt
         {
             InitializeComponent();
             btnUserDetails.Visible= false;
+            SetImageInToButton();
         }
-
+        private void SetImageInToButton()
+        {
+            this.btnUserDetails.Image = (Image)(new Bitmap(Receipt.Properties.Resources.userimage, new Size(35, 35))); 
+            this.btnWingDetails.Image = (Image)(new Bitmap(Receipt.Properties.Resources.wingDetails, new Size(95, 40)));
+            this.btnWingDetails.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCustomer.Image= (Image)(new Bitmap(Receipt.Properties.Resources.CustomerDetails, new Size(80, 40)));
+            this.btnCustomer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnReceiptDetails.Image = (Image)(new Bitmap(Receipt.Properties.Resources.Banakhat, new Size(80, 40)));
+            this.btnReceiptDetails.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBanakhat.Image = (Image)(new Bitmap(Receipt.Properties.Resources.Banakhat, new Size(80, 40)));
+            this.btnBanakhat.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnChqDetails.Image = (Image)(new Bitmap(Receipt.Properties.Resources.CheckDetails, new Size(80, 40)));
+            this.btnChqDetails.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnImport.Image = (Image)(new Bitmap(Receipt.Properties.Resources.ImportData, new Size(80, 40)));
+            this.btnImport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnReport.Image = (Image)(new Bitmap(Receipt.Properties.Resources.Report, new Size(80, 40)));
+            this.btnReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLogout.Image = (Image)(new Bitmap(Receipt.Properties.Resources.logout, new Size(80, 40)));
+            this.btnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        }
         private void btnUserDetails_Click(object sender, EventArgs e)
         {
             if (myForm != null)
