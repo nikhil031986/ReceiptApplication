@@ -4,11 +4,13 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ReceiptBAccess;
 using ReceiptEntity;
+using ReceiptLog;
 
 namespace Receipt
 {
@@ -19,8 +21,15 @@ namespace Receipt
         public event EventHandler CloseUserDetails;
         public Wing_Master()
         {
-            InitializeComponent();
-            AddContrial();
+            try
+            {
+
+                InitializeComponent();
+                AddContrial();
+                this.btnClose.Image = (Image)(new Bitmap(Receipt.Properties.Resources.Close, new Size(32, 25)));
+                this.btnClose.ImageAlign = ContentAlignment.MiddleCenter;
+            }
+            catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
         }
         private async Task FillGridWingMaster(int wingMasterId = 0)
         {
@@ -64,8 +73,7 @@ namespace Receipt
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name);
             }
 
         }
@@ -103,19 +111,22 @@ namespace Receipt
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name);
             }
 
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            if (CloseUserDetails != null)
+            try
             {
-                CloseUserDetails.Invoke(sender, e);
+                if (CloseUserDetails != null)
+                {
+                    CloseUserDetails.Invoke(sender, e);
+                }
+                this.Close();
             }
-            this.Close();
+            catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
         }
 
         private async void btnCreateFloarNumber_Click(object sender, EventArgs e)
@@ -127,47 +138,54 @@ namespace Receipt
             int florNumber = 0;
             await Task.Run(() =>
             {
-                for (int i = 1; i <= TotalFloar; i++)
+                try
                 {
-                    FlatNo = 0;
-                    florNumber = florNumber + 1;
-                    for (int b = 1; b <= FlateCount; b++)
+                    for (int i = 1; i <= TotalFloar; i++)
                     {
-                        FlatNo = StartNo + b;
-                        if (string.IsNullOrWhiteSpace(Convert.ToString(txtwingName.Tag)))
+                        FlatNo = 0;
+                        florNumber = florNumber + 1;
+                        for (int b = 1; b <= FlateCount; b++)
                         {
-                            var drNew = dtWingDetails.NewRow();
-                            drNew["Wing_DetailsId"] = 0;
-                            drNew["Wing_MasterId"] = 0;
-                            drNew["Flat_No"] = FlatNo.ToString();
-                            drNew["Wing_Name"] = txtwingName.Text;
-                            drNew["Land"] = 0;
-                            drNew["Carpet"] = 0;
-                            drNew["WB"] = 0;
-                            drNew["Amount"] = 0;
-                            drNew["Total"] = 0;
-                            drNew["EAST"] = 0;
-                            drNew["WEST"] = 0;
-                            drNew["NORTH"] = 0;
-                            drNew["SOUTH"] = 0;
-                            drNew["FlorName"] = ClsUtil.ConvertWord(florNumber);
-                            dtWingDetails.Rows.Add(drNew);
-                        }
-                        else
-                        {
-                            if (dtWingDetails.AsEnumerable().Where<DataRow>(x => x.Field<string>("Flat_No") == FlatNo.ToString()).Count() > 0)
+                            FlatNo = StartNo + b;
+                            if (string.IsNullOrWhiteSpace(Convert.ToString(txtwingName.Tag)))
                             {
-                                dtWingDetails.AsEnumerable().Where<DataRow>(x => x.Field<string>("Flat_No") == FlatNo.ToString()).ToList().ForEach(x =>
-                                {
-                                    x["Flat_No"] = FlatNo.ToString();
-                                    x["Wing_Name"] = txtwingName.Text;
-                                    x["FlorName"] = ClsUtil.ConvertWord(florNumber);
-                                });
+                                var drNew = dtWingDetails.NewRow();
+                                drNew["Wing_DetailsId"] = 0;
+                                drNew["Wing_MasterId"] = 0;
+                                drNew["Flat_No"] = FlatNo.ToString();
+                                drNew["Wing_Name"] = txtwingName.Text;
+                                drNew["Land"] = 0;
+                                drNew["Carpet"] = 0;
+                                drNew["WB"] = 0;
+                                drNew["Amount"] = 0;
+                                drNew["Total"] = 0;
+                                drNew["EAST"] = 0;
+                                drNew["WEST"] = 0;
+                                drNew["NORTH"] = 0;
+                                drNew["SOUTH"] = 0;
+                                drNew["FlorName"] = ClsUtil.ConvertWord(florNumber);
+                                dtWingDetails.Rows.Add(drNew);
                             }
-                        }
+                            else
+                            {
+                                if (dtWingDetails.AsEnumerable().Where<DataRow>(x => x.Field<string>("Flat_No") == FlatNo.ToString()).Count() > 0)
+                                {
+                                    dtWingDetails.AsEnumerable().Where<DataRow>(x => x.Field<string>("Flat_No") == FlatNo.ToString()).ToList().ForEach(x =>
+                                    {
+                                        x["Flat_No"] = FlatNo.ToString();
+                                        x["Wing_Name"] = txtwingName.Text;
+                                        x["FlorName"] = ClsUtil.ConvertWord(florNumber);
+                                    });
+                                }
+                            }
 
+                        }
+                        StartNo = StartNo + 100;
                     }
-                    StartNo = StartNo + 100;
+                }
+                catch (Exception ex)
+                {
+                    clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name);
                 }
             });
             dtWingDetails.AcceptChanges();
@@ -191,66 +209,80 @@ namespace Receipt
         }
         private void txtNumberOnly_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-                (e.KeyChar != '.'))
+            try
             {
-                e.Handled = true;
-            }
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+                       (e.KeyChar != '.'))
+                {
+                    e.Handled = true;
+                }
 
-            // only allow one decimal point
-            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+                // only allow one decimal point
+                if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+                {
+                    e.Handled = true;
+                }
+            }
+            catch (Exception ex)
             {
-                e.Handled = true;
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name);
             }
         }
         private async void btnSave_Click(object sender, EventArgs e)
         {
-            int wingMasterId = 0;
-            if (!string.IsNullOrEmpty(Convert.ToString(txtwingName.Tag)))
+            try
             {
-                wingMasterId = Convert.ToInt32(txtwingName.Tag);
-            }
-            EnWingMaster enWingMaster = new EnWingMaster(wingMasterId,
-                txtwingName.Text,
-                Convert.ToInt32(txtFloar_Count.Text),
-                Convert.ToInt32(txtHouseCount.Text),
-                Convert.ToInt32(txtStartNo.Text),
-                Convert.ToInt32(txtEndNo.Text));
+                int wingMasterId = 0;
+                if (!string.IsNullOrEmpty(Convert.ToString(txtwingName.Tag)))
+                {
+                    wingMasterId = Convert.ToInt32(txtwingName.Tag);
+                }
+                EnWingMaster enWingMaster = new EnWingMaster(wingMasterId,
+                    txtwingName.Text,
+                    Convert.ToInt32(txtFloar_Count.Text),
+                    Convert.ToInt32(txtHouseCount.Text),
+                    Convert.ToInt32(txtStartNo.Text),
+                    Convert.ToInt32(txtEndNo.Text));
 
 
-            List<EnWingDetails> enWingDetails = new List<EnWingDetails>();
-            dtWingDetails.AsEnumerable().ToList().ForEach(x =>
-            {
-                enWingDetails.Add(new EnWingDetails(
-                    Convert.ToInt32(x["Wing_DetailsId"]),
-                    wingMasterId,
-                    Convert.ToString(x["Flat_No"]),
-                    enWingMaster.Wing_Name,
-                    Convert.ToDecimal(x["Land"]),
-                    Convert.ToDecimal(x["Carpet"]),
-                    Convert.ToDecimal(x["WB"]),
-                    Convert.ToDecimal(x["Amount"]),
-                    Convert.ToDecimal(x["Total"]),
-                    Convert.ToString(x["EAST"]),
-                    Convert.ToString(x["WEST"]),
-                    Convert.ToString(x["NORTH"]),
-                    Convert.ToString(x["SOUTH"]),
-                    Convert.ToString(x["FlorName"])
-                    ));
-            });
-            var result = await BaWingMaster.InsertWingMaster(enWingMaster, enWingDetails, 1);
-            if (result > 0)
-            {
+                List<EnWingDetails> enWingDetails = new List<EnWingDetails>();
+                dtWingDetails.AsEnumerable().ToList().ForEach(x =>
+                {
+                    enWingDetails.Add(new EnWingDetails(
+                        Convert.ToInt32(x["Wing_DetailsId"]),
+                        wingMasterId,
+                        Convert.ToString(x["Flat_No"]),
+                        enWingMaster.Wing_Name,
+                        Convert.ToDecimal(x["Land"]),
+                        Convert.ToDecimal(x["Carpet"]),
+                        Convert.ToDecimal(x["WB"]),
+                        Convert.ToDecimal(x["Amount"]),
+                        Convert.ToDecimal(x["Total"]),
+                        Convert.ToString(x["EAST"]),
+                        Convert.ToString(x["WEST"]),
+                        Convert.ToString(x["NORTH"]),
+                        Convert.ToString(x["SOUTH"]),
+                        Convert.ToString(x["FlorName"])
+                        ));
+                });
+                var result = await BaWingMaster.InsertWingMaster(enWingMaster, enWingDetails, 1);
                 if (result > 0)
                 {
-                    MessageBox.Show("Data Save", "Recipt", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    await FillGridWingMaster(result);
-                    await ClearControlData();
-                }
-                if (result == -1)
-                {
+                    if (result > 0)
+                    {
+                        MessageBox.Show("Data Save", "Recipt", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        await FillGridWingMaster(result);
+                        await ClearControlData();
+                    }
+                    if (result == -1)
+                    {
 
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                ReceiptLog.clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name);
             }
         }
 
@@ -286,60 +318,73 @@ namespace Receipt
                         drNew["WEST"] = wingDetails.WEST;
                         drNew["NORTH"] = wingDetails.NORTH;
                         drNew["SOUTH"] = wingDetails.SOUTH;
-                        drNew["FlorName"]=wingDetails.FlorName;
+                        drNew["FlorName"] = wingDetails.FlorName;
                         dtWingDetails.Rows.Add(drNew);
                     });
                 }
             }
             catch (Exception ex)
             {
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name);
                 MessageBox.Show(ex.Message.ToString());
             }
         }
 
         private void dgWingDetails_CellLeave(object sender, DataGridViewCellEventArgs e)
         {
-            decimal total = 0;
-            var cell = dgWingDetails[e.ColumnIndex, e.RowIndex];
-            if (cell.OwningColumn.Name == "Land" || cell.OwningColumn.Name == "Carpet" || cell.OwningColumn.Name == "WB")
+            try
             {
-                //update the Amount cell
-                cell.OwningRow.Cells["Total"].Value = Convert.ToDecimal(cell.OwningRow.Cells["Carpet"].Value) +
-                                                      Convert.ToDecimal(cell.OwningRow.Cells["WB"].Value);
+                decimal total = 0;
+                var cell = dgWingDetails[e.ColumnIndex, e.RowIndex];
+                if (cell.OwningColumn.Name == "Land" || cell.OwningColumn.Name == "Carpet" || cell.OwningColumn.Name == "WB")
+                {
+                    //update the Amount cell
+                    cell.OwningRow.Cells["Total"].Value = Convert.ToDecimal(cell.OwningRow.Cells["Carpet"].Value) +
+                                                          Convert.ToDecimal(cell.OwningRow.Cells["WB"].Value);
+                }
             }
+            catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
         }
 
         private void dgWingDetails_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            e.Control.KeyPress -= new KeyPressEventHandler(Column1_KeyPress);
-            if (dgWingDetails.CurrentCell.OwningColumn.Name == "Land" ||
-                dgWingDetails.CurrentCell.OwningColumn.Name == "Carpet" ||
-                dgWingDetails.CurrentCell.OwningColumn.Name == "WB" || dgWingDetails.CurrentCell.OwningColumn.Name == "Amount") //Desired Column
+            try
             {
-                TextBox tb = e.Control as TextBox;
-                if (tb != null)
+                e.Control.KeyPress -= new KeyPressEventHandler(Column1_KeyPress);
+                if (dgWingDetails.CurrentCell.OwningColumn.Name == "Land" ||
+                    dgWingDetails.CurrentCell.OwningColumn.Name == "Carpet" ||
+                    dgWingDetails.CurrentCell.OwningColumn.Name == "WB" || dgWingDetails.CurrentCell.OwningColumn.Name == "Amount") //Desired Column
                 {
-                    tb.KeyPress += new KeyPressEventHandler(Column1_KeyPress);
+                    TextBox tb = e.Control as TextBox;
+                    if (tb != null)
+                    {
+                        tb.KeyPress += new KeyPressEventHandler(Column1_KeyPress);
+                    }
                 }
             }
+            catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
         }
         private void Column1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            try
             {
-                e.Handled = true;
-            }
-
-            // allow 1 dot:
-
-
-            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
-            {
-                if ((sender as TextBox).Text != ".")
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
                 {
                     e.Handled = true;
                 }
+
+                // allow 1 dot:
+
+
+                if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+                {
+                    if ((sender as TextBox).Text != ".")
+                    {
+                        e.Handled = true;
+                    }
+                }
             }
+            catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
         }
     }
 }

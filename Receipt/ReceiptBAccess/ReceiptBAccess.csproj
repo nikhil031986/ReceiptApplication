@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="BACheqDetails.cs" />
     <Compile Include="BACustomerMaster.cs" />
+    <Compile Include="BAImpoerData.cs" />
     <Compile Include="BAReceiptDetails.cs" />
     <Compile Include="BASiteMaster.cs" />
     <Compile Include="BAUserDetails.cs" />

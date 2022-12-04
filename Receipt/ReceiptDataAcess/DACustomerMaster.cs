@@ -1,4 +1,5 @@
 ﻿using ReceiptEntity;
+using ReceiptLog;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,6 +12,41 @@ namespace ReceiptDataAcess
 {
     public static class DACustomerMaster
     {
+        public static async Task<EnCommonRet> GetCustomerDT(int customerId, bool isNext)
+        {
+            EnCommonRet enCommonRet = new EnCommonRet();
+            DataSet retDataTable = new DataSet();
+            SQLiteCommand cmd = new SQLiteCommand();
+            try
+            {
+                cmd.CommandText = @"SELECT CM.Customer_Id,CM.Wing_Master_Id,CM.Wing_Details_Id,WM.Wing_Name,WD.FlatNo,CM.Customer_Name,CM.Address,
+                                        CM.Con_Details,CM.Email_Id,CM.Customer_Wing_Name,CM.Pan,CM.Aadhar,CM.Customer1,CM.Pan1,CM.Aadhar1,CM.Customer2,CM.Pan2,CM.Aadhar2,CM.Customer3,CM.Pan3,CM.Aadhar3
+                                    FROM Customer_Master CM
+                                    INNER JOIN Wing_Master WM
+                                        ON WM.Wing_Master_Id = CM.Wing_Master_Id
+                                    INNER JOIN Wing_Details WD
+                                        ON WM.Wing_Master_Id = WD.Wing_MasterId
+                                    AND CM.Wing_Details_Id = WD.Wing_DetailsId " + (customerId == 0 ? "" : " WHERE Customer_Id"+(isNext==true?">":"<")+ "@Customer_Id")+ " ORDER BY Customer_Id;SELECT COUNT(*) FROM Customer_Master;";
+                if (customerId > 0)
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@Cheq_Details_Id", customerId);
+                }
+                retDataTable = await DaDatabaseConnection.GetDataSet(cmd);
+                enCommonRet.dtForReturn = retDataTable.Tables[0];
+                enCommonRet.TotalNumber = Convert.ToString(retDataTable.Tables[1].Rows[0][0]);
+                return enCommonRet;
+            }
+            catch (Exception ex)
+            {
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, "DACustomerMaster.GetCustomerDT");
+                throw ex;
+            }
+            finally
+            {
+                retDataTable.Dispose();
+            }
+        }
         public static async Task<List<EnCustomer>> GetCustomer(int customerId=0)
         {
             List<EnCustomer> lstCustomers = new List<EnCustomer>();
@@ -66,6 +102,71 @@ namespace ReceiptDataAcess
             }
             catch (Exception ex)
             {
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, "ReceiptDataAcess.DACustomerMaster.GetCustomer");
+                throw ex;
+            }
+            finally
+            {
+                dtCustomer.Dispose();
+                cmd.Dispose();
+            }
+        }
+        public static async Task<List<EnCustomer>> GetCustomeriByName(string customerName)
+        {
+            List<EnCustomer> lstCustomers = new List<EnCustomer>();
+            DataTable dtCustomer = new DataTable();
+            SQLiteCommand cmd = new SQLiteCommand();
+            try
+            {
+                cmd.CommandText = @"SELECT CM.Customer_Id,CM.Wing_Master_Id,CM.Wing_Details_Id,WM.Wing_Name,WD.FlatNo,CM.Customer_Name,CM.Address,
+                                        CM.Con_Details,CM.Email_Id,CM.Customer_Wing_Name,CM.Pan,CM.Aadhar,CM.Customer1,CM.Pan1,CM.Aadhar1,CM.Customer2,CM.Pan2,CM.Aadhar2,CM.Customer3,CM.Pan3,CM.Aadhar3
+                                    FROM Customer_Master CM
+                                    INNER JOIN Wing_Master WM
+                                        ON WM.Wing_Master_Id = CM.Wing_Master_Id
+                                    INNER JOIN Wing_Details WD
+                                        ON WM.Wing_Master_Id = WD.Wing_MasterId
+                                    AND CM.Wing_Details_Id = WD.Wing_DetailsId " + (customerName == "" ? ";" : " WHERE Customer_Name=@Customer_Name;");
+                if (!string.IsNullOrEmpty(customerName ))
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@Customer_Name", customerName);
+                }
+                dtCustomer = await DaDatabaseConnection.GetDataTable(cmd);
+                if (dtCustomer != null && dtCustomer.AsEnumerable().Count() > 0)
+                {
+                    dtCustomer.AsEnumerable().ToList().ForEach(firstRow =>
+                    {
+                        lstCustomers.Add(new EnCustomer(
+                            Convert.ToInt32(firstRow["Customer_Id"]),
+                                                        Convert.ToInt32(firstRow["Wing_Master_Id"]),
+                                                        Convert.ToInt32(firstRow["Wing_Details_Id"]),
+                                                        Convert.ToString(firstRow["Wing_Name"]),
+                                                        Convert.ToString(firstRow["FlatNo"]),
+                                                        Convert.ToString(firstRow["Customer_Name"]),
+                                                        Convert.ToString(firstRow["Address"]),
+                                                        Convert.ToString(firstRow["Con_Details"]),
+                                                        Convert.ToString(firstRow["Email_Id"]),
+                                                        Convert.ToString(firstRow["Customer_Wing_Name"]),
+
+                                                        Convert.ToString(firstRow["Pan"]),
+                                                        Convert.ToString(firstRow["Aadhar"]),
+                                                        Convert.ToString(firstRow["Customer1"]),
+                                                        Convert.ToString(firstRow["Pan1"]),
+                                                        Convert.ToString(firstRow["Aadhar1"]),
+                                                        Convert.ToString(firstRow["Customer2"]),
+                                                        Convert.ToString(firstRow["Pan2"]),
+                                                         Convert.ToString(firstRow["Aadhar2"]),
+                                                        Convert.ToString(firstRow["Customer3"]),
+                                                        Convert.ToString(firstRow["Pan3"]),
+                                                        Convert.ToString(firstRow["Aadhar3"])
+                                                        ));
+                    });
+                }
+                return lstCustomers;
+            }
+            catch (Exception ex)
+            {
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, "ReceiptDataAcess.DACustomerMaster.GetCustomeriByName");
                 throw ex;
             }
             finally
@@ -137,6 +238,7 @@ namespace ReceiptDataAcess
             }
             catch (Exception ex)
             {
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, "ReceiptDataAcess.DACustomerMaster.InsertUpdateCustomer");
                 throw ex;
             }
             finally

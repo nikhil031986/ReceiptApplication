@@ -175,10 +175,10 @@
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExit.ForeColor = System.Drawing.Color.White;
-            this.btnExit.Location = new System.Drawing.Point(335, 201);
+            this.btnExit.Location = new System.Drawing.Point(335, 193);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(56, 27);
-            this.btnExit.TabIndex = 9;
+            this.btnExit.TabIndex = 8;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = false;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
@@ -203,10 +203,10 @@
             this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogin.ForeColor = System.Drawing.Color.White;
-            this.btnLogin.Location = new System.Drawing.Point(254, 201);
+            this.btnLogin.Location = new System.Drawing.Point(254, 193);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(75, 27);
-            this.btnLogin.TabIndex = 8;
+            this.btnLogin.TabIndex = 7;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = false;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
@@ -214,12 +214,13 @@
             // cmbsiteName
             // 
             this.cmbsiteName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbsiteName.BackColor = System.Drawing.Color.White;
+            this.cmbsiteName.BackColor = System.Drawing.Color.Black;
             this.tblLogin.SetColumnSpan(this.cmbsiteName, 2);
             this.cmbsiteName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbsiteName.ForeColor = System.Drawing.Color.Black;
+            this.cmbsiteName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmbsiteName.ForeColor = System.Drawing.Color.White;
             this.cmbsiteName.FormattingEnabled = true;
-            this.cmbsiteName.Location = new System.Drawing.Point(53, 168);
+            this.cmbsiteName.Location = new System.Drawing.Point(53, 164);
             this.cmbsiteName.Name = "cmbsiteName";
             this.cmbsiteName.Size = new System.Drawing.Size(276, 21);
             this.cmbsiteName.TabIndex = 6;
@@ -232,8 +233,8 @@
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(335, 163);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(28, 32);
-            this.button1.TabIndex = 7;
+            this.button1.Size = new System.Drawing.Size(27, 24);
+            this.button1.TabIndex = 9;
             this.button1.Text = "+";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);

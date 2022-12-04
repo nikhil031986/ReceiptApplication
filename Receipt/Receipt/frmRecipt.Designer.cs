@@ -71,6 +71,7 @@
             this.tblMenuItem.Controls.Add(this.btnReport, 0, 6);
             this.tblMenuItem.Controls.Add(this.btnLogout, 0, 9);
             this.tblMenuItem.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tblMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tblMenuItem.Location = new System.Drawing.Point(0, 0);
             this.tblMenuItem.Name = "tblMenuItem";
             this.tblMenuItem.RowCount = 10;

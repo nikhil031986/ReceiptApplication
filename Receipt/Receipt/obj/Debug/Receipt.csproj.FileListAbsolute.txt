@@ -90,6 +90,7 @@ D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\bin\Debug\ReceiptDataAcess.
 D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\bin\Debug\System.Data.SQLite.xml
 D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.csproj.AssemblyReference.cache
 D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.csproj.SuggestedBindingRedirects.cache
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.frmBanakhat.resources
 D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.frmCheqDetail.resources
 D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.frmCheqDetailsList.resources
 D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.frmCustomer.resources
@@ -108,4 +109,3 @@ D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.csproj.Co
 D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.csproj.CopyComplete
 D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.exe
 D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.pdb
-D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.frmBanakhat.resources

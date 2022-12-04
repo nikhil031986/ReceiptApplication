@@ -1,9 +1,11 @@
 ﻿using ReceiptEntity;
+using ReceiptLog;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,6 +13,34 @@ namespace ReceiptDataAcess
 {
     public static class DACheqDetails
     {
+        public static async Task<EnCommonRet> GetCheqDetailsTables(int lastNumber,bool isNext)
+        {
+            EnCommonRet enCommonRet = new EnCommonRet();
+            DataSet retDataTable = new DataSet();
+            SQLiteCommand cmd = new SQLiteCommand();
+            try
+            {
+                cmd.CommandText = @"SELECT Cheq_Details_Id,Customer_Name,Cheq_Date,Amount,Amount_InWord,Bank_Name,Cheq_No FROM Cheq_Details " + (lastNumber == 0 ? "" : " WHERE Cheq_Details_Id"+ (isNext == true?">":"<")+ "@Cheq_Details_Id ")+"ORDER BY Cheq_Details_Id LIMIT 100; SELECT COUNT(*) FROM Cheq_Details;";
+                if (lastNumber > 0)
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@Cheq_Details_Id", lastNumber);
+                }
+                retDataTable = await DaDatabaseConnection.GetDataSet(cmd);
+                enCommonRet.dtForReturn = retDataTable.Tables[0];
+                enCommonRet.TotalNumber = Convert.ToString(retDataTable.Tables[1].Rows[0][0]);
+                return enCommonRet;
+            }
+            catch (Exception ex)
+            {
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, "DACheqDetails.GetCheqDetailsTables");
+                throw ex;
+            }
+            finally
+            {
+                retDataTable.Dispose();
+            }
+        }
         public static async Task<List<EnCheqDetails>> GetCheqDetails(int CheqDetailsId)
         {
             List<EnCheqDetails> lstCustomers = new List<EnCheqDetails>();
@@ -42,7 +72,7 @@ namespace ReceiptDataAcess
             }
             catch (Exception ex)
             {
-                ReceiptLog.clsLog.InstanceCreation().InsertLog(ex.Message, ReceiptLog.clsLog.logType.Error, "DACheqDetails.GetCheqDetails");
+                ReceiptLog.clsLog.InstanceCreation().InsertLog(ex.ToString(), ReceiptLog.clsLog.logType.Error, "DACheqDetails.GetCheqDetails");
                 throw ex;
             }
             finally
@@ -72,7 +102,7 @@ namespace ReceiptDataAcess
             }
             catch (Exception ex)
             {
-                ReceiptLog.clsLog.InstanceCreation().InsertLog(ex.Message, ReceiptLog.clsLog.logType.Error, "DACheqDetails.GetCustomerName");
+                ReceiptLog.clsLog.InstanceCreation().InsertLog(ex.ToString(), ReceiptLog.clsLog.logType.Error, "DACheqDetails.GetCustomerName");
                 throw ex;
             }
             finally
@@ -139,7 +169,7 @@ namespace ReceiptDataAcess
             }
             catch (Exception ex)
             {
-                ReceiptLog.clsLog.InstanceCreation().InsertLog(ex.Message, ReceiptLog.clsLog.logType.Error, "DACheqDetails.InsertUpdateCheqDetqails");
+                ReceiptLog.clsLog.InstanceCreation().InsertLog(ex.ToString(), ReceiptLog.clsLog.logType.Error, "DACheqDetails.InsertUpdateCheqDetqails");
                 throw ex;
             }
             finally

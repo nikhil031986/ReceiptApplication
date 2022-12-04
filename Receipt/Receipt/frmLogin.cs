@@ -1,11 +1,13 @@
 ﻿using ReceiptBAccess;
 using ReceiptEntity;
+using ReceiptLog;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,18 +18,26 @@ namespace Receipt
     {
         public frmLogin()
         {
-            InitializeComponent();
-            FillSiteName();
-            ReceiptLog.clsLog.InstanceCreation().filePath = ClsUtil.getCurrentPath();
-            ReceiptLog.clsLog.InstanceCreation().CreateLogFile();
+            try
+            {
+                InitializeComponent();
+                FillSiteName();
+                ReceiptLog.clsLog.InstanceCreation().filePath = ClsUtil.getCurrentPath();
+                ReceiptLog.clsLog.InstanceCreation().CreateLogFile();
+            }
+            catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
         }
         private async void FillSiteName()
         {
-            var siteMasterData = await BASiteMaster.GetSiteMaster(0);
-            cmbsiteName.DisplayMember = "Site_Name";
-            cmbsiteName.ValueMember = "Site_Master_Id";
-            cmbsiteName.DataSource=siteMasterData;
-            cmbsiteName.SelectedIndex = -1;
+            try
+            {
+                var siteMasterData = await BASiteMaster.GetSiteMaster(0);
+                cmbsiteName.DisplayMember = "Site_Name";
+                cmbsiteName.ValueMember = "Site_Master_Id";
+                cmbsiteName.DataSource = siteMasterData;
+                cmbsiteName.SelectedIndex = -1;
+            }
+            catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
         }
 
         private async void btnLogin_Click(object sender, EventArgs e)

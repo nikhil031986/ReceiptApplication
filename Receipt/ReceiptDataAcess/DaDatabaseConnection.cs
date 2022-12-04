@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Data.SQLite;
 using System.Data;
+using ReceiptLog;
+using System.Reflection;
 
 namespace ReceiptDataAcess
 {
@@ -47,7 +49,43 @@ namespace ReceiptDataAcess
             }
             catch(Exception ex)
             {
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name);
                 throw ex;
+            }
+        }
+        internal async static Task<DataSet> GetDataSet(SQLiteCommand cmd)
+        {
+            if (string.IsNullOrWhiteSpace(SelectedSiteDataBase))
+            {
+                SelectedSiteDataBase = strMainDataBase;
+            }
+            DataSet dtreturn = new DataSet();
+            try
+            {
+                await Task.Run(() =>
+                {
+                    using (SQLiteConnection conn = new SQLiteConnection(SelectedSiteDataBase))
+                    {
+                        using (SQLiteCommand sqlcmd = cmd)
+                        {
+                            sqlcmd.Connection = conn;
+                            using (SQLiteDataAdapter adp = new SQLiteDataAdapter(sqlcmd))
+                            {
+                                adp.Fill(dtreturn);
+                            }
+                        }
+                    }
+                });
+                return dtreturn;
+            }
+            catch (Exception ex)
+            {
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name);
+                throw ex;
+            }
+            finally
+            {
+                dtreturn.Dispose();
             }
         }
         internal async static Task<DataTable> GetDataTable(SQLiteCommand cmd)
@@ -77,6 +115,7 @@ namespace ReceiptDataAcess
             }
             catch(Exception ex)
             {
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error,MethodBase.GetCurrentMethod().Name);
                 throw ex;
             }
             finally
@@ -107,6 +146,7 @@ namespace ReceiptDataAcess
             }
             catch(Exception ex)
             {
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name);
                 throw ex;
             }
             return retObject;

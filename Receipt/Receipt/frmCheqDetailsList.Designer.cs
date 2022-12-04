@@ -38,8 +38,6 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvReceiptList = new System.Windows.Forms.DataGridView();
-            this.cntmnuCheqList = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.exportToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Cheq_Details_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Customer_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Bank_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,6 +45,8 @@
             this.Cheq_Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Amount_InWord = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cntmnuCheqList = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.exportToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -160,6 +160,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(893, 511);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
@@ -185,20 +186,6 @@
             this.dgvReceiptList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvReceiptList.Size = new System.Drawing.Size(887, 451);
             this.dgvReceiptList.TabIndex = 0;
-            // 
-            // cntmnuCheqList
-            // 
-            this.cntmnuCheqList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exportToExcelToolStripMenuItem});
-            this.cntmnuCheqList.Name = "cntmnuCheqList";
-            this.cntmnuCheqList.Size = new System.Drawing.Size(154, 26);
-            // 
-            // exportToExcelToolStripMenuItem
-            // 
-            this.exportToExcelToolStripMenuItem.Name = "exportToExcelToolStripMenuItem";
-            this.exportToExcelToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
-            this.exportToExcelToolStripMenuItem.Text = "Export To Excel";
-            this.exportToExcelToolStripMenuItem.Click += new System.EventHandler(this.exportToExcelToolStripMenuItem_Click);
             // 
             // Cheq_Details_Id
             // 
@@ -251,10 +238,25 @@
             this.Amount_InWord.Name = "Amount_InWord";
             this.Amount_InWord.ReadOnly = true;
             // 
+            // cntmnuCheqList
+            // 
+            this.cntmnuCheqList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportToExcelToolStripMenuItem});
+            this.cntmnuCheqList.Name = "cntmnuCheqList";
+            this.cntmnuCheqList.Size = new System.Drawing.Size(154, 26);
+            // 
+            // exportToExcelToolStripMenuItem
+            // 
+            this.exportToExcelToolStripMenuItem.Name = "exportToExcelToolStripMenuItem";
+            this.exportToExcelToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.exportToExcelToolStripMenuItem.Text = "Export To Excel";
+            this.exportToExcelToolStripMenuItem.Click += new System.EventHandler(this.exportToExcelToolStripMenuItem_Click);
+            // 
             // frmCheqDetailsList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(893, 511);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

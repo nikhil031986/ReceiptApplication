@@ -51,9 +51,9 @@
             this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Amount_Word = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Payment_Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblReceiptDetails = new System.Windows.Forms.Label();
             this.ctMenuReceiptList = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.exportToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblReceiptDetails = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -290,6 +290,20 @@
             this.Payment_Date.Name = "Payment_Date";
             this.Payment_Date.ReadOnly = true;
             // 
+            // ctMenuReceiptList
+            // 
+            this.ctMenuReceiptList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportToExcelToolStripMenuItem});
+            this.ctMenuReceiptList.Name = "ctMenuReceiptList";
+            this.ctMenuReceiptList.Size = new System.Drawing.Size(154, 26);
+            // 
+            // exportToExcelToolStripMenuItem
+            // 
+            this.exportToExcelToolStripMenuItem.Name = "exportToExcelToolStripMenuItem";
+            this.exportToExcelToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.exportToExcelToolStripMenuItem.Text = "Export To Excel";
+            this.exportToExcelToolStripMenuItem.Click += new System.EventHandler(this.exportToExcelToolStripMenuItem_Click);
+            // 
             // lblReceiptDetails
             // 
             this.lblReceiptDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -302,24 +316,11 @@
             this.lblReceiptDetails.Text = "Receipt List";
             this.lblReceiptDetails.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // ctMenuReceiptList
-            // 
-            this.ctMenuReceiptList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exportToExcelToolStripMenuItem});
-            this.ctMenuReceiptList.Name = "ctMenuReceiptList";
-            this.ctMenuReceiptList.Size = new System.Drawing.Size(154, 26);
-            // 
-            // exportToExcelToolStripMenuItem
-            // 
-            this.exportToExcelToolStripMenuItem.Name = "exportToExcelToolStripMenuItem";
-            this.exportToExcelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.exportToExcelToolStripMenuItem.Text = "Export To Excel";
-            this.exportToExcelToolStripMenuItem.Click += new System.EventHandler(this.exportToExcelToolStripMenuItem_Click);
-            // 
             // frmReceiptList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1083, 545);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

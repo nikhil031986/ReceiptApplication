@@ -31,12 +31,12 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.lblBANAKHATPRINT = new System.Windows.Forms.Label();
             this.cmbCustomer = new System.Windows.Forms.ComboBox();
-            this.btnPrint = new System.Windows.Forms.Button();
-            this.btnprintprivew = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.wbHtmlView = new System.Windows.Forms.WebBrowser();
+            this.btnprintprivew = new System.Windows.Forms.Button();
             this.lblEnterFlaotNO = new System.Windows.Forms.Label();
             this.txtFlatNo = new System.Windows.Forms.TextBox();
+            this.btnPrint = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -92,28 +92,6 @@
             this.cmbCustomer.Size = new System.Drawing.Size(292, 21);
             this.cmbCustomer.TabIndex = 2;
             // 
-            // btnPrint
-            // 
-            this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPrint.Location = new System.Drawing.Point(839, 603);
-            this.btnPrint.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(75, 23);
-            this.btnPrint.TabIndex = 7;
-            this.btnPrint.Text = "PRINT";
-            this.btnPrint.UseVisualStyleBackColor = true;
-            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
-            // 
-            // btnprintprivew
-            // 
-            this.btnprintprivew.Location = new System.Drawing.Point(810, 21);
-            this.btnprintprivew.Name = "btnprintprivew";
-            this.btnprintprivew.Size = new System.Drawing.Size(111, 23);
-            this.btnprintprivew.TabIndex = 5;
-            this.btnprintprivew.Text = "PRINT PRIVEW";
-            this.btnprintprivew.UseVisualStyleBackColor = true;
-            this.btnprintprivew.Click += new System.EventHandler(this.btnprintprivew_Click);
-            // 
             // label2
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -134,6 +112,16 @@
             this.wbHtmlView.Size = new System.Drawing.Size(918, 547);
             this.wbHtmlView.TabIndex = 6;
             // 
+            // btnprintprivew
+            // 
+            this.btnprintprivew.Location = new System.Drawing.Point(810, 21);
+            this.btnprintprivew.Name = "btnprintprivew";
+            this.btnprintprivew.Size = new System.Drawing.Size(111, 23);
+            this.btnprintprivew.TabIndex = 5;
+            this.btnprintprivew.Text = "PRINT PRIVEW";
+            this.btnprintprivew.UseVisualStyleBackColor = true;
+            this.btnprintprivew.Click += new System.EventHandler(this.btnprintprivew_Click);
+            // 
             // lblEnterFlaotNO
             // 
             this.lblEnterFlaotNO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -153,10 +141,23 @@
             this.txtFlatNo.TabIndex = 4;
             this.txtFlatNo.Validated += new System.EventHandler(this.txtFlatNo_Validated);
             // 
+            // btnPrint
+            // 
+            this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPrint.Location = new System.Drawing.Point(839, 603);
+            this.btnPrint.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(75, 23);
+            this.btnPrint.TabIndex = 7;
+            this.btnPrint.Text = "PRINT";
+            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
             // frmBanakhat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(924, 629);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

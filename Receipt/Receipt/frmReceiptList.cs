@@ -1,5 +1,6 @@
 ﻿using ReceiptBAccess;
 using ReceiptEntity;
+using ReceiptLog;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Net.NetworkInformation;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -20,9 +22,13 @@ namespace Receipt
         public event EventHandler CloseUserDetails;
         public frmReceiptList()
         {
-            InitializeComponent();
-            FillTableRecords();
-            FillGridReceiptList(0);
+            try
+            {
+                InitializeComponent();
+                FillTableRecords();
+                new System.Threading.Thread(() => FillGridReceiptList(0)).Start();
+            }
+            catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
         }
         private async Task FillGridReceiptList(int ReceiptId = 0)
         {
@@ -74,82 +80,103 @@ namespace Receipt
                 });
 
             }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
+            catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
 
         }
         private async Task FillTableRecords()
         {
-            dtReceiptDetails = new DataTable();
-            List<clsColumn> clsColumns = new List<clsColumn>();
-            clsColumns.Add(new clsColumn("Receipt_Id", ClsUtil.ColumnType.dbLong, "0"));
-            clsColumns.Add(new clsColumn("Receipt_No", ClsUtil.ColumnType.dbString, ""));
-            clsColumns.Add(new clsColumn("Receipt_Date", ClsUtil.ColumnType.dbString, ""));
-            clsColumns.Add(new clsColumn("Customer_Id", ClsUtil.ColumnType.dbInt, "0"));
-            clsColumns.Add(new clsColumn("Customer_Name", ClsUtil.ColumnType.dbString, ""));
-            clsColumns.Add(new clsColumn("Flate_ShopNo", ClsUtil.ColumnType.dbString, ""));
-            clsColumns.Add(new clsColumn("Cheq_Rtgs_Neft_ImpsNo", ClsUtil.ColumnType.dbString, ""));
-            clsColumns.Add(new clsColumn("Year_Id", ClsUtil.ColumnType.dbInt, "0"));
-            clsColumns.Add(new clsColumn("Bank_Name", ClsUtil.ColumnType.dbString, ""));
-            clsColumns.Add(new clsColumn("Branch_Name", ClsUtil.ColumnType.dbString, ""));
-            clsColumns.Add(new clsColumn("ReceivedAs", ClsUtil.ColumnType.dbString, ""));
-            clsColumns.Add(new clsColumn("Amount", ClsUtil.ColumnType.dbDecimal, "0.0"));
-            clsColumns.Add(new clsColumn("Amount_Word", ClsUtil.ColumnType.dbString, ""));
-            clsColumns.Add(new clsColumn("Payment_Date", ClsUtil.ColumnType.dbString, ""));
-            await ClsUtil.AddColumn(dtReceiptDetails,clsColumns);
-            dgvReceiptList.DataSource = dtReceiptDetails;
-            dtReceiptDetails.TableName = "ReceipList";
-            cmbColumnName.Items.Clear();
-            foreach (DataColumn column in dtReceiptDetails.Columns)
+            try
             {
-                if (!column.ColumnName.ToLower().Contains("id"))
-                    cmbColumnName.Items.Add(column.ColumnName);
+                dtReceiptDetails = new DataTable();
+                List<clsColumn> clsColumns = new List<clsColumn>();
+                clsColumns.Add(new clsColumn("Receipt_Id", ClsUtil.ColumnType.dbLong, "0"));
+                clsColumns.Add(new clsColumn("Receipt_No", ClsUtil.ColumnType.dbString, ""));
+                clsColumns.Add(new clsColumn("Receipt_Date", ClsUtil.ColumnType.dbString, ""));
+                clsColumns.Add(new clsColumn("Customer_Id", ClsUtil.ColumnType.dbInt, "0"));
+                clsColumns.Add(new clsColumn("Customer_Name", ClsUtil.ColumnType.dbString, ""));
+                clsColumns.Add(new clsColumn("Flate_ShopNo", ClsUtil.ColumnType.dbString, ""));
+                clsColumns.Add(new clsColumn("Cheq_Rtgs_Neft_ImpsNo", ClsUtil.ColumnType.dbString, ""));
+                clsColumns.Add(new clsColumn("Year_Id", ClsUtil.ColumnType.dbInt, "0"));
+                clsColumns.Add(new clsColumn("Bank_Name", ClsUtil.ColumnType.dbString, ""));
+                clsColumns.Add(new clsColumn("Branch_Name", ClsUtil.ColumnType.dbString, ""));
+                clsColumns.Add(new clsColumn("ReceivedAs", ClsUtil.ColumnType.dbString, ""));
+                clsColumns.Add(new clsColumn("Amount", ClsUtil.ColumnType.dbDecimal, "0.0"));
+                clsColumns.Add(new clsColumn("Amount_Word", ClsUtil.ColumnType.dbString, ""));
+                clsColumns.Add(new clsColumn("Payment_Date", ClsUtil.ColumnType.dbString, ""));
+                await ClsUtil.AddColumn(dtReceiptDetails, clsColumns);
+                dgvReceiptList.DataSource = dtReceiptDetails;
+                dtReceiptDetails.TableName = "ReceipList";
+                cmbColumnName.Items.Clear();
+                foreach (DataColumn column in dtReceiptDetails.Columns)
+                {
+                    if (!column.ColumnName.ToLower().Contains("id"))
+                        cmbColumnName.Items.Add(column.ColumnName);
+                }
             }
+            catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
         }
         private async Task OpenReceiptEntryForm(int receipt_Id = 0)
         {
-            frmReceiptEntry _frmReceiptEntry;
-            if (receipt_Id == 0)
+            try
             {
-                _frmReceiptEntry = new frmReceiptEntry();
+                frmReceiptEntry _frmReceiptEntry;
+                if (receipt_Id == 0)
+                {
+                    _frmReceiptEntry = new frmReceiptEntry();
+                }
+                else
+                {
+                    _frmReceiptEntry = new frmReceiptEntry(receipt_Id);
+                }
+                _frmReceiptEntry.ShowDialog();
+                if (_frmReceiptEntry.Receipt_ID > 0)
+                    await FillGridReceiptList(_frmReceiptEntry.Receipt_ID);
             }
-            else
-            {
-                _frmReceiptEntry = new frmReceiptEntry(receipt_Id);
-            }
-            _frmReceiptEntry.ShowDialog();
-            if (_frmReceiptEntry.Receipt_ID > 0)
-                await FillGridReceiptList(_frmReceiptEntry.Receipt_ID);
+            catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
         }
         private async void btnAdd_Click(object sender, EventArgs e)
         {
-             await OpenReceiptEntryForm(0);
+            try
+            {
+                await OpenReceiptEntryForm(0);
+            }
+            catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
         }
 
         private async void btnEdit_Click(object sender, EventArgs e)
         {
-            var receiptId = dgvReceiptList.SelectedRows[0].Cells[0].Value;
-            await  OpenReceiptEntryForm(Convert.ToInt32(receiptId));
+            try
+            {
+
+                var receiptId = dgvReceiptList.SelectedRows[0].Cells[0].Value;
+                await OpenReceiptEntryForm(Convert.ToInt32(receiptId));
+            }
+            catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(txtSearch.Text))
+            try
             {
-                dtReceiptDetails.DefaultView.RowFilter = string.Format("[{0}] LIKE '%{1}%'", cmbColumnName.Text, txtSearch.Text);
+                if (!string.IsNullOrWhiteSpace(txtSearch.Text))
+                {
+                    dtReceiptDetails.DefaultView.RowFilter = string.Format("[{0}] LIKE '%{1}%'", cmbColumnName.Text, txtSearch.Text);
+                }
+                else
+                {
+                    dtReceiptDetails.DefaultView.RowFilter = String.Empty;
+                }
             }
-            else
-            {
-                dtReceiptDetails.DefaultView.RowFilter = String.Empty;
-            }
+            catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
         }
 
         private void exportToExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ClsUtil.ExportDataToExcel(dgvReceiptList);
+            try
+            {
+                ClsUtil.ExportDataToExcel(dgvReceiptList);
+            }
+            catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
         }
     }
 }

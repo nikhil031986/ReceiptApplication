@@ -12,5 +12,8 @@ namespace ReceiptBAccess
 
         public static async Task<List<EnCustomer>> GetCustomer(int CustomerId = 0)
         => await DACustomerMaster.GetCustomer(CustomerId);
+
+        public static async Task<EnCommonRet> GetCustomerDT(int customerId, bool isNext)
+            => await DACustomerMaster.GetCustomerDT(customerId, isNext);
     }
 }

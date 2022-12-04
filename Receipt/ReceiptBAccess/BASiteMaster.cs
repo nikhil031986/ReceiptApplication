@@ -11,13 +11,9 @@ namespace ReceiptBAccess
     public static class BASiteMaster
     {
         public static async Task<List<EnSiteMaster>> GetSiteMaster(int SiteMasterId)
-        {
-            return await DASiteMaster.GetSiteMaster(SiteMasterId);
-        }
+        => await DASiteMaster.GetSiteMaster(SiteMasterId);
 
         public static async Task<int> InsertUpdateSiteMaster(EnSiteMaster enSiteMaster)
-        {
-            return await DASiteMaster.InsertUpdateSiteMaster(enSiteMaster);
-        }
+        => await DASiteMaster.InsertUpdateSiteMaster(enSiteMaster);
     }
 }

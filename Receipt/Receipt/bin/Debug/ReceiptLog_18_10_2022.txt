@@ -1,5 +1,0 @@
-18/10/2022 14:22:PM Message Type:Info, Message : User Login User Name :Admin , Class Name:frmLogin.btnLogin
-18/10/2022 14:28:PM Message Type:Info, Message : User Login User Name :Admin , Class Name:frmLogin.btnLogin
-18/10/2022 14:34:PM Message Type:Info, Message : User Login User Name :Admin , Class Name:frmLogin.btnLogin
-18/10/2022 15:02:PM Message Type:Info, Message : User Login User Name :Admin , Class Name:frmLogin.btnLogin
-18/10/2022 15:04:PM Message Type:Info, Message : User Login User Name :Admin , Class Name:frmLogin.btnLogin

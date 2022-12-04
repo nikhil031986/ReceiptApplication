@@ -1,9 +1,11 @@
 ﻿using ReceiptEntity;
+using ReceiptLog;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace ReceiptDataAcess
@@ -53,6 +55,7 @@ namespace ReceiptDataAcess
             }
             catch (Exception ex)
             {
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name);
                 throw ex;
             }
             finally
@@ -105,6 +108,7 @@ namespace ReceiptDataAcess
             }
             catch (Exception ex)
             {
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name);
                 throw ex;
             }
             finally
@@ -157,6 +161,60 @@ namespace ReceiptDataAcess
             }
             catch (Exception ex)
             {
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name);
+                throw ex;
+            }
+            finally
+            {
+                dtCustomer.Dispose();
+                cmd.Dispose();
+            }
+        }
+        public static async Task<List<EnReceiptDetails>> GetReceiptDetailsByReceiptNo(string ReceiptNo="")
+        {
+            List<EnReceiptDetails> lstCustomers = new List<EnReceiptDetails>();
+            DataTable dtCustomer = new DataTable();
+            SQLiteCommand cmd = new SQLiteCommand();
+            try
+            {
+                cmd.CommandText = @"SELECT RD.Receipt_Id,RD.Receipt_No,
+                                    RD.Receipt_Date,RD.Customer_Id,CM.Customer_Name,RD.Flate_ShopNo,RD.Cheq_Rtgs_Neft_ImpsNo,
+                                    RD.Year_Id,RD.Bank_Name,RD.Branch_Name,RD.ReceivedAs,RD.Amount,RD.Amount_Word, RD.Payment_Date, RD.ReceiptDateNo FROM 
+                                    ReceiptDetail RD
+                                    INNER JOIN Customer_Master CM
+                                    ON RD.Customer_Id = CM.Customer_Id " + (ReceiptNo == "" ? ";" : " WHERE Receipt_No=@Receipt_No;");
+                if (ReceiptNo !="")
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@Receipt_No", ReceiptNo);
+                }
+                dtCustomer = await DaDatabaseConnection.GetDataTable(cmd);
+                if (dtCustomer != null && dtCustomer.AsEnumerable().Count() > 0)
+                {
+                    dtCustomer.AsEnumerable().ToList().ForEach(firstRow =>
+                    {
+                        lstCustomers.Add(new EnReceiptDetails(Convert.ToInt32(firstRow["Receipt_Id"]),
+                                                        Convert.ToString(firstRow["Receipt_No"]),
+                                                        Convert.ToString(firstRow["Receipt_Date"]),
+                                                        Convert.ToInt32(firstRow["Customer_Id"]),
+                                                        Convert.ToString(firstRow["Flate_ShopNo"]),
+                                                        Convert.ToString(firstRow["Cheq_Rtgs_Neft_ImpsNo"]),
+                                                        Convert.ToInt32(firstRow["Year_Id"]),
+                                                        Convert.ToString(firstRow["Bank_Name"]),
+                                                        Convert.ToString(firstRow["Branch_Name"]),
+                                                        Convert.ToString(firstRow["ReceivedAs"]),
+                                                        Convert.ToDecimal(firstRow["Amount"]),
+                                                        Convert.ToString(firstRow["Amount_Word"]),
+                                                        Convert.ToString(firstRow["Customer_Name"]),
+                                                        Convert.ToString(firstRow["Payment_Date"]),
+                                                        Convert.ToInt32(firstRow["ReceiptDateNo"])));
+                    });
+                }
+                return lstCustomers;
+            }
+            catch (Exception ex)
+            {
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name);
                 throw ex;
             }
             finally
@@ -189,6 +247,7 @@ namespace ReceiptDataAcess
             }
             catch (Exception ex)
             {
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name);
                 throw ex;
             }
             finally
@@ -266,6 +325,7 @@ namespace ReceiptDataAcess
             }
             catch (Exception ex)
             {
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name);
                 throw ex;
             }
             finally

@@ -69,6 +69,7 @@
     <Compile Include="DACheqDetails.cs" />
     <Compile Include="DACustomerMaster.cs" />
     <Compile Include="DaDatabaseConnection.cs" />
+    <Compile Include="DAImportData.cs" />
     <Compile Include="DAReciptDetails.cs" />
     <Compile Include="DASiteMaster.cs" />
     <Compile Include="DAUserDetails.cs" />

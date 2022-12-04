@@ -47,6 +47,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnClose = new System.Windows.Forms.Button();
             this.lblCustomer = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblPan = new System.Windows.Forms.Label();
             this.lblAadhar = new System.Windows.Forms.Label();
             this.lblPan1 = new System.Windows.Forms.Label();
@@ -86,6 +87,7 @@
             this.tblMainCustomerDetails.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.flowLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgCustomer)).BeginInit();
             this.SuspendLayout();
@@ -172,13 +174,13 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1044, 304);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1044, 312);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
             // txtCustomerWingName
             // 
             this.txtCustomerWingName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCustomerWingName.Location = new System.Drawing.Point(637, 119);
+            this.txtCustomerWingName.Location = new System.Drawing.Point(637, 127);
             this.txtCustomerWingName.Name = "txtCustomerWingName";
             this.txtCustomerWingName.Size = new System.Drawing.Size(404, 20);
             this.txtCustomerWingName.TabIndex = 14;
@@ -186,7 +188,7 @@
             // txtContactNo
             // 
             this.txtContactNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtContactNo.Location = new System.Drawing.Point(91, 93);
+            this.txtContactNo.Location = new System.Drawing.Point(91, 101);
             this.txtContactNo.Name = "txtContactNo";
             this.txtContactNo.Size = new System.Drawing.Size(404, 20);
             this.txtContactNo.TabIndex = 10;
@@ -194,7 +196,7 @@
             // txtAddress
             // 
             this.txtAddress.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtAddress.Location = new System.Drawing.Point(637, 66);
+            this.txtAddress.Location = new System.Drawing.Point(637, 74);
             this.txtAddress.Multiline = true;
             this.txtAddress.Name = "txtAddress";
             this.tableLayoutPanel2.SetRowSpan(this.txtAddress, 2);
@@ -204,7 +206,7 @@
             // txtCustomerName
             // 
             this.txtCustomerName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCustomerName.Location = new System.Drawing.Point(91, 39);
+            this.txtCustomerName.Location = new System.Drawing.Point(91, 47);
             this.txtCustomerName.Name = "txtCustomerName";
             this.txtCustomerName.Size = new System.Drawing.Size(404, 20);
             this.txtCustomerName.TabIndex = 2;
@@ -214,7 +216,7 @@
             // 
             this.cmbFlatNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbFlatNo.FormattingEnabled = true;
-            this.cmbFlatNo.Location = new System.Drawing.Point(91, 66);
+            this.cmbFlatNo.Location = new System.Drawing.Point(91, 74);
             this.cmbFlatNo.Name = "cmbFlatNo";
             this.cmbFlatNo.Size = new System.Drawing.Size(404, 21);
             this.cmbFlatNo.TabIndex = 6;
@@ -224,7 +226,7 @@
             // 
             this.lblCustomerWingName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCustomerWingName.AutoSize = true;
-            this.lblCustomerWingName.Location = new System.Drawing.Point(521, 122);
+            this.lblCustomerWingName.Location = new System.Drawing.Point(521, 130);
             this.lblCustomerWingName.Name = "lblCustomerWingName";
             this.lblCustomerWingName.Size = new System.Drawing.Size(110, 13);
             this.lblCustomerWingName.TabIndex = 13;
@@ -234,7 +236,7 @@
             // 
             this.lblAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblAddress.AutoSize = true;
-            this.lblAddress.Location = new System.Drawing.Point(521, 70);
+            this.lblAddress.Location = new System.Drawing.Point(521, 78);
             this.lblAddress.Name = "lblAddress";
             this.lblAddress.Size = new System.Drawing.Size(110, 13);
             this.lblAddress.TabIndex = 7;
@@ -244,7 +246,7 @@
             // 
             this.lblWingName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblWingName.AutoSize = true;
-            this.lblWingName.Location = new System.Drawing.Point(521, 43);
+            this.lblWingName.Location = new System.Drawing.Point(521, 51);
             this.lblWingName.Name = "lblWingName";
             this.lblWingName.Size = new System.Drawing.Size(110, 13);
             this.lblWingName.TabIndex = 3;
@@ -254,7 +256,7 @@
             // 
             this.lblEmailID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblEmailID.AutoSize = true;
-            this.lblEmailID.Location = new System.Drawing.Point(3, 122);
+            this.lblEmailID.Location = new System.Drawing.Point(3, 130);
             this.lblEmailID.Name = "lblEmailID";
             this.lblEmailID.Size = new System.Drawing.Size(82, 13);
             this.lblEmailID.TabIndex = 11;
@@ -264,7 +266,7 @@
             // 
             this.lblContactNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblContactNo.AutoSize = true;
-            this.lblContactNo.Location = new System.Drawing.Point(3, 96);
+            this.lblContactNo.Location = new System.Drawing.Point(3, 104);
             this.lblContactNo.Name = "lblContactNo";
             this.lblContactNo.Size = new System.Drawing.Size(82, 13);
             this.lblContactNo.TabIndex = 9;
@@ -274,7 +276,7 @@
             // 
             this.lblFlatNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblFlatNo.AutoSize = true;
-            this.lblFlatNo.Location = new System.Drawing.Point(3, 70);
+            this.lblFlatNo.Location = new System.Drawing.Point(3, 78);
             this.lblFlatNo.Name = "lblFlatNo";
             this.lblFlatNo.Size = new System.Drawing.Size(82, 13);
             this.lblFlatNo.TabIndex = 5;
@@ -284,7 +286,7 @@
             // 
             this.lblCustomerName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCustomerName.AutoSize = true;
-            this.lblCustomerName.Location = new System.Drawing.Point(3, 43);
+            this.lblCustomerName.Location = new System.Drawing.Point(3, 51);
             this.lblCustomerName.Name = "lblCustomerName";
             this.lblCustomerName.Size = new System.Drawing.Size(82, 13);
             this.lblCustomerName.TabIndex = 1;
@@ -294,7 +296,7 @@
             // 
             this.cmbWingName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbWingName.FormattingEnabled = true;
-            this.cmbWingName.Location = new System.Drawing.Point(637, 39);
+            this.cmbWingName.Location = new System.Drawing.Point(637, 47);
             this.cmbWingName.Name = "cmbWingName";
             this.cmbWingName.Size = new System.Drawing.Size(404, 21);
             this.cmbWingName.TabIndex = 4;
@@ -303,7 +305,7 @@
             // txtEmailId
             // 
             this.txtEmailId.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtEmailId.Location = new System.Drawing.Point(91, 119);
+            this.txtEmailId.Location = new System.Drawing.Point(91, 127);
             this.txtEmailId.Name = "txtEmailId";
             this.txtEmailId.Size = new System.Drawing.Size(404, 20);
             this.txtEmailId.TabIndex = 12;
@@ -313,29 +315,30 @@
             // 
             this.tableLayoutPanel1.AutoSize = true;
             this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel2.SetColumnSpan(this.tableLayoutPanel1, 5);
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.Controls.Add(this.btnClose, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblCustomer, 0, 0);
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel1.Controls.Add(this.btnClose, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblCustomer, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1038, 30);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1038, 38);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // btnClose
             // 
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnClose.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Location = new System.Drawing.Point(1001, 3);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(34, 24);
+            this.btnClose.Size = new System.Drawing.Size(34, 32);
             this.btnClose.TabIndex = 1;
-            this.btnClose.Text = "X";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
@@ -344,18 +347,28 @@
             this.lblCustomer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCustomer.AutoSize = true;
             this.lblCustomer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCustomer.Location = new System.Drawing.Point(3, 5);
+            this.lblCustomer.Location = new System.Drawing.Point(42, 9);
             this.lblCustomer.Name = "lblCustomer";
-            this.lblCustomer.Size = new System.Drawing.Size(992, 20);
+            this.lblCustomer.Size = new System.Drawing.Size(953, 20);
             this.lblCustomer.TabIndex = 0;
             this.lblCustomer.Text = "Customer Details";
             this.lblCustomer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Receipt.Properties.Resources.CustomerDetails;
+            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(33, 32);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
             // 
             // lblPan
             // 
             this.lblPan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPan.AutoSize = true;
-            this.lblPan.Location = new System.Drawing.Point(3, 148);
+            this.lblPan.Location = new System.Drawing.Point(3, 156);
             this.lblPan.Name = "lblPan";
             this.lblPan.Size = new System.Drawing.Size(82, 13);
             this.lblPan.TabIndex = 15;
@@ -365,7 +378,7 @@
             // 
             this.lblAadhar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblAadhar.AutoSize = true;
-            this.lblAadhar.Location = new System.Drawing.Point(521, 148);
+            this.lblAadhar.Location = new System.Drawing.Point(521, 156);
             this.lblAadhar.Name = "lblAadhar";
             this.lblAadhar.Size = new System.Drawing.Size(110, 13);
             this.lblAadhar.TabIndex = 17;
@@ -375,7 +388,7 @@
             // 
             this.lblPan1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPan1.AutoSize = true;
-            this.lblPan1.Location = new System.Drawing.Point(521, 174);
+            this.lblPan1.Location = new System.Drawing.Point(521, 182);
             this.lblPan1.Name = "lblPan1";
             this.lblPan1.Size = new System.Drawing.Size(110, 13);
             this.lblPan1.TabIndex = 21;
@@ -385,7 +398,7 @@
             // 
             this.lblCustomer1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCustomer1.AutoSize = true;
-            this.lblCustomer1.Location = new System.Drawing.Point(3, 174);
+            this.lblCustomer1.Location = new System.Drawing.Point(3, 182);
             this.lblCustomer1.Name = "lblCustomer1";
             this.lblCustomer1.Size = new System.Drawing.Size(82, 13);
             this.lblCustomer1.TabIndex = 19;
@@ -395,7 +408,7 @@
             // 
             this.lblaadhar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblaadhar1.AutoSize = true;
-            this.lblaadhar1.Location = new System.Drawing.Point(3, 200);
+            this.lblaadhar1.Location = new System.Drawing.Point(3, 208);
             this.lblaadhar1.Name = "lblaadhar1";
             this.lblaadhar1.Size = new System.Drawing.Size(82, 13);
             this.lblaadhar1.TabIndex = 23;
@@ -405,7 +418,7 @@
             // 
             this.lblCustomer2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCustomer2.AutoSize = true;
-            this.lblCustomer2.Location = new System.Drawing.Point(521, 200);
+            this.lblCustomer2.Location = new System.Drawing.Point(521, 208);
             this.lblCustomer2.Name = "lblCustomer2";
             this.lblCustomer2.Size = new System.Drawing.Size(110, 13);
             this.lblCustomer2.TabIndex = 25;
@@ -415,7 +428,7 @@
             // 
             this.lblPan2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPan2.AutoSize = true;
-            this.lblPan2.Location = new System.Drawing.Point(3, 226);
+            this.lblPan2.Location = new System.Drawing.Point(3, 234);
             this.lblPan2.Name = "lblPan2";
             this.lblPan2.Size = new System.Drawing.Size(82, 13);
             this.lblPan2.TabIndex = 27;
@@ -425,7 +438,7 @@
             // 
             this.lblAadhar2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblAadhar2.AutoSize = true;
-            this.lblAadhar2.Location = new System.Drawing.Point(521, 226);
+            this.lblAadhar2.Location = new System.Drawing.Point(521, 234);
             this.lblAadhar2.Name = "lblAadhar2";
             this.lblAadhar2.Size = new System.Drawing.Size(110, 13);
             this.lblAadhar2.TabIndex = 29;
@@ -436,7 +449,7 @@
             this.flowLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.flowLayoutPanel2.Controls.Add(this.btnSave);
             this.flowLayoutPanel2.Controls.Add(this.btnCancel);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(871, 275);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(871, 283);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(170, 26);
             this.flowLayoutPanel2.TabIndex = 36;
@@ -465,7 +478,7 @@
             // 
             this.lblcustomer3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblcustomer3.AutoSize = true;
-            this.lblcustomer3.Location = new System.Drawing.Point(3, 252);
+            this.lblcustomer3.Location = new System.Drawing.Point(3, 260);
             this.lblcustomer3.Name = "lblcustomer3";
             this.lblcustomer3.Size = new System.Drawing.Size(82, 13);
             this.lblcustomer3.TabIndex = 19;
@@ -475,7 +488,7 @@
             // 
             this.lblPan3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPan3.AutoSize = true;
-            this.lblPan3.Location = new System.Drawing.Point(521, 252);
+            this.lblPan3.Location = new System.Drawing.Point(521, 260);
             this.lblPan3.Name = "lblPan3";
             this.lblPan3.Size = new System.Drawing.Size(110, 13);
             this.lblPan3.TabIndex = 32;
@@ -485,7 +498,7 @@
             // 
             this.lblAadhar3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblAadhar3.AutoSize = true;
-            this.lblAadhar3.Location = new System.Drawing.Point(3, 281);
+            this.lblAadhar3.Location = new System.Drawing.Point(3, 289);
             this.lblAadhar3.Name = "lblAadhar3";
             this.lblAadhar3.Size = new System.Drawing.Size(82, 13);
             this.lblAadhar3.TabIndex = 34;
@@ -494,7 +507,7 @@
             // txtPan
             // 
             this.txtPan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPan.Location = new System.Drawing.Point(91, 145);
+            this.txtPan.Location = new System.Drawing.Point(91, 153);
             this.txtPan.Name = "txtPan";
             this.txtPan.Size = new System.Drawing.Size(404, 20);
             this.txtPan.TabIndex = 16;
@@ -503,7 +516,7 @@
             // txtAadhar
             // 
             this.txtAadhar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtAadhar.Location = new System.Drawing.Point(637, 145);
+            this.txtAadhar.Location = new System.Drawing.Point(637, 153);
             this.txtAadhar.Name = "txtAadhar";
             this.txtAadhar.Size = new System.Drawing.Size(404, 20);
             this.txtAadhar.TabIndex = 18;
@@ -512,7 +525,7 @@
             // txtCustomer1
             // 
             this.txtCustomer1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCustomer1.Location = new System.Drawing.Point(91, 171);
+            this.txtCustomer1.Location = new System.Drawing.Point(91, 179);
             this.txtCustomer1.Name = "txtCustomer1";
             this.txtCustomer1.Size = new System.Drawing.Size(404, 20);
             this.txtCustomer1.TabIndex = 20;
@@ -521,7 +534,7 @@
             // txtPan1
             // 
             this.txtPan1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPan1.Location = new System.Drawing.Point(637, 171);
+            this.txtPan1.Location = new System.Drawing.Point(637, 179);
             this.txtPan1.Name = "txtPan1";
             this.txtPan1.Size = new System.Drawing.Size(404, 20);
             this.txtPan1.TabIndex = 22;
@@ -530,7 +543,7 @@
             // txtAadhar1
             // 
             this.txtAadhar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtAadhar1.Location = new System.Drawing.Point(91, 197);
+            this.txtAadhar1.Location = new System.Drawing.Point(91, 205);
             this.txtAadhar1.Name = "txtAadhar1";
             this.txtAadhar1.Size = new System.Drawing.Size(404, 20);
             this.txtAadhar1.TabIndex = 24;
@@ -539,7 +552,7 @@
             // txtCustomer2
             // 
             this.txtCustomer2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCustomer2.Location = new System.Drawing.Point(637, 197);
+            this.txtCustomer2.Location = new System.Drawing.Point(637, 205);
             this.txtCustomer2.Name = "txtCustomer2";
             this.txtCustomer2.Size = new System.Drawing.Size(404, 20);
             this.txtCustomer2.TabIndex = 26;
@@ -548,7 +561,7 @@
             // txtPan2
             // 
             this.txtPan2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPan2.Location = new System.Drawing.Point(91, 223);
+            this.txtPan2.Location = new System.Drawing.Point(91, 231);
             this.txtPan2.Name = "txtPan2";
             this.txtPan2.Size = new System.Drawing.Size(404, 20);
             this.txtPan2.TabIndex = 28;
@@ -557,7 +570,7 @@
             // txtAadhar2
             // 
             this.txtAadhar2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtAadhar2.Location = new System.Drawing.Point(637, 223);
+            this.txtAadhar2.Location = new System.Drawing.Point(637, 231);
             this.txtAadhar2.Name = "txtAadhar2";
             this.txtAadhar2.Size = new System.Drawing.Size(404, 20);
             this.txtAadhar2.TabIndex = 30;
@@ -566,7 +579,7 @@
             // txtCustomer3
             // 
             this.txtCustomer3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCustomer3.Location = new System.Drawing.Point(91, 249);
+            this.txtCustomer3.Location = new System.Drawing.Point(91, 257);
             this.txtCustomer3.Name = "txtCustomer3";
             this.txtCustomer3.Size = new System.Drawing.Size(404, 20);
             this.txtCustomer3.TabIndex = 31;
@@ -575,7 +588,7 @@
             // txtAadhar3
             // 
             this.txtAadhar3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtAadhar3.Location = new System.Drawing.Point(91, 278);
+            this.txtAadhar3.Location = new System.Drawing.Point(91, 286);
             this.txtAadhar3.Name = "txtAadhar3";
             this.txtAadhar3.Size = new System.Drawing.Size(404, 20);
             this.txtAadhar3.TabIndex = 35;
@@ -584,7 +597,7 @@
             // txtPan3
             // 
             this.txtPan3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPan3.Location = new System.Drawing.Point(637, 249);
+            this.txtPan3.Location = new System.Drawing.Point(637, 257);
             this.txtPan3.Name = "txtPan3";
             this.txtPan3.Size = new System.Drawing.Size(404, 20);
             this.txtPan3.TabIndex = 33;
@@ -607,10 +620,10 @@
             this.Email_Id,
             this.Customer_Wing_Name});
             this.dgCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgCustomer.Location = new System.Drawing.Point(3, 313);
+            this.dgCustomer.Location = new System.Drawing.Point(3, 321);
             this.dgCustomer.Name = "dgCustomer";
             this.dgCustomer.ReadOnly = true;
-            this.dgCustomer.Size = new System.Drawing.Size(1044, 308);
+            this.dgCustomer.Size = new System.Drawing.Size(1044, 300);
             this.dgCustomer.TabIndex = 0;
             this.dgCustomer.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCustomer_CellClick);
             // 
@@ -696,6 +709,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1050, 624);
             this.Controls.Add(this.tblMainCustomerDetails);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -709,6 +723,7 @@
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.flowLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgCustomer)).EndInit();
             this.ResumeLayout(false);
@@ -773,5 +788,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Con_Details;
         private System.Windows.Forms.DataGridViewTextBoxColumn Email_Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Customer_Wing_Name;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

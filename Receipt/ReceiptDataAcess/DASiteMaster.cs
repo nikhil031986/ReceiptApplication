@@ -1,9 +1,11 @@
 ﻿using ReceiptEntity;
+using ReceiptLog;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -40,6 +42,7 @@ namespace ReceiptDataAcess
             }
             catch (Exception ex)
             {
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name);
                 throw ex;
             }
             finally
@@ -86,6 +89,7 @@ namespace ReceiptDataAcess
             }
             catch (Exception ex)
             {
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name);
                 throw ex;
             }
             finally

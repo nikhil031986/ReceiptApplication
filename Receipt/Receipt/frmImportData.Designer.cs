@@ -150,6 +150,7 @@
             this.btnImportData.TabIndex = 7;
             this.btnImportData.Text = "Import";
             this.btnImportData.UseVisualStyleBackColor = true;
+            this.btnImportData.Click += new System.EventHandler(this.btnImportData_Click);
             // 
             // dgvImportData
             // 
@@ -164,11 +165,14 @@
             this.tableLayoutPanel1.SetRowSpan(this.dgvImportData, 2);
             this.dgvImportData.Size = new System.Drawing.Size(794, 322);
             this.dgvImportData.TabIndex = 8;
+            this.dgvImportData.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvImportData_CellFormatting);
+            this.dgvImportData.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvImportData_RowPrePaint);
             // 
             // frmImportData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

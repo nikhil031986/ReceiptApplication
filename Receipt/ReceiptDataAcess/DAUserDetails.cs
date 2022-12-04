@@ -6,6 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SQLite;
 using ReceiptEntity;
+using ReceiptLog;
+using System.Reflection;
+
 namespace ReceiptDataAcess
 {
     public static class DAUserDetails
@@ -23,6 +26,7 @@ namespace ReceiptDataAcess
             }
             catch (Exception ex)
             {
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name);
                 throw ex;
             }
         }
@@ -42,6 +46,7 @@ namespace ReceiptDataAcess
             }
             catch (Exception ex)
             {
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name);
                 throw ex;
             }
         }
@@ -66,6 +71,7 @@ namespace ReceiptDataAcess
             }
             catch (Exception ex)
             {
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name);
                 throw ex;
             }
         }
@@ -102,6 +108,7 @@ namespace ReceiptDataAcess
             }
             catch (Exception ex)
             {
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name);
                 throw ex;
             }
             finally

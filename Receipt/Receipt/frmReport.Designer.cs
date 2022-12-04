@@ -30,15 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.lblFromDate = new System.Windows.Forms.Label();
             this.lblToDate = new System.Windows.Forms.Label();
+            this.lblFromDate = new System.Windows.Forms.Label();
             this.dtpFromDate = new System.Windows.Forms.DateTimePicker();
             this.dtpToDate = new System.Windows.Forms.DateTimePicker();
             this.btnSearch = new System.Windows.Forms.Button();
             this.lblReport = new System.Windows.Forms.Label();
             this.dgvReport = new System.Windows.Forms.DataGridView();
-            this.contGridMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.exportDataToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Receipt_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Receipt_No = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Receipt_Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,6 +51,8 @@
             this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Amount_Word = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Payment_Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contGridMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.exportDataToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReport)).BeginInit();
             this.contGridMenu.SuspendLayout();
@@ -85,16 +85,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 450);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // lblFromDate
-            // 
-            this.lblFromDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblFromDate.AutoSize = true;
-            this.lblFromDate.Location = new System.Drawing.Point(3, 33);
-            this.lblFromDate.Name = "lblFromDate";
-            this.lblFromDate.Size = new System.Drawing.Size(53, 13);
-            this.lblFromDate.TabIndex = 1;
-            this.lblFromDate.Text = "FromDate";
-            // 
             // lblToDate
             // 
             this.lblToDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -104,6 +94,16 @@
             this.lblToDate.Size = new System.Drawing.Size(46, 13);
             this.lblToDate.TabIndex = 2;
             this.lblToDate.Text = "To Date";
+            // 
+            // lblFromDate
+            // 
+            this.lblFromDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblFromDate.AutoSize = true;
+            this.lblFromDate.Location = new System.Drawing.Point(3, 33);
+            this.lblFromDate.Name = "lblFromDate";
+            this.lblFromDate.Size = new System.Drawing.Size(53, 13);
+            this.lblFromDate.TabIndex = 1;
+            this.lblFromDate.Text = "FromDate";
             // 
             // dtpFromDate
             // 
@@ -178,20 +178,6 @@
             this.dgvReport.RowHeadersVisible = false;
             this.dgvReport.Size = new System.Drawing.Size(794, 390);
             this.dgvReport.TabIndex = 7;
-            // 
-            // contGridMenu
-            // 
-            this.contGridMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exportDataToExcelToolStripMenuItem});
-            this.contGridMenu.Name = "contGridMenu";
-            this.contGridMenu.Size = new System.Drawing.Size(181, 26);
-            // 
-            // exportDataToExcelToolStripMenuItem
-            // 
-            this.exportDataToExcelToolStripMenuItem.Name = "exportDataToExcelToolStripMenuItem";
-            this.exportDataToExcelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.exportDataToExcelToolStripMenuItem.Text = "Export Data To Excel";
-            this.exportDataToExcelToolStripMenuItem.Click += new System.EventHandler(this.exportDataToExcelToolStripMenuItem_Click);
             // 
             // Receipt_Id
             // 
@@ -295,10 +281,25 @@
             this.Payment_Date.Name = "Payment_Date";
             this.Payment_Date.ReadOnly = true;
             // 
+            // contGridMenu
+            // 
+            this.contGridMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportDataToExcelToolStripMenuItem});
+            this.contGridMenu.Name = "contGridMenu";
+            this.contGridMenu.Size = new System.Drawing.Size(181, 26);
+            // 
+            // exportDataToExcelToolStripMenuItem
+            // 
+            this.exportDataToExcelToolStripMenuItem.Name = "exportDataToExcelToolStripMenuItem";
+            this.exportDataToExcelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exportDataToExcelToolStripMenuItem.Text = "Export Data To Excel";
+            this.exportDataToExcelToolStripMenuItem.Click += new System.EventHandler(this.exportDataToExcelToolStripMenuItem_Click);
+            // 
             // frmReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EnCheqDetails.cs" />
+    <Compile Include="EnCommonRet.cs" />
     <Compile Include="EnCustomer.cs" />
     <Compile Include="EnReceiptDetails.cs" />
     <Compile Include="EnSiteMaster.cs" />

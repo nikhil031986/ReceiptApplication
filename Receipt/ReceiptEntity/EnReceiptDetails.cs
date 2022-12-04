@@ -24,7 +24,7 @@ namespace ReceiptEntity
         public string PaymentDate { get; set; }
         public int ReceiptDateNo { get; set; }
         public EnReceiptDetails()
-        {
+        {       
 
         }
         public EnReceiptDetails(int receipt_Id, string receipt_No, string receipt_Date, int customer_Id, string flate_ShopNo, 
