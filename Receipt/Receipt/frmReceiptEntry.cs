@@ -12,6 +12,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using static System.Net.Mime.MediaTypeNames;
@@ -36,56 +37,119 @@ namespace Receipt
                 txtReceiptNo.Text = BAReceiptDetails.getReceiptNo().Result;
                 cmbReceivedAs.SelectedIndex = 0;
                 dtpReceiptDate.Focus();
+                FillBankNameAndBranchName();
             }
             catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
         }
-        public frmReceiptEntry(int receiptId)
+        public async Task PrintDocument()
+        {
+            try
+            {
+                clsWaitForm.ShowWaitForm();
+
+                //await Task.Run(()=>GetReceiptDetails(this.Receipt_ID));
+
+                await FillDataInToEntity();
+
+                await FillReplaceStrList();
+
+                PrintDocumentView();
+
+                System.Threading.Thread.Sleep(1000);
+                PrintDialog printDlg = new PrintDialog();
+                //pdocument.DocumentName = "fileName";
+                printDlg.Document = pdocument;
+                printDlg.AllowSelection = true;
+                printDlg.AllowSomePages = true;
+                printDlg.PrinterSettings.Copies = 2;
+                //Call ShowDialog
+                clsWaitForm.CloseWaitForm();
+                if (printDlg.ShowDialog() == DialogResult.OK)
+                {
+                    pdocument.Print();
+                    await BAReceiptDetails.UpdateReceiptPrint(Receipt_ID);
+                }
+            }
+            catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
+            this.Close();
+        }
+        public frmReceiptEntry(int receiptId, bool IsPrint = false)
         {
             try
             {
                 InitializeComponent();
                 Task.Run(() => FillCustomerData()).Wait();
                 receiptDetails = new EnReceiptDetails();
-                GetReceiptDetails(receiptId);
+                Receipt_ID = receiptId;
+                FillBankNameAndBranchName();
+                Task.Run(()=> GetReceiptDetails(receiptId)).Wait();
                 cmbReceivedAs.SelectedIndex = 0;
                 dtpReceiptDate.Focus();
+
+
             }
             catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
         }
-        private async Task GetReceiptDetails(int receiptId)
+        private async void FillBankNameAndBranchName()
+        {
+            var BankName = await BAReceiptDetails.GetBankName();
+            cboBankName.Items.Clear();
+            cboBankName.Items.AddRange(BankName.ToArray());
+            var BranchName = await BAReceiptDetails.GetBranchName();
+            cboBranchName.Items.Clear();
+            cboBranchName.Items.AddRange(BranchName.ToArray());
+        }
+        private async void GetReceiptDetails(int receiptId)
         {
             try
             {
 
-                var receiptDetails = await BAReceiptDetails.GetReceiptDetails(receiptId);
+                var _receiptDetails = await BAReceiptDetails.GetReceiptDetails(receiptId);
+                receiptDetails = _receiptDetails.FirstOrDefault();
+                txtReceiptNo.Tag = receiptDetails.Receipt_Id;
+                txtReceiptNo.Text = receiptDetails.Receipt_No;
+                cmbCustomerName.SelectedValue = receiptDetails.Customer_Id;
+                cmbReceivedAs.Text = receiptDetails.ReceivedAs;
 
-                txtReceiptNo.Tag = receiptDetails.FirstOrDefault().Receipt_Id;
-                txtReceiptNo.Text = receiptDetails.FirstOrDefault().Receipt_No;
-                cmbCustomerName.SelectedValue = receiptDetails.FirstOrDefault().Customer_Id;
-                cmbReceivedAs.Text = receiptDetails.FirstOrDefault().ReceivedAs;
 
+                txtFlatShopNo.Text = receiptDetails.Flate_ShopNo;
+                txtImpsCheqDetails.Text = receiptDetails.Cheq_Rtgs_Neft_ImpsNo;
+                txtAmount.Text = receiptDetails.Amount.ToString();
+                cboBankName.Text = receiptDetails.Bank_Name;
+                cboBranchName.Text = receiptDetails.Branch_Name;
+                txtAmountInWord.Text = receiptDetails.Amount_Word;
 
-                txtFlatShopNo.Text = receiptDetails.FirstOrDefault().Flate_ShopNo;
-                txtImpsCheqDetails.Text = receiptDetails.FirstOrDefault().Cheq_Rtgs_Neft_ImpsNo;
-                txtAmount.Text = receiptDetails.FirstOrDefault().Amount.ToString();
-                txtBankName.Text = receiptDetails.FirstOrDefault().Bank_Name;
-                txtBranchName.Text = receiptDetails.FirstOrDefault().Branch_Name;
-                txtAmountInWord.Text = receiptDetails.FirstOrDefault().Amount_Word;
+                ChkIsCancel.Checked = receiptDetails.IsCancel == 1 ? true : false;
 
-                var strReceiptDate = receiptDetails.FirstOrDefault().Receipt_Date;
-                var paymentDate = receiptDetails.FirstOrDefault().PaymentDate;
-                strReceiptDate = strReceiptDate.Replace(".", "/");
-                paymentDate = paymentDate.Replace(".", "/");
-                if (strReceiptDate.Length < 10)
+                var strReceiptDate = receiptDetails.Receipt_Date;
+                strReceiptDate = strReceiptDate.Replace(".", "/").Replace("-", "/");
+                if (!string.IsNullOrWhiteSpace(strReceiptDate))
                 {
-                    strReceiptDate = strReceiptDate.Remove(6, 2) + DateTime.Now.Year.ToString();
+                    string dateFormate = (strReceiptDate.Split('/')[2].Length < 3 ? DateTime.Now.Year.ToString().Substring(0, 2) + strReceiptDate.Split('/')[2] : strReceiptDate.Split('/')[2])
+                                        + "/" + strReceiptDate.Split('/')[1] + "/" + strReceiptDate.Split('/')[0];
+                    dtpReceiptDate.Value = Convert.ToDateTime(dateFormate);
+
                 }
-                if (paymentDate.Length < 10)
+                var paymentDate = receiptDetails.PaymentDate;
+                paymentDate = paymentDate.Replace(".", "/").Replace("-", "/");
+                if (!string.IsNullOrWhiteSpace(paymentDate))
                 {
-                    paymentDate = paymentDate.Remove(6, 2) + DateTime.Now.Year.ToString();
+                    string dateFormate = (paymentDate.Split('/')[2].Length < 3 ? DateTime.Now.Year.ToString().Substring(0, 2) + paymentDate.Split('/')[2] : paymentDate.Split('/')[2])
+                                        + "/" + paymentDate.Split('/')[1] + "/" + paymentDate.Split('/')[0];
+                    dtpPaymentDate.Value = Convert.ToDateTime(dateFormate);
+
                 }
-                dtpReceiptDate.Value = DateTime.ParseExact(strReceiptDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                dtpPaymentDate.Value = DateTime.ParseExact(paymentDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                //if (strReceiptDate.Length < 10)
+                //{
+                //    strReceiptDate = strReceiptDate.Remove(6, 2) + DateTime.Now.Year.ToString();
+                //}
+                //if (paymentDate.Length < 10)
+                //{
+                //    paymentDate = paymentDate.Remove(6, 2) + DateTime.Now.Year.ToString();
+                //}
+                //dtpReceiptDate.Value = DateTime.ParseExact(strReceiptDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                //dtpPaymentDate.Value = DateTime.ParseExact(paymentDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             }
             catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
         }
@@ -108,14 +172,19 @@ namespace Receipt
         {
             try
             {
-                await Task.Run(() =>
+                await Task.Run(async () =>
                     {
+                        var custDetails = await BACustomerMaster.GetCustomer(receiptDetails.Customer_Id);
+                        string customerName = custDetails.FirstOrDefault().Customer_Name;
+                        customerName += string.IsNullOrWhiteSpace(Convert.ToString(custDetails.FirstOrDefault().Customer1)) == true ? " " : " & " + Convert.ToString(custDetails.FirstOrDefault().Customer1);
+                        customerName += string.IsNullOrWhiteSpace(Convert.ToString(custDetails.FirstOrDefault().Customer2)) == true ? " " : " & " + Convert.ToString(custDetails.FirstOrDefault().Customer2);
+                        customerName += string.IsNullOrWhiteSpace(Convert.ToString(custDetails.FirstOrDefault().Customer3)) == true ? " " : " & " + Convert.ToString(custDetails.FirstOrDefault().Customer3);
                         replaceStr = new Dictionary<string, string>();
                         replaceStr.Add("_DBReceiptNO", receiptDetails.Receipt_No.ToUpper());
-                        replaceStr.Add("_DBCustomerName", receiptDetails.Customer_Name.ToUpper());
+                        replaceStr.Add("_DBCustomerName", customerName.ToUpper());
                         replaceStr.Add("_DBFlatShopNo", receiptDetails.Flate_ShopNo.ToUpper());
                         replaceStr.Add("_DBAmountInWord", receiptDetails.Amount_Word.ToUpper());
-                        replaceStr.Add("_DBCheqRtgsNeftImps", receiptDetails.Cheq_Rtgs_Neft_ImpsNo);
+                        replaceStr.Add("_DBCheqRtgsNeftImps", receiptDetails.Cheq_Rtgs_Neft_ImpsNo + "\t");
                         replaceStr.Add("_DBDate", receiptDetails.PaymentDate);
                         replaceStr.Add("_DBBankName", receiptDetails.Bank_Name.ToUpper());
                         replaceStr.Add("_DBBranch", receiptDetails.Branch_Name.ToUpper());
@@ -130,42 +199,46 @@ namespace Receipt
         {
             int floatx = 55;
             int floaty = 10;
-            e.Graphics.DrawString(string.Empty, new Font("Times New Roman", 10, FontStyle.Bold),
+            e.Graphics.DrawString(string.Empty, new Font("Times New Roman", 12, FontStyle.Bold),
       Brushes.Black, floatx, floaty);
             floaty = floaty + 70;
             foreach (string strLine in printDocumentControls)
             {
-                if (strLine.ToUpper().Contains("NAME"))
+                if (strLine.ToUpper().Contains("NAME") && !strLine.ToUpper().Contains("BANK NAME"))
                 {
-                    if (strLine.Length < 70)
+                    string[] custmor = strLine.Split('&');
+                    for (int i = 0; i <= custmor.Length - 1; i++)
                     {
-                        e.Graphics.DrawString(strLine, new Font("Times New Roman", 10, FontStyle.Bold),
-                        Brushes.Black, floatx, floaty);
-                    }
-                    else
-                    {
-                        string printData = strLine;
-                        //Line one
-                        string strNewPrint = printData.Substring(0, 70);
-                        e.Graphics.DrawString(strNewPrint, new Font("Times New Roman", 10, FontStyle.Bold),
-                       Brushes.Black, floatx, floaty);
-                        floaty = floaty + 20;
-                        // Line two
-                        strNewPrint = "\t\t\t  " + printData.Replace(strNewPrint, "");
-                        e.Graphics.DrawString(strNewPrint, new Font("Times New Roman", 10, FontStyle.Bold),
-                       Brushes.Black, floatx, floaty);
+                        if (i == 0)
+                        {
+                            e.Graphics.DrawString(custmor[i] , new Font("Times New Roman", 12, FontStyle.Bold),
+                            Brushes.Black, floatx, floaty);
+                        }
+                        else if(i<custmor.Length-1)
+                        {
+                            floaty = floaty + 20;
+                            e.Graphics.DrawString("\t\t\t\t\t\t\t\t & "+ custmor[i] , new Font("Times New Roman", 12, FontStyle.Bold),
+                            Brushes.Black, floatx, floaty);
+                        }
+                        else
+                        {
+                            floaty = floaty + 20;
+                            e.Graphics.DrawString("\t\t\t\t\t\t\t\t & "+ custmor[i] + " ", new Font("Times New Roman", 12, FontStyle.Bold),
+                            Brushes.Black, floatx, floaty);
+                        }
                     }
                 }
                 else
                 {
-                    e.Graphics.DrawString(strLine, new Font("Times New Roman", 10, FontStyle.Bold),
+                    e.Graphics.DrawString(strLine, new Font("Times New Roman", 12, FontStyle.Bold),
            Brushes.Black, floatx, floaty);
                 }
                 floaty = floaty + 20;
             }
+
         }
 
-        private void FillDataInToEntity()
+        private async Task FillDataInToEntity()
         {
             try
             {
@@ -177,8 +250,8 @@ namespace Receipt
 
                 receiptDetails.Receipt_No = txtReceiptNo.Text.Trim();
                 receiptDetails.Receipt_Date = dtpReceiptDate.Value.ToString("dd/MM/yyyy");
-                receiptDetails.Bank_Name = txtBankName.Text;
-                receiptDetails.Branch_Name = txtBranchName.Text;
+                receiptDetails.Bank_Name = cboBankName.Text;
+                receiptDetails.Branch_Name = cboBranchName.Text;
                 receiptDetails.Customer_Name = cmbCustomerName.Text;
                 receiptDetails.Customer_Id = Convert.ToInt32(cmbCustomerName.SelectedValue);
                 receiptDetails.Year_Id = 1;
@@ -189,6 +262,8 @@ namespace Receipt
                 receiptDetails.ReceivedAs = cmbReceivedAs.Text;
                 receiptDetails.PaymentDate = dtpPaymentDate.Value.ToString("dd/MM/yyyy");
                 receiptDetails.ReceiptDateNo = Convert.ToInt32(dtpPaymentDate.Value.ToString("yyyyMMdd"));
+                receiptDetails.IsCancel = ChkIsCancel.Checked == true ? 1 : 0;
+                receiptDetails.IsPrint = 0;
             }
             catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
         }
@@ -215,7 +290,7 @@ namespace Receipt
                 pdocument.PrinterSettings.PrinterName = "Microsoft XPS Document Writer";
                 pdocument.PrinterSettings.PrintToFile = false;
                 pdocument.DefaultPageSettings.Landscape = true;
-                pdocument.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("PaperA5", 750, 1024);
+                pdocument.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("PaperA5", 1024, 1024);
                 pdocument.DefaultPageSettings.Margins = new Margins(0, 0, 0, 0);
                 pdocument.PrintPage += Pdocument_PrintPage;
                 prntprvControl.Document = pdocument;
@@ -226,19 +301,23 @@ namespace Receipt
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
-
+            btnSave.Enabled= false;
             try
             {
-                FillDataInToEntity();
+                clsWaitForm.ShowWaitForm();
+                await FillDataInToEntity();
 
                 Receipt_ID = await BAReceiptDetails.InsertUpdateReceiptDetails(receiptDetails);
-
+                txtReceiptNo.Tag = Receipt_ID;
                 await Task.Run(() => FillReplaceStrList());
 
                 PrintDocumentView();
 
+                clsWaitForm.CloseWaitForm();
+
             }
             catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
+            btnSave.Enabled = true;
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -294,18 +373,31 @@ namespace Receipt
             catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
         }
 
-        private void btnPrint_Click(object sender, EventArgs e)
+        private async void btnPrint_Click(object sender, EventArgs e)
         {
             try
             {
+                clsWaitForm.ShowWaitForm();
+                FillDataInToEntity();
+
+                await Task.Run(() => FillReplaceStrList());
+
+                PrintDocumentView();
+
+                System.Threading.Thread.Sleep(1000);
                 PrintDialog printDlg = new PrintDialog();
-                pdocument.DocumentName = "fileName";
+                //pdocument.DocumentName = "fileName";
                 printDlg.Document = pdocument;
                 printDlg.AllowSelection = true;
                 printDlg.AllowSomePages = true;
+                printDlg.PrinterSettings.Copies = 2;
                 //Call ShowDialog
+                clsWaitForm.CloseWaitForm();
                 if (printDlg.ShowDialog() == DialogResult.OK)
+                {
                     pdocument.Print();
+                    await BAReceiptDetails.UpdateReceiptPrint(Receipt_ID);
+                }
             }
             catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
         }
@@ -314,12 +406,13 @@ namespace Receipt
         {
             try
             {
-
+                clsWaitForm.ShowWaitForm();
                 FillDataInToEntity();
 
                 await Task.Run(() => FillReplaceStrList());
 
                 PrintDocumentView();
+                clsWaitForm.CloseWaitForm();
             }
             catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
         }

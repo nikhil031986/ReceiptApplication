@@ -177,11 +177,31 @@ namespace Receipt
                                         x["FlorName"] = ClsUtil.ConvertWord(florNumber);
                                     });
                                 }
+                                else
+                                {
+                                    var drNew = dtWingDetails.NewRow();
+                                    drNew["Wing_DetailsId"] = 0;
+                                    drNew["Wing_MasterId"] = 0;
+                                    drNew["Flat_No"] = FlatNo.ToString();
+                                    drNew["Wing_Name"] = txtwingName.Text;
+                                    drNew["Land"] = 0;
+                                    drNew["Carpet"] = 0;
+                                    drNew["WB"] = 0;
+                                    drNew["Amount"] = 0;
+                                    drNew["Total"] = 0;
+                                    drNew["EAST"] = 0;
+                                    drNew["WEST"] = 0;
+                                    drNew["NORTH"] = 0;
+                                    drNew["SOUTH"] = 0;
+                                    drNew["FlorName"] = ClsUtil.ConvertWord(florNumber);
+                                    dtWingDetails.Rows.Add(drNew);
+                                }
                             }
 
                         }
                         StartNo = StartNo + 100;
                     }
+                    dtWingDetails.AcceptChanges();
                 }
                 catch (Exception ex)
                 {

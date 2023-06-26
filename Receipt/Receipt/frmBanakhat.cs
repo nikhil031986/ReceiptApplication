@@ -2,12 +2,16 @@
 using ReceiptEntity;
 using ReceiptLog;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Forms;
+using System.Windows.Navigation;
 
 namespace Receipt
 {
@@ -15,6 +19,8 @@ namespace Receipt
     {
         public event EventHandler CloseUserDetails;
         private string htmlFilePath = string.Empty;
+
+        
         public frmBanakhat()
         {
             try
@@ -56,6 +62,7 @@ namespace Receipt
                 StringBuilder strNewHTMLFile = new StringBuilder();
                 var selectedCustomer = cmbCustomer.SelectedItem;
                 var wingDetails = await BaWingMaster.GetWingDetails(((EnCustomer)selectedCustomer).Wing_Master_Id);
+                var wingMaster = await BaWingMaster.GetWingMaster(((EnCustomer)selectedCustomer).Wing_Master_Id);
                 var selectedWingDetails = wingDetails.AsEnumerable().Where(x => x.Wing_DetailsId == ((EnCustomer)selectedCustomer).Wing_Details_Id).FirstOrDefault();
                 var selectReceiptDetails = await BAReceiptDetails.GetReceiptByCustomer(((EnCustomer)selectedCustomer).Customer_Id);
                 strNewHTMLFile.AppendLine(@"<html>");
@@ -105,72 +112,75 @@ namespace Receipt
                 strNewHTMLFile.AppendLine(@"");
                 strNewHTMLFile.AppendLine(@"			<table border='1' cellpadding='1' cellspacing='1' style='width:100%'>");
                 strNewHTMLFile.AppendLine(@"				<tbody>");
-                if (!string.IsNullOrWhiteSpace(((EnCustomer)selectedCustomer).Customer1))
+                if (!string.IsNullOrWhiteSpace(((EnCustomer)selectedCustomer).Customer_Name))
                 {
                     strNewHTMLFile.AppendLine(@"					<tr>");
                     strNewHTMLFile.AppendLine(@"						<td style='background-color:#E8E8E8;'><strong>NAME.:-</strong></td>");
-                    strNewHTMLFile.AppendLine(@"						<td colspan='1' rowspan='2'>" + ((EnCustomer)selectedCustomer).Customer1 + "</td>");
+                    strNewHTMLFile.AppendLine(@"						<td colspan='1' rowspan='2'>" + ((EnCustomer)selectedCustomer).Customer_Name + "</td>");
                     strNewHTMLFile.AppendLine(@"						<td ><strong>OCCUPATION.:-</strong></td>");
-                    strNewHTMLFile.AppendLine(@"						<td>N/A</td>");
+                    strNewHTMLFile.AppendLine(@"						<td>" + ((EnCustomer)selectedCustomer).Ocupation + "</td>");
                     strNewHTMLFile.AppendLine(@"					</tr>");
                     strNewHTMLFile.AppendLine(@"					<tr>");
                     strNewHTMLFile.AppendLine(@"						<td>&nbsp;</td>");
                     strNewHTMLFile.AppendLine(@"						<td><strong>BANAKHAT. NO.:-</strong></td>");
-                    strNewHTMLFile.AppendLine(@"						<td>N/A</td>");
+                    strNewHTMLFile.AppendLine(@"						<td>" + ((EnCustomer)selectedCustomer).BanakhatNo + "</td>");
+                    strNewHTMLFile.AppendLine(@"					</tr>");
+                    strNewHTMLFile.AppendLine(@"					<tr>");
+                    strNewHTMLFile.AppendLine(@"						<td style='background-color:#E8E8E8;'><strong>PAN NO.:-</strong></td>");
+                    strNewHTMLFile.AppendLine(@"						<td>" + ((EnCustomer)selectedCustomer).Pan + "</td>");
+                    strNewHTMLFile.AppendLine(@"						<td><strong>DATE:-</strong></td>");
+                    strNewHTMLFile.AppendLine(@"						<td>" + ((EnCustomer)selectedCustomer).BanakhatDate + "</td>");
+                    strNewHTMLFile.AppendLine(@"					</tr>");
+                    strNewHTMLFile.AppendLine(@"					<tr>");
+                    strNewHTMLFile.AppendLine(@"						<td style='background-color:#E8E8E8;'><strong>ADHAR NO.:-</strong></td>");
+                    strNewHTMLFile.AppendLine(@"						<td colspan='3' rowspan = '1' > " + ((EnCustomer)selectedCustomer).Aadhar + " </ td > ");
+                    strNewHTMLFile.AppendLine(@"					</tr>");
+                }
+                if (!string.IsNullOrWhiteSpace(((EnCustomer)selectedCustomer).Customer1))
+                {
+                    strNewHTMLFile.AppendLine(@"					<tr>");
+                    strNewHTMLFile.AppendLine(@"						<td style='background-color:#E8E8E8;'><strong>NAME.:-</strong></td>");
+                    strNewHTMLFile.AppendLine(@"						<td colspan='1'>" + ((EnCustomer)selectedCustomer).Customer1 + "</td>");
+                    strNewHTMLFile.AppendLine(@"						<td><strong>OCCUPATION.:-</strong></td>");
+                    strNewHTMLFile.AppendLine(@"						<td>" + ((EnCustomer)selectedCustomer).Ocupation1 + "</td>");
                     strNewHTMLFile.AppendLine(@"					</tr>");
                     strNewHTMLFile.AppendLine(@"					<tr>");
                     strNewHTMLFile.AppendLine(@"						<td style='background-color:#E8E8E8;'><strong>PAN NO.:-</strong></td>");
                     strNewHTMLFile.AppendLine(@"						<td>" + ((EnCustomer)selectedCustomer).Pan1 + "</td>");
-                    strNewHTMLFile.AppendLine(@"						<td><strong>DATE:-</strong></td>");
-                    strNewHTMLFile.AppendLine(@"						<td>&nbsp;</td>");
                     strNewHTMLFile.AppendLine(@"					</tr>");
                     strNewHTMLFile.AppendLine(@"					<tr>");
                     strNewHTMLFile.AppendLine(@"						<td style='background-color:#E8E8E8;'><strong>ADHAR NO.:-</strong></td>");
-                    strNewHTMLFile.AppendLine(@"						<td colspan='3' rowspan = '1' > " + ((EnCustomer)selectedCustomer).Aadhar1 + " </ td > ");
+                    strNewHTMLFile.AppendLine(@"						<td colspan='3' rowspan = '1' > " + ((EnCustomer)selectedCustomer).Aadhar1 + "</td>");
                     strNewHTMLFile.AppendLine(@"					</tr>");
                 }
                 if (!string.IsNullOrWhiteSpace(((EnCustomer)selectedCustomer).Customer2))
                 {
                     strNewHTMLFile.AppendLine(@"					<tr>");
                     strNewHTMLFile.AppendLine(@"						<td style='background-color:#E8E8E8;'><strong>NAME.:-</strong></td>");
-                    strNewHTMLFile.AppendLine(@"						<td colspan='1' rowspan='2'>" + ((EnCustomer)selectedCustomer).Customer2 + "</td>");
+                    strNewHTMLFile.AppendLine(@"						<td colspan='1'>" + ((EnCustomer)selectedCustomer).Customer2 + "</td>");
                     strNewHTMLFile.AppendLine(@"						<td><strong>OCCUPATION.:-</strong></td>");
-                    strNewHTMLFile.AppendLine(@"						<td>N/A</td>");
-                    strNewHTMLFile.AppendLine(@"					</tr>");
-                    strNewHTMLFile.AppendLine(@"					<tr>");
-                    strNewHTMLFile.AppendLine(@"						<td>&nbsp;</td>");
-                    strNewHTMLFile.AppendLine(@"						<td><strong>BANAKHAT. NO.:-</strong></td>");
-                    strNewHTMLFile.AppendLine(@"						<td>N/A</td>");
+                    strNewHTMLFile.AppendLine(@"						<td>" + ((EnCustomer)selectedCustomer).Ocupation2 + "</td>");
                     strNewHTMLFile.AppendLine(@"					</tr>");
                     strNewHTMLFile.AppendLine(@"					<tr>");
                     strNewHTMLFile.AppendLine(@"						<td style='background-color:#E8E8E8;'><strong>PAN NO.:-</strong></td>");
                     strNewHTMLFile.AppendLine(@"						<td>" + ((EnCustomer)selectedCustomer).Pan2 + "</td>");
-                    strNewHTMLFile.AppendLine(@"						<td><strong>DATE:-</strong></td>");
-                    strNewHTMLFile.AppendLine(@"						<td>&nbsp;</td>");
                     strNewHTMLFile.AppendLine(@"					</tr>");
                     strNewHTMLFile.AppendLine(@"					<tr>");
                     strNewHTMLFile.AppendLine(@"						<td style='background-color:#E8E8E8;'><strong>ADHAR NO.:-</strong></td>");
-                    strNewHTMLFile.AppendLine(@"						<td colspan='3' rowspan = '1' > " + ((EnCustomer)selectedCustomer).Aadhar2 + "</td>");
+                    strNewHTMLFile.AppendLine(@"						<td colspan='3' rowspan = '1' > " + ((EnCustomer)selectedCustomer).Aadhar2 + "</ td > ");
                     strNewHTMLFile.AppendLine(@"					</tr>");
                 }
                 if (!string.IsNullOrWhiteSpace(((EnCustomer)selectedCustomer).Customer3))
                 {
                     strNewHTMLFile.AppendLine(@"					<tr>");
                     strNewHTMLFile.AppendLine(@"						<td style='background-color:#E8E8E8;'><strong>NAME.:-</strong></td>");
-                    strNewHTMLFile.AppendLine(@"						<td colspan='1' rowspan='2'>" + ((EnCustomer)selectedCustomer).Customer3 + "</td>");
+                    strNewHTMLFile.AppendLine(@"						<td colspan='1'>" + ((EnCustomer)selectedCustomer).Customer3 + "</td>");
                     strNewHTMLFile.AppendLine(@"						<td><strong>OCCUPATION.:-</strong></td>");
-                    strNewHTMLFile.AppendLine(@"						<td>N/A</td>");
-                    strNewHTMLFile.AppendLine(@"					</tr>");
-                    strNewHTMLFile.AppendLine(@"					<tr>");
-                    strNewHTMLFile.AppendLine(@"						<td>&nbsp;</td>");
-                    strNewHTMLFile.AppendLine(@"						<td><strong>BANAKHAT. NO.:-</strong></td>");
-                    strNewHTMLFile.AppendLine(@"						<td>N/A</td>");
+                    strNewHTMLFile.AppendLine(@"						<td>" + ((EnCustomer)selectedCustomer).Ocupation3 + "</td>");
                     strNewHTMLFile.AppendLine(@"					</tr>");
                     strNewHTMLFile.AppendLine(@"					<tr>");
                     strNewHTMLFile.AppendLine(@"						<td style='background-color:#E8E8E8;'><strong>PAN NO.:-</strong></td>");
                     strNewHTMLFile.AppendLine(@"						<td>" + ((EnCustomer)selectedCustomer).Pan3 + "</td>");
-                    strNewHTMLFile.AppendLine(@"						<td><strong>DATE:-</strong></td>");
-                    strNewHTMLFile.AppendLine(@"						<td>&nbsp;</td>");
                     strNewHTMLFile.AppendLine(@"					</tr>");
                     strNewHTMLFile.AppendLine(@"					<tr>");
                     strNewHTMLFile.AppendLine(@"						<td style='background-color:#E8E8E8;'><strong>ADHAR NO.:-</strong></td>");
@@ -234,7 +244,36 @@ namespace Receipt
                 strNewHTMLFile.AppendLine(@"					<tr>");
                 strNewHTMLFile.AppendLine(@"						<td style='text-align:center; width:89px'><strong>EAST</strong></td>");
                 strNewHTMLFile.AppendLine(@"						<td style='width:1070px'>" + selectedWingDetails.EAST + "</td>");
-                strNewHTMLFile.AppendLine(@"						<td rowspan='4' style='width:1070px'>&nbsp;</td>");
+                strNewHTMLFile.AppendLine(@"						<td rowspan='4' style='width:1070px'>");
+                if (((EnCustomer)selectedCustomer).Financial_Name.ToUpper() == "AXIS")
+                {
+                    string FilePathAdd = ClsUtil.getCurrentPath() + "AxisBank\\";
+                    List<string> UpdateStr = new List<string>();
+                    List<string> repValue = ClsUtil.GetALLOTMENTLST();
+                    UpdateListBaseInRepStr(repValue, UpdateStr, (EnCustomer)selectedCustomer, wingDetails.FirstOrDefault(), wingMaster.FirstOrDefault(),TotalAmount,pendingAmount);
+                    UpdateCustomerFile(FilePathAdd + "ALLOTMENT LETTER.docx", FilePathAdd + ((EnCustomer)selectedCustomer).Customer_Id + "ALLOTMENT LETTER.docx",
+                        repValue, UpdateStr);
+                    strNewHTMLFile.AppendLine(@"                <p><a href='" + FilePathAdd + ((EnCustomer)selectedCustomer).Customer_Id + "ALLOTMENT LETTER.docx" + "'>ALLOTMENT LETTER</a></p>");
+                    repValue = ClsUtil.GetDEMANDLST();
+                    UpdateStr = new List<string>();
+                    UpdateListBaseInRepStr(repValue, UpdateStr, (EnCustomer)selectedCustomer, wingDetails.FirstOrDefault(), wingMaster.FirstOrDefault(), TotalAmount, pendingAmount);
+                    UpdateCustomerFile(FilePathAdd + "DEMAND LETTER.doc", FilePathAdd + ((EnCustomer)selectedCustomer).Customer_Id + "DEMAND LETTER.doc",
+                        repValue, UpdateStr);
+                    strNewHTMLFile.AppendLine(@"                <p><a href='" + FilePathAdd + ((EnCustomer)selectedCustomer).Customer_Id + "DEMAND LETTER.doc" + "'>DEMAND LETTER</a></p>");
+                    repValue = ClsUtil.GetMARGINLST();
+                    UpdateStr = new List<string>();
+                    UpdateListBaseInRepStr(repValue, UpdateStr, (EnCustomer)selectedCustomer, wingDetails.FirstOrDefault(), wingMaster.FirstOrDefault(), TotalAmount, pendingAmount);
+                    UpdateCustomerFile(FilePathAdd + "MARGIN MONEY LETTER.docx", FilePathAdd + ((EnCustomer)selectedCustomer).Customer_Id + "MARGIN MONEY LETTER.docx",
+                        repValue, UpdateStr);
+                    strNewHTMLFile.AppendLine(@"                <p><a href='" + FilePathAdd + ((EnCustomer)selectedCustomer).Customer_Id + "MARGIN MONEY LETTER.docx" + "'>MARGIN MONEY LETTER</a></p>");
+                    repValue = ClsUtil.GetNOCLST();
+                    UpdateStr = new List<string>();
+                    UpdateListBaseInRepStr(repValue, UpdateStr, (EnCustomer)selectedCustomer, wingDetails.FirstOrDefault(), wingMaster.FirstOrDefault(), TotalAmount, pendingAmount);
+                    UpdateCustomerFile(FilePathAdd + "NOC-FLAT.doc", FilePathAdd + ((EnCustomer)selectedCustomer).Customer_Id + "NOC-FLAT.doc",
+                        repValue, UpdateStr);
+                    strNewHTMLFile.AppendLine(@"                <p><a href='" + FilePathAdd + ((EnCustomer)selectedCustomer).Customer_Id + "NOC-FLAT.doc" + "'>NOC-FLAT</a></p>");
+                }
+                strNewHTMLFile.AppendLine(@"			</td>");
                 strNewHTMLFile.AppendLine(@"					</tr>");
                 strNewHTMLFile.AppendLine(@"					<tr>");
                 strNewHTMLFile.AppendLine(@"						<td style='text-align:center; width:89px'><strong>WEST</strong></td>");
@@ -251,6 +290,8 @@ namespace Receipt
                 strNewHTMLFile.AppendLine(@"				</tbody>");
                 strNewHTMLFile.AppendLine(@"			</table>");
                 strNewHTMLFile.AppendLine(@"			</td>");
+
+
                 strNewHTMLFile.AppendLine(@"		</tr>");
                 strNewHTMLFile.AppendLine(@"	</tbody>");
                 strNewHTMLFile.AppendLine(@"</table>");
@@ -281,10 +322,188 @@ namespace Receipt
                 clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Module.Name);
             }
         }
+        private void UpdateListBaseInRepStr(List<string> repList, List<string> UpList,EnCustomer customer,EnWingDetails wingDetails,EnWingMaster wingMaster,decimal TotalAmount, decimal pendingAmount)
+        {
+            try
+            {
+                for(int i = 0; i < repList.Count;i++)
+                {
+                    if (repList[i].ToUpper() == "{CURRENTDATE}")
+                    {
+                        UpList.Add(DateTime.Now.ToString("dd/MM/yyyy"));
+                    }
+                    if (repList[i].ToUpper() == "{BLOCK}")
+                    {
+                        UpList.Add(wingMaster.Wing_Name.ToUpper());
+                    }
+                    if (repList[i].ToUpper() == "{FLATNO}")
+                    {
+                        UpList.Add(wingDetails.FlatNo.ToString());
+                    }
+                    if (repList[i].ToUpper() == "{FLORNAME}")
+                    {
+                        UpList.Add(wingDetails.FlorName.ToUpper());
+                    }
+                    if (repList[i].ToUpper() == "{CUSTOMERNAME}")
+                    {
+                        string custName = customer.Customer_Name.ToUpper();
+                        if (!string.IsNullOrEmpty(Convert.ToString(customer.Customer1)))
+                        {
+                            custName = custName + " & " + customer.Customer1.ToUpper();
+                        }
+                        if (!string.IsNullOrEmpty(Convert.ToString(customer.Customer2)))
+                        {
+                            custName = custName + " & " + customer.Customer2.ToUpper();
+                        }
+                        if (!string.IsNullOrEmpty(Convert.ToString(customer.Customer3)))
+                        {
+                            custName = custName + " & " + customer.Customer3.ToUpper();
+                        }
+                        UpList.Add(custName);
+                    }
+                    if (repList[i].ToUpper() == "{CARPET}")
+                    {
+                        UpList.Add(wingDetails.Carpet.ToString());
+                    }
+                    if (repList[i].ToUpper() == "{WASH}")
+                    {
+                        UpList.Add(wingDetails.WB.ToString());
+                    }
+                    if (repList[i].ToUpper() == "{AMOUNTWITHNAME}")
+                    {
+                        var amountwithName = "Rs." + wingDetails.Amount.ToString() + "/- (" + ClsUtil.ConvertWord(Convert.ToInt32(wingDetails.Amount)).ToUpper() + " ONLY)";
+                        UpList.Add(amountwithName);
+                    }
+                    if (repList[i].ToUpper() == "{EAST}")
+                    {
+                        UpList.Add(wingDetails.EAST.ToUpper());
+                    }
+                    if (repList[i].ToUpper() == "{WEST}")
+                    {
+                        UpList.Add(wingDetails.WEST.ToUpper());
+                    }
+                    if (repList[i].ToUpper() == "{NORTH}")
+                    {
+                        UpList.Add(wingDetails.NORTH.ToUpper());
+                    }
+                    if (repList[i].ToUpper() == "{SOUTH}")
+                    {
+                        UpList.Add(wingDetails.SOUTH.ToUpper());
+                    }
+                    if (repList[i].ToUpper() == "{CURRENTDT}")
+                    {
+                        UpList.Add(DateTime.Now.ToString("dd/MM/yyyy"));
+                    }
+                    
+                    if (repList[i].ToUpper() == "{AMOUNTONLY}")
+                    {
+                        UpList.Add(TotalAmount.ToString());
+                    }
+                    if (repList[i].ToUpper() == "{DUEAMOUNT}")
+                    {
+                        UpList.Add(pendingAmount.ToString());
+                    }
 
+                    if (repList[i].ToUpper() == "{FLATNOS}")
+                    {
+                        UpList.Add(wingMaster.Wing_Name.ToUpper() + "-" + wingDetails.FlatNo.ToString());
+                    }
+                    if (repList[i].ToUpper() == "{FLOORNAME}")
+                    {
+                        UpList.Add(wingDetails.FlorName.ToString().ToUpper());
+                    }
+                    if (repList[i].ToUpper() == "{AMOUNTINWORDS}")
+                    {
+                        var amountwithName = "Rs." + wingDetails.Amount.ToString() + "/- (" + ClsUtil.ConvertWord(Convert.ToInt32(wingDetails.Amount)).ToUpper() + " ONLY)";
+                        UpList.Add(amountwithName);
+                    }
+                    if (repList[i].ToUpper() == "{RECEIVEDAMOUNT}")
+                    {
+                        UpList.Add(TotalAmount.ToString());
+                    }
+
+                    if (repList[i].ToUpper() == "{CURRNETDATE}")
+                    {
+                        UpList.Add(DateTime.Now.ToString("dd/MM/yyyy"));
+                    }
+                    if (repList[i].ToUpper() == "{FLATAMOUNT}")
+                    {
+                        UpList.Add(wingDetails.Amount.ToString());
+                    }
+                    if (repList[i].ToUpper() == "{LAND}")
+                    {
+                        UpList.Add(wingDetails.Land.ToString());
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Module.Name);
+            }
+        }
+        private async void UpdateCustomerFile(string FilePath, string replaceFilePath, List<string> replatce, List<string> update)
+        {
+
+            if (System.IO.File.Exists(replaceFilePath))
+            {
+                System.IO.File.Delete(replaceFilePath);
+            }
+            var wordApp = new Microsoft.Office.Interop.Word.Application();
+            var doc = wordApp.Documents.Open(FilePath, false, true);
+
+            try
+            {
+                for (int i = 0; i < replatce.Count; i++)
+                {
+                    var Upstatus = doc.Content.Find.Execute(FindText: replatce[i],
+                                            MatchCase: false,
+                                            MatchWholeWord: false,
+                                            MatchWildcards: false,
+                                            MatchSoundsLike: false,
+                                            MatchAllWordForms: false,
+                                            Forward: true, //this may be the one
+                                            Wrap: false,
+                                            Format: false,
+                                            ReplaceWith: update[i],
+                                            Replace: Microsoft.Office.Interop.Word.WdReplace.wdReplaceAll
+                                            );
+                }
+                doc.SaveAs(replaceFilePath);
+            }
+            catch (Exception ex)
+            {
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Module.Name);
+            }
+            finally
+            {
+                if (wordApp != null)
+                {
+                    doc.Close();
+                    wordApp.Quit();
+                    doc = null;
+                    wordApp = null;
+                }
+                GC.Collect();
+            }
+        }
         private async void btnprintprivew_Click(object sender, EventArgs e)
         {
-            await CreateHTMLFile();
+            clsWaitForm.ShowWaitForm();
+            try
+            {
+                await CreateHTMLFile();
+            }
+            catch (Exception ex)
+            {
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name);
+            }
+            finally
+            {
+                clsWaitForm.CloseWaitForm();
+                GC.Collect();
+            }
+            
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
@@ -324,7 +543,7 @@ namespace Receipt
             }
             catch (Exception ex)
             {
-                clsLog.InstanceCreation().InsertLog(ex.ToString(),clsLog.logType.Error,MethodBase.GetCurrentMethod().Name);
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name);
                 MessageBox.Show(ex.Message);
             }
         }

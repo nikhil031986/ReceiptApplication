@@ -70,7 +70,7 @@ namespace Receipt
                                           + cheqDetails.Cheq_Date.Substring(8, 1) + "    "
                                           + cheqDetails.Cheq_Date.Substring(9, 1);
 
-                        replaceStr.Add("_D__D__M__M__Y__Y__Y__Y", cheqDate);
+                        replaceStr.Add("_D__D__M__M__Y__Y__Y__Y", " "+cheqDate);
                         replaceStr.Add("_memberName", cheqDetails.Customer_Name.ToUpper());
                         replaceStr.Add("_AmountInWord", cheqDetails.Amount_InWord.ToUpper());
                         replaceStr.Add("_Amount", cheqDetails.Amount.ToString().ToUpper());
@@ -85,7 +85,7 @@ namespace Receipt
                 int floatx = 5;
                 int floaty = 215;
 
-                e.Graphics.DrawString(string.Empty, new Font("Times New Roman", 10, FontStyle.Bold),
+                e.Graphics.DrawString(string.Empty, new Font("Calibri", 11, FontStyle.Bold),
           Brushes.Black, floatx, floaty);
                 floaty = floaty + 22;
                 //     for(int blankLine=0;blankLine<6;blankLine++)
@@ -101,7 +101,7 @@ namespace Receipt
                     {
                         floaty = floaty - 3;
                     }
-                    e.Graphics.DrawString(strLine, new Font("Times New Roman", 10, FontStyle.Bold),
+                    e.Graphics.DrawString(strLine, new Font("Calibri", 11, FontStyle.Bold),
            Brushes.Black, floatx, floaty);
 
                     if (linespace == 0 || (linespace >= 1 && linespace <= 4))

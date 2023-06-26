@@ -23,13 +23,17 @@ namespace ReceiptEntity
         public string Customer_Name { get; set; }
         public string PaymentDate { get; set; }
         public int ReceiptDateNo { get; set; }
+        public int IsCancel { get; set; }
+
+        private int _isPrinter = 0;
+        public int IsPrint { get { return _isPrinter; } set { _isPrinter = value; } }
         public EnReceiptDetails()
         {       
 
         }
         public EnReceiptDetails(int receipt_Id, string receipt_No, string receipt_Date, int customer_Id, string flate_ShopNo, 
             string cheq_Rtgs_Neft_ImpsNo, int year_Id, string bank_Name, string branch_Name, string receivedAs,
-            decimal amount, string amount_Word, string customer_Name, string paymentDate, int receiptDateNo)
+            decimal amount, string amount_Word, string customer_Name, string paymentDate, int receiptDateNo, int isCancel, int isPrint)
         {
             Receipt_Id = receipt_Id;
             Receipt_No = receipt_No;
@@ -46,6 +50,8 @@ namespace ReceiptEntity
             Customer_Name = customer_Name;
             PaymentDate = paymentDate;
             ReceiptDateNo = receiptDateNo;
+            IsCancel = isCancel;
+            IsPrint = isPrint;
         }
     }
 }

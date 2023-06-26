@@ -1,4 +1,5 @@
-﻿using ReceiptLog;
+﻿using Microsoft.Office.Interop.Excel;
+using ReceiptLog;
 using System;
 using System.Diagnostics;
 using System.Drawing;
@@ -16,14 +17,15 @@ namespace Receipt
             UserForm = 0,
             WingMaster = 1,
             CustomerDetails = 3,
-            ReceiptDetails=4,
-            CheqDetails=5,
-            Report=6,
-            ImportData=7,
-            Banakhat=8
+            ReceiptDetails = 4,
+            CheqDetails = 5,
+            Report = 6,
+            ImportData = 7,
+            Banakhat = 8,
+            BanakhatList = 9
         }
         private Form myForm;
-        private Form_Name FormName ;
+        private Form_Name FormName;
         public frmRecipt()
         {
             try
@@ -135,6 +137,11 @@ namespace Receipt
                         myForm = null;
                         GC.Collect();
                         break;
+                    case Form_Name.BanakhatList:
+                        btnBanakhatList.Text = btnBanakhat.Text.Replace(">", "<");
+                        myForm = null;
+                        GC.Collect();
+                        break;
                 }
             }
             catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
@@ -195,6 +202,7 @@ namespace Receipt
                 {
                     myForm.Close();
                     MyForm_CloseUserDetails(null, null);
+                    GC.Collect();
                 }
                 FormName = Form_Name.ReceiptDetails;
                 btnReceiptDetails.Text = btnReceiptDetails.Text.Replace("<", ">");
@@ -205,6 +213,7 @@ namespace Receipt
                 myForm.Dock = DockStyle.Fill;
                 this.PlnMainForm.Controls.Add(myForm);
                 myForm.Show();
+                this.PlnMainForm.Refresh();
             }
             catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
         }
@@ -307,6 +316,49 @@ namespace Receipt
                 myForm.Show();
             }
             catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
+        }
+
+        private void btnBanakhatList_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (myForm != null)
+                {
+                    myForm.Close();
+                    MyForm_CloseUserDetails(null, null);
+                }
+                FormName = Form_Name.BanakhatList;
+                btnBanakhatList.Text = btnBanakhatList.Text.Replace("<", ">");
+                myForm = new frmBanakhatList();
+                myForm.TopLevel = false;
+                myForm.AutoScroll = true;
+                myForm.Dock = DockStyle.Fill;
+                this.PlnMainForm.Controls.Add(myForm);
+                myForm.Show();
+            }
+            catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
+        }
+
+        private void btnBackUpDataBase_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+                folderBrowserDialog.ShowDialog();
+                clsWaitForm.ShowWaitForm();
+                if (folderBrowserDialog.SelectedPath != null && !string.IsNullOrWhiteSpace(folderBrowserDialog.SelectedPath))
+                {
+                    System.IO.File.Copy(ClsUtil.getCurrentPath() + ClsUtil.SiteDBName + ".db", folderBrowserDialog.SelectedPath + @"\" + ClsUtil.SiteDBName + ".db", true);
+                    clsWaitForm.CloseWaitForm();
+                    MessageBox.Show("DataBase Backuped..", "Receipt Application",MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                clsWaitForm.CloseWaitForm();
+            }
+            catch (Exception ex)
+            {
+                clsWaitForm.CloseWaitForm();
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, "btnBackUpDataBase_Click");
+            }
         }
     }
 }

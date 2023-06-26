@@ -72,7 +72,7 @@ namespace ReceiptDataAcess
                         Convert.ToInt32(firstRow["Start_Number"]),
                         Convert.ToInt32(firstRow["End_Number"]));
                     command = new SQLiteCommand();
-                    command.CommandText = "SELECT Wing_DetailsId,Wing_MasterId,FlatNo,Wing_Name,IFNULL(Land, 0 ) as Land,IFNULL(Carpet, 0 ) as Carpet,IFNULL(WB, 0 ) as WB,IFNULL(Amount, 0 ) as Amount,IFNULL(Total, 0 ) as Total,EAST,WEST,NORTH,SOUTH,FlorName FROM Wing_Details WHERE Wing_MasterId=@Wing_MasterId";
+                    command.CommandText = "SELECT Wing_DetailsId,Wing_MasterId,FlatNo,Wing_Name,IFNULL(Land, 0 ) as Land,IFNULL(Carpet, 0 ) as Carpet,IFNULL(WB, 0 ) as WB,IFNULL(Amount, 0 ) as Amount,IFNULL(Total, 0 ) as Total,EAST,WEST,NORTH,SOUTH,FlorName,CAST(FlatNo AS INT) AS INTFlat FROM Wing_Details WHERE Wing_MasterId=@Wing_MasterId order by INTFlat;";
                     command.Parameters.Clear();
                     command.Parameters.AddWithValue("@Wing_MasterId", enWingMaster.Wing_Master_Id);
                     dtWingMaster = await DaDatabaseConnection.GetDataTable(command);
@@ -178,7 +178,8 @@ namespace ReceiptDataAcess
             SQLiteCommand cmd = new SQLiteCommand();
             try
             {
-                cmd.CommandText = "SELECT Wing_DetailsId,Wing_MasterId,FlatNo,Wing_Name,IFNULL(Land, 0 ) as Land,IFNULL(Carpet, 0 ) as Carpet,IFNULL(WB, 0 ) as WB,IFNULL(Amount, 0 ) as Amount,IFNULL(Total, 0 ) as Total,EAST,WEST,NORTH,SOUTH,FlorName FROM Wing_Details" + (wingMasterId == 0 ? ";" : " WHERE Wing_MasterId=@Wing_MasterId;");
+                string cmdText = "SELECT Wing_DetailsId,Wing_MasterId,FlatNo,Wing_Name,printf(\"%.2f\",IFNULL(Land, 0 )) as Land,printf(\"%.2f\",IFNULL(Carpet, 0 )) as Carpet,printf(\"%.2f\", IFNULL(WB, 0 )) as WB,IFNULL(Amount, 0 ) as Amount,printf(\"%.2f\", IFNULL(Total, 0 )) as Total,EAST,WEST,NORTH,SOUTH,FlorName FROM Wing_Details" + (wingMasterId == 0 ? ";" : " WHERE Wing_MasterId=@Wing_MasterId;");
+                cmd.CommandText = cmdText;
                 if (wingMasterId > 0)
                 {
                     cmd.Parameters.Clear();
@@ -279,7 +280,7 @@ namespace ReceiptDataAcess
         }
         public static async Task<int> InsertUpdateWingDetails(EnWingDetails wingDetail, int wingMasterId)
         {
-            decimal Total = wingDetail.Land + wingDetail.Carpet + wingDetail.WB;
+            decimal Total = wingDetail.Carpet + wingDetail.WB;
             SQLiteCommand cmd = new SQLiteCommand();
             try
             {
@@ -336,7 +337,7 @@ namespace ReceiptDataAcess
             List<int> totalWingInsert = new List<int>();
             foreach (EnWingDetails wingDetail in wingDetails)
             {
-                decimal Total = wingDetail.Land + wingDetail.Carpet + wingDetail.WB;
+                decimal Total =  wingDetail.Carpet + wingDetail.WB;
                 SQLiteCommand cmd = new SQLiteCommand();
                 try
                 {

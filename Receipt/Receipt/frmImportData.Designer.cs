@@ -38,6 +38,8 @@
             this.cmbSelectSheet = new System.Windows.Forms.ComboBox();
             this.btnImportData = new System.Windows.Forms.Button();
             this.dgvImportData = new System.Windows.Forms.DataGridView();
+            this.lblTableName = new System.Windows.Forms.Label();
+            this.cboTableName = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvImportData)).BeginInit();
             this.SuspendLayout();
@@ -57,17 +59,20 @@
             this.tableLayoutPanel1.Controls.Add(this.btnSelectFile, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.btnShowData, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.cmbSelectSheet, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.btnImportData, 2, 5);
-            this.tableLayoutPanel1.Controls.Add(this.dgvImportData, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.dgvImportData, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.btnImportData, 2, 6);
+            this.tableLayoutPanel1.Controls.Add(this.lblTableName, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.cboTableName, 1, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 6;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanel1.RowCount = 7;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 450);
             this.tableLayoutPanel1.TabIndex = 0;
@@ -77,7 +82,7 @@
             this.lblImportModule.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblImportModule.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.lblImportModule, 3);
-            this.lblImportModule.Location = new System.Drawing.Point(3, 11);
+            this.lblImportModule.Location = new System.Drawing.Point(3, 0);
             this.lblImportModule.Name = "lblImportModule";
             this.lblImportModule.Size = new System.Drawing.Size(794, 13);
             this.lblImportModule.TabIndex = 0;
@@ -88,7 +93,7 @@
             // 
             this.lblSelectFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSelectFile.AutoSize = true;
-            this.lblSelectFile.Location = new System.Drawing.Point(3, 43);
+            this.lblSelectFile.Location = new System.Drawing.Point(3, 21);
             this.lblSelectFile.Name = "lblSelectFile";
             this.lblSelectFile.Size = new System.Drawing.Size(68, 13);
             this.lblSelectFile.TabIndex = 1;
@@ -97,7 +102,7 @@
             // txtSelectedFile
             // 
             this.txtSelectedFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSelectedFile.Location = new System.Drawing.Point(77, 39);
+            this.txtSelectedFile.Location = new System.Drawing.Point(77, 17);
             this.txtSelectedFile.Name = "txtSelectedFile";
             this.txtSelectedFile.Size = new System.Drawing.Size(639, 20);
             this.txtSelectedFile.TabIndex = 2;
@@ -106,7 +111,7 @@
             // 
             this.lblSelectSheet.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSelectSheet.AutoSize = true;
-            this.lblSelectSheet.Location = new System.Drawing.Point(3, 72);
+            this.lblSelectSheet.Location = new System.Drawing.Point(3, 50);
             this.lblSelectSheet.Name = "lblSelectSheet";
             this.lblSelectSheet.Size = new System.Drawing.Size(68, 13);
             this.lblSelectSheet.TabIndex = 3;
@@ -115,7 +120,7 @@
             // 
             // btnSelectFile
             // 
-            this.btnSelectFile.Location = new System.Drawing.Point(722, 38);
+            this.btnSelectFile.Location = new System.Drawing.Point(722, 16);
             this.btnSelectFile.Name = "btnSelectFile";
             this.btnSelectFile.Size = new System.Drawing.Size(75, 23);
             this.btnSelectFile.TabIndex = 4;
@@ -125,7 +130,7 @@
             // 
             // btnShowData
             // 
-            this.btnShowData.Location = new System.Drawing.Point(722, 67);
+            this.btnShowData.Location = new System.Drawing.Point(722, 45);
             this.btnShowData.Name = "btnShowData";
             this.btnShowData.Size = new System.Drawing.Size(75, 23);
             this.btnShowData.TabIndex = 5;
@@ -137,7 +142,7 @@
             // 
             this.cmbSelectSheet.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbSelectSheet.FormattingEnabled = true;
-            this.cmbSelectSheet.Location = new System.Drawing.Point(77, 68);
+            this.cmbSelectSheet.Location = new System.Drawing.Point(77, 46);
             this.cmbSelectSheet.Name = "cmbSelectSheet";
             this.cmbSelectSheet.Size = new System.Drawing.Size(639, 21);
             this.cmbSelectSheet.TabIndex = 6;
@@ -159,14 +164,33 @@
             this.dgvImportData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tableLayoutPanel1.SetColumnSpan(this.dgvImportData, 3);
             this.dgvImportData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvImportData.Location = new System.Drawing.Point(3, 96);
+            this.dgvImportData.Location = new System.Drawing.Point(3, 101);
             this.dgvImportData.Name = "dgvImportData";
             this.dgvImportData.ReadOnly = true;
             this.tableLayoutPanel1.SetRowSpan(this.dgvImportData, 2);
-            this.dgvImportData.Size = new System.Drawing.Size(794, 322);
+            this.dgvImportData.Size = new System.Drawing.Size(794, 317);
             this.dgvImportData.TabIndex = 8;
             this.dgvImportData.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvImportData_CellFormatting);
             this.dgvImportData.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvImportData_RowPrePaint);
+            // 
+            // lblTableName
+            // 
+            this.lblTableName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblTableName.AutoSize = true;
+            this.lblTableName.Location = new System.Drawing.Point(3, 78);
+            this.lblTableName.Name = "lblTableName";
+            this.lblTableName.Size = new System.Drawing.Size(68, 13);
+            this.lblTableName.TabIndex = 9;
+            this.lblTableName.Text = "Table Name";
+            // 
+            // cboTableName
+            // 
+            this.cboTableName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboTableName.FormattingEnabled = true;
+            this.cboTableName.Location = new System.Drawing.Point(77, 74);
+            this.cboTableName.Name = "cboTableName";
+            this.cboTableName.Size = new System.Drawing.Size(639, 21);
+            this.cboTableName.TabIndex = 10;
             // 
             // frmImportData
             // 
@@ -198,5 +222,7 @@
         private System.Windows.Forms.ComboBox cmbSelectSheet;
         private System.Windows.Forms.Button btnImportData;
         private System.Windows.Forms.DataGridView dgvImportData;
+        private System.Windows.Forms.Label lblTableName;
+        private System.Windows.Forms.ComboBox cboTableName;
     }
 }

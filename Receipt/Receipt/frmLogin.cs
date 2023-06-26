@@ -60,7 +60,7 @@ namespace Receipt
             try
             {
                 EnSiteMaster dbName =(EnSiteMaster)cmbsiteName.SelectedItem;
-               
+                ClsUtil.SiteDBName = dbName.DB_Name;
                 ClsUtil.currentUserInfo = await BAUserDetails.GetUserDetails(txtUserID.Text.Trim(), txtPassword.Text.Trim());
                 if (ClsUtil.currentUserInfo != null && ClsUtil.currentUserInfo.UserId > 0)
                 {

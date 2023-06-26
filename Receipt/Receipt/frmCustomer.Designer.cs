@@ -28,51 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCustomer));
             this.tblMainCustomerDetails = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.txtCustomerWingName = new System.Windows.Forms.TextBox();
-            this.txtContactNo = new System.Windows.Forms.TextBox();
-            this.txtAddress = new System.Windows.Forms.TextBox();
-            this.txtCustomerName = new System.Windows.Forms.TextBox();
-            this.cmbFlatNo = new System.Windows.Forms.ComboBox();
-            this.lblCustomerWingName = new System.Windows.Forms.Label();
-            this.lblAddress = new System.Windows.Forms.Label();
-            this.lblWingName = new System.Windows.Forms.Label();
-            this.lblEmailID = new System.Windows.Forms.Label();
-            this.lblContactNo = new System.Windows.Forms.Label();
-            this.lblFlatNo = new System.Windows.Forms.Label();
-            this.lblCustomerName = new System.Windows.Forms.Label();
-            this.cmbWingName = new System.Windows.Forms.ComboBox();
-            this.txtEmailId = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnClose = new System.Windows.Forms.Button();
             this.lblCustomer = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.lblPan = new System.Windows.Forms.Label();
-            this.lblAadhar = new System.Windows.Forms.Label();
-            this.lblPan1 = new System.Windows.Forms.Label();
-            this.lblCustomer1 = new System.Windows.Forms.Label();
-            this.lblaadhar1 = new System.Windows.Forms.Label();
-            this.lblCustomer2 = new System.Windows.Forms.Label();
-            this.lblPan2 = new System.Windows.Forms.Label();
-            this.lblAadhar2 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.cboSearch = new System.Windows.Forms.ComboBox();
+            this.lblSearch = new System.Windows.Forms.Label();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnSave = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.lblcustomer3 = new System.Windows.Forms.Label();
-            this.lblPan3 = new System.Windows.Forms.Label();
-            this.lblAadhar3 = new System.Windows.Forms.Label();
-            this.txtPan = new System.Windows.Forms.TextBox();
-            this.txtAadhar = new System.Windows.Forms.TextBox();
-            this.txtCustomer1 = new System.Windows.Forms.TextBox();
-            this.txtPan1 = new System.Windows.Forms.TextBox();
-            this.txtAadhar1 = new System.Windows.Forms.TextBox();
-            this.txtCustomer2 = new System.Windows.Forms.TextBox();
-            this.txtPan2 = new System.Windows.Forms.TextBox();
-            this.txtAadhar2 = new System.Windows.Forms.TextBox();
-            this.txtCustomer3 = new System.Windows.Forms.TextBox();
-            this.txtAadhar3 = new System.Windows.Forms.TextBox();
-            this.txtPan3 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.tolFirst = new System.Windows.Forms.ToolStripButton();
+            this.tolPrv = new System.Windows.Forms.ToolStripButton();
+            this.txttolDisplay = new System.Windows.Forms.ToolStripLabel();
+            this.tolTotalPages = new System.Windows.Forms.ToolStripLabel();
+            this.tolNext = new System.Windows.Forms.ToolStripButton();
+            this.tolLast = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tolRowsCounts = new System.Windows.Forms.ToolStripLabel();
+            this.txttolRowsCount = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.lblGotoPageNo = new System.Windows.Forms.ToolStripLabel();
+            this.txtGotoPageNo = new System.Windows.Forms.ToolStripTextBox();
+            this.btnGoTo = new System.Windows.Forms.ToolStripButton();
             this.dgCustomer = new System.Windows.Forms.DataGridView();
             this.Customer_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Wing_Master_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -84,12 +68,20 @@
             this.Con_Details = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Email_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Customer_Wing_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BanakhatNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BanakhatDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txttolDisplay1 = new System.Windows.Forms.ToolStripTextBox();
+            this.ctxCustomerSendToExcel = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.sendToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tblMainCustomerDetails.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tableLayoutPanel4.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgCustomer)).BeginInit();
+            this.ctxCustomerSendToExcel.SuspendLayout();
             this.SuspendLayout();
             // 
             // tblMainCustomerDetails
@@ -119,197 +111,20 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.txtCustomerWingName, 4, 4);
-            this.tableLayoutPanel2.Controls.Add(this.txtContactNo, 1, 3);
-            this.tableLayoutPanel2.Controls.Add(this.txtAddress, 4, 2);
-            this.tableLayoutPanel2.Controls.Add(this.txtCustomerName, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.cmbFlatNo, 1, 2);
-            this.tableLayoutPanel2.Controls.Add(this.lblCustomerWingName, 3, 4);
-            this.tableLayoutPanel2.Controls.Add(this.lblAddress, 3, 2);
-            this.tableLayoutPanel2.Controls.Add(this.lblWingName, 3, 1);
-            this.tableLayoutPanel2.Controls.Add(this.lblEmailID, 0, 4);
-            this.tableLayoutPanel2.Controls.Add(this.lblContactNo, 0, 3);
-            this.tableLayoutPanel2.Controls.Add(this.lblFlatNo, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.lblCustomerName, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.cmbWingName, 4, 1);
-            this.tableLayoutPanel2.Controls.Add(this.txtEmailId, 1, 4);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel1, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.lblPan, 0, 5);
-            this.tableLayoutPanel2.Controls.Add(this.lblAadhar, 3, 5);
-            this.tableLayoutPanel2.Controls.Add(this.lblPan1, 3, 6);
-            this.tableLayoutPanel2.Controls.Add(this.lblCustomer1, 0, 6);
-            this.tableLayoutPanel2.Controls.Add(this.lblaadhar1, 0, 7);
-            this.tableLayoutPanel2.Controls.Add(this.lblCustomer2, 3, 7);
-            this.tableLayoutPanel2.Controls.Add(this.lblPan2, 0, 8);
-            this.tableLayoutPanel2.Controls.Add(this.lblAadhar2, 3, 8);
-            this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel2, 4, 10);
-            this.tableLayoutPanel2.Controls.Add(this.lblcustomer3, 0, 9);
-            this.tableLayoutPanel2.Controls.Add(this.lblPan3, 3, 9);
-            this.tableLayoutPanel2.Controls.Add(this.lblAadhar3, 0, 10);
-            this.tableLayoutPanel2.Controls.Add(this.txtPan, 1, 5);
-            this.tableLayoutPanel2.Controls.Add(this.txtAadhar, 4, 5);
-            this.tableLayoutPanel2.Controls.Add(this.txtCustomer1, 1, 6);
-            this.tableLayoutPanel2.Controls.Add(this.txtPan1, 4, 6);
-            this.tableLayoutPanel2.Controls.Add(this.txtAadhar1, 1, 7);
-            this.tableLayoutPanel2.Controls.Add(this.txtCustomer2, 4, 7);
-            this.tableLayoutPanel2.Controls.Add(this.txtPan2, 1, 8);
-            this.tableLayoutPanel2.Controls.Add(this.txtAadhar2, 4, 8);
-            this.tableLayoutPanel2.Controls.Add(this.txtCustomer3, 1, 9);
-            this.tableLayoutPanel2.Controls.Add(this.txtAadhar3, 1, 10);
-            this.tableLayoutPanel2.Controls.Add(this.txtPan3, 4, 9);
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel4, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.toolStrip1, 0, 2);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 12;
+            this.tableLayoutPanel2.RowCount = 5;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1044, 312);
-            this.tableLayoutPanel2.TabIndex = 1;
-            // 
-            // txtCustomerWingName
-            // 
-            this.txtCustomerWingName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCustomerWingName.Location = new System.Drawing.Point(637, 127);
-            this.txtCustomerWingName.Name = "txtCustomerWingName";
-            this.txtCustomerWingName.Size = new System.Drawing.Size(404, 20);
-            this.txtCustomerWingName.TabIndex = 14;
-            // 
-            // txtContactNo
-            // 
-            this.txtContactNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtContactNo.Location = new System.Drawing.Point(91, 101);
-            this.txtContactNo.Name = "txtContactNo";
-            this.txtContactNo.Size = new System.Drawing.Size(404, 20);
-            this.txtContactNo.TabIndex = 10;
-            // 
-            // txtAddress
-            // 
-            this.txtAddress.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtAddress.Location = new System.Drawing.Point(637, 74);
-            this.txtAddress.Multiline = true;
-            this.txtAddress.Name = "txtAddress";
-            this.tableLayoutPanel2.SetRowSpan(this.txtAddress, 2);
-            this.txtAddress.Size = new System.Drawing.Size(404, 47);
-            this.txtAddress.TabIndex = 8;
-            // 
-            // txtCustomerName
-            // 
-            this.txtCustomerName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCustomerName.Location = new System.Drawing.Point(91, 47);
-            this.txtCustomerName.Name = "txtCustomerName";
-            this.txtCustomerName.Size = new System.Drawing.Size(404, 20);
-            this.txtCustomerName.TabIndex = 2;
-            this.txtCustomerName.TextChanged += new System.EventHandler(this.txtCustomerName_TextChanged);
-            // 
-            // cmbFlatNo
-            // 
-            this.cmbFlatNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbFlatNo.FormattingEnabled = true;
-            this.cmbFlatNo.Location = new System.Drawing.Point(91, 74);
-            this.cmbFlatNo.Name = "cmbFlatNo";
-            this.cmbFlatNo.Size = new System.Drawing.Size(404, 21);
-            this.cmbFlatNo.TabIndex = 6;
-            this.cmbFlatNo.SelectedIndexChanged += new System.EventHandler(this.cmbFlatNo_SelectedIndexChanged);
-            // 
-            // lblCustomerWingName
-            // 
-            this.lblCustomerWingName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCustomerWingName.AutoSize = true;
-            this.lblCustomerWingName.Location = new System.Drawing.Point(521, 130);
-            this.lblCustomerWingName.Name = "lblCustomerWingName";
-            this.lblCustomerWingName.Size = new System.Drawing.Size(110, 13);
-            this.lblCustomerWingName.TabIndex = 13;
-            this.lblCustomerWingName.Text = "Customer Wing Name";
-            // 
-            // lblAddress
-            // 
-            this.lblAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblAddress.AutoSize = true;
-            this.lblAddress.Location = new System.Drawing.Point(521, 78);
-            this.lblAddress.Name = "lblAddress";
-            this.lblAddress.Size = new System.Drawing.Size(110, 13);
-            this.lblAddress.TabIndex = 7;
-            this.lblAddress.Text = "Address";
-            // 
-            // lblWingName
-            // 
-            this.lblWingName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblWingName.AutoSize = true;
-            this.lblWingName.Location = new System.Drawing.Point(521, 51);
-            this.lblWingName.Name = "lblWingName";
-            this.lblWingName.Size = new System.Drawing.Size(110, 13);
-            this.lblWingName.TabIndex = 3;
-            this.lblWingName.Text = "Wing Name";
-            // 
-            // lblEmailID
-            // 
-            this.lblEmailID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblEmailID.AutoSize = true;
-            this.lblEmailID.Location = new System.Drawing.Point(3, 130);
-            this.lblEmailID.Name = "lblEmailID";
-            this.lblEmailID.Size = new System.Drawing.Size(82, 13);
-            this.lblEmailID.TabIndex = 11;
-            this.lblEmailID.Text = "Email Id";
-            // 
-            // lblContactNo
-            // 
-            this.lblContactNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblContactNo.AutoSize = true;
-            this.lblContactNo.Location = new System.Drawing.Point(3, 104);
-            this.lblContactNo.Name = "lblContactNo";
-            this.lblContactNo.Size = new System.Drawing.Size(82, 13);
-            this.lblContactNo.TabIndex = 9;
-            this.lblContactNo.Text = "Contact No";
-            // 
-            // lblFlatNo
-            // 
-            this.lblFlatNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblFlatNo.AutoSize = true;
-            this.lblFlatNo.Location = new System.Drawing.Point(3, 78);
-            this.lblFlatNo.Name = "lblFlatNo";
-            this.lblFlatNo.Size = new System.Drawing.Size(82, 13);
-            this.lblFlatNo.TabIndex = 5;
-            this.lblFlatNo.Text = "Flat No";
-            // 
-            // lblCustomerName
-            // 
-            this.lblCustomerName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCustomerName.AutoSize = true;
-            this.lblCustomerName.Location = new System.Drawing.Point(3, 51);
-            this.lblCustomerName.Name = "lblCustomerName";
-            this.lblCustomerName.Size = new System.Drawing.Size(82, 13);
-            this.lblCustomerName.TabIndex = 1;
-            this.lblCustomerName.Text = "Customer Name";
-            // 
-            // cmbWingName
-            // 
-            this.cmbWingName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbWingName.FormattingEnabled = true;
-            this.cmbWingName.Location = new System.Drawing.Point(637, 47);
-            this.cmbWingName.Name = "cmbWingName";
-            this.cmbWingName.Size = new System.Drawing.Size(404, 21);
-            this.cmbWingName.TabIndex = 4;
-            this.cmbWingName.SelectedIndexChanged += new System.EventHandler(this.cmbWingName_SelectedIndexChanged);
-            // 
-            // txtEmailId
-            // 
-            this.txtEmailId.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtEmailId.Location = new System.Drawing.Point(91, 127);
-            this.txtEmailId.Name = "txtEmailId";
-            this.txtEmailId.Size = new System.Drawing.Size(404, 20);
-            this.txtEmailId.TabIndex = 12;
-            this.txtEmailId.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmailId_Validating);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1044, 109);
+            this.tableLayoutPanel2.TabIndex = 0;
             // 
             // tableLayoutPanel1
             // 
@@ -364,249 +179,228 @@
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
-            // lblPan
+            // tableLayoutPanel4
             // 
-            this.lblPan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblPan.AutoSize = true;
-            this.lblPan.Location = new System.Drawing.Point(3, 156);
-            this.lblPan.Name = "lblPan";
-            this.lblPan.Size = new System.Drawing.Size(82, 13);
-            this.lblPan.TabIndex = 15;
-            this.lblPan.Text = "Pan";
+            this.tableLayoutPanel4.AutoSize = true;
+            this.tableLayoutPanel4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tableLayoutPanel4.ColumnCount = 4;
+            this.tableLayoutPanel2.SetColumnSpan(this.tableLayoutPanel4, 5);
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel4.Controls.Add(this.cboSearch, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.lblSearch, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.txtSearch, 2, 0);
+            this.tableLayoutPanel4.Controls.Add(this.flowLayoutPanel2, 3, 0);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 44);
+            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 1;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(1044, 33);
+            this.tableLayoutPanel4.TabIndex = 39;
             // 
-            // lblAadhar
+            // cboSearch
             // 
-            this.lblAadhar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblAadhar.AutoSize = true;
-            this.lblAadhar.Location = new System.Drawing.Point(521, 156);
-            this.lblAadhar.Name = "lblAadhar";
-            this.lblAadhar.Size = new System.Drawing.Size(110, 13);
-            this.lblAadhar.TabIndex = 17;
-            this.lblAadhar.Text = "Addhar";
+            this.cboSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboSearch.FormattingEnabled = true;
+            this.cboSearch.Location = new System.Drawing.Point(87, 6);
+            this.cboSearch.Name = "cboSearch";
+            this.cboSearch.Size = new System.Drawing.Size(247, 21);
+            this.cboSearch.TabIndex = 0;
             // 
-            // lblPan1
+            // lblSearch
             // 
-            this.lblPan1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblPan1.AutoSize = true;
-            this.lblPan1.Location = new System.Drawing.Point(521, 182);
-            this.lblPan1.Name = "lblPan1";
-            this.lblPan1.Size = new System.Drawing.Size(110, 13);
-            this.lblPan1.TabIndex = 21;
-            this.lblPan1.Text = "Pan 1";
+            this.lblSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblSearch.AutoSize = true;
+            this.lblSearch.Location = new System.Drawing.Point(3, 10);
+            this.lblSearch.Margin = new System.Windows.Forms.Padding(3, 0, 40, 0);
+            this.lblSearch.Name = "lblSearch";
+            this.lblSearch.Size = new System.Drawing.Size(41, 13);
+            this.lblSearch.TabIndex = 1;
+            this.lblSearch.Text = "Search";
             // 
-            // lblCustomer1
+            // txtSearch
             // 
-            this.lblCustomer1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCustomer1.AutoSize = true;
-            this.lblCustomer1.Location = new System.Drawing.Point(3, 182);
-            this.lblCustomer1.Name = "lblCustomer1";
-            this.lblCustomer1.Size = new System.Drawing.Size(82, 13);
-            this.lblCustomer1.TabIndex = 19;
-            this.lblCustomer1.Text = "Customer 1";
-            // 
-            // lblaadhar1
-            // 
-            this.lblaadhar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblaadhar1.AutoSize = true;
-            this.lblaadhar1.Location = new System.Drawing.Point(3, 208);
-            this.lblaadhar1.Name = "lblaadhar1";
-            this.lblaadhar1.Size = new System.Drawing.Size(82, 13);
-            this.lblaadhar1.TabIndex = 23;
-            this.lblaadhar1.Text = "Addhar 1";
-            // 
-            // lblCustomer2
-            // 
-            this.lblCustomer2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCustomer2.AutoSize = true;
-            this.lblCustomer2.Location = new System.Drawing.Point(521, 208);
-            this.lblCustomer2.Name = "lblCustomer2";
-            this.lblCustomer2.Size = new System.Drawing.Size(110, 13);
-            this.lblCustomer2.TabIndex = 25;
-            this.lblCustomer2.Text = "Customer 2";
-            // 
-            // lblPan2
-            // 
-            this.lblPan2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblPan2.AutoSize = true;
-            this.lblPan2.Location = new System.Drawing.Point(3, 234);
-            this.lblPan2.Name = "lblPan2";
-            this.lblPan2.Size = new System.Drawing.Size(82, 13);
-            this.lblPan2.TabIndex = 27;
-            this.lblPan2.Text = "Pan 2";
-            // 
-            // lblAadhar2
-            // 
-            this.lblAadhar2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblAadhar2.AutoSize = true;
-            this.lblAadhar2.Location = new System.Drawing.Point(521, 234);
-            this.lblAadhar2.Name = "lblAadhar2";
-            this.lblAadhar2.Size = new System.Drawing.Size(110, 13);
-            this.lblAadhar2.TabIndex = 29;
-            this.lblAadhar2.Text = "Addhar 2";
+            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSearch.Location = new System.Drawing.Point(340, 6);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(534, 20);
+            this.txtSearch.TabIndex = 2;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // flowLayoutPanel2
             // 
             this.flowLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.flowLayoutPanel2.Controls.Add(this.btnSave);
-            this.flowLayoutPanel2.Controls.Add(this.btnCancel);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(871, 283);
+            this.flowLayoutPanel2.Controls.Add(this.button1);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(877, 0);
+            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(170, 26);
-            this.flowLayoutPanel2.TabIndex = 36;
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(167, 33);
+            this.flowLayoutPanel2.TabIndex = 38;
             // 
             // btnSave
             // 
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.Location = new System.Drawing.Point(3, 3);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.Size = new System.Drawing.Size(75, 30);
             this.btnSave.TabIndex = 0;
-            this.btnSave.Text = "Save";
+            this.btnSave.Text = "ADD";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // btnCancel
+            // button1
             // 
-            this.btnCancel.Location = new System.Drawing.Point(84, 3);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 1;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(84, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 30);
+            this.button1.TabIndex = 40;
+            this.button1.Text = "EDIT";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // lblcustomer3
+            // toolStrip1
             // 
-            this.lblcustomer3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblcustomer3.AutoSize = true;
-            this.lblcustomer3.Location = new System.Drawing.Point(3, 260);
-            this.lblcustomer3.Name = "lblcustomer3";
-            this.lblcustomer3.Size = new System.Drawing.Size(82, 13);
-            this.lblcustomer3.TabIndex = 19;
-            this.lblcustomer3.Text = "Customer 3";
+            this.toolStrip1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel2.SetColumnSpan(this.toolStrip1, 5);
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tolFirst,
+            this.tolPrv,
+            this.txttolDisplay,
+            this.tolTotalPages,
+            this.tolNext,
+            this.tolLast,
+            this.toolStripSeparator1,
+            this.tolRowsCounts,
+            this.txttolRowsCount,
+            this.toolStripSeparator2,
+            this.lblGotoPageNo,
+            this.txtGotoPageNo,
+            this.btnGoTo});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 77);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(1044, 32);
+            this.toolStrip1.TabIndex = 41;
+            this.toolStrip1.Text = "toolStrip1";
             // 
-            // lblPan3
+            // tolFirst
             // 
-            this.lblPan3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblPan3.AutoSize = true;
-            this.lblPan3.Location = new System.Drawing.Point(521, 260);
-            this.lblPan3.Name = "lblPan3";
-            this.lblPan3.Size = new System.Drawing.Size(110, 13);
-            this.lblPan3.TabIndex = 32;
-            this.lblPan3.Text = "Pan 3";
+            this.tolFirst.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tolFirst.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tolFirst.Image = ((System.Drawing.Image)(resources.GetObject("tolFirst.Image")));
+            this.tolFirst.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tolFirst.Name = "tolFirst";
+            this.tolFirst.Size = new System.Drawing.Size(35, 29);
+            this.tolFirst.Text = "|<";
+            this.tolFirst.Click += new System.EventHandler(this.tolFirst_Click);
             // 
-            // lblAadhar3
+            // tolPrv
             // 
-            this.lblAadhar3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblAadhar3.AutoSize = true;
-            this.lblAadhar3.Location = new System.Drawing.Point(3, 289);
-            this.lblAadhar3.Name = "lblAadhar3";
-            this.lblAadhar3.Size = new System.Drawing.Size(82, 13);
-            this.lblAadhar3.TabIndex = 34;
-            this.lblAadhar3.Text = "Addhar 3";
+            this.tolPrv.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tolPrv.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tolPrv.Image = ((System.Drawing.Image)(resources.GetObject("tolPrv.Image")));
+            this.tolPrv.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tolPrv.Name = "tolPrv";
+            this.tolPrv.Size = new System.Drawing.Size(42, 29);
+            this.tolPrv.Text = "<<";
+            this.tolPrv.Click += new System.EventHandler(this.tolPrv_Click);
             // 
-            // txtPan
+            // txttolDisplay
             // 
-            this.txtPan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPan.Location = new System.Drawing.Point(91, 153);
-            this.txtPan.Name = "txtPan";
-            this.txtPan.Size = new System.Drawing.Size(404, 20);
-            this.txtPan.TabIndex = 16;
-            this.txtPan.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmailId_Validating);
+            this.txttolDisplay.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txttolDisplay.Name = "txttolDisplay";
+            this.txttolDisplay.Size = new System.Drawing.Size(13, 29);
+            this.txttolDisplay.Text = "1";
+            this.txttolDisplay.TextChanged += new System.EventHandler(this.txttolDisplay_TextChanged);
             // 
-            // txtAadhar
+            // tolTotalPages
             // 
-            this.txtAadhar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtAadhar.Location = new System.Drawing.Point(637, 153);
-            this.txtAadhar.Name = "txtAadhar";
-            this.txtAadhar.Size = new System.Drawing.Size(404, 20);
-            this.txtAadhar.TabIndex = 18;
-            this.txtAadhar.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmailId_Validating);
+            this.tolTotalPages.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tolTotalPages.Name = "tolTotalPages";
+            this.tolTotalPages.Size = new System.Drawing.Size(40, 29);
+            this.tolTotalPages.Text = "OF ";
             // 
-            // txtCustomer1
+            // tolNext
             // 
-            this.txtCustomer1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCustomer1.Location = new System.Drawing.Point(91, 179);
-            this.txtCustomer1.Name = "txtCustomer1";
-            this.txtCustomer1.Size = new System.Drawing.Size(404, 20);
-            this.txtCustomer1.TabIndex = 20;
-            this.txtCustomer1.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmailId_Validating);
+            this.tolNext.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tolNext.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tolNext.Image = ((System.Drawing.Image)(resources.GetObject("tolNext.Image")));
+            this.tolNext.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tolNext.Name = "tolNext";
+            this.tolNext.Size = new System.Drawing.Size(42, 29);
+            this.tolNext.Text = ">>";
+            this.tolNext.Click += new System.EventHandler(this.tolNext_Click);
             // 
-            // txtPan1
+            // tolLast
             // 
-            this.txtPan1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPan1.Location = new System.Drawing.Point(637, 179);
-            this.txtPan1.Name = "txtPan1";
-            this.txtPan1.Size = new System.Drawing.Size(404, 20);
-            this.txtPan1.TabIndex = 22;
-            this.txtPan1.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmailId_Validating);
+            this.tolLast.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tolLast.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tolLast.Image = ((System.Drawing.Image)(resources.GetObject("tolLast.Image")));
+            this.tolLast.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tolLast.Name = "tolLast";
+            this.tolLast.Size = new System.Drawing.Size(35, 29);
+            this.tolLast.Text = ">|";
+            this.tolLast.Click += new System.EventHandler(this.tolLast_Click);
             // 
-            // txtAadhar1
+            // toolStripSeparator1
             // 
-            this.txtAadhar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtAadhar1.Location = new System.Drawing.Point(91, 205);
-            this.txtAadhar1.Name = "txtAadhar1";
-            this.txtAadhar1.Size = new System.Drawing.Size(404, 20);
-            this.txtAadhar1.TabIndex = 24;
-            this.txtAadhar1.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmailId_Validating);
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 32);
             // 
-            // txtCustomer2
+            // tolRowsCounts
             // 
-            this.txtCustomer2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCustomer2.Location = new System.Drawing.Point(637, 205);
-            this.txtCustomer2.Name = "txtCustomer2";
-            this.txtCustomer2.Size = new System.Drawing.Size(404, 20);
-            this.txtCustomer2.TabIndex = 26;
-            this.txtCustomer2.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmailId_Validating);
+            this.tolRowsCounts.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tolRowsCounts.Name = "tolRowsCounts";
+            this.tolRowsCounts.Size = new System.Drawing.Size(157, 29);
+            this.tolRowsCounts.Text = "Page Rows Count";
             // 
-            // txtPan2
+            // txttolRowsCount
             // 
-            this.txtPan2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPan2.Location = new System.Drawing.Point(91, 231);
-            this.txtPan2.Name = "txtPan2";
-            this.txtPan2.Size = new System.Drawing.Size(404, 20);
-            this.txtPan2.TabIndex = 28;
-            this.txtPan2.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmailId_Validating);
+            this.txttolRowsCount.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txttolRowsCount.Name = "txttolRowsCount";
+            this.txttolRowsCount.Size = new System.Drawing.Size(100, 32);
+            this.txttolRowsCount.TextChanged += new System.EventHandler(this.txttolRowsCount_TextChanged);
             // 
-            // txtAadhar2
+            // toolStripSeparator2
             // 
-            this.txtAadhar2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtAadhar2.Location = new System.Drawing.Point(637, 231);
-            this.txtAadhar2.Name = "txtAadhar2";
-            this.txtAadhar2.Size = new System.Drawing.Size(404, 20);
-            this.txtAadhar2.TabIndex = 30;
-            this.txtAadhar2.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmailId_Validating);
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 32);
             // 
-            // txtCustomer3
+            // lblGotoPageNo
             // 
-            this.txtCustomer3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCustomer3.Location = new System.Drawing.Point(91, 257);
-            this.txtCustomer3.Name = "txtCustomer3";
-            this.txtCustomer3.Size = new System.Drawing.Size(404, 20);
-            this.txtCustomer3.TabIndex = 31;
-            this.txtCustomer3.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmailId_Validating);
+            this.lblGotoPageNo.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGotoPageNo.Name = "lblGotoPageNo";
+            this.lblGotoPageNo.Size = new System.Drawing.Size(83, 29);
+            this.lblGotoPageNo.Text = "Page No";
             // 
-            // txtAadhar3
+            // txtGotoPageNo
             // 
-            this.txtAadhar3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtAadhar3.Location = new System.Drawing.Point(91, 286);
-            this.txtAadhar3.Name = "txtAadhar3";
-            this.txtAadhar3.Size = new System.Drawing.Size(404, 20);
-            this.txtAadhar3.TabIndex = 35;
-            this.txtAadhar3.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmailId_Validating);
+            this.txtGotoPageNo.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtGotoPageNo.Name = "txtGotoPageNo";
+            this.txtGotoPageNo.Size = new System.Drawing.Size(100, 32);
             // 
-            // txtPan3
+            // btnGoTo
             // 
-            this.txtPan3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPan3.Location = new System.Drawing.Point(637, 257);
-            this.txtPan3.Name = "txtPan3";
-            this.txtPan3.Size = new System.Drawing.Size(404, 20);
-            this.txtPan3.TabIndex = 33;
-            this.txtPan3.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmailId_Validating);
+            this.btnGoTo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnGoTo.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGoTo.Image = ((System.Drawing.Image)(resources.GetObject("btnGoTo.Image")));
+            this.btnGoTo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnGoTo.Name = "btnGoTo";
+            this.btnGoTo.Size = new System.Drawing.Size(40, 29);
+            this.btnGoTo.Text = "Go";
+            this.btnGoTo.Click += new System.EventHandler(this.btnGoTo_Click);
             // 
             // dgCustomer
             // 
             this.dgCustomer.AllowUserToAddRows = false;
             this.dgCustomer.AllowUserToDeleteRows = false;
+            this.dgCustomer.BackgroundColor = System.Drawing.Color.White;
             this.dgCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgCustomer.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Customer_Id,
@@ -618,13 +412,18 @@
             this.Address,
             this.Con_Details,
             this.Email_Id,
-            this.Customer_Wing_Name});
+            this.Customer_Wing_Name,
+            this.BanakhatNo,
+            this.BanakhatDate});
+            this.dgCustomer.ContextMenuStrip = this.ctxCustomerSendToExcel;
             this.dgCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgCustomer.Location = new System.Drawing.Point(3, 321);
+            this.dgCustomer.Location = new System.Drawing.Point(3, 118);
             this.dgCustomer.Name = "dgCustomer";
             this.dgCustomer.ReadOnly = true;
-            this.dgCustomer.Size = new System.Drawing.Size(1044, 300);
-            this.dgCustomer.TabIndex = 0;
+            this.dgCustomer.RowHeadersVisible = false;
+            this.dgCustomer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgCustomer.Size = new System.Drawing.Size(1044, 503);
+            this.dgCustomer.TabIndex = 1;
             this.dgCustomer.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCustomer_CellClick);
             // 
             // Customer_Id
@@ -705,6 +504,40 @@
             this.Customer_Wing_Name.ReadOnly = true;
             this.Customer_Wing_Name.Width = 98;
             // 
+            // BanakhatNo
+            // 
+            this.BanakhatNo.DataPropertyName = "BanakhatNo";
+            this.BanakhatNo.HeaderText = "Banakhat No";
+            this.BanakhatNo.Name = "BanakhatNo";
+            this.BanakhatNo.ReadOnly = true;
+            // 
+            // BanakhatDate
+            // 
+            this.BanakhatDate.DataPropertyName = "BanakhatDate";
+            this.BanakhatDate.HeaderText = "Banakhat Date";
+            this.BanakhatDate.Name = "BanakhatDate";
+            this.BanakhatDate.ReadOnly = true;
+            // 
+            // txttolDisplay1
+            // 
+            this.txttolDisplay1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txttolDisplay1.Name = "txttolDisplay1";
+            this.txttolDisplay1.Size = new System.Drawing.Size(100, 23);
+            // 
+            // ctxCustomerSendToExcel
+            // 
+            this.ctxCustomerSendToExcel.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sendToExcelToolStripMenuItem});
+            this.ctxCustomerSendToExcel.Name = "ctxCustomerSendToExcel";
+            this.ctxCustomerSendToExcel.Size = new System.Drawing.Size(181, 48);
+            // 
+            // sendToExcelToolStripMenuItem
+            // 
+            this.sendToExcelToolStripMenuItem.Name = "sendToExcelToolStripMenuItem";
+            this.sendToExcelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sendToExcelToolStripMenuItem.Text = "Send To Excel";
+            this.sendToExcelToolStripMenuItem.Click += new System.EventHandler(this.sendToExcelToolStripMenuItem_Click);
+            // 
             // frmCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -713,10 +546,12 @@
             this.ClientSize = new System.Drawing.Size(1050, 624);
             this.Controls.Add(this.tblMainCustomerDetails);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmCustomer";
             this.Text = "frmCustomer";
+            this.Load += new System.EventHandler(this.frmCustomer_Load);
             this.tblMainCustomerDetails.ResumeLayout(false);
             this.tblMainCustomerDetails.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -724,8 +559,13 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgCustomer)).EndInit();
+            this.ctxCustomerSendToExcel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -735,49 +575,13 @@
 
         private System.Windows.Forms.TableLayoutPanel tblMainCustomerDetails;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.TextBox txtCustomerWingName;
-        private System.Windows.Forms.TextBox txtContactNo;
-        private System.Windows.Forms.TextBox txtCustomerName;
-        private System.Windows.Forms.ComboBox cmbFlatNo;
-        private System.Windows.Forms.Label lblCustomerWingName;
-        private System.Windows.Forms.Label lblAddress;
-        private System.Windows.Forms.Label lblWingName;
-        private System.Windows.Forms.Label lblEmailID;
-        private System.Windows.Forms.Label lblContactNo;
-        private System.Windows.Forms.Label lblFlatNo;
-        private System.Windows.Forms.Label lblCustomerName;
         private System.Windows.Forms.Label lblCustomer;
-        private System.Windows.Forms.ComboBox cmbWingName;
-        private System.Windows.Forms.TextBox txtEmailId;
-        private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.TextBox txtAddress;
         private System.Windows.Forms.DataGridView dgCustomer;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private System.Windows.Forms.Label lblPan;
-        private System.Windows.Forms.Label lblAadhar;
-        private System.Windows.Forms.Label lblPan1;
-        private System.Windows.Forms.Label lblCustomer1;
-        private System.Windows.Forms.Label lblaadhar1;
-        private System.Windows.Forms.Label lblCustomer2;
-        private System.Windows.Forms.Label lblPan2;
-        private System.Windows.Forms.Label lblAadhar2;
-        private System.Windows.Forms.Label lblcustomer3;
-        private System.Windows.Forms.Label lblPan3;
-        private System.Windows.Forms.Label lblAadhar3;
-        private System.Windows.Forms.TextBox txtPan;
-        private System.Windows.Forms.TextBox txtAadhar;
-        private System.Windows.Forms.TextBox txtCustomer1;
-        private System.Windows.Forms.TextBox txtPan1;
-        private System.Windows.Forms.TextBox txtAadhar1;
-        private System.Windows.Forms.TextBox txtCustomer2;
-        private System.Windows.Forms.TextBox txtPan2;
-        private System.Windows.Forms.TextBox txtAadhar2;
-        private System.Windows.Forms.TextBox txtCustomer3;
-        private System.Windows.Forms.TextBox txtAadhar3;
-        private System.Windows.Forms.TextBox txtPan3;
+        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Customer_Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Wing_Master_Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Wing_Details_Id;
@@ -788,6 +592,29 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Con_Details;
         private System.Windows.Forms.DataGridViewTextBoxColumn Email_Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Customer_Wing_Name;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BanakhatNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BanakhatDate;
+        private System.Windows.Forms.ContextMenuStrip ctxCustomerSendToExcel;
+        private System.Windows.Forms.ToolStripMenuItem sendToExcelToolStripMenuItem;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.ComboBox cboSearch;
+        private System.Windows.Forms.Label lblSearch;
+        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton tolFirst;
+        private System.Windows.Forms.ToolStripButton tolPrv;
+        private System.Windows.Forms.ToolStripTextBox txttolDisplay1;
+        private System.Windows.Forms.ToolStripLabel tolTotalPages;
+        private System.Windows.Forms.ToolStripButton tolNext;
+        private System.Windows.Forms.ToolStripButton tolLast;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripLabel tolRowsCounts;
+        private System.Windows.Forms.ToolStripTextBox txttolRowsCount;
+        private System.Windows.Forms.ToolStripLabel txttolDisplay;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripLabel lblGotoPageNo;
+        private System.Windows.Forms.ToolStripButton btnGoTo;
+        private System.Windows.Forms.ToolStripTextBox txtGotoPageNo;
     }
 }

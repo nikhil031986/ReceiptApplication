@@ -11,6 +11,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Forms;
 
 namespace Receipt
@@ -22,8 +23,17 @@ namespace Receipt
         public frmImportData()
         {
             InitializeComponent();
+            FillTableName();
         }
-
+        private async void FillTableName()
+        {
+            cboTableName.Items.Clear();
+            var lstTableName = await BAImpoerData.GetTableName();
+            lstTableName.ForEach(x =>
+            {
+                cboTableName.Items.Add(x);
+            });
+        }
         private void btnSelectFile_Click(object sender, EventArgs e)
         {
             try
@@ -51,14 +61,30 @@ namespace Receipt
             try
             {
                 cmbSelectSheet.Items.Clear();
-                var xlApp = new Microsoft.Office.Interop.Excel.Application();
-                var xlWorkBook = xlApp.Workbooks.Open(sFile);           // WORKBOOK TO OPEN THE EXCEL FILE.
-                foreach (Worksheet xlsheet in xlWorkBook.Worksheets)
+                string connectionString = @"Provider = Microsoft.ACE.OLEDB.12.0;" +
+                "Data Source='" + sFile + "';Extended Properties=Excel 12.0;";
+                
+                OleDbConnection con = new OleDbConnection(connectionString);
+
+                System.Data.DataTable dtForExcel = new System.Data.DataTable();
+                try
                 {
-                    cmbSelectSheet.Items.Add(xlsheet.Name);
+                    con.Open();
+                    dtForExcel = con.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+                    con.Close();
                 }
-                xlWorkBook.Close();
-                xlApp.Quit();
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                finally
+                {
+                    con.Dispose();
+                }
+                foreach (System.Data.DataRow sheets in dtForExcel.Rows)
+                {
+                    cmbSelectSheet.Items.Add(Convert.ToString(sheets["TABLE_NAME"]).Replace("$",""));
+                }
             }
             catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
         }
@@ -112,22 +138,29 @@ namespace Receipt
         {
             try
             {
-                System.Data.DataTable dtImportData = await BAImpoerData.ImportData(dtExcelData);
-
-                //new System.Threading.Thread(() =>
-                //{
-                //    for (int rowNo = 0; rowNo < dtExcelData.Rows.Count; rowNo++)
-                //    {
-                //        if (Convert.ToBoolean(dtImportData.Rows[rowNo]["IsImport"]))
-                //        {
-                //            dgvImportData.Invoke(new MethodInvoker(() =>
-                //            {
-                //                dgvImportData.Rows[rowNo].DefaultCellStyle.BackColor = Color.Green;
-                //                dgvImportData.Rows[rowNo].DefaultCellStyle.ForeColor = Color.White;
-                //            }));
-                //        }
-                //    }
-                //}).Start();
+                if(!string.IsNullOrWhiteSpace(cboTableName.Text))
+                {
+                    if(!string.IsNullOrWhiteSpace(cboTableName.Text))
+                    {
+                        string selectedTableName = cboTableName.Text.Trim().ToLower();
+                        switch (selectedTableName)
+                        {
+                            case "receiptdetail":
+                                System.Data.DataTable dtImportData = await BAImpoerData.ImportReceiptData(dtExcelData);
+                                break;
+                            case "wing_details":
+                                await BAImpoerData.ImportWingDetails(dtExcelData);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    MessageBox.Show("Data Import in the system.\n if any error for import data see the isimport column value and contact to administrator.", "Receipt Application", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //if(!string.IsNullOrWhiteSpace(cboTableName.Text) && cboTableName.Text.Trim().ToLower()== "receiptdetail")
+                    //{
+                    //    System.Data.DataTable dtImportData = await BAImpoerData.ImportReceiptData(dtExcelData);
+                    //}
+                }
 
             }
             catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }

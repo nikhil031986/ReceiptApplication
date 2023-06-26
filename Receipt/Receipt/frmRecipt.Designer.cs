@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRecipt));
             this.plnMenuItem = new System.Windows.Forms.Panel();
             this.tblMenuItem = new System.Windows.Forms.TableLayoutPanel();
+            this.btnBackUpDataBase = new System.Windows.Forms.Button();
+            this.btnBanakhatList = new System.Windows.Forms.Button();
             this.btnBanakhat = new System.Windows.Forms.Button();
             this.btnImport = new System.Windows.Forms.Button();
             this.btnUserDetails = new System.Windows.Forms.Button();
@@ -51,7 +53,7 @@
             this.plnMenuItem.Dock = System.Windows.Forms.DockStyle.Left;
             this.plnMenuItem.Location = new System.Drawing.Point(0, 0);
             this.plnMenuItem.Name = "plnMenuItem";
-            this.plnMenuItem.Size = new System.Drawing.Size(192, 521);
+            this.plnMenuItem.Size = new System.Drawing.Size(192, 610);
             this.plnMenuItem.TabIndex = 0;
             // 
             // tblMenuItem
@@ -61,6 +63,8 @@
             this.tblMenuItem.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.tblMenuItem.ColumnCount = 1;
             this.tblMenuItem.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tblMenuItem.Controls.Add(this.btnBackUpDataBase, 0, 9);
+            this.tblMenuItem.Controls.Add(this.btnBanakhatList, 0, 8);
             this.tblMenuItem.Controls.Add(this.btnBanakhat, 0, 8);
             this.tblMenuItem.Controls.Add(this.btnImport, 0, 6);
             this.tblMenuItem.Controls.Add(this.btnUserDetails, 0, 0);
@@ -69,12 +73,12 @@
             this.tblMenuItem.Controls.Add(this.btnReceiptDetails, 0, 4);
             this.tblMenuItem.Controls.Add(this.btnChqDetails, 0, 5);
             this.tblMenuItem.Controls.Add(this.btnReport, 0, 6);
-            this.tblMenuItem.Controls.Add(this.btnLogout, 0, 9);
+            this.tblMenuItem.Controls.Add(this.btnLogout, 0, 12);
             this.tblMenuItem.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tblMenuItem.Location = new System.Drawing.Point(0, 0);
             this.tblMenuItem.Name = "tblMenuItem";
-            this.tblMenuItem.RowCount = 10;
+            this.tblMenuItem.RowCount = 13;
             this.tblMenuItem.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tblMenuItem.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tblMenuItem.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -83,11 +87,43 @@
             this.tblMenuItem.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tblMenuItem.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tblMenuItem.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tblMenuItem.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
-            this.tblMenuItem.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
-            this.tblMenuItem.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tblMenuItem.Size = new System.Drawing.Size(192, 521);
+            this.tblMenuItem.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tblMenuItem.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tblMenuItem.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tblMenuItem.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tblMenuItem.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tblMenuItem.Size = new System.Drawing.Size(192, 610);
             this.tblMenuItem.TabIndex = 0;
+            // 
+            // btnBackUpDataBase
+            // 
+            this.btnBackUpDataBase.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnBackUpDataBase.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBackUpDataBase.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnBackUpDataBase.Location = new System.Drawing.Point(0, 463);
+            this.btnBackUpDataBase.Margin = new System.Windows.Forms.Padding(0);
+            this.btnBackUpDataBase.Name = "btnBackUpDataBase";
+            this.btnBackUpDataBase.Size = new System.Drawing.Size(192, 56);
+            this.btnBackUpDataBase.TabIndex = 9;
+            this.btnBackUpDataBase.Text = "DATABASE BACKUP";
+            this.btnBackUpDataBase.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnBackUpDataBase.UseVisualStyleBackColor = true;
+            this.btnBackUpDataBase.Click += new System.EventHandler(this.btnBackUpDataBase_Click);
+            // 
+            // btnBanakhatList
+            // 
+            this.btnBanakhatList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnBanakhatList.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBanakhatList.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnBanakhatList.Location = new System.Drawing.Point(0, 406);
+            this.btnBanakhatList.Margin = new System.Windows.Forms.Padding(0);
+            this.btnBanakhatList.Name = "btnBanakhatList";
+            this.btnBanakhatList.Size = new System.Drawing.Size(192, 57);
+            this.btnBanakhatList.TabIndex = 8;
+            this.btnBanakhatList.Text = "BANAKHAT LIST <";
+            this.btnBanakhatList.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnBanakhatList.UseVisualStyleBackColor = true;
+            this.btnBanakhatList.Click += new System.EventHandler(this.btnBanakhatList_Click);
             // 
             // btnBanakhat
             // 
@@ -109,7 +145,7 @@
             this.btnImport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnImport.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnImport.Location = new System.Drawing.Point(0, 250);
+            this.btnImport.Location = new System.Drawing.Point(0, 300);
             this.btnImport.Margin = new System.Windows.Forms.Padding(0);
             this.btnImport.Name = "btnImport";
             this.btnImport.Size = new System.Drawing.Size(192, 50);
@@ -201,7 +237,7 @@
             this.btnReport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReport.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnReport.Location = new System.Drawing.Point(0, 300);
+            this.btnReport.Location = new System.Drawing.Point(0, 250);
             this.btnReport.Margin = new System.Windows.Forms.Padding(0);
             this.btnReport.Name = "btnReport";
             this.btnReport.Size = new System.Drawing.Size(192, 50);
@@ -216,7 +252,7 @@
             this.btnLogout.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogout.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnLogout.Location = new System.Drawing.Point(0, 476);
+            this.btnLogout.Location = new System.Drawing.Point(0, 565);
             this.btnLogout.Margin = new System.Windows.Forms.Padding(0);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(192, 45);
@@ -234,14 +270,14 @@
             this.PlnMainForm.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PlnMainForm.Location = new System.Drawing.Point(192, 0);
             this.PlnMainForm.Name = "PlnMainForm";
-            this.PlnMainForm.Size = new System.Drawing.Size(608, 521);
+            this.PlnMainForm.Size = new System.Drawing.Size(608, 610);
             this.PlnMainForm.TabIndex = 1;
             // 
             // frmRecipt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 521);
+            this.ClientSize = new System.Drawing.Size(800, 610);
             this.Controls.Add(this.PlnMainForm);
             this.Controls.Add(this.plnMenuItem);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -270,5 +306,7 @@
         private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.Button btnImport;
         private System.Windows.Forms.Button btnBanakhat;
+        private System.Windows.Forms.Button btnBanakhatList;
+        private System.Windows.Forms.Button btnBackUpDataBase;
     }
 }

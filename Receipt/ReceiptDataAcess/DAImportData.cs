@@ -3,6 +3,7 @@ using ReceiptLog;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SQLite;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -15,14 +16,19 @@ namespace ReceiptDataAcess
 {
     public static class DAImportData
     {
+        private static string[] numberformate = {"ZERO","FIRST","SECOND","THIRD","FOURTH","FIFTH","SIXTH","SEVENTH","EIGHTH",
+            "NINTH","TENTH","ELEVENTH" };
         private static String[] units = { "Zero", "One", "Two", "Three",
     "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven",
     "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen",
     "Seventeen", "Eighteen", "Nineteen" };
         private static String[] tens = { "", "", "Twenty", "Thirty", "Forty",
     "Fifty", "Sixty", "Seventy", "Eighty", "Ninety" };
-
-        private static String ConvertAmount(double amount)
+        private static string convertNumberToWord(int number)
+        {
+            return numberformate[number];
+        }
+        public static String ConvertAmount(double amount)
         {
             try
             {
@@ -37,13 +43,13 @@ namespace ReceiptDataAcess
                     return ConvertWord(amount_int) + " Point " + ConvertWord(amount_dec) + " Only.";
                 }
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, "ReceiptDataAcess.DAImportData.ConvertAmount");
+                // TODO: handle exception  
             }
             return "";
         }
-        private static String ConvertWord(Int64 i)
+        public static String ConvertWord(Int64 i)
         {
             if (i < 20)
             {
@@ -76,7 +82,147 @@ namespace ReceiptDataAcess
             return ConvertWord(i / 1000000000) + " Arab "
                     + ((i % 1000000000 > 0) ? " " + ConvertWord(i % 1000000000) : "");
         }
-        public static async Task<DataTable> ImportData(DataTable dtForImport)
+        public static async Task<List<string>> GetTableName()
+        {
+            SQLiteCommand command = new SQLiteCommand();
+            try
+            {
+                command.CommandText = "SELECT NAME AS Table_Name from sqlite_master WHERE NAME NOT LIKE '%sqlite%' ORDER BY NAME;";
+                command.Parameters.Clear();
+                DataTable dtWingMaster = await DaDatabaseConnection.GetDataTable(command);
+                var tableName = dtWingMaster.AsEnumerable().Select(x => x.Field<string>("Table_Name")).ToList<string>();
+                return tableName;
+            }
+            catch (Exception ex)
+            {
+                ReceiptLog.clsLog.InstanceCreation().InsertLog(ex.Message, ReceiptLog.clsLog.logType.Error, "DaWingMaster.getWingMaster");
+                throw ex;
+            }
+            finally
+            {
+                command.Dispose();
+            }
+        }
+        public static async Task ImportWingDetails(DataTable dtForImport)
+        {
+            try
+            {
+                if (!dtForImport.Columns.Contains("Wing_Master_Id"))
+                {
+                    DataColumn dc = new DataColumn();
+                    dc.DataType = typeof(int);
+                    dc.DefaultValue = 0;
+                    dc.ColumnName = "Wing_Master_Id";
+                    dtForImport.Columns.Add(dc);
+                }
+                if (!dtForImport.Columns.Contains("Wing_DetailsId"))
+                {
+                    DataColumn dcWingDetailsId = new DataColumn();
+                    dcWingDetailsId.DataType = typeof(int);
+                    dcWingDetailsId.DefaultValue = 0;
+                    dcWingDetailsId.ColumnName = "Wing_DetailsId";
+                    dtForImport.Columns.Add(dcWingDetailsId);
+                }
+                if (!dtForImport.Columns.Contains("IsImport"))
+                {
+                    DataColumn dcIsImportRow = new DataColumn();
+                    dcIsImportRow.DataType = typeof(bool);
+                    dcIsImportRow.DefaultValue = false;
+                    dcIsImportRow.ColumnName = "IsImport";
+                    dtForImport.Columns.Add(dcIsImportRow);
+                }
+                dtForImport.AcceptChanges();
+                foreach (DataRow drImport in dtForImport.Rows)
+                {
+                    try
+                    {
+                        var wingMaster = await DaWingMaster.GetWingMasterByName(Convert.ToString(drImport["WingName"]));
+                        if (wingMaster != null && wingMaster.Wing_Master_Id > 0)
+                        {
+                            drImport["Wing_Master_Id"] = wingMaster.Wing_Master_Id;
+                            var wingDetails = wingMaster.enWingDetails.Where<EnWingDetails>(x => x.FlatNo == Convert.ToString(drImport["HousNo"])).FirstOrDefault();
+                            if (wingDetails != null)
+                            {
+                                drImport["Wing_DetailsId"] = wingDetails.Wing_DetailsId;
+                                decimal totals = Convert.ToDecimal(drImport["Carpet"]) + Convert.ToDecimal(drImport["w_B"]);
+                                wingDetails.Total = totals;
+                                wingDetails.Carpet = Convert.ToDecimal(drImport["Carpet"]);
+                                wingDetails.WB = Convert.ToDecimal(drImport["w_B"]);
+                                wingDetails.Land = Convert.ToDecimal(drImport["Land"]);
+                                wingDetails.Amount = Convert.ToDecimal(drImport["Amount"]);
+                                wingDetails.WEST = Convert.ToString(drImport["WEST"]);
+                                wingDetails.EAST = Convert.ToString(drImport["EAST"]);
+                                wingDetails.NORTH = Convert.ToString(drImport["NORTH"]);
+                                wingDetails.SOUTH = Convert.ToString(drImport["SOUTH"]);
+                                int wingDetailId = await DaWingMaster.InsertUpdateWingDetails(wingDetails, wingMaster.Wing_Master_Id);
+                                drImport["Wing_DetailsId"] = wingDetails.Wing_DetailsId;
+
+                            }
+                            else
+                            {
+                                var FlatNoumbr = Convert.ToString(drImport["HousNo"]);
+                                int numberConvert = 0;
+                                decimal totals = Convert.ToDecimal(drImport["Carpet"]) + Convert.ToDecimal(drImport["w_B"]);
+                                if (FlatNoumbr.ToCharArray().Length == 3)
+                                {
+                                    numberConvert = Convert.ToInt32(FlatNoumbr.ToCharArray()[0].ToString());
+                                }
+                                if (FlatNoumbr.ToCharArray().Length > 3)
+                                {
+                                    numberConvert = Convert.ToInt32(FlatNoumbr.ToCharArray()[0].ToString() + FlatNoumbr.ToCharArray()[1].ToString());
+                                }
+                                var enWingDetails = new EnWingDetails(0, wingMaster.Wing_Master_Id, Convert.ToString(drImport["HousNo"]),
+                                                                       Convert.ToString(drImport["Wing"]), Convert.ToDecimal(drImport["Land"]),
+                                                                       Convert.ToDecimal(drImport["Carpet"]), Convert.ToDecimal(drImport["w_B"]),
+                                                                       Convert.ToDecimal(drImport["Amount"]), totals, Convert.ToString(drImport["EAST"]),
+                                                                       Convert.ToString(drImport["WEST"]), Convert.ToString(drImport["NORTH"]),
+                                                                       Convert.ToString(drImport["SOUTH"]), convertNumberToWord(numberConvert));
+                                int wingDetailId = await DaWingMaster.InsertUpdateWingDetails(enWingDetails, wingMaster.Wing_Master_Id);
+                                drImport["Wing_DetailsId"] = enWingDetails.Wing_DetailsId;
+                            }
+                        }
+                        else
+                        {
+                            var FlatNoumbr = Convert.ToString(drImport["HousNo"]);
+                            int numberConvert = 0;
+                            decimal totals = Convert.ToDecimal(drImport["Carpet"]) + Convert.ToDecimal(drImport["w_B"]);
+                            if (FlatNoumbr.ToCharArray().Length == 3)
+                            {
+                                numberConvert = Convert.ToInt32(FlatNoumbr.ToCharArray()[0].ToString());
+                            }
+                            if (FlatNoumbr.ToCharArray().Length > 3)
+                            {
+                                numberConvert = Convert.ToInt32(FlatNoumbr.ToCharArray()[0].ToString() + FlatNoumbr.ToCharArray()[1].ToString());
+                            }
+                            EnWingMaster enWingMaster = new EnWingMaster(0, Convert.ToString(drImport["WingName"]), 11, 4, 100, 1104);
+                            var enWingDetails = new EnWingDetails(0, wingMaster.Wing_Master_Id, Convert.ToString(drImport["HousNo"]),
+                                                                           Convert.ToString(drImport["Wing"]), Convert.ToDecimal(drImport["Land"]),
+                                                                           Convert.ToDecimal(drImport["Carpet"]), Convert.ToDecimal(drImport["w_B"]),
+                                                                           Convert.ToDecimal(drImport["Amount"]), totals, Convert.ToString(drImport["EAST"]),
+                                                                           Convert.ToString(drImport["WEST"]), Convert.ToString(drImport["NORTH"]),
+                                                                           Convert.ToString(drImport["SOUTH"]), convertNumberToWord(numberConvert));
+                            List<EnWingDetails> enWingDetailsList = new List<EnWingDetails>();
+                            enWingDetailsList.Add(enWingDetails);
+                            var wingMasterID = await DaWingMaster.InsertWingMaster(enWingMaster, enWingDetailsList, 1);
+                            drImport["Wing_Master_Id"] = enWingMaster.Wing_Master_Id;
+                            drImport["Wing_DetailsId"] = enWingDetailsList.FirstOrDefault().Wing_DetailsId;
+                        }
+                        drImport["IsImport"] = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        drImport["IsImport"] = false;
+                        ReceiptLog.clsLog.InstanceCreation().InsertLog(ex.Message, ReceiptLog.clsLog.logType.Error, "DAImport.ImportWingDetails");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ReceiptLog.clsLog.InstanceCreation().InsertLog(ex.Message, ReceiptLog.clsLog.logType.Error, "DAImport.ImportWingDetails");
+                throw ex;
+            }
+        }
+        public static async Task<DataTable> ImportReceiptData(DataTable dtForImport)
         {
             DataTable dtReturn = new DataTable();
             try
@@ -136,11 +282,7 @@ namespace ReceiptDataAcess
                     try
                     {
                         string receiptDate = Convert.ToString(drImport["RECEIPT_DATE"]);
-                        if(receiptDate.Length<9)
-                        {
-                            receiptDate = (receiptDate.Remove(6, 2) + DateTime.Now.Year.ToString());
-                        }
-                        receiptDate=receiptDate.Replace(".", "/");
+                        receiptDate = receiptDate.Split('/')[0] + "/" + receiptDate.Split('/')[1] + "/20" + receiptDate.Split('/')[2];
                         drImport["RECEIPT_DATE"] = DateTime.ParseExact(receiptDate, "dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("dd/MM/yyyy");
                         string receiptDateNo = DateTime.ParseExact(receiptDate, "dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("yyyyMMdd");
                         var wingMaster = await DaWingMaster.GetWingMasterByName(Convert.ToString(drImport["Wing"]));
@@ -154,30 +296,75 @@ namespace ReceiptDataAcess
                             }
                             else
                             {
+                                var FlatNoumbr = Convert.ToString(drImport["Flat_No"]);
+                                int numberConvert = 0;
+                                decimal totals = Convert.ToDecimal(drImport["Carpet"]) + Convert.ToDecimal(drImport["w_B"]);
+                                if(FlatNoumbr.ToCharArray().Length==3)
+                                {
+                                    numberConvert = Convert.ToInt32(FlatNoumbr.ToCharArray()[0].ToString());
+                                }
+                                if (FlatNoumbr.ToCharArray().Length>3)
+                                {
+                                    numberConvert = Convert.ToInt32(FlatNoumbr.ToCharArray()[0].ToString()+ FlatNoumbr.ToCharArray()[1].ToString());
+                                }
                                 var enWingDetails = new EnWingDetails(0, wingMaster.Wing_Master_Id, Convert.ToString(drImport["Flat_No"]),
                                                                        Convert.ToString(drImport["Wing"]), Convert.ToDecimal(drImport["Land"]),
                                                                        Convert.ToDecimal(drImport["Carpet"]), Convert.ToDecimal(drImport["w_B"]),
-                                                                       Convert.ToDecimal(drImport["Amount"]), Convert.ToDecimal(drImport["Total"]), Convert.ToString(drImport["EAST"]),
-                                                                       Convert.ToString(drImport["WEST"]), Convert.ToString(drImport["NORTH"]), Convert.ToString(drImport["SOUTH"]), "");
+                                                                       Convert.ToDecimal(drImport["Amount"]), totals, Convert.ToString(drImport["EAST"]),
+                                                                       Convert.ToString(drImport["WEST"]), Convert.ToString(drImport["NORTH"]),
+                                                                       Convert.ToString(drImport["SOUTH"]),convertNumberToWord(numberConvert));
                                 int wingDetailId = await DaWingMaster.InsertUpdateWingDetails(enWingDetails, wingMaster.Wing_Master_Id);
                                 drImport["Wing_DetailsId"] = enWingDetails.Wing_DetailsId;
                             }
                         }
                         else
                         {
+                            var FlatNoumbr = Convert.ToString(drImport["Flat_No"]);
+                            int numberConvert = 0;
+                            decimal totals = Convert.ToDecimal(drImport["Carpet"]) + Convert.ToDecimal(drImport["w_B"]);
+                            if (FlatNoumbr.ToCharArray().Length == 3)
+                            {
+                                numberConvert = Convert.ToInt32(FlatNoumbr.ToCharArray()[0].ToString());
+                            }
+                            if (FlatNoumbr.ToCharArray().Length > 3)
+                            {
+                                numberConvert = Convert.ToInt32(FlatNoumbr.ToCharArray()[0].ToString() + FlatNoumbr.ToCharArray()[1].ToString());
+                            }
                             EnWingMaster enWingMaster = new EnWingMaster(0, Convert.ToString(drImport["Wing"]), 11, 4, 100, 1104);
                             var enWingDetails = new EnWingDetails(0, wingMaster.Wing_Master_Id, Convert.ToString(drImport["Flat_No"]),
                                                                            Convert.ToString(drImport["Wing"]), Convert.ToDecimal(drImport["Land"]),
                                                                            Convert.ToDecimal(drImport["Carpet"]), Convert.ToDecimal(drImport["w_B"]),
-                                                                           Convert.ToDecimal(drImport["Amount"]), Convert.ToDecimal(drImport["Total"]), Convert.ToString(drImport["EAST"]),
-                                                                           Convert.ToString(drImport["WEST"]), Convert.ToString(drImport["NORTH"]), Convert.ToString(drImport["SOUTH"]), "");
+                                                                           Convert.ToDecimal(drImport["Amount"]), totals, Convert.ToString(drImport["EAST"]),
+                                                                           Convert.ToString(drImport["WEST"]), Convert.ToString(drImport["NORTH"]),
+                                                                           Convert.ToString(drImport["SOUTH"]), convertNumberToWord(numberConvert));
                             List<EnWingDetails> enWingDetailsList = new List<EnWingDetails>();
                             enWingDetailsList.Add(enWingDetails);
                             var wingMasterID = await DaWingMaster.InsertWingMaster(enWingMaster, enWingDetailsList, 1);
                             drImport["Wing_Master_Id"] = enWingMaster.Wing_Master_Id;
                             drImport["Wing_DetailsId"] = enWingDetailsList.FirstOrDefault().Wing_DetailsId;
                         }
-
+                        string banakhatNo = "";
+                        string banakhatDate = "";
+                        int IsBanakhat = 0;
+                        if (drImport.Table.Columns.Contains("BANAKHATNO"))
+                        {
+                            banakhatNo = Convert.ToString(drImport["BANAKHATNO"]);
+                        }
+                        if (drImport.Table.Columns.Contains("BANAKHATDATE"))
+                        {
+                            banakhatDate = Convert.ToString(drImport["BANAKHATDATE"]);
+                            if(!string.IsNullOrWhiteSpace(banakhatDate))
+                            {
+                                banakhatDate = banakhatDate.Split('.')[0]+"/"+ banakhatDate.Split('.')[1]+"/20"+ banakhatDate.Split('.')[2];
+                            }
+                        }
+                        if(drImport.Table.Columns.Contains("IsBanakhat"))
+                        {
+                            if (!string.IsNullOrWhiteSpace(Convert.ToString(drImport["IsBanakhat"])))
+                            {
+                                IsBanakhat = Convert.ToInt32(Convert.ToString(drImport["IsBanakhat"]));
+                            }
+                        }
                         if (!string.IsNullOrEmpty(Convert.ToString(drImport["Wing_Master_Id"])) &&
                             !string.IsNullOrWhiteSpace(Convert.ToString(drImport["Wing_DetailsId"])))
                         {
@@ -187,6 +374,7 @@ namespace ReceiptDataAcess
                             var customer = await DACustomerMaster.GetCustomeriByName(cutomerNames[0]);
                             if (customer != null)
                             {
+                                
                                 var selectedCusteomer = customer.AsEnumerable().Where(x => x.Wing_Master_Id == Convert.ToInt32(drImport["Wing_Master_Id"]) &&
                                 x.Wing_Details_Id == Convert.ToInt32(drImport["Wing_DetailsId"])).FirstOrDefault();
                                 if (selectedCusteomer != null)
@@ -220,9 +408,12 @@ namespace ReceiptDataAcess
                                                             drImport.Table.Columns.Contains("Aadhar2") == true ? Convert.ToString(drImport["Aadhar2"]) : "",
                                                             cutomerNames.Length > 2 ? cutomerNames[2] : "",
                                                             drImport.Table.Columns.Contains("Pan3") == true ? Convert.ToString(drImport["Pan3"]) : "",
-                                                            drImport.Table.Columns.Contains("Aadhar3") == true ? Convert.ToString(drImport["Aadhar3"]) : ""
+                                                            drImport.Table.Columns.Contains("Aadhar3") == true ? Convert.ToString(drImport["Aadhar3"]) : "",
+                                                            banakhatNo, banakhatDate,"","","","",
+                                                            drImport.Table.Columns.Contains("Financial_Name") == true ? Convert.ToString(drImport["Financial_Name"]) : "",
+                                                            "",""
                                                             );
-                                    var newCustomer = await DACustomerMaster.InsertUpdateCustomer(enCustomer);
+                                    var newCustomer = await DACustomerMaster.InsertUpdateCustomer(enCustomer, IsBanakhat);
                                     drImport["Customer_Id"] = newCustomer;
                                 }
                             }
@@ -252,9 +443,12 @@ namespace ReceiptDataAcess
                                                         cutomerNames.Length > 2 ? cutomerNames[2] : "",
                                                         //drImport.Table.Columns.Contains("Customer3") == true ? Convert.ToString(drImport["Customer3"]) : "",
                                                         drImport.Table.Columns.Contains("Pan3") == true ? Convert.ToString(drImport["Pan3"]) : "",
-                                                        drImport.Table.Columns.Contains("Aadhar3") == true ? Convert.ToString(drImport["Aadhar3"]) : ""
+                                                        drImport.Table.Columns.Contains("Aadhar3") == true ? Convert.ToString(drImport["Aadhar3"]) : "",
+                                                        banakhatNo,banakhatDate,"","","","",
+                                                        drImport.Table.Columns.Contains("Financial_Name") == true ? Convert.ToString(drImport["Financial_Name"]) : "",
+                                                        "",""
                                                         );
-                                var newCustomer = await DACustomerMaster.InsertUpdateCustomer(enCustomer);
+                                var newCustomer = await DACustomerMaster.InsertUpdateCustomer(enCustomer, IsBanakhat);
                                 drImport["Customer_Id"] = newCustomer;
                             }
                         }
@@ -264,6 +458,11 @@ namespace ReceiptDataAcess
                             !string.IsNullOrWhiteSpace(Convert.ToString(drImport["Wing_DetailsId"])) &&
                             !string.IsNullOrEmpty(Convert.ToString(drImport["Customer_Id"])))
                         {
+                            int IsCancel = 0;
+                            if (drImport.Table.Columns.Contains("ISCANCALRECEIPT"))
+                            {
+                                IsCancel = Convert.ToInt32(drImport["ISCANCALRECEIPT"]);
+                            }
                             var receiptDetails = await DAReciptDetails.GetReceiptDetailsByReceiptNo(Convert.ToString(drImport["RECEIPT_NO"]));
                             if (receiptDetails != null)
                             {
@@ -272,7 +471,7 @@ namespace ReceiptDataAcess
                                     drImport["Receipt_Id"] = receiptDetails.FirstOrDefault().Receipt_Id;
                                 }
                                 else
-                                {
+                                {   
                                     EnReceiptDetails enReceiptDetails = new EnReceiptDetails(Convert.ToInt32(0),
                                                             Convert.ToString(drImport["RECEIPT_NO"]),
                                                             Convert.ToString(drImport["RECEIPT_DATE"]),
@@ -287,7 +486,7 @@ namespace ReceiptDataAcess
                                                             ConvertAmount(Convert.ToDouble(drImport["AMOUNT_Receipt"])),
                                                             Convert.ToString(drImport["UpdateCustomerName"]),
                                                             Convert.ToString(drImport["RECEIPT_DATE"]),
-                                                            Convert.ToInt32(receiptDateNo));
+                                                            Convert.ToInt32(receiptDateNo), IsCancel,0);
                                     var newReceipt = await DAReciptDetails.InsertUpdateReceiptDetails(enReceiptDetails);
                                     drImport["Receipt_Id"] = enReceiptDetails.Receipt_Id;
                                 }
@@ -308,7 +507,7 @@ namespace ReceiptDataAcess
                                                         ConvertAmount(Convert.ToDouble(drImport["AMOUNT_Receipt"])),
                                                         Convert.ToString(drImport["UpdateCustomerName"]),
                                                         Convert.ToString(drImport["RECEIPT_DATE"]),
-                                                        Convert.ToInt32(receiptDateNo));
+                                                        Convert.ToInt32(receiptDateNo),IsCancel,0);
                                 var newReceipt = await DAReciptDetails.InsertUpdateReceiptDetails(enReceiptDetails);
                                 drImport["Receipt_Id"] = enReceiptDetails.Receipt_Id;
                             }

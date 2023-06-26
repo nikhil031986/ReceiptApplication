@@ -1,4 +1,5 @@
 ﻿using Microsoft.SqlServer.Server;
+using System;
 
 namespace ReceiptEntity
 {
@@ -25,11 +26,23 @@ namespace ReceiptEntity
         public string Customer3 { get; set; }
         public string Pan3 { get; set; }
         public string Aadhar3 { get; set; }
+        public string BanakhatNo { get; set; }
+        public string BanakhatDate { get; set; }
+        public string Ocupation { get; set; }
+        public string Ocupation1 { get; set; }
+        public string Ocupation2 { get; set; }
+        public string Ocupation3 { get; set; }
+        public string Financial_Name { get; set; }
+        public string Dastavg_No { get;set; }
+        public string Dastavg_Date { get; set; }
         public EnCustomer()
         {
 
         }
-        public EnCustomer(int customerId, int wing_Master_Id, int wing_Details_Id, string wing_Name, string flatNo, string custoimer_Name, string address, string con_Details, string emailId, string customer_Wing_Name, string pan, string aadhar, string customer1, string pan1, string aadhar1, string customer2, string pan2, string aadhar2, string customer3, string pan3, string aadhar3)
+        public EnCustomer(int customerId, int wing_Master_Id, int wing_Details_Id, string wing_Name, string flatNo, string custoimer_Name, 
+            string address, string con_Details, string emailId, string customer_Wing_Name, string pan, string aadhar, string customer1, string pan1,
+            string aadhar1, string customer2, string pan2, string aadhar2, string customer3, string pan3, string aadhar3,
+            string banakhatNo, string bankhatDate, string ocupation, string ocupation1, string ocupation2, string ocupation3, string financial_Name, string dastavg_No, string dastavg_Date)
         {
             this.Customer_Id = customerId;
             this.Wing_Master_Id = wing_Master_Id;
@@ -52,6 +65,15 @@ namespace ReceiptEntity
             this.Customer3 = customer3;
             this.Pan3 = pan3;
             this.Aadhar3 = aadhar3;
+            this.BanakhatNo = banakhatNo;
+            this.BanakhatDate = bankhatDate;
+            this.Ocupation = ocupation;
+            this.Ocupation1 = ocupation1;
+            this.Ocupation2 = ocupation2;
+            this.Ocupation3 = ocupation3;
+            this.Financial_Name = financial_Name;
+            this.Dastavg_No = dastavg_No;
+            this.Dastavg_Date = dastavg_Date;
         }
 
     }

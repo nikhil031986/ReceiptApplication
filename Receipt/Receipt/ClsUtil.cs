@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity.Core.Mapping;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,7 +36,57 @@ namespace Receipt
     "Seventeen", "Eighteen", "Nineteen" };
         private static String[] tens = { "", "", "Twenty", "Thirty", "Forty",
     "Fifty", "Sixty", "Seventy", "Eighty", "Ninety" };
-
+        
+        public static List<string> GetNOCLST()
+        {
+            List<string> retNOCLST = new List<string>();
+            retNOCLST.Add("{CurrnetDate}");
+            retNOCLST.Add("{flatNo}");
+            retNOCLST.Add("{floorName}");
+            retNOCLST.Add("{CustomerName}");
+            retNOCLST.Add("{FlatAmount}");
+            retNOCLST.Add("{land}");
+            retNOCLST.Add("{Carpet}");
+            return retNOCLST;
+        }
+        public static List<string> GetMARGINLST()
+        {
+            List<string> retMARGINLST = new List<string>();
+            retMARGINLST.Add("{CurrentDate}");
+            retMARGINLST.Add("{CustomerName}");
+            retMARGINLST.Add("{FlatNo}");
+            retMARGINLST.Add("{FloorName}");
+            retMARGINLST.Add("{AmountInWords}");
+            retMARGINLST.Add("{ReceivedAmount}");
+            return retMARGINLST;
+        }
+        public static List<string> GetDEMANDLST()
+        {
+            List<string> retDEMAND = new List<string>();
+            retDEMAND.Add("{CurrentDt}");
+            retDEMAND.Add("{customerName}");
+            retDEMAND.Add("{flatNo}");
+            retDEMAND.Add("{amountOnly}");
+            retDEMAND.Add("{dueAmount}");
+            return retDEMAND;
+        }
+        public static List<string> GetALLOTMENTLST()
+        {
+            List<string> retALLOTMENT = new List<string>();
+            retALLOTMENT.Add("{CurrentDate}");
+            retALLOTMENT.Add("{Block}");
+            retALLOTMENT.Add("{FlatNo}");
+            retALLOTMENT.Add("{FlorName}");
+            retALLOTMENT.Add("{CustomerName}");
+            retALLOTMENT.Add("{Carpet}");
+            retALLOTMENT.Add("{wash}");
+            retALLOTMENT.Add("{amountWithName}");
+            retALLOTMENT.Add("{East}");
+            retALLOTMENT.Add("{West}");
+            retALLOTMENT.Add("{North}");
+            retALLOTMENT.Add("{South}");
+            return retALLOTMENT;
+        }
         public enum ColumnType
         {
             dbString = 1,
@@ -73,6 +124,7 @@ namespace Receipt
             if (dtExport != null && dtExport.Rows.Count > 0)
             {
                 Microsoft.Office.Interop.Excel.Application XcelApp = new Microsoft.Office.Interop.Excel.Application();
+                System.Threading.Thread.Sleep(1000);
                 XcelApp.Application.Workbooks.Add(Type.Missing);
                 int columnNo = 1;
                 for (int i = 1; i < dtExport.Columns.Count + 1; i++)
@@ -228,6 +280,11 @@ namespace Receipt
             {
                 throw ex;
             }
+        }
+        public static string getdesktopPath()
+        {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            return path;
         }
         public static string getCurrentPath()
         {
