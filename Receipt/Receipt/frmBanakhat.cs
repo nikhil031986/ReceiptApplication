@@ -63,7 +63,7 @@ namespace Receipt
                 var selectedCustomer = cmbCustomer.SelectedItem;
                 var wingDetails = await BaWingMaster.GetWingDetails(((EnCustomer)selectedCustomer).Wing_Master_Id);
                 var wingMaster = await BaWingMaster.GetWingMaster(((EnCustomer)selectedCustomer).Wing_Master_Id);
-                var selectedWingDetails = wingDetails.AsEnumerable().Where(x => x.Wing_DetailsId == ((EnCustomer)selectedCustomer).Wing_Details_Id).FirstOrDefault();
+                var selectedWingDetails = wingDetails.AsEnumerable().Where(x => x.Wing_DetailsId == ((EnCustomer)selectedCustomer).Wing_Details_Id).SingleOrDefault();
                 var selectReceiptDetails = await BAReceiptDetails.GetReceiptByCustomer(((EnCustomer)selectedCustomer).Customer_Id);
                 strNewHTMLFile.AppendLine(@"<html>");
                 strNewHTMLFile.AppendLine(@"<body>");
@@ -245,30 +245,37 @@ namespace Receipt
                 strNewHTMLFile.AppendLine(@"						<td style='text-align:center; width:89px'><strong>EAST</strong></td>");
                 strNewHTMLFile.AppendLine(@"						<td style='width:1070px'>" + selectedWingDetails.EAST + "</td>");
                 strNewHTMLFile.AppendLine(@"						<td rowspan='4' style='width:1070px'>");
-                if (((EnCustomer)selectedCustomer).Financial_Name.ToUpper() == "AXIS")
+                if(((EnCustomer)selectedCustomer).Financial_Name.ToUpper()=="SBI")
+                {
+                    string FilePathAdd = ClsUtil.getCurrentPath() + "SBI\\";
+                    List<string> UpdateStr = new List<string>();
+                    List<string> repValue = ClsUtil.GetALLOTMENTLST();
+                }
+                if (((EnCustomer)selectedCustomer).Financial_Name.ToUpper().Trim() == "AXIS BANK LTD.")
                 {
                     string FilePathAdd = ClsUtil.getCurrentPath() + "AxisBank\\";
                     List<string> UpdateStr = new List<string>();
                     List<string> repValue = ClsUtil.GetALLOTMENTLST();
-                    UpdateListBaseInRepStr(repValue, UpdateStr, (EnCustomer)selectedCustomer, wingDetails.FirstOrDefault(), wingMaster.FirstOrDefault(),TotalAmount,pendingAmount);
+                    var custwingDetail = wingDetails.Where(x => x.Wing_DetailsId == ((EnCustomer)selectedCustomer).Wing_Details_Id).FirstOrDefault();
+                    UpdateListBaseInRepStr(repValue, UpdateStr, (EnCustomer)selectedCustomer, custwingDetail, wingMaster.FirstOrDefault(),TotalAmount,pendingAmount);
                     UpdateCustomerFile(FilePathAdd + "ALLOTMENT LETTER.docx", FilePathAdd + ((EnCustomer)selectedCustomer).Customer_Id + "ALLOTMENT LETTER.docx",
                         repValue, UpdateStr);
                     strNewHTMLFile.AppendLine(@"                <p><a href='" + FilePathAdd + ((EnCustomer)selectedCustomer).Customer_Id + "ALLOTMENT LETTER.docx" + "'>ALLOTMENT LETTER</a></p>");
                     repValue = ClsUtil.GetDEMANDLST();
                     UpdateStr = new List<string>();
-                    UpdateListBaseInRepStr(repValue, UpdateStr, (EnCustomer)selectedCustomer, wingDetails.FirstOrDefault(), wingMaster.FirstOrDefault(), TotalAmount, pendingAmount);
+                    UpdateListBaseInRepStr(repValue, UpdateStr, (EnCustomer)selectedCustomer, custwingDetail, wingMaster.FirstOrDefault(), TotalAmount, pendingAmount);
                     UpdateCustomerFile(FilePathAdd + "DEMAND LETTER.doc", FilePathAdd + ((EnCustomer)selectedCustomer).Customer_Id + "DEMAND LETTER.doc",
                         repValue, UpdateStr);
                     strNewHTMLFile.AppendLine(@"                <p><a href='" + FilePathAdd + ((EnCustomer)selectedCustomer).Customer_Id + "DEMAND LETTER.doc" + "'>DEMAND LETTER</a></p>");
                     repValue = ClsUtil.GetMARGINLST();
                     UpdateStr = new List<string>();
-                    UpdateListBaseInRepStr(repValue, UpdateStr, (EnCustomer)selectedCustomer, wingDetails.FirstOrDefault(), wingMaster.FirstOrDefault(), TotalAmount, pendingAmount);
+                    UpdateListBaseInRepStr(repValue, UpdateStr, (EnCustomer)selectedCustomer, custwingDetail, wingMaster.FirstOrDefault(), TotalAmount, pendingAmount);
                     UpdateCustomerFile(FilePathAdd + "MARGIN MONEY LETTER.docx", FilePathAdd + ((EnCustomer)selectedCustomer).Customer_Id + "MARGIN MONEY LETTER.docx",
                         repValue, UpdateStr);
                     strNewHTMLFile.AppendLine(@"                <p><a href='" + FilePathAdd + ((EnCustomer)selectedCustomer).Customer_Id + "MARGIN MONEY LETTER.docx" + "'>MARGIN MONEY LETTER</a></p>");
                     repValue = ClsUtil.GetNOCLST();
                     UpdateStr = new List<string>();
-                    UpdateListBaseInRepStr(repValue, UpdateStr, (EnCustomer)selectedCustomer, wingDetails.FirstOrDefault(), wingMaster.FirstOrDefault(), TotalAmount, pendingAmount);
+                    UpdateListBaseInRepStr(repValue, UpdateStr, (EnCustomer)selectedCustomer, custwingDetail, wingMaster.FirstOrDefault(), TotalAmount, pendingAmount);
                     UpdateCustomerFile(FilePathAdd + "NOC-FLAT.doc", FilePathAdd + ((EnCustomer)selectedCustomer).Customer_Id + "NOC-FLAT.doc",
                         repValue, UpdateStr);
                     strNewHTMLFile.AppendLine(@"                <p><a href='" + FilePathAdd + ((EnCustomer)selectedCustomer).Customer_Id + "NOC-FLAT.doc" + "'>NOC-FLAT</a></p>");
@@ -444,47 +451,54 @@ namespace Receipt
         }
         private async void UpdateCustomerFile(string FilePath, string replaceFilePath, List<string> replatce, List<string> update)
         {
-
-            if (System.IO.File.Exists(replaceFilePath))
-            {
-                System.IO.File.Delete(replaceFilePath);
-            }
-            var wordApp = new Microsoft.Office.Interop.Word.Application();
-            var doc = wordApp.Documents.Open(FilePath, false, true);
-
             try
             {
-                for (int i = 0; i < replatce.Count; i++)
+
+                if (System.IO.File.Exists(replaceFilePath))
                 {
-                    var Upstatus = doc.Content.Find.Execute(FindText: replatce[i],
-                                            MatchCase: false,
-                                            MatchWholeWord: false,
-                                            MatchWildcards: false,
-                                            MatchSoundsLike: false,
-                                            MatchAllWordForms: false,
-                                            Forward: true, //this may be the one
-                                            Wrap: false,
-                                            Format: false,
-                                            ReplaceWith: update[i],
-                                            Replace: Microsoft.Office.Interop.Word.WdReplace.wdReplaceAll
-                                            );
+                    System.IO.File.Delete(replaceFilePath);
                 }
-                doc.SaveAs(replaceFilePath);
+                var wordApp = new Microsoft.Office.Interop.Word.Application();
+                var doc = wordApp.Documents.Open(FilePath, false, true);
+
+                try
+                {
+                    for (int i = 0; i < replatce.Count; i++)
+                    {
+                        var Upstatus = doc.Content.Find.Execute(FindText: replatce[i],
+                                                MatchCase: false,
+                                                MatchWholeWord: false,
+                                                MatchWildcards: false,
+                                                MatchSoundsLike: false,
+                                                MatchAllWordForms: false,
+                                                Forward: true, //this may be the one
+                                                Wrap: false,
+                                                Format: false,
+                                                ReplaceWith: update[i],
+                                                Replace: Microsoft.Office.Interop.Word.WdReplace.wdReplaceAll
+                                                );
+                    }
+                    doc.SaveAs(replaceFilePath);
+                }
+                catch (Exception ex)
+                {
+                    clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Module.Name);
+                }
+                finally
+                {
+                    if (wordApp != null)
+                    {
+                        doc.Close();
+                        wordApp.Quit();
+                        doc = null;
+                        wordApp = null;
+                    }
+                    GC.Collect();
+                }
             }
             catch (Exception ex)
             {
                 clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Module.Name);
-            }
-            finally
-            {
-                if (wordApp != null)
-                {
-                    doc.Close();
-                    wordApp.Quit();
-                    doc = null;
-                    wordApp = null;
-                }
-                GC.Collect();
             }
         }
         private async void btnprintprivew_Click(object sender, EventArgs e)

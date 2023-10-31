@@ -13,17 +13,19 @@ namespace ReceiptEntity
         public string DB_Name { get; set; }
         public string Site_Address { get; set; }
         public string Created_Date { get; set; }
+        public int IsAvtive { get; set; }
         public EnSiteMaster()
         {
 
         }
-        public EnSiteMaster(int site_Master_Id, string site_Name, string dB_Name, string site_Address, string created_Date)
+        public EnSiteMaster(int site_Master_Id, string site_Name, string dB_Name, string site_Address, string created_Date, int isAvtive)
         {
             Site_Master_Id = site_Master_Id;
             Site_Name = site_Name;
             DB_Name = dB_Name;
             Site_Address = site_Address;
             Created_Date = created_Date;
+            IsAvtive = isAvtive;
         }
     }
 }

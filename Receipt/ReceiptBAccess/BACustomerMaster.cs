@@ -1,6 +1,7 @@
 ﻿using ReceiptDataAcess;
 using ReceiptEntity;
 using System.Collections.Generic;
+using System.Data;
 using System.Threading.Tasks;
 
 namespace ReceiptBAccess
@@ -27,5 +28,12 @@ namespace ReceiptBAccess
 
         public static async Task<List<EnCustomer>> GetCustomerByCond(string whereCond)
             => await DACustomerMaster.GetCustomerByCond(whereCond);
+
+        public async static Task<DataTable> GetCurrentSales()
+            => await DACustomerMaster.GetCurrentSales();
+        public async static Task<DataTable> GetCurrentPendingSales()
+            => await DACustomerMaster.GetCurrentPendingSales();
+        public async static Task<DataTable> GetMonthWiseSalesAmount()
+            => await DACustomerMaster.GetMonthWiseSalesAmount();
     }
 }

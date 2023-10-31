@@ -20,7 +20,7 @@ namespace ReceiptDataAcess
             SQLiteCommand cmd = new SQLiteCommand();
             try
             {
-                cmd.CommandText = @"SELECT Site_Master_Id,Site_Name,DB_Name,Site_Address,Created_Date FROM Site_Master " + (SiteMasterId == 0 ? ";" : " WHERE Site_Master_Id=@Site_Master_Id;");
+                cmd.CommandText = @"SELECT Site_Master_Id,Site_Name,DB_Name,Site_Address,Created_Date,IsActive FROM Site_Master WHERE IsActive=1 " + (SiteMasterId == 0 ? ";" : "AND  Site_Master_Id=@Site_Master_Id;");
                 if (SiteMasterId > 0)
                 {
                     cmd.Parameters.Clear();
@@ -35,7 +35,8 @@ namespace ReceiptDataAcess
                                                             Convert.ToString(firstRow["Site_Name"]),
                                                             Convert.ToString(firstRow["DB_Name"]),
                                                             Convert.ToString(firstRow["Site_Address"]),
-                                                            Convert.ToString(firstRow["Created_Date"])));
+                                                            Convert.ToString(firstRow["Created_Date"]),
+                                                            Convert.ToInt32(firstRow["IsActive"])));
                     });
                 }
                 return lstCustomers;
@@ -61,8 +62,8 @@ namespace ReceiptDataAcess
                 bool isEdit = false;
                 if (string.IsNullOrEmpty(Convert.ToString(enSiteMaster.Site_Master_Id)) || enSiteMaster.Site_Master_Id== 0)
                 {
-                    strCommand = @"Insert into Site_Master (Site_Name,DB_Name,Site_Address,Created_Date) VALUES
-                                    (@Site_Name,@DB_Name,@Site_Address,@Created_Date); 
+                    strCommand = @"Insert into Site_Master (Site_Name,DB_Name,Site_Address,Created_Date,IsActive) VALUES
+                                    (@Site_Name,@DB_Name,@Site_Address,@Created_Date,@IsActive); 
                                     SELECT last_insert_rowid() FROM Site_Master;";
                 }
                 else
@@ -72,7 +73,8 @@ namespace ReceiptDataAcess
                                 SET Site_Name=@Site_Name,
                                 DB_Name=@DB_Name,
                                 Site_Address=@Site_Address,
-                                Created_Date=@Created_Date
+                                Created_Date=@Created_Date,
+                                IsActive=@IsActive
                                 WHERE Site_Master_Id=@Site_Master_Id; SELECT @Site_Master_Id;";
                 }
                 cmd.CommandText = strCommand;
@@ -82,7 +84,7 @@ namespace ReceiptDataAcess
                 cmd.Parameters.AddWithValue("@DB_Name", enSiteMaster.DB_Name);
                 cmd.Parameters.AddWithValue("@Site_Address", enSiteMaster.Site_Address);
                 cmd.Parameters.AddWithValue("@Created_Date", enSiteMaster.Created_Date);
-
+                cmd.Parameters.AddWithValue("@IsActive", 1);
                 var Valeu = await DaDatabaseConnection.ExecSacaler(cmd);
                 intRetValeu = Convert.ToInt32(Valeu);
                 return intRetValeu;

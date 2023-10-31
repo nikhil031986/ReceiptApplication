@@ -86,8 +86,9 @@ namespace Receipt
                     drNew["Aadhar3"] = customer.Aadhar3;
                     drNew["BanakhatNo"] = customer.BanakhatNo;
                     drNew["BanakhatDate"] = customer.BanakhatDate;
-                    drNew["Dastavg_No"] = customer.Dastavg_No;
-                    drNew["Dastavg_Date"] = customer.Dastavg_Date;
+                    drNew["Dastavej_No"] = customer.Dastavg_No;
+                    drNew["Dastavej_Date"] = customer.Dastavg_Date;
+                    drNew["Dastavej_Amount"] = customer.Dastavej_Amount;
                     dtCustomer.Rows.Add(drNew);
                 });
 
@@ -130,8 +131,9 @@ namespace Receipt
                     drNew["Aadhar3"] = customer.Aadhar3;
                     drNew["BanakhatNo"] = customer.BanakhatNo;
                     drNew["BanakhatDate"] = customer.BanakhatDate;
-                    drNew["Dastavg_No"] = customer.Dastavg_No;
-                    drNew["Dastavg_Date"] = customer.Dastavg_Date;
+                    drNew["Dastavej_No"] = customer.Dastavg_No;
+                    drNew["Dastavej_Date"] = customer.Dastavg_Date;
+                    drNew["Dastavej_Amount"] = customer.Dastavej_Amount;
                     dtCustomer.Rows.Add(drNew);
                 });
             }
@@ -171,8 +173,9 @@ namespace Receipt
                             dr["Aadhar3"] = customer.Aadhar3;
                             dr["BanakhatNo"] = customer.BanakhatNo;
                             dr["BanakhatDate"] = customer.BanakhatDate;
-                            dr["Dastavg_No"] = customer.Dastavg_No;
-                            dr["Dastavg_Date"] = customer.Dastavg_Date;
+                            dr["Dastavej_No"] = customer.Dastavg_No;
+                            dr["Dastavej_Date"] = customer.Dastavg_Date;
+                            dr["Dastavej_Amount"] = customer.Dastavej_Amount;
                         });
                         dtCustomer.AcceptChanges();
                     }
@@ -202,8 +205,9 @@ namespace Receipt
                         drNew["Aadhar3"] = customer.Aadhar3;
                         drNew["BanakhatNo"] = customer.BanakhatNo;
                         drNew["BanakhatDate"] = customer.BanakhatDate;
-                        drNew["Dastavg_No"] = customer.Dastavg_No;
-                        drNew["Dastavg_Date"] = customer.Dastavg_Date;
+                        drNew["Dastavej_No"] = customer.Dastavg_No;
+                        drNew["Dastavej_Date"] = customer.Dastavg_Date;
+                        drNew["Dastavej_Amount"] = customer.Dastavej_Amount;
                         dtCustomer.Rows.Add(drNew);
                     }
                 });
@@ -238,9 +242,9 @@ namespace Receipt
                 await ClsUtil.AddColumn(dtCustomer, "Aadhar3", ClsUtil.ColumnType.dbString, "");
                 await ClsUtil.AddColumn(dtCustomer, "BanakhatNo", ClsUtil.ColumnType.dbString, "");
                 await ClsUtil.AddColumn(dtCustomer, "BanakhatDate", ClsUtil.ColumnType.dbString, "");
-                await ClsUtil.AddColumn(dtCustomer, "Dastavg_No", ClsUtil.ColumnType.dbString, "");
-                await ClsUtil.AddColumn(dtCustomer, "Dastavg_Date", ClsUtil.ColumnType.dbString, "");
-
+                await ClsUtil.AddColumn(dtCustomer, "Dastavej_No", ClsUtil.ColumnType.dbString, "");
+                await ClsUtil.AddColumn(dtCustomer, "Dastavej_Date", ClsUtil.ColumnType.dbString, "");
+                await ClsUtil.AddColumn(dtCustomer, "Dastavej_Amount", ClsUtil.ColumnType.dbDecimal, "0");
                 dgCustomer.DataSource = dtCustomer;
 
                 cboSearch.Items.Clear();
@@ -298,13 +302,61 @@ namespace Receipt
             catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
         }
 
-        private void sendToExcelToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void sendToExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            clsWaitForm.ShowWaitForm();
+            var dgExport = new DataGridView();
+            var dtExport = dtCustomer.Clone();
             try
             {
-                ClsUtil.ExportDataToExcel(dgCustomer);
+                foreach(DataGridViewColumn dgColumn in dgCustomer.Columns)
+                {
+                    dgExport.Columns.Add(dgColumn.Clone() as DataGridViewColumn);
+                }
+                dgExport.Refresh();
+                dtExport.Rows.Clear();
+                var receiptDetails = await BACustomerMaster.GetCustomerByCond("");
+                receiptDetails.ForEach(customer =>
+                {
+                    DataRow drNew = dtExport.NewRow();
+                    drNew["Customer_Id"] = customer.Customer_Id;
+                    drNew["Wing_Master_Id"] = customer.Wing_Master_Id;
+                    drNew["Wing_Details_Id"] = customer.Wing_Details_Id;
+                    drNew["Wing_Name"] = customer.Wing_Name;
+                    drNew["FlatNo"] = customer.FlatNo;
+                    drNew["Customer_Name"] = customer.Customer_Name;
+                    drNew["Address"] = customer.Address;
+                    drNew["Con_Details"] = customer.Con_Details;
+                    drNew["Email_Id"] = customer.Email_Id;
+                    drNew["Customer_Wing_Name"] = customer.Customer_Wing_Name;
+                    drNew["Pan"] = customer.Pan;
+                    drNew["Aadhar"] = customer.Aadhar;
+                    drNew["Customer1"] = customer.Customer1;
+                    drNew["Pan1"] = customer.Pan1;
+                    drNew["Aadhar1"] = customer.Aadhar1;
+                    drNew["Customer2"] = customer.Customer2;
+                    drNew["Pan2"] = customer.Pan2;
+                    drNew["Aadhar2"] = customer.Aadhar2;
+                    drNew["Customer3"] = customer.Customer3;
+                    drNew["Pan3"] = customer.Pan3;
+                    drNew["Aadhar3"] = customer.Aadhar3;
+                    drNew["BanakhatNo"] = customer.BanakhatNo;
+                    drNew["BanakhatDate"] = customer.BanakhatDate;
+                    drNew["Dastavej_No"] = customer.Dastavg_No;
+                    drNew["Dastavej_Date"] = customer.Dastavg_Date;
+                    drNew["Dastavej_Amount"] = customer.Dastavej_Amount;
+                    dtExport.Rows.Add(drNew);
+                    dgExport.Rows.Add(drNew.ItemArray);
+                });
+                ClsUtil.ExportDataToExcel(dgExport);
             }
             catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
+            finally 
+            {
+                dgExport.Dispose();
+                dtExport.Dispose();
+                clsWaitForm.CloseWaitForm();
+            }
         }
 
         private async void txtSearch_TextChanged(object sender, EventArgs e)

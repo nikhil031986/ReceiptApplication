@@ -103,30 +103,11 @@ namespace Receipt
             {
                 if (ReceiptId == 0)
                 {
+                    
+                    var lstReceiptDetails = await BAReceiptDetails.GetReciptPageing(PageSize, rowsCount);
                     dtReceiptDetails.Rows.Clear();
+                    dtReceiptDetails.Load(lstReceiptDetails.CreateDataReader(), LoadOption.Upsert);
                     dtReceiptDetails.AcceptChanges();
-                    var receiptDetails = await BAReceiptDetails.GetReciptPageing(PageSize, rowsCount);
-                    receiptDetails.ForEach(receipt =>
-                    {
-                        DataRow drNew = dtReceiptDetails.NewRow();
-                        drNew["Receipt_Id"] = receipt.Receipt_Id;
-                        drNew["Receipt_No"] = receipt.Receipt_No;
-                        drNew["Receipt_Date"] = receipt.Receipt_Date;
-                        drNew["Customer_Id"] = receipt.Customer_Id;
-                        drNew["Customer_Name"] = receipt.Customer_Name;
-                        drNew["Flate_ShopNo"] = receipt.Flate_ShopNo;
-                        drNew["Cheq_Rtgs_Neft_ImpsNo"] = receipt.Cheq_Rtgs_Neft_ImpsNo;
-                        drNew["Year_Id"] = receipt.Year_Id;
-                        drNew["Bank_Name"] = receipt.Bank_Name;
-                        drNew["Branch_Name"] = receipt.Branch_Name;
-                        drNew["ReceivedAs"] = receipt.ReceivedAs;
-                        drNew["Amount"] = receipt.Amount;
-                        drNew["Amount_Word"] = receipt.Amount_Word;
-                        drNew["Payment_Date"] = receipt.PaymentDate;
-                        drNew["IsCancel"] = receipt.IsCancel;
-                        drNew["IsPrint"] = receipt.IsPrint;
-                        dtReceiptDetails.Rows.Add(drNew);
-                    });
                 }
                 else
                 {
@@ -238,7 +219,7 @@ namespace Receipt
                 {
                     _frmReceiptEntry.Show();
                     await _frmReceiptEntry.PrintDocument();
-                    if(_frmReceiptEntry.Receipt_ID > 0)
+                    if (_frmReceiptEntry.Receipt_ID > 0)
                     {
                         await FillGridReceiptList(_frmReceiptEntry.Receipt_ID);
                     }
@@ -295,22 +276,65 @@ namespace Receipt
             catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
         }
 
-        private void exportToExcelToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void exportToExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            clsWaitForm.ShowWaitForm();
+            var dgExport = new DataGridView();
+            var dtExport = dtReceiptDetails.Clone();
             try
             {
-                clsWaitForm.ShowWaitForm();
-                ClsUtil.ExportDataToExcel(dgvReceiptList);
-                clsWaitForm.CloseWaitForm();
+                foreach (DataGridViewColumn dgcolumn in dgvReceiptList.Columns)
+                {
+                    dgExport.Columns.Add(dgcolumn.Clone() as DataGridViewColumn);
+                }
+                string whereCond = string.Empty;
+                if (!string.IsNullOrWhiteSpace(txtSearch.Text) && !string.IsNullOrWhiteSpace(cmbColumnName.Text))
+                {
+                    whereCond = "CAST(" + (cmbColumnName.Text.Contains("Customer") ? "CM." : "RD.") + cmbColumnName.Text + " AS TEXT) LIKE '" + txtSearch.Text + "%'";
+                }
+
+                dtExport.Rows.Clear();
+                dtExport.AcceptChanges();
+                var receiptDetails = await BAReceiptDetails.GetReceiptByCond(whereCond);
+                receiptDetails.ForEach(receipt =>
+                {
+                    DataRow drNew = dtExport.NewRow();
+                    drNew["Receipt_Id"] = receipt.Receipt_Id;
+                    drNew["Receipt_No"] = receipt.Receipt_No;
+                    drNew["Receipt_Date"] = receipt.Receipt_Date;
+                    drNew["Customer_Id"] = receipt.Customer_Id;
+                    drNew["Customer_Name"] = receipt.Customer_Name;
+                    drNew["Flate_ShopNo"] = receipt.Flate_ShopNo;
+                    drNew["Cheq_Rtgs_Neft_ImpsNo"] = receipt.Cheq_Rtgs_Neft_ImpsNo;
+                    drNew["Year_Id"] = receipt.Year_Id;
+                    drNew["Bank_Name"] = receipt.Bank_Name;
+                    drNew["Branch_Name"] = receipt.Branch_Name;
+                    drNew["ReceivedAs"] = receipt.ReceivedAs;
+                    drNew["Amount"] = receipt.Amount;
+                    drNew["Amount_Word"] = receipt.Amount_Word;
+                    drNew["Payment_Date"] = receipt.PaymentDate;
+                    drNew["IsCancel"] = receipt.IsCancel;
+                    drNew["IsPrint"] = receipt.IsPrint;
+                    dtExport.Rows.Add(drNew);
+                    dgExport.Rows.Add(drNew.ItemArray);
+                });
+
+                ClsUtil.ExportDataToExcel(dgExport);
             }
             catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
+            finally
+            {
+                dtExport.Dispose();
+                dgExport.Dispose();
+                clsWaitForm.CloseWaitForm();
+            }
         }
 
         private async void tolFirst_Click(object sender, EventArgs e)
         {
             try
             {
-               // clsWaitForm.ShowWaitForm();
+                // clsWaitForm.ShowWaitForm();
                 PageIndex = 1;
                 txttolDisplay.Text = PageIndex.ToString();
                 PageSize = 0;
@@ -348,13 +372,11 @@ namespace Receipt
                 {
                     return;
                 }
-                //clsWaitForm.ShowWaitForm();
                 PageIndex = PageIndex + 1;
                 currentPage = currentPage + 1;
                 txttolDisplay.Text = PageIndex.ToString();
-                PageSize = currentPage + rowsCount;
+                PageSize = currentPage * rowsCount;
                 await FillGridReceiptList(0);
-                //clsWaitForm.CloseWaitForm();
             }
             catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
         }
@@ -363,13 +385,11 @@ namespace Receipt
         {
             try
             {
-                //clsWaitForm.ShowWaitForm();
-                PageSize = (rowsCount * PageCount);
+                PageSize = (rowsCount *( PageCount-1));
                 PageIndex = PageCount;
                 currentPage = PageCount;
                 txttolDisplay.Text = PageIndex.ToString();
                 await FillGridReceiptList(0);
-                //clsWaitForm.CloseWaitForm();
             }
             catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
         }
@@ -429,7 +449,7 @@ namespace Receipt
                 var pag = BAReceiptDetails.GetPageCount(rowsCount);
                 PageCount = Convert.ToInt32(pag.Result.ToString());
                 PageIndex = PageCount;
-                PageSize = PageIndex * rowsCount;
+                PageSize = (PageIndex-1) * rowsCount;
                 tolTotalPages.Text = " OF " + PageCount.ToString();
                 txttolDisplay.Text = PageIndex.ToString();
                 await FillGridReceiptList(0);
@@ -463,13 +483,26 @@ namespace Receipt
                     @"Spreadsheet (.xls ,.xlsx)|  *.xls ;*.xlsx",
                 FilterIndex = 1,
                 RestoreDirectory = true,
-                Multiselect= false
+                Multiselect = false
             };
-            if(openFileDialog.ShowDialog()== DialogResult.OK)
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 frmImportReceipt frmImportRece = new frmImportReceipt(openFileDialog.FileName);
                 frmImportRece.ShowDialog();
                 tolLast_Click(null, null);
+            }
+        }
+
+        private void tolBtnReceiptUpdate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                frmReceiptNotDisplay newFrm = new frmReceiptNotDisplay();
+                newFrm.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, "Open Update wrong Entry");
             }
         }
     }

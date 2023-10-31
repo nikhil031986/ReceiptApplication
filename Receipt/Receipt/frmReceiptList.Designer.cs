@@ -57,6 +57,7 @@
             this.Receipt_Print = new System.Windows.Forms.DataGridViewButtonColumn();
             this.ctMenuReceiptList = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.exportToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importFromExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblReceiptDetails = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tolFirst = new System.Windows.Forms.ToolStripButton();
@@ -74,7 +75,7 @@
             this.btnGoTo = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tltTotalAMOUNT = new System.Windows.Forms.ToolStripLabel();
-            this.importFromExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tolBtnReceiptUpdate = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -359,14 +360,21 @@
             this.exportToExcelToolStripMenuItem,
             this.importFromExcelToolStripMenuItem});
             this.ctMenuReceiptList.Name = "ctMenuReceiptList";
-            this.ctMenuReceiptList.Size = new System.Drawing.Size(181, 70);
+            this.ctMenuReceiptList.Size = new System.Drawing.Size(172, 48);
             // 
             // exportToExcelToolStripMenuItem
             // 
             this.exportToExcelToolStripMenuItem.Name = "exportToExcelToolStripMenuItem";
-            this.exportToExcelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exportToExcelToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.exportToExcelToolStripMenuItem.Text = "Export To Excel";
             this.exportToExcelToolStripMenuItem.Click += new System.EventHandler(this.exportToExcelToolStripMenuItem_Click);
+            // 
+            // importFromExcelToolStripMenuItem
+            // 
+            this.importFromExcelToolStripMenuItem.Name = "importFromExcelToolStripMenuItem";
+            this.importFromExcelToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.importFromExcelToolStripMenuItem.Text = "Import From Excel";
+            this.importFromExcelToolStripMenuItem.Click += new System.EventHandler(this.importFromExcelToolStripMenuItem_Click);
             // 
             // lblReceiptDetails
             // 
@@ -400,7 +408,8 @@
             this.txtGotoPageNo,
             this.btnGoTo,
             this.toolStripSeparator3,
-            this.tltTotalAMOUNT});
+            this.tltTotalAMOUNT,
+            this.tolBtnReceiptUpdate});
             this.toolStrip1.Location = new System.Drawing.Point(0, 54);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1083, 32);
@@ -524,12 +533,14 @@
             this.tltTotalAMOUNT.Size = new System.Drawing.Size(128, 29);
             this.tltTotalAMOUNT.Text = "Total Amount:";
             // 
-            // importFromExcelToolStripMenuItem
+            // tolBtnReceiptUpdate
             // 
-            this.importFromExcelToolStripMenuItem.Name = "importFromExcelToolStripMenuItem";
-            this.importFromExcelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.importFromExcelToolStripMenuItem.Text = "Import From Excel";
-            this.importFromExcelToolStripMenuItem.Click += new System.EventHandler(this.importFromExcelToolStripMenuItem_Click);
+            this.tolBtnReceiptUpdate.Image = global::Receipt.Properties.Resources.CheckDetails;
+            this.tolBtnReceiptUpdate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tolBtnReceiptUpdate.Name = "tolBtnReceiptUpdate";
+            this.tolBtnReceiptUpdate.Size = new System.Drawing.Size(154, 29);
+            this.tolBtnReceiptUpdate.Text = "Get Inserted Not Display";
+            this.tolBtnReceiptUpdate.Click += new System.EventHandler(this.tolBtnReceiptUpdate_Click);
             // 
             // frmReceiptList
             // 
@@ -605,5 +616,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripLabel tltTotalAMOUNT;
         private System.Windows.Forms.ToolStripMenuItem importFromExcelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton tolBtnReceiptUpdate;
     }
 }

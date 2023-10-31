@@ -67,6 +67,7 @@
             this.dgvImportReceipt.ReadOnly = true;
             this.dgvImportReceipt.Size = new System.Drawing.Size(620, 334);
             this.dgvImportReceipt.TabIndex = 0;
+            this.dgvImportReceipt.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvImportReceipt_RowPrePaint);
             // 
             // btnImport
             // 

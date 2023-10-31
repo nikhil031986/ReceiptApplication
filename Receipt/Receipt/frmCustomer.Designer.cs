@@ -70,9 +70,9 @@
             this.Customer_Wing_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BanakhatNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BanakhatDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txttolDisplay1 = new System.Windows.Forms.ToolStripTextBox();
             this.ctxCustomerSendToExcel = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.sendToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.txttolDisplay1 = new System.Windows.Forms.ToolStripTextBox();
             this.tblMainCustomerDetails.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -362,7 +362,6 @@
             // 
             // txttolRowsCount
             // 
-            this.txttolRowsCount.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txttolRowsCount.Name = "txttolRowsCount";
             this.txttolRowsCount.Size = new System.Drawing.Size(100, 32);
             this.txttolRowsCount.TextChanged += new System.EventHandler(this.txttolRowsCount_TextChanged);
@@ -381,7 +380,6 @@
             // 
             // txtGotoPageNo
             // 
-            this.txtGotoPageNo.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtGotoPageNo.Name = "txtGotoPageNo";
             this.txtGotoPageNo.Size = new System.Drawing.Size(100, 32);
             // 
@@ -400,6 +398,7 @@
             // 
             this.dgCustomer.AllowUserToAddRows = false;
             this.dgCustomer.AllowUserToDeleteRows = false;
+            this.dgCustomer.AllowUserToOrderColumns = true;
             this.dgCustomer.BackgroundColor = System.Drawing.Color.White;
             this.dgCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgCustomer.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -518,25 +517,24 @@
             this.BanakhatDate.Name = "BanakhatDate";
             this.BanakhatDate.ReadOnly = true;
             // 
-            // txttolDisplay1
-            // 
-            this.txttolDisplay1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txttolDisplay1.Name = "txttolDisplay1";
-            this.txttolDisplay1.Size = new System.Drawing.Size(100, 23);
-            // 
             // ctxCustomerSendToExcel
             // 
             this.ctxCustomerSendToExcel.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sendToExcelToolStripMenuItem});
             this.ctxCustomerSendToExcel.Name = "ctxCustomerSendToExcel";
-            this.ctxCustomerSendToExcel.Size = new System.Drawing.Size(181, 48);
+            this.ctxCustomerSendToExcel.Size = new System.Drawing.Size(146, 26);
             // 
             // sendToExcelToolStripMenuItem
             // 
             this.sendToExcelToolStripMenuItem.Name = "sendToExcelToolStripMenuItem";
-            this.sendToExcelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sendToExcelToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.sendToExcelToolStripMenuItem.Text = "Send To Excel";
             this.sendToExcelToolStripMenuItem.Click += new System.EventHandler(this.sendToExcelToolStripMenuItem_Click);
+            // 
+            // txttolDisplay1
+            // 
+            this.txttolDisplay1.Name = "txttolDisplay1";
+            this.txttolDisplay1.Size = new System.Drawing.Size(100, 23);
             // 
             // frmCustomer
             // 

@@ -72,8 +72,6 @@
             this.cboWing = new System.Windows.Forms.ComboBox();
             this.cboFlatNo = new System.Windows.Forms.ComboBox();
             this.txtCustomerName = new System.Windows.Forms.TextBox();
-            this.txtCustomerWingName = new System.Windows.Forms.TextBox();
-            this.lblCustomerWingName = new System.Windows.Forms.Label();
             this.lblAddress = new System.Windows.Forms.Label();
             this.dtpBankhatDate = new System.Windows.Forms.DateTimePicker();
             this.txtBankhatNo = new System.Windows.Forms.TextBox();
@@ -81,18 +79,20 @@
             this.label9 = new System.Windows.Forms.Label();
             this.lblMobileNo = new System.Windows.Forms.Label();
             this.lblFinancial_Name = new System.Windows.Forms.Label();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
             this.txtMobileNo = new System.Windows.Forms.TextBox();
             this.txtFinancial_Name = new System.Windows.Forms.TextBox();
             this.txtOcupation = new System.Windows.Forms.ComboBox();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.txtCustomerWingName = new System.Windows.Forms.TextBox();
+            this.lblCustomerWingName = new System.Windows.Forms.Label();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.lbldastavgNo = new System.Windows.Forms.Label();
-            this.txtDastavgNo = new System.Windows.Forms.TextBox();
-            this.lblDastavgDate = new System.Windows.Forms.Label();
             this.dtpDastavgDate = new System.Windows.Forms.DateTimePicker();
+            this.txtDastavgNo = new System.Windows.Forms.TextBox();
             this.lblDastavgDt = new System.Windows.Forms.Label();
+            this.lblDastavgDate = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.gpCoAppThree.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
@@ -687,26 +687,6 @@
             this.txtCustomerName.TabIndex = 3;
             this.txtCustomerName.TextChanged += new System.EventHandler(this.txtCustomerName_TextChanged);
             // 
-            // txtCustomerWingName
-            // 
-            this.txtCustomerWingName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.txtCustomerWingName, 2);
-            this.txtCustomerWingName.Location = new System.Drawing.Point(134, 490);
-            this.txtCustomerWingName.Margin = new System.Windows.Forms.Padding(25, 3, 3, 3);
-            this.txtCustomerWingName.Name = "txtCustomerWingName";
-            this.txtCustomerWingName.Size = new System.Drawing.Size(312, 20);
-            this.txtCustomerWingName.TabIndex = 29;
-            // 
-            // lblCustomerWingName
-            // 
-            this.lblCustomerWingName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCustomerWingName.AutoSize = true;
-            this.lblCustomerWingName.Location = new System.Drawing.Point(3, 494);
-            this.lblCustomerWingName.Name = "lblCustomerWingName";
-            this.lblCustomerWingName.Size = new System.Drawing.Size(103, 13);
-            this.lblCustomerWingName.TabIndex = 28;
-            this.lblCustomerWingName.Text = "CUST WING NAME";
-            // 
             // lblAddress
             // 
             this.lblAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -780,6 +760,32 @@
             this.lblFinancial_Name.Text = "FINANCIAL NAME";
             this.lblFinancial_Name.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // txtMobileNo
+            // 
+            this.txtMobileNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtMobileNo.Location = new System.Drawing.Point(134, 114);
+            this.txtMobileNo.Margin = new System.Windows.Forms.Padding(25, 3, 3, 3);
+            this.txtMobileNo.Name = "txtMobileNo";
+            this.txtMobileNo.Size = new System.Drawing.Size(209, 20);
+            this.txtMobileNo.TabIndex = 15;
+            // 
+            // txtFinancial_Name
+            // 
+            this.txtFinancial_Name.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtFinancial_Name.Location = new System.Drawing.Point(452, 114);
+            this.txtFinancial_Name.Name = "txtFinancial_Name";
+            this.txtFinancial_Name.Size = new System.Drawing.Size(231, 20);
+            this.txtFinancial_Name.TabIndex = 17;
+            // 
+            // txtOcupation
+            // 
+            this.txtOcupation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtOcupation.FormattingEnabled = true;
+            this.txtOcupation.Location = new System.Drawing.Point(452, 34);
+            this.txtOcupation.Name = "txtOcupation";
+            this.txtOcupation.Size = new System.Drawing.Size(231, 21);
+            this.txtOcupation.TabIndex = 5;
+            // 
             // flowLayoutPanel2
             // 
             this.flowLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -810,31 +816,25 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // txtMobileNo
+            // txtCustomerWingName
             // 
-            this.txtMobileNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMobileNo.Location = new System.Drawing.Point(134, 114);
-            this.txtMobileNo.Margin = new System.Windows.Forms.Padding(25, 3, 3, 3);
-            this.txtMobileNo.Name = "txtMobileNo";
-            this.txtMobileNo.Size = new System.Drawing.Size(209, 20);
-            this.txtMobileNo.TabIndex = 15;
+            this.txtCustomerWingName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.txtCustomerWingName, 2);
+            this.txtCustomerWingName.Location = new System.Drawing.Point(134, 490);
+            this.txtCustomerWingName.Margin = new System.Windows.Forms.Padding(25, 3, 3, 3);
+            this.txtCustomerWingName.Name = "txtCustomerWingName";
+            this.txtCustomerWingName.Size = new System.Drawing.Size(312, 20);
+            this.txtCustomerWingName.TabIndex = 29;
             // 
-            // txtFinancial_Name
+            // lblCustomerWingName
             // 
-            this.txtFinancial_Name.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFinancial_Name.Location = new System.Drawing.Point(452, 114);
-            this.txtFinancial_Name.Name = "txtFinancial_Name";
-            this.txtFinancial_Name.Size = new System.Drawing.Size(231, 20);
-            this.txtFinancial_Name.TabIndex = 17;
-            // 
-            // txtOcupation
-            // 
-            this.txtOcupation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtOcupation.FormattingEnabled = true;
-            this.txtOcupation.Location = new System.Drawing.Point(452, 34);
-            this.txtOcupation.Name = "txtOcupation";
-            this.txtOcupation.Size = new System.Drawing.Size(231, 21);
-            this.txtOcupation.TabIndex = 5;
+            this.lblCustomerWingName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCustomerWingName.AutoSize = true;
+            this.lblCustomerWingName.Location = new System.Drawing.Point(3, 494);
+            this.lblCustomerWingName.Name = "lblCustomerWingName";
+            this.lblCustomerWingName.Size = new System.Drawing.Size(103, 13);
+            this.lblCustomerWingName.TabIndex = 28;
+            this.lblCustomerWingName.Text = "CUST WING NAME";
             // 
             // tableLayoutPanel5
             // 
@@ -854,7 +854,7 @@
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 1;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(559, 26);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(569, 26);
             this.tableLayoutPanel5.TabIndex = 27;
             // 
             // lbldastavgNo
@@ -864,18 +864,38 @@
             this.lbldastavgNo.Location = new System.Drawing.Point(25, 6);
             this.lbldastavgNo.Margin = new System.Windows.Forms.Padding(25, 0, 3, 0);
             this.lbldastavgNo.Name = "lbldastavgNo";
-            this.lbldastavgNo.Size = new System.Drawing.Size(77, 13);
+            this.lbldastavgNo.Size = new System.Drawing.Size(81, 13);
             this.lbldastavgNo.TabIndex = 0;
-            this.lbldastavgNo.Text = "DASTAVG NO";
+            this.lbldastavgNo.Text = "DASTAVEJ NO";
+            // 
+            // dtpDastavgDate
+            // 
+            this.dtpDastavgDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtpDastavgDate.CustomFormat = "dd/MM/yyyy";
+            this.dtpDastavgDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpDastavgDate.Location = new System.Drawing.Point(452, 3);
+            this.dtpDastavgDate.Name = "dtpDastavgDate";
+            this.dtpDastavgDate.Size = new System.Drawing.Size(114, 20);
+            this.dtpDastavgDate.TabIndex = 3;
             // 
             // txtDastavgNo
             // 
             this.txtDastavgNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtDastavgNo.Location = new System.Drawing.Point(135, 3);
+            this.txtDastavgNo.Location = new System.Drawing.Point(139, 3);
             this.txtDastavgNo.Margin = new System.Windows.Forms.Padding(30, 3, 3, 3);
             this.txtDastavgNo.Name = "txtDastavgNo";
-            this.txtDastavgNo.Size = new System.Drawing.Size(205, 20);
+            this.txtDastavgNo.Size = new System.Drawing.Size(207, 20);
             this.txtDastavgNo.TabIndex = 1;
+            // 
+            // lblDastavgDt
+            // 
+            this.lblDastavgDt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblDastavgDt.AutoSize = true;
+            this.lblDastavgDt.Location = new System.Drawing.Point(352, 6);
+            this.lblDastavgDt.Name = "lblDastavgDt";
+            this.lblDastavgDt.Size = new System.Drawing.Size(94, 13);
+            this.lblDastavgDt.TabIndex = 2;
+            this.lblDastavgDt.Text = "DASTAVEJ DATE";
             // 
             // lblDastavgDate
             // 
@@ -886,26 +906,6 @@
             this.lblDastavgDate.Size = new System.Drawing.Size(73, 13);
             this.lblDastavgDate.TabIndex = 29;
             this.lblDastavgDate.Text = "Dastavg Date";
-            // 
-            // dtpDastavgDate
-            // 
-            this.dtpDastavgDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.dtpDastavgDate.CustomFormat = "dd/MM/yyyy";
-            this.dtpDastavgDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpDastavgDate.Location = new System.Drawing.Point(442, 3);
-            this.dtpDastavgDate.Name = "dtpDastavgDate";
-            this.dtpDastavgDate.Size = new System.Drawing.Size(114, 20);
-            this.dtpDastavgDate.TabIndex = 3;
-            // 
-            // lblDastavgDt
-            // 
-            this.lblDastavgDt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblDastavgDt.AutoSize = true;
-            this.lblDastavgDt.Location = new System.Drawing.Point(346, 6);
-            this.lblDastavgDt.Name = "lblDastavgDt";
-            this.lblDastavgDt.Size = new System.Drawing.Size(90, 13);
-            this.lblDastavgDt.TabIndex = 2;
-            this.lblDastavgDt.Text = "DASTAVG DATE";
             // 
             // frmCustomerEntry
             // 
@@ -919,6 +919,7 @@
             this.Name = "frmCustomerEntry";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmCustomerEntry";
+            this.Load += new System.EventHandler(this.frmCustomerEntry_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.gpCoAppThree.ResumeLayout(false);

@@ -28,11 +28,13 @@ namespace ReceiptBAccess
         public static async Task<List<EnReceiptDetails>> GetReceiptByCustomer(int CustomerID)
             => await DAReciptDetails.GetReceiptByCustomer(CustomerID);
 
-         public async static Task<DataTable> GetBanakhatDetails()
-            => await DAReciptDetails.GetBanakhatDetails();
+         public async static Task<DataTable> GetBanakhatDetails(bool Iscompleted)
+            => await DAReciptDetails.GetBanakhatDetails(Iscompleted);
+        public async static Task<DataTable> GetReceiptDetails()
+            => await DAReciptDetails.GetReceiptDetails();
         public async static Task<int> UpdatePrintedBanakhat(string customerIds)
             => await DAReciptDetails.UpdatePrintedBanakhat(customerIds);
-        public static async Task<List<EnReceiptDetails>> GetReciptPageing(int incrimentSize,int rtRows)
+        public static async Task<DataTable> GetReciptPageing(int incrimentSize,int rtRows)
             => await DAReciptDetails.GetReciptPageing(incrimentSize, rtRows);
         public static async Task<string> GetPageCount(int rowCount)
             => await DAReciptDetails.GetPageCount(rowCount);
@@ -41,5 +43,11 @@ namespace ReceiptBAccess
 
         public static async Task ImportReceiptFromExcel(DataTable dtImport)
             => await DAReciptDetails.ImportReceiptFromExcel(dtImport);
+
+        public static async Task<DataTable> getMissingCustomerDetails()
+            => await DAReciptDetails.getMissingCustomerDetails();
+
+        public static async Task<int> UpdateReceiptCustomerId(int receiptId, int CustomerId)
+            => await DAReciptDetails.UpdateReceiptCustomerId(receiptId, CustomerId);
     }
 }

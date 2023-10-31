@@ -35,6 +35,7 @@ namespace ReceiptEntity
         public string Financial_Name { get; set; }
         public string Dastavg_No { get;set; }
         public string Dastavg_Date { get; set; }
+        public decimal Dastavej_Amount { get; set; }
         public EnCustomer()
         {
 
@@ -42,7 +43,8 @@ namespace ReceiptEntity
         public EnCustomer(int customerId, int wing_Master_Id, int wing_Details_Id, string wing_Name, string flatNo, string custoimer_Name, 
             string address, string con_Details, string emailId, string customer_Wing_Name, string pan, string aadhar, string customer1, string pan1,
             string aadhar1, string customer2, string pan2, string aadhar2, string customer3, string pan3, string aadhar3,
-            string banakhatNo, string bankhatDate, string ocupation, string ocupation1, string ocupation2, string ocupation3, string financial_Name, string dastavg_No, string dastavg_Date)
+            string banakhatNo, string bankhatDate, string ocupation, string ocupation1, string ocupation2, string ocupation3, 
+            string financial_Name, string dastavg_No, string dastavg_Date , decimal dastavej_amount)
         {
             this.Customer_Id = customerId;
             this.Wing_Master_Id = wing_Master_Id;
@@ -74,6 +76,7 @@ namespace ReceiptEntity
             this.Financial_Name = financial_Name;
             this.Dastavg_No = dastavg_No;
             this.Dastavg_Date = dastavg_Date;
+            this.Dastavej_Amount = dastavej_amount;
         }
 
     }

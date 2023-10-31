@@ -93,6 +93,93 @@ namespace ReceiptDataAcess
                 retDataTable.Dispose();
             }
         }
+        public async static Task<DataTable> GetCurrentSales()
+        {
+            DataTable dtRetunr = new DataTable();
+            SQLiteCommand cmd = new SQLiteCommand();
+            try
+            {
+                string strCommand = "";
+                strCommand = @" SELECT WM.Wing_Master_Id,WM.Wing_Name,COUNT(CM.Customer_Id) As TotalSales FROM
+                                Wing_Master wm INNER JOIN  Wing_Details WD ON WM.Wing_Master_Id=WD.Wing_MasterId
+                                LEFT JOIN Customer_Master CM ON CM.Wing_Details_Id= WD.Wing_DetailsId GROUP BY WM.Wing_Master_Id;";
+                cmd.CommandText = strCommand;
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.Clear();
+                dtRetunr = await DaDatabaseConnection.GetDataTable(cmd);
+                return dtRetunr;
+            }
+            catch (Exception ex)
+            {
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, "GetBanakhatDetails");
+                throw ex;
+            }
+            finally
+            {
+                cmd.Dispose();
+                dtRetunr.Dispose();
+            }
+        }
+
+        public async static Task<DataTable> GetCurrentPendingSales()
+        {
+            DataTable dtRetunr = new DataTable();
+            SQLiteCommand cmd = new SQLiteCommand();
+            try
+            {
+                string strCommand = "";
+                strCommand = @" SELECT WM.Wing_Master_Id,WM.Wing_Name,count(WD.Wing_MasterId)-COUNT(CM.Customer_Id) As TotalPending FROM
+                                Wing_Master wm INNER JOIN  Wing_Details WD ON WM.Wing_Master_Id=WD.Wing_MasterId
+                                LEFT JOIN Customer_Master CM ON CM.Wing_Details_Id= WD.Wing_DetailsId GROUP BY WM.Wing_Master_Id;";
+                cmd.CommandText = strCommand;
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.Clear();
+                dtRetunr = await DaDatabaseConnection.GetDataTable(cmd);
+                return dtRetunr;
+            }
+            catch (Exception ex)
+            {
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, "GetBanakhatDetails");
+                throw ex;
+            }
+            finally
+            {
+                cmd.Dispose();
+                dtRetunr.Dispose();
+            }
+        }
+
+        public async static Task<DataTable> GetMonthWiseSalesAmount()
+        {
+            DataTable dtRetunr = new DataTable();
+            SQLiteCommand cmd = new SQLiteCommand();
+            try
+            {
+                string strCommand = "";
+                strCommand = @"SELECT RD.year,Sum(RD.ReceiptAmount) As TotalAmount
+                                FROM 
+                                (
+	                                SELECT CAST(substr(ReceiptDateNo,1,4) AS INT) As year,CAST(substr(ReceiptDateNo,5,2) AS INT) As month,Amount AS ReceiptAmount
+	                                FROM ReceiptDetail
+                                ) AS RD
+                                GROUP BY RD.year;";
+                cmd.CommandText = strCommand;
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.Clear();
+                dtRetunr = await DaDatabaseConnection.GetDataTable(cmd);
+                return dtRetunr;
+            }
+            catch (Exception ex)
+            {
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, "GetBanakhatDetails");
+                throw ex;
+            }
+            finally
+            {
+                cmd.Dispose();
+                dtRetunr.Dispose();
+            }
+        }
         public static async Task<EnCommonRet> GetCustomerDT(int customerId, bool isNext)
         {
             EnCommonRet enCommonRet = new EnCommonRet();
@@ -139,7 +226,7 @@ namespace ReceiptDataAcess
                 cmd.CommandText = @"SELECT CM.Customer_Id,CM.Wing_Master_Id,CM.Wing_Details_Id,IFNULL(WM.Wing_Name,'') AS Wing_Name,IFNULL(WD.FlatNo,0) AS FlatNo,CM.Customer_Name,CM.Address,
                                         CM.Con_Details,CM.Email_Id,CM.Customer_Wing_Name,CM.Pan,CM.Aadhar,CM.Customer1,CM.Pan1,CM.Aadhar1,CM.Customer2,
                                         CM.Pan2,CM.Aadhar2,CM.Customer3,CM.Pan3,CM.Aadhar3,CM.BanakhatNo,CM.BanakhatDate,CM.Ocupation,CM.Ocupation1,CM.Ocupation2,CM.Ocupation3,IFNULL(CM.Financial_Name,'') As Financial_Name,
-                                        CM.Dastavg_No,CM.Dastavg_Date
+                                        CM.Dastavg_No,CM.Dastavg_Date,IFNULL(WD.Amount,0) As Dastavej_Amount
                                     FROM Customer_Master CM
                                     LEFT JOIN Wing_Master WM
                                         ON WM.Wing_Master_Id = CM.Wing_Master_Id
@@ -186,7 +273,8 @@ namespace ReceiptDataAcess
                                                        Convert.ToString(firstRow["Ocupation3"]),
                                                        Convert.ToString(firstRow["Financial_Name"]),
                                                        Convert.ToString(firstRow["Dastavg_No"]),
-                                                       Convert.ToString(firstRow["Dastavg_Date"])
+                                                       Convert.ToString(firstRow["Dastavg_Date"]),
+                                                       Convert.ToDecimal(Convert.ToString(firstRow["Dastavej_Amount"]))
                                                        ));
 
                     });
@@ -214,7 +302,7 @@ namespace ReceiptDataAcess
                 cmd.CommandText = @"SELECT CM.Customer_Id,CM.Wing_Master_Id,CM.Wing_Details_Id,IFNULL(WM.Wing_Name,'') AS Wing_Name,IFNULL(WD.FlatNo,0) AS FlatNo,CM.Customer_Name,CM.Address,
                                         CM.Con_Details,CM.Email_Id,CM.Customer_Wing_Name,CM.Pan,CM.Aadhar,CM.Customer1,CM.Pan1,CM.Aadhar1,CM.Customer2,
                                         CM.Pan2,CM.Aadhar2,CM.Customer3,CM.Pan3,CM.Aadhar3,CM.BanakhatNo,CM.BanakhatDate,CM.Ocupation,CM.Ocupation1,CM.Ocupation2,CM.Ocupation3,IFNULL(CM.Financial_Name,'') As Financial_Name,
-                                        CM.Dastavg_No,CM.Dastavg_Date
+                                        CM.Dastavg_No,CM.Dastavg_Date,IFNULL(WD.Amount,0) AS Dastavej_Amount
                                     FROM Customer_Master CM
                                     LEFT JOIN Wing_Master WM
                                         ON WM.Wing_Master_Id = CM.Wing_Master_Id
@@ -258,7 +346,8 @@ namespace ReceiptDataAcess
                                                         Convert.ToString(firstRow["Ocupation3"]),
                                                         Convert.ToString(firstRow["Financial_Name"]),
                                                         Convert.ToString(firstRow["Dastavg_No"]),
-                                                        Convert.ToString(firstRow["Dastavg_Date"])
+                                                        Convert.ToString(firstRow["Dastavg_Date"]),
+                                                        Convert.ToDecimal(Convert.ToString(firstRow["Dastavej_Amount"]))
                                                         ));
                     });
                 }
@@ -285,7 +374,7 @@ namespace ReceiptDataAcess
                 cmd.CommandText = @"SELECT CM.Customer_Id,CM.Wing_Master_Id,CM.Wing_Details_Id,IFNULL(WM.Wing_Name,'') AS Wing_Name,IFNULL(WD.FlatNo,0) AS FlatNo,CM.Customer_Name,CM.Address,
                                         CM.Con_Details,CM.Email_Id,CM.Customer_Wing_Name,CM.Pan,CM.Aadhar,CM.Customer1,CM.Pan1,CM.Aadhar1,CM.Customer2,
                                         CM.Pan2,CM.Aadhar2,CM.Customer3,CM.Pan3,CM.Aadhar3,CM.BanakhatNo,CM.BanakhatDate,CM.Ocupation,CM.Ocupation1,CM.Ocupation2,CM.Ocupation3,IFNULL(CM.Financial_Name,'') As Financial_Name,
-                                        CM.Dastavg_No,CM.Dastavg_Date
+                                        CM.Dastavg_No,CM.Dastavg_Date,IFNULL(WD.Amount,0) AS Dastavej_Amount
                                     FROM Customer_Master CM
                                     LEFT JOIN Wing_Master WM
                                         ON WM.Wing_Master_Id = CM.Wing_Master_Id
@@ -333,7 +422,8 @@ namespace ReceiptDataAcess
                                                         Convert.ToString(firstRow["Ocupation3"]),
                                                         Convert.ToString(firstRow["Financial_Name"]),
                                                         Convert.ToString(firstRow["Dastavg_No"]),
-                                                        Convert.ToString(firstRow["Dastavg_Date"])
+                                                        Convert.ToString(firstRow["Dastavg_Date"]),
+                                                        Convert.ToDecimal(Convert.ToString(firstRow["Dastavej_Amount"]))
                                                         ));
                     });
                 }
@@ -363,14 +453,14 @@ namespace ReceiptDataAcess
                                         CM.Con_Details,CM.Email_Id,CM.Customer_Wing_Name,CM.Pan,CM.Aadhar,CM.Customer1,CM.Pan1,CM.Aadhar1,
                                         CM.Customer2,CM.Pan2,CM.Aadhar2,CM.Customer3,CM.Pan3,CM.Aadhar3,
                                         CM.BanakhatNo,CM.BanakhatDate,CM.Ocupation,CM.Ocupation1,CM.Ocupation2,CM.Ocupation3,IFNULL(CM.Financial_Name,'') As Financial_Name,
-                                        CM.Dastavg_No,CM.Dastavg_Date
+                                        CM.Dastavg_No,CM.Dastavg_Date,WD.Amount AS Dastavej_Amount
                                     FROM Customer_Master CM
                                     LEFT JOIN Wing_Master WM
                                         ON WM.Wing_Master_Id = CM.Wing_Master_Id
                                     LEFT JOIN Wing_Details WD
                                         ON WM.Wing_Master_Id = WD.Wing_MasterId
                                     AND CM.Wing_Details_Id = WD.Wing_DetailsId ";
-                if(!string.IsNullOrEmpty(customerName)) 
+                if(!string.IsNullOrEmpty(customerName) && Wing_Master_Id==0 && Wing_Details_Id==0) 
                 {
                     where_condition = where_condition+(where_condition == "" ? "" : " AND ") + "CM.Customer_Name=@Customer_Name";
                 }
@@ -437,7 +527,8 @@ namespace ReceiptDataAcess
                                                         Convert.ToString(firstRow["Ocupation3"]),
                                                         Convert.ToString(firstRow["Financial_Name"]),
                                                         Convert.ToString(firstRow["Dastavg_No"]),
-                                                        Convert.ToString(firstRow["Dastavg_Date"])
+                                                        Convert.ToString(firstRow["Dastavg_Date"]),
+                                                        Convert.ToDecimal(Convert.ToString(firstRow["Dastavej_Amount"]))
                                                         ));
                     });
                 }

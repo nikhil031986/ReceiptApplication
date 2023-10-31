@@ -15,12 +15,15 @@ using System.Drawing;
 using System.Web;
 using System.Web.UI.WebControls;
 using System.Windows.Forms.VisualStyles;
+using System.Windows.Controls;
 
 namespace Receipt
 {
     public partial class frmBanakhatList : Form
     {
         private System.Data.DataTable dtList;
+        private System.Data.DataTable dtReciptDetails;
+        private System.Data.DataSet dsCustomerDetails;
         private string htmlFilePath = "";
         public frmBanakhatList()
         {
@@ -33,17 +36,38 @@ namespace Receipt
             {
                 dtList = new System.Data.DataTable();
                 List<clsColumn> list = new List<clsColumn>();
-                list.Add(new clsColumn("Customer_Id", ClsUtil.ColumnType.dbInt, "0"));
-                list.Add(new clsColumn("Customer_Name", ClsUtil.ColumnType.dbString, ""));
-                list.Add(new clsColumn("Wing_Master_Id", ClsUtil.ColumnType.dbInt, "0"));
                 list.Add(new clsColumn("Wing_Name", ClsUtil.ColumnType.dbString, ""));
                 list.Add(new clsColumn("FlatNo", ClsUtil.ColumnType.dbString, ""));
+                list.Add(new clsColumn("Customer_Name", ClsUtil.ColumnType.dbString, ""));
                 list.Add(new clsColumn("Amount", ClsUtil.ColumnType.dbDecimal, "0.0"));
                 list.Add(new clsColumn("minPayAmount", ClsUtil.ColumnType.dbDecimal, "0.0"));
                 list.Add(new clsColumn("ReceiptAmount", ClsUtil.ColumnType.dbDecimal, "0.0"));
                 list.Add(new clsColumn("PrintBanakhat", ClsUtil.ColumnType.dbInt, "0"));
+                list.Add(new clsColumn("Customer_Id", ClsUtil.ColumnType.dbInt, "0"));
+                list.Add(new clsColumn("Wing_Master_Id", ClsUtil.ColumnType.dbInt, "0"));
                 await ClsUtil.AddColumn(dtList, list);
-                dgvListOfBanakhat.DataSource = dtList;
+                dtList.TableName = "CustomerMaster";
+                dtReciptDetails = new System.Data.DataTable();
+                list = new List<clsColumn>();
+                list.Add(new clsColumn("Receipt_No", ClsUtil.ColumnType.dbString, ""));
+                list.Add(new clsColumn("Receipt_Date", ClsUtil.ColumnType.dbString, ""));
+                list.Add(new clsColumn("Flate_ShopNo", ClsUtil.ColumnType.dbString, ""));
+                list.Add(new clsColumn("Cheq_Rtgs_Neft_ImpsNo", ClsUtil.ColumnType.dbString, ""));
+                list.Add(new clsColumn("Bank_Name", ClsUtil.ColumnType.dbString, ""));
+                list.Add(new clsColumn("Branch_Name", ClsUtil.ColumnType.dbString, ""));
+                list.Add(new clsColumn("Amount", ClsUtil.ColumnType.dbDecimal, "0"));
+                list.Add(new clsColumn("Amount_Word", ClsUtil.ColumnType.dbString, ""));
+                list.Add(new clsColumn("Customer_Id", ClsUtil.ColumnType.dbInt, "0"));
+                await ClsUtil.AddColumn(dtReciptDetails, list);
+                dtReciptDetails.TableName = "ReceiptDetails";
+                dsCustomerDetails = new System.Data.DataSet();
+                dsCustomerDetails.Tables.Add(dtList);
+                dsCustomerDetails.Tables.Add(dtReciptDetails);
+
+                DataRelation Datatablerelation = new DataRelation("ReceiptCustomer", dsCustomerDetails.Tables[0].Columns["Customer_Id"], dsCustomerDetails.Tables[1].Columns["Customer_Id"], true);
+                dsCustomerDetails.Relations.Add(Datatablerelation);
+                dsCustomerDetails.DataSetName = "Customer_List";
+                dgviewBanakhatDetails.DataSource = dsCustomerDetails.Tables[0];
             }
             catch (Exception ex)
             {
@@ -51,9 +75,12 @@ namespace Receipt
                 throw;
             }
         }
-        private async Task GetBanakhatListData()
+        private async Task GetBanakhatListData(bool Iscompleted=false)
         {
-            var dtBanakhat = await BAReceiptDetails.GetBanakhatDetails();
+            var dtBanakhat = await BAReceiptDetails.GetBanakhatDetails(Iscompleted);
+            var dtRecipt = await BAReceiptDetails.GetReceiptDetails();
+            dtReciptDetails.Rows.Clear();
+            dtList.Rows.Clear();
             dtBanakhat.AsEnumerable().ToList<DataRow>().ForEach(row =>
             {
                 var newRows = dtList.NewRow();
@@ -64,11 +91,32 @@ namespace Receipt
                 newRows["FlatNo"] = Convert.ToString(row["FlatNo"]);
                 newRows["minPayAmount"] = Convert.ToDecimal(row["minPayAmount"]);
                 newRows["ReceiptAmount"] = Convert.ToDecimal(row["ReceiptAmount"]);
+                newRows["Amount"] = Convert.ToDecimal(row["Amount"]);
                 newRows["PrintBanakhat"] = Convert.ToInt32(row["PrintBanakhat"]) == 0 ? false : true;
                 dtList.Rows.Add(newRows);
+                dtRecipt.Select("Customer_Id=" + Convert.ToString(newRows["Customer_Id"])).AsEnumerable().ToList().ForEach(
+                dr =>
+                {
+                    var drNew = dtReciptDetails.NewRow();
+                    drNew["Customer_Id"] = Convert.ToInt32(dr["Customer_Id"]);
+                    drNew["Receipt_No"] = Convert.ToString(dr["Receipt_No"]);
+                    drNew["Receipt_Date"] = Convert.ToString(dr["Receipt_Date"]);
+                    drNew["Flate_ShopNo"] = Convert.ToString(dr["Flate_ShopNo"]);
+                    drNew["Cheq_Rtgs_Neft_ImpsNo"] = Convert.ToString(dr["Cheq_Rtgs_Neft_ImpsNo"]);
+                    drNew["Bank_Name"] = Convert.ToString(dr["Bank_Name"]);
+                    drNew["Branch_Name"] = Convert.ToString(dr["Branch_Name"]);
+
+                    drNew["Amount"] = Convert.ToDecimal(dr["Amount"]);
+                    drNew["Amount_Word"] = Convert.ToString(dr["Amount_Word"]);
+                    dtReciptDetails.Rows.Add(drNew);
+                });
+                
             });
+            dtReciptDetails.AcceptChanges();
+            //dtRecipt.AsEnumerable().Where<DataRow>(x => x.Field<int>("Customer_Id") == Convert.ToInt32(newRows["Customer_Id"])).ToList<DataRow>().ForEach(
             dtList.AcceptChanges();
-            dgvListOfBanakhat.DataSource = dtList;
+
+          
         }
         private async Task CreateExcelBankhat(int CustomerId)
         {
@@ -1083,11 +1131,17 @@ namespace Receipt
 
         private void sendToExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            DataGridView dataGridView= new DataGridView();
             try
             {
-                ClsUtil.ExportDataToExcel(dgvListOfBanakhat);
+                ClsUtil.ExpodtDatasetToExcel(dsCustomerDetails, "Customer_Id");
             }
             catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
+            finally
+            {
+                dataGridView.Dispose();
+                GC.Collect();
+            }
         }
 
         private async void frmBanakhatList_Load(object sender, EventArgs e)
@@ -1102,17 +1156,19 @@ namespace Receipt
             catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
         }
 
-        private void chlRePrintBANAKHAT_CheckedChanged(object sender, EventArgs e)
+        private async void chlRePrintBANAKHAT_CheckedChanged(object sender, EventArgs e)
         {
             try
             {
                 if(chlRePrintBANAKHAT.Checked)
                 {
-
+                    await GetBanakhatListData(true);
+                    dgviewBanakhatDetails.CaptionText = "Banakhat completed List";
                 }
                 else
                 {
-
+                    await GetBanakhatListData(false);
+                    dgviewBanakhatDetails.CaptionText = "Banakhat Pending List";
                 }
             }
             catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }

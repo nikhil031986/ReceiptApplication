@@ -3,6 +3,7 @@ using ReceiptLog;
 using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 using Application = System.Windows.Forms.Application;
@@ -22,7 +23,8 @@ namespace Receipt
             Report = 6,
             ImportData = 7,
             Banakhat = 8,
-            BanakhatList = 9
+            BanakhatList = 9,
+            dashboard=10
         }
         private Form myForm;
         private Form_Name FormName;
@@ -33,6 +35,26 @@ namespace Receipt
                 InitializeComponent();
                 btnUserDetails.Visible = false;
                 SetImageInToButton();
+            }
+            catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
+        }
+        private void openDashbord()
+        {
+            try
+            {
+                if (myForm != null)
+                {
+                    myForm.Close();
+                    MyForm_CloseUserDetails(null, null);
+                }
+                FormName = Form_Name.dashboard;
+                myForm = new frmdashboard();
+                myForm.TopLevel = false;
+                myForm.AutoScroll = true;
+                myForm.Dock = DockStyle.Fill;
+                this.PlnMainForm.Controls.Add(myForm);
+                myForm.Show();
+                btnHome.Text = btnHome.Text.Replace("<", ">");
             }
             catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
         }
@@ -139,6 +161,11 @@ namespace Receipt
                         break;
                     case Form_Name.BanakhatList:
                         btnBanakhatList.Text = btnBanakhat.Text.Replace(">", "<");
+                        myForm = null;
+                        GC.Collect();
+                        break;
+                    case Form_Name.dashboard:
+                        btnHome.Text = btnHome.Text.Replace(">", "<");
                         myForm = null;
                         GC.Collect();
                         break;
@@ -358,6 +385,43 @@ namespace Receipt
             {
                 clsWaitForm.CloseWaitForm();
                 clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, "btnBackUpDataBase_Click");
+            }
+        }
+
+        private void frmRecipt_Load(object sender, EventArgs e)
+        {
+            openDashbord();
+        }
+
+        private void btnHome_Click(object sender, EventArgs e)
+        {
+            openDashbord();
+        }
+
+        private void frmRecipt_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            clsWaitForm.ShowWaitForm();
+            try
+            {
+                string filePath = "D:\\ReceiptDataBaseBackUp";
+                if(!System.IO.Directory.Exists(filePath)) 
+                {
+                    System.IO.Directory.CreateDirectory(filePath);
+                }
+                System.IO.DirectoryInfo di = new DirectoryInfo(filePath);
+                foreach (FileInfo file in di.GetFiles())
+                {
+                    file.Delete();
+                }
+                System.IO.File.Copy(ClsUtil.getCurrentPath() + ClsUtil.SiteDBName + ".db", filePath + @"\" + ClsUtil.SiteDBName + ".db");
+            }
+            catch (Exception ex)
+            {
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name);
+            }
+            finally
+            {
+                clsWaitForm.CloseWaitForm();
             }
         }
     }

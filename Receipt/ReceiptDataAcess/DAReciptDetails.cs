@@ -111,7 +111,7 @@ namespace ReceiptDataAcess
                 dtCustomer = await DaDatabaseConnection.GetDataTable(cmd);
                 if (dtCustomer != null && dtCustomer.AsEnumerable().Count() > 0)
                 {
-                    lstBankName = dtCustomer.AsEnumerable().Select(x=> x.Field<string>("Bank_Name")).ToList<string>();
+                    lstBankName = dtCustomer.AsEnumerable().Select(x => x.Field<string>("Bank_Name")).ToList<string>();
                 }
                 return lstBankName;
             }
@@ -243,6 +243,11 @@ namespace ReceiptDataAcess
                 var Valeu = await DaDatabaseConnection.ExecSacaler(cmd);
                 decimal pagesCount = Convert.ToDecimal(Valeu);
                 int manValue = (int)pagesCount;
+                var counts = pagesCount - manValue;
+                if(counts> 0) 
+                {
+                    manValue++;
+                }
                 //manValue= ((pagesCount-manValue)>0? manValue+1: manValue);
                 return Convert.ToString(manValue);
             }
@@ -265,7 +270,7 @@ namespace ReceiptDataAcess
                                     RD.Year_Id,RD.Bank_Name,RD.Branch_Name,RD.ReceivedAs,RD.Amount,RD.Amount_Word, RD.Payment_Date, RD.ReceiptDateNo,RD.IsCancel,RD.IsPrint FROM 
                                     ReceiptDetail RD
                                     INNER JOIN Customer_Master CM
-                                    ON RD.Customer_Id = CM.Customer_Id "+ (string.IsNullOrWhiteSpace(whereCond)==true?"":"WHERE "+whereCond) +" ;";
+                                    ON RD.Customer_Id = CM.Customer_Id " + (string.IsNullOrWhiteSpace(whereCond) == true ? "" : "WHERE " + whereCond) + " ;";
 
                 dtCustomer = await DaDatabaseConnection.GetDataTable(cmd);
                 if (dtCustomer != null && dtCustomer.AsEnumerable().Count() > 0)
@@ -303,7 +308,7 @@ namespace ReceiptDataAcess
                 cmd.Dispose();
             }
         }
-        public static async Task<List<EnReceiptDetails>> GetReciptPageing(int incrimentSize,int rtRows)
+        public static async Task<DataTable> GetReciptPageing(int incrimentSize, int rtRows)
         {
             List<EnReceiptDetails> lstCustomers = new List<EnReceiptDetails>();
             DataTable dtCustomer = new DataTable();
@@ -315,34 +320,34 @@ namespace ReceiptDataAcess
                                     RD.Year_Id,RD.Bank_Name,RD.Branch_Name,RD.ReceivedAs,RD.Amount,RD.Amount_Word, RD.Payment_Date, RD.ReceiptDateNo,RD.IsCancel,IFNULL(RD.IsPrint,0) AS IsPrint FROM 
                                     ReceiptDetail RD
                                     INNER JOIN Customer_Master CM
-                                    ON RD.Customer_Id = CM.Customer_Id ORDER BY RD.Receipt_Id  LIMIT " + rtRows.ToString() + (incrimentSize == 0 ? "" : " OFFSET " + incrimentSize.ToString())+";";
+                                    ON RD.Customer_Id = CM.Customer_Id ORDER BY  CAST(REPLACE(RD.Receipt_No,'-','') AS INT),RD.Receipt_Id   LIMIT " + rtRows.ToString() + (incrimentSize == 0 ? "" : " OFFSET " + incrimentSize.ToString()) + ";";
 
-                clsLog.InstanceCreation().InsertLog(cmd.CommandText,clsLog.logType.Info, MethodBase.GetCurrentMethod().Name);
+                clsLog.InstanceCreation().InsertLog(cmd.CommandText, clsLog.logType.Info, MethodBase.GetCurrentMethod().Name);
 
                 dtCustomer = await DaDatabaseConnection.GetDataTable(cmd);
-                if (dtCustomer != null && dtCustomer.AsEnumerable().Count() > 0)
-                {
-                    dtCustomer.AsEnumerable().ToList().ForEach(firstRow =>
-                    {
-                        lstCustomers.Add(new EnReceiptDetails(Convert.ToInt32(firstRow["Receipt_Id"]),
-                                                        Convert.ToString(firstRow["Receipt_No"]),
-                                                        Convert.ToString(firstRow["Receipt_Date"]),
-                                                        Convert.ToInt32(firstRow["Customer_Id"]),
-                                                        Convert.ToString(firstRow["Flate_ShopNo"]),
-                                                        Convert.ToString(firstRow["Cheq_Rtgs_Neft_ImpsNo"]),
-                                                        Convert.ToInt32(firstRow["Year_Id"]),
-                                                        Convert.ToString(firstRow["Bank_Name"]),
-                                                        Convert.ToString(firstRow["Branch_Name"]),
-                                                        Convert.ToString(firstRow["ReceivedAs"]),
-                                                        Convert.ToDecimal(firstRow["Amount"]),
-                                                        Convert.ToString(firstRow["Amount_Word"]),
-                                                        Convert.ToString(firstRow["Customer_Name"]),
-                                                        Convert.ToString(firstRow["Payment_Date"]),
-                                                        Convert.ToInt32(firstRow["ReceiptDateNo"]),
-                                                        Convert.ToInt32(firstRow["IsCancel"]), Convert.ToInt32(firstRow["IsPrint"])));
-                    });
-                }
-                return lstCustomers;
+                //if (dtCustomer != null && dtCustomer.AsEnumerable().Count() > 0)
+                //{
+                //    dtCustomer.AsEnumerable().ToList().ForEach(firstRow =>
+                //    {
+                //        lstCustomers.Add(new EnReceiptDetails(Convert.ToInt32(firstRow["Receipt_Id"]),
+                //                                        Convert.ToString(firstRow["Receipt_No"]),
+                //                                        Convert.ToString(firstRow["Receipt_Date"]),
+                //                                        Convert.ToInt32(firstRow["Customer_Id"]),
+                //                                        Convert.ToString(firstRow["Flate_ShopNo"]),
+                //                                        Convert.ToString(firstRow["Cheq_Rtgs_Neft_ImpsNo"]),
+                //                                        Convert.ToInt32(firstRow["Year_Id"]),
+                //                                        Convert.ToString(firstRow["Bank_Name"]),
+                //                                        Convert.ToString(firstRow["Branch_Name"]),
+                //                                        Convert.ToString(firstRow["ReceivedAs"]),
+                //                                        Convert.ToDecimal(firstRow["Amount"]),
+                //                                        Convert.ToString(firstRow["Amount_Word"]),
+                //                                        Convert.ToString(firstRow["Customer_Name"]),
+                //                                        Convert.ToString(firstRow["Payment_Date"]),
+                //                                        Convert.ToInt32(firstRow["ReceiptDateNo"]),
+                //                                        Convert.ToInt32(firstRow["IsCancel"]), Convert.ToInt32(firstRow["IsPrint"])));
+                //    });
+                //}
+                return dtCustomer;
             }
             catch (Exception ex)
             {
@@ -431,6 +436,60 @@ namespace ReceiptDataAcess
                 throw ex;
             }
         }
+
+        public static async Task<int> UpdateReceiptCustomerId(int receiptId,int CustomerId)
+        {
+            SQLiteCommand cmd = new SQLiteCommand();
+            try
+            {
+                if (string.IsNullOrWhiteSpace(Convert.ToString(receiptId)) == true)
+                {
+                    return 1;
+                }
+                string sqlCommand = "UPDATE ReceiptDetail SET Customer_Id="+ CustomerId.ToString() + " WHERE Receipt_Id =" + receiptId.ToString() + "; SELECT 1 AS UPDATEDVALUE;";
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.CommandText = sqlCommand;
+                var Valeu = await DaDatabaseConnection.ExecSacaler(cmd);
+                var intRetValeu = Convert.ToInt32(Valeu);
+                return intRetValeu;
+            }
+            catch (Exception ex)
+            {
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name);
+                throw ex;
+            }
+        }
+        public static async Task<DataTable> getMissingCustomerDetails()
+        {
+            DataTable dtRetunr = new DataTable();
+            SQLiteCommand cmd = new SQLiteCommand();
+            try
+            {
+                string strCommand = "";
+                strCommand = @" 
+                                SELECT RD.Receipt_Id,RD.Receipt_No,RD.Receipt_Date,RD.Bank_Name,RD.Branch_Name,RD.Amount,'' AS ReceiptCustomer,CM.Customer_Id,CM.Customer_Name,RD.Flate_ShopNo,0 AS IsUpdate  FROM ReceiptDetail RD
+                                INNER JOIN Wing_Master WM ON WM.Wing_Name = substr(RD.Flate_ShopNo, 1, instr(RD.Flate_ShopNo, '-')-1) 
+                                INNER JOIN Wing_Details WD on WM.Wing_Master_Id=WD.Wing_MasterId
+                                AND WD.FlatNo =substr(Flate_ShopNo,instr(Flate_ShopNo, '-')+1,length(Flate_ShopNo)- instr(Flate_ShopNo, '-'))
+                                INNER JOIN Customer_Master CM ON CM.Wing_Details_Id= WD.Wing_DetailsId
+                                WHERE RD.Customer_Id=0 AND RD.Flate_ShopNo like '%-%';";
+                cmd.CommandText = strCommand;
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.Clear();
+                dtRetunr = await DaDatabaseConnection.GetDataTable(cmd);
+                return dtRetunr;
+            }
+            catch (Exception ex)
+            {
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, "GetBanakhatDetails");
+                throw ex;
+            }
+            finally
+            {
+                cmd.Dispose();
+                dtRetunr.Dispose();
+            }
+        }
         public static async Task<string> getReceiptNo()
         {
             string strRetValeu = "00-00-000";
@@ -455,7 +514,7 @@ namespace ReceiptDataAcess
 		                            WHEN 2 THEN  '0'||CAST( CAST(substr(ifnull(Receipt_No,'00-00-000'),7,3) AS INT)+1 AS TEXT) 
 		                            ELSE CAST( CAST(substr(ifnull(Receipt_No,'00-00-000'),7,3) AS INT)+1 AS TEXT) 
 	                            END )
-                            FROM ReceiptDetail ORDER BY Receipt_Id DESC LIMIT 1;";
+                            FROM ReceiptDetail ORDER BY CAST(replace(Receipt_No,'-','') AS INT) DESC, Receipt_Id DESC LIMIT 1;";
                 cmd.CommandText = strCommand;
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.Parameters.Clear();
@@ -499,7 +558,7 @@ namespace ReceiptDataAcess
                 cmd.Dispose();
             }
         }
-        public async static Task<DataTable> GetBanakhatDetails()
+        public async static Task<DataTable> GetBanakhatDetails(bool Iscompleted)
         {
             DataTable dtRetunr = new DataTable();
             SQLiteCommand cmd = new SQLiteCommand();
@@ -507,16 +566,53 @@ namespace ReceiptDataAcess
             {
                 string strCommand = "";
                 strCommand = @" SELECT CM.Customer_Id ,CM.Customer_Name,WM.Wing_Master_Id,WM.Wing_Name
-                                    ,WD.FlatNo,WD.Amount,(WD.Amount*10)/100 As minPayAmount,
-                                    SUM(RD.AMOUNT) AS ReceiptAmount,0 AS PrintBanakhat 
-                                    FROM Customer_Master CM
-                                    INNER JOIN Wing_Master WM ON CM.Wing_Master_Id=WM.Wing_Master_Id
-                                    INNER JOIN Wing_Details WD ON WD.Wing_MasterId=WM.Wing_Master_Id
-                                    AND WD.Wing_DetailsId=CM.Wing_Details_Id
-                                    INNER JOIN ReceiptDetail RD ON RD.Customer_Id=CM.Customer_Id
-                                    WHERE CM.IsBanakhat=0 AND RD.IsCancel=0
-                                    GROUP BY CM.Customer_Id
-                                    HAVING ((minPayAmount-ReceiptAmount)<0);";
+                                ,WD.FlatNo,WD.Amount,(WD.Amount*10)/100 As minPayAmount,
+                                SUM(RD.AMOUNT) AS ReceiptAmount,0 AS PrintBanakhat ,CM.BanakhatNo
+                                FROM Customer_Master CM
+                                INNER JOIN Wing_Master WM ON CM.Wing_Master_Id=WM.Wing_Master_Id
+                                INNER JOIN Wing_Details WD ON WD.Wing_MasterId=WM.Wing_Master_Id
+                                AND WD.Wing_DetailsId=CM.Wing_Details_Id
+                                INNER JOIN ReceiptDetail RD ON RD.Customer_Id=CM.Customer_Id
+                                WHERE ";
+                if (Iscompleted == false)
+                {
+                    strCommand += "IFNULL(CM.IsBanakhat,'0')=0 ";
+                }
+                else
+                {
+                    strCommand += "IFNULL(CM.IsBanakhat,'0')>0 ";
+                }
+                strCommand += @" AND RD.IsCancel=0 
+                                GROUP BY CM.Customer_Id
+                                HAVING ((minPayAmount-ReceiptAmount)<0);";
+                cmd.CommandText = strCommand;
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.Clear();
+                dtRetunr = await DaDatabaseConnection.GetDataTable(cmd);
+                return dtRetunr;
+            }
+            catch (Exception ex)
+            {
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, "GetBanakhatDetails");
+                throw ex;
+            }
+            finally
+            {
+                cmd.Dispose();
+                dtRetunr.Dispose();
+            }
+        }
+        public async static Task<DataTable> GetReceiptDetails()
+        {
+            DataTable dtRetunr = new DataTable();
+            SQLiteCommand cmd = new SQLiteCommand();
+            try
+            {
+                string strCommand = "";
+                strCommand = @" SELECT Customer_Id,Receipt_No,Receipt_Date,Flate_ShopNo,Cheq_Rtgs_Neft_ImpsNo,
+                                    Bank_Name,Branch_Name,Amount,Amount_Word 
+                                    FROM ReceiptDetail RD 
+                                    WHERE IsCancel=0 order by ReceiptDateNo,Customer_Id;";
                 cmd.CommandText = strCommand;
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.Parameters.Clear();
@@ -538,18 +634,27 @@ namespace ReceiptDataAcess
         {
             try
             {
-                foreach(DataRow drImport in dtImport.Rows)
+                if (!dtImport.Columns.Contains("IsImport"))
+                {
+                    DataColumn dcIsImportRow = new DataColumn();
+                    dcIsImportRow.DataType = typeof(bool);
+                    dcIsImportRow.DefaultValue = false;
+                    dcIsImportRow.ColumnName = "IsImport";
+                    dtImport.Columns.Add(dcIsImportRow);
+                }
+                foreach (DataRow drImport in dtImport.Rows)
                 {
                     EnReceiptDetails enReceiptDetails = new EnReceiptDetails();
-                     var getReceipt = await GetReceiptDetailsByReceiptNo(Convert.ToString(drImport[0]));
-                    if(getReceipt != null && getReceipt.Count>0)
+                    var getReceipt = await GetReceiptDetailsByReceiptNo(Convert.ToString(drImport[0]));
+                    if (getReceipt != null && getReceipt.Count > 0)
                     {
+
                         enReceiptDetails = getReceipt.FirstOrDefault();
                         var wingAndWingDetails = drImport[3].ToString().Split('-');
                         var wingMaster = await DaWingMaster.GetWingMasterByName(wingAndWingDetails[0].ToString());
-                        var wingDetails = wingMaster.enWingDetails.Where(x=> x.FlatNo==wingAndWingDetails[1].ToString());
-                        var customerWingName=drImport[2].ToString();
-                        var CustomerDetails = await DACustomerMaster.GetCustomeriByName(customerWingName,wingMaster.Wing_Master_Id,wingDetails.FirstOrDefault().Wing_DetailsId);
+                        var wingDetails = wingMaster.enWingDetails.Where(x => x.FlatNo == wingAndWingDetails[1].ToString());
+                        var customerWingName = drImport[2].ToString();
+                        var CustomerDetails = await DACustomerMaster.GetCustomeriByName(customerWingName, wingMaster.Wing_Master_Id, wingDetails.FirstOrDefault().Wing_DetailsId);
                         enReceiptDetails.Customer_Id = CustomerDetails.FirstOrDefault().Customer_Id;
                         enReceiptDetails.Customer_Name = CustomerDetails.FirstOrDefault().Customer_Name;
                         enReceiptDetails.Bank_Name = drImport[5].ToString();
@@ -563,11 +668,16 @@ namespace ReceiptDataAcess
                         enReceiptDetails.Receipt_No = drImport[0].ToString();
                         enReceiptDetails.Receipt_Date = drImport[1].ToString();
                         var reDate = drImport[1].ToString().Split('/');
-                        var recDateNo = reDate[2] + (reDate[1].Length<1?"0":"")+ reDate[1] +(reDate[0].Length<1?"0":"") + reDate[0];
-                        enReceiptDetails.ReceiptDateNo=Convert.ToInt32(recDateNo);
+                        if(reDate.Length < 2)
+                        {
+                            reDate = drImport[1].ToString().Split('-');
+                        }
+                        var recDateNo = reDate[2] + (reDate[1].Length < 1 ? "0" : "") + reDate[1] + (reDate[0].Length < 1 ? "0" : "") + reDate[0];
+                        enReceiptDetails.ReceiptDateNo = Convert.ToInt32(recDateNo);
                         enReceiptDetails.IsCancel = Convert.ToInt32(drImport[11]);
-                        enReceiptDetails.IsPrint= Convert.ToInt32(drImport[12]);
+                        enReceiptDetails.IsPrint = Convert.ToInt32(drImport[12]);
                         await DAReciptDetails.InsertUpdateReceiptDetails(enReceiptDetails);
+
                     }
                     else
                     {
@@ -590,12 +700,17 @@ namespace ReceiptDataAcess
                         enReceiptDetails.Receipt_No = drImport[0].ToString();
                         enReceiptDetails.Receipt_Date = drImport[1].ToString();
                         var reDate = drImport[1].ToString().Split('/');
+                        if (reDate.Length < 2)
+                        {
+                            reDate = drImport[1].ToString().Split('-');
+                        }
                         var recDateNo = reDate[2] + (reDate[1].Length < 1 ? "0" : "") + reDate[1] + (reDate[0].Length < 1 ? "0" : "") + reDate[0];
                         enReceiptDetails.ReceiptDateNo = Convert.ToInt32(recDateNo);
                         enReceiptDetails.IsCancel = Convert.ToInt32(drImport[11]);
                         enReceiptDetails.IsPrint = Convert.ToInt32(drImport[12]);
                         await DAReciptDetails.InsertUpdateReceiptDetails(enReceiptDetails);
                     }
+                    drImport["IsImport"] = true;
                 }
             }
             catch (Exception ex)
@@ -671,7 +786,7 @@ namespace ReceiptDataAcess
                 cmd.Parameters.AddWithValue("@PaymentDate", enReceiptDetails.PaymentDate);
                 cmd.Parameters.AddWithValue("@ReceiptDateNo", enReceiptDetails.ReceiptDateNo);
                 cmd.Parameters.AddWithValue("@IsCancel", enReceiptDetails.IsCancel);
-                cmd.Parameters.AddWithValue("@IsPrint",enReceiptDetails.IsPrint);
+                cmd.Parameters.AddWithValue("@IsPrint", enReceiptDetails.IsPrint);
                 var Valeu = await DaDatabaseConnection.ExecSacaler(cmd);
                 intRetValeu = Convert.ToInt32(Valeu);
                 return intRetValeu;

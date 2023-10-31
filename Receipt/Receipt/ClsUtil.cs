@@ -1,4 +1,5 @@
 ﻿using ReceiptEntity;
+using ReceiptLog;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -36,7 +37,7 @@ namespace Receipt
     "Seventeen", "Eighteen", "Nineteen" };
         private static String[] tens = { "", "", "Twenty", "Thirty", "Forty",
     "Fifty", "Sixty", "Seventy", "Eighty", "Ninety" };
-        
+
         public static List<string> GetNOCLST()
         {
             List<string> retNOCLST = new List<string>();
@@ -118,7 +119,69 @@ namespace Receipt
                 XcelApp.Visible = true;
             }
         }
+        public static void ExpodtDatasetToExcel(DataSet dsExport, string commonColumnName = "")
+        {
+            try
+            {
+                if (dsExport.Tables.Count == 0)
+                {
+                    return;
+                }
+                Microsoft.Office.Interop.Excel.Application XcelApp = new Microsoft.Office.Interop.Excel.Application();
+                System.Threading.Thread.Sleep(1000);
+                XcelApp.Application.Workbooks.Add(Type.Missing);
+                int columnNo = 1;
+                int selectedColumnfilter = 0;
+                for (int i = 1; i < dsExport.Tables[0].Columns.Count + 1; i++)
+                {
+                    XcelApp.Cells[1, columnNo] = dsExport.Tables[0].Columns[i - 1].ColumnName;
+                    if (dsExport.Tables[0].Columns[i - 1].ColumnName.ToUpper() == commonColumnName.ToUpper())
+                    {
+                        selectedColumnfilter = i;
+                    }
+                    columnNo = columnNo + 1;
+                }
+                int rowNumber = 2;
+                for (int i = 0; i < dsExport.Tables[0].Rows.Count; i++)
+                {
+                    columnNo = 1;
+                    for (int j = 0; j < dsExport.Tables[0].Columns.Count; j++)
+                    {
+                        XcelApp.Cells[rowNumber, j + 1] = Convert.ToString(dsExport.Tables[0].Rows[i][j]);
+                    }
+                    rowNumber = rowNumber + 1;
+                    if (dsExport.Tables.Count > 1)
+                    {
 
+                        var selectedRecords = dsExport.Tables[1].Select(commonColumnName + "=" + dsExport.Tables[0].Rows[i][commonColumnName].ToString());
+                        if (selectedRecords.Count() > 0)
+                        {
+                            for (int k = 1; k < dsExport.Tables[1].Columns.Count + 1; k++)
+                            {
+                                XcelApp.Cells[rowNumber, k+1] = dsExport.Tables[1].Columns[k - 1].ColumnName;
+                            }
+                            rowNumber = rowNumber + 1;
+                            for (int l = 0; l < selectedRecords.Count(); l++)
+                            {
+                                columnNo = 1;
+                                for (int j = 0; j < dsExport.Tables[0].Columns.Count; j++)
+                                {
+                                    XcelApp.Cells[rowNumber, j + 2] = Convert.ToString(selectedRecords[l][j]);
+                                }
+                                rowNumber = rowNumber + 1;
+                            }
+                            rowNumber = rowNumber + 1;
+                        }
+                    }
+                }
+                XcelApp.Columns.AutoFit();
+                XcelApp.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, "ClsUtill.ExpoertDatasetToExcel");
+            }
+        }
         public static void ExportDataToExcel(DataGridView dtExport)
         {
             if (dtExport != null && dtExport.Rows.Count > 0)
@@ -142,7 +205,7 @@ namespace Receipt
                     {
                         if (dtExport.Columns[j].Visible)
                         {
-                            XcelApp.Cells[i + 2, columnNo] = dtExport.Rows[i].Cells[j].Value.ToString();
+                            XcelApp.Cells[i + 2, columnNo] = Convert.ToString(dtExport.Rows[i].Cells[j].Value);
                             columnNo = columnNo + 1;
                         }
                     }

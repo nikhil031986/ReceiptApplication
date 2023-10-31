@@ -57,12 +57,31 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>C:\Program Files (x86)\Microsoft Visual Studio\Shared\Visual Studio Tools for Office\PIA\Office15\Microsoft.Office.Interop.Word.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1586.0\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1586.0\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1586.0\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1586.0\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1586.0\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -76,6 +95,14 @@
   <ItemGroup>
     <Compile Include="ClsUtil.cs" />
     <Compile Include="clsWaitForm.cs" />
+    <Compile Include="DataSet3.cs">
+      <DependentUpon>DataSet3.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSet3.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet3.xsd</DependentUpon>
+    </Compile>
     <Compile Include="frmBanakhat.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,6 +139,12 @@
     <Compile Include="frmCustomerEntry.Designer.cs">
       <DependentUpon>frmCustomerEntry.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmdashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmdashboard.Designer.cs">
+      <DependentUpon>frmdashboard.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmImportData.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,6 +163,12 @@
     <Compile Include="frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmMSReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMSReport.Designer.cs">
+      <DependentUpon>frmMSReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmReceiptEntry.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -141,6 +180,12 @@
     </Compile>
     <Compile Include="frmReceiptList.Designer.cs">
       <DependentUpon>frmReceiptList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReceiptNotDisplay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReceiptNotDisplay.Designer.cs">
+      <DependentUpon>frmReceiptNotDisplay.cs</DependentUpon>
     </Compile>
     <Compile Include="frmRecipt.cs">
       <SubType>Form</SubType>
@@ -174,6 +219,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="Wing_Master.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -198,6 +244,9 @@
     <EmbeddedResource Include="frmCustomerEntry.resx">
       <DependentUpon>frmCustomerEntry.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmdashboard.resx">
+      <DependentUpon>frmdashboard.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmImportData.resx">
       <DependentUpon>frmImportData.cs</DependentUpon>
     </EmbeddedResource>
@@ -207,11 +256,17 @@
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmMSReport.resx">
+      <DependentUpon>frmMSReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmReceiptEntry.resx">
       <DependentUpon>frmReceiptEntry.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmReceiptList.resx">
       <DependentUpon>frmReceiptList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReceiptNotDisplay.resx">
+      <DependentUpon>frmReceiptNotDisplay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmRecipt.resx">
       <DependentUpon>frmRecipt.cs</DependentUpon>
@@ -238,9 +293,21 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="rptBanakhat.rdlc" />
     <EmbeddedResource Include="Wing_Master.resx">
       <DependentUpon>Wing_Master.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="DataSet3.xsc">
+      <DependentUpon>DataSet3.xsd</DependentUpon>
+    </None>
+    <None Include="DataSet3.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet3.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataSet3.xss">
+      <DependentUpon>DataSet3.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -284,6 +351,19 @@
     <None Include="Resources\ReceiptImage.png" />
     <None Include="Resources\userimage.jpeg" />
     <None Include="Resources\loading_animated.gif" />
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="system-icon-clipart-3.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

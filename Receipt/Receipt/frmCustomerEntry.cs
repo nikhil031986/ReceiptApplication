@@ -8,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,21 +19,20 @@ namespace Receipt
     {
         private int customerId = 0;
         public int CustomerId { get { return this.customerId; } set { this.customerId = value; } }
+
+        private int wing_DetailsId = 0;
         public frmCustomerEntry()
         {
             InitializeComponent();
-            FillWing(true);
-            FillCoupations();
+            //FillWing(true);
+            //FillCoupations();
             this.customerId = 0;
         }
 
         public frmCustomerEntry(int _customerId)
         {
             InitializeComponent();
-            FillWing(true);
-            FillCoupations();
             this.customerId = _customerId;
-            getCustomerDetails();
         }
         private async void FillCoupations()
         {
@@ -58,13 +58,13 @@ namespace Receipt
                 return Task.FromResult(false);
             }
 
-            if (string.IsNullOrWhiteSpace(cboWing.Text) && Convert.ToInt32(cboWing.SelectedValue)==0)
+            if (string.IsNullOrWhiteSpace(cboWing.Text) && Convert.ToInt32(cboWing.SelectedValue) == 0)
             {
                 MessageBox.Show("Please Enter customer name!", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return Task.FromResult(false);
             }
 
-            if (string.IsNullOrWhiteSpace(cboFlatNo.Text) && Convert.ToInt32(cboFlatNo.SelectedValue)==0)
+            if (string.IsNullOrWhiteSpace(cboFlatNo.Text) && Convert.ToInt32(cboFlatNo.SelectedValue) == 0)
             {
                 MessageBox.Show("Please Enter customer name!", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return Task.FromResult(false);
@@ -95,7 +95,7 @@ namespace Receipt
             catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
         }
 
-        protected async Task FillWing(bool fillWingMaster = false, int wingMasterId = 0)
+        protected async void FillWing(bool fillWingMaster = false, int wingMasterId = 0, int wingDetailId = 0)
         {
             try
             {
@@ -106,7 +106,6 @@ namespace Receipt
                     cboWing.DisplayMember = "Wing_Name";
                     cboWing.ValueMember = "Wing_Master_Id";
                     cboWing.DataSource = wingMaster.OrderBy(x => x.Wing_Name).ToList();
-                    cboWing.SelectedIndex = 1;
                     return;
                 }
                 var wingDetails = await BaWingMaster.GetWingDetails(wingMasterId);
@@ -114,23 +113,30 @@ namespace Receipt
                 cboFlatNo.DisplayMember = "FlatNo";
                 cboFlatNo.ValueMember = "Wing_DetailsId";
                 cboFlatNo.DataSource = wingDetails.OrderBy(x => x.Wing_DetailsId).ToList();
-                cboFlatNo.SelectedIndex = -1;
+                if (wingDetailId > 0)
+                {
+                    cboFlatNo.SelectedValue = wingDetailId;
+                }
+                else
+                {
+                    cboFlatNo.SelectedIndex = -1;
+                }
 
             }
-            catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
+            catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error,ex.Source.Last().ToString()); }
         }
         private async void getCustomerDetails()
         {
             try
             {
                 var customerDetails = await BACustomerMaster.GetCustomer(this.customerId);
-                if(customerDetails != null)
+                if (customerDetails != null)
                 {
                     var selectedCustomer = customerDetails.FirstOrDefault();
                     txtCustomerName.Text = selectedCustomer.Customer_Name;
+                    this.wing_DetailsId = selectedCustomer.Wing_Details_Id;
                     cboWing.SelectedValue = selectedCustomer.Wing_Master_Id;
-                    await FillWing(false, selectedCustomer.Wing_Master_Id);
-                    cboFlatNo.SelectedValue = selectedCustomer.Wing_Details_Id;
+                    //await Task.Run(()=>);
                     txtMobileNo.Text = selectedCustomer.Con_Details;
                     txtPanNo.Text = selectedCustomer.Pan;
                     txtAadharNo.Text = selectedCustomer.Aadhar;
@@ -139,15 +145,23 @@ namespace Receipt
                     txtCoAppAadharNo.Text = selectedCustomer.Aadhar1;
                     txtCoAppTwoName.Text = selectedCustomer.Customer2;
                     txtCoAppTwoPanNo.Text = selectedCustomer.Pan2;
-                    txtCoAppTwoAadharNo.Text= selectedCustomer.Aadhar2;
+                    txtCoAppTwoAadharNo.Text = selectedCustomer.Aadhar2;
                     txtCoAppThreeName.Text = selectedCustomer.Customer3;
                     txtCoAppThreePanNo.Text = selectedCustomer.Pan3;
-                    txtCoAppTwoAadharNo.Text=selectedCustomer.Aadhar3;
+                    txtCoAppTwoAadharNo.Text = selectedCustomer.Aadhar3;
                     txtAddress.Text = selectedCustomer.Address;
                     txtBankhatNo.Text = selectedCustomer.BanakhatNo;
                     if (!string.IsNullOrWhiteSpace(selectedCustomer.BanakhatDate))
                     {
-                        string dateFormate = selectedCustomer.BanakhatDate.Split('/')[2] + "/" + selectedCustomer.BanakhatDate.Split('/')[1] + "/" + selectedCustomer.BanakhatDate.Split('/')[0];
+                        string dateFormate = "";
+                        if (selectedCustomer.BanakhatDate.Contains("/"))
+                        {
+                        dateFormate = selectedCustomer.BanakhatDate.Split('/')[2] + "/" + selectedCustomer.BanakhatDate.Split('/')[1] + "/" + selectedCustomer.BanakhatDate.Split('/')[0];
+                        }
+                        else
+                        {
+                            dateFormate = selectedCustomer.BanakhatDate.Split('-')[2] + "/" + selectedCustomer.BanakhatDate.Split('-')[1] + "/" + selectedCustomer.BanakhatDate.Split('-')[0];
+                        }
                         dtpBankhatDate.Value = Convert.ToDateTime(dateFormate);
                     }
                     txtOcupation.Text = selectedCustomer.Ocupation;
@@ -158,7 +172,15 @@ namespace Receipt
                     txtDastavgNo.Text = selectedCustomer.Dastavg_No;
                     if (!string.IsNullOrWhiteSpace(selectedCustomer.Dastavg_Date))
                     {
-                        string dateFormate = selectedCustomer.Dastavg_Date.Split('/')[2] + "/" + selectedCustomer.Dastavg_Date.Split('/')[1] + "/" + selectedCustomer.Dastavg_Date.Split('/')[0];
+                        string dateFormate = "";
+                        if (selectedCustomer.BanakhatDate.Contains("/"))
+                        {
+                            dateFormate = selectedCustomer.Dastavg_Date.Split('/')[2] + "/" + selectedCustomer.Dastavg_Date.Split('/')[1] + "/" + selectedCustomer.Dastavg_Date.Split('/')[0];
+                        }
+                        else
+                        {
+                            dateFormate = selectedCustomer.Dastavg_Date.Split('-')[2] + "/" + selectedCustomer.Dastavg_Date.Split('-')[1] + "/" + selectedCustomer.Dastavg_Date.Split('-')[0];
+                        }
                         dtpDastavgDate.Value = Convert.ToDateTime(dateFormate);
                     }
                 }
@@ -212,11 +234,11 @@ namespace Receipt
                     txtCoAppTwoAadharNo.Text,
                     txtCoAppThreeName.Text,
                     txtCoAppThreePanNo.Text,
-                    txtCoAppThreeAadharNo.Text, txtBankhatNo.Text, dtpBankhatDate.Value.ToString("dd/MM/yyyy"),txtOcupation.Text,txtCoApOneOcupation.Text,
-                    txtCoAppTwoOcupation.Text,txtCoAppThreeOcupation.Text,txtFinancial_Name.Text,
-                    txtDastavgNo.Text, dtpDastavgDate.Value.ToString("dd/MM/yyyy"));
-                int isBanakhat=0;
-                if(!string.IsNullOrWhiteSpace(txtBankhatNo.Text) )
+                    txtCoAppThreeAadharNo.Text, txtBankhatNo.Text, dtpBankhatDate.Value.ToString("dd/MM/yyyy"), txtOcupation.Text, txtCoApOneOcupation.Text,
+                    txtCoAppTwoOcupation.Text, txtCoAppThreeOcupation.Text, txtFinancial_Name.Text,
+                    txtDastavgNo.Text, dtpDastavgDate.Value.ToString("dd/MM/yyyy"), decimal.Zero);
+                int isBanakhat = 0;
+                if (!string.IsNullOrWhiteSpace(txtBankhatNo.Text))
                 {
                     isBanakhat = 1;
                 }
@@ -232,7 +254,7 @@ namespace Receipt
             try
             {
                 int wingMasterId = Convert.ToInt32(cboWing.SelectedValue);
-                await FillWing(false, wingMasterId);
+                FillWing(false, wingMasterId,this.wing_DetailsId);
                 CreateWingCustomerName();
             }
             catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
@@ -251,6 +273,16 @@ namespace Receipt
         private void txtCustomerName_TextChanged(object sender, EventArgs e)
         {
             CreateWingCustomerName();
+        }
+
+        private void frmCustomerEntry_Load(object sender, EventArgs e)
+        {
+            FillWing(true);
+            FillCoupations();
+            if (this.customerId > 0)
+            {
+                getCustomerDetails();
+            }
         }
     }
 }

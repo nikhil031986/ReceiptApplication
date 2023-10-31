@@ -136,6 +136,7 @@ namespace Receipt
 
         private async void btnImportData_Click(object sender, EventArgs e)
         {
+            clsWaitForm.ShowWaitForm();
             try
             {
                 if(!string.IsNullOrWhiteSpace(cboTableName.Text))
@@ -164,6 +165,11 @@ namespace Receipt
 
             }
             catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
+            finally
+            {
+                clsWaitForm.CloseWaitForm();
+                GC.Collect();
+            }
         }
 
         private void dgvImportData_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
