@@ -31,6 +31,10 @@ namespace Receipt
         public static EnUserDetails currentUserInfo = new EnUserDetails();
         public static string SiteDBName { get; set; }
 
+        public static string SiteAddress { get; set; }
+
+        public static string templateFolderPath { get;set; }
+
         private static String[] units = { "Zero", "One", "Two", "Three",
     "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven",
     "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen",
@@ -227,7 +231,7 @@ namespace Receipt
                 }
                 else
                 {
-                    return ConvertWord(amount_int) + " Point " + ConvertWord(amount_dec) + " Only.";
+                    return ConvertWord(amount_int) + " Paise " + ConvertWord(amount_dec) + " Only.";
                 }
             }
             catch (Exception e)
@@ -351,8 +355,28 @@ namespace Receipt
         }
         public static string getCurrentPath()
         {
-            return System.Reflection.Assembly.GetExecutingAssembly().Location.ToString().Replace("Receipt.exe", "");
+            return System.Reflection.Assembly.GetExecutingAssembly().Location.ToString().Replace("WEBAPISYCAPP.exe", "");
         }
+
+        public static string getDateFormate(string dt)
+        {
+            if(string.IsNullOrWhiteSpace(dt))
+            {
+                return DateTime.Now.ToString("dd-MMM-yyyy").ToUpper();
+            }
+            dt = dt.Replace("/", "-").Replace(".","-");
+            int[] selectedDate = dt.Split('-').Select(int.Parse).ToArray();
+            if (selectedDate.Length > 2)
+            {
+                var newdt = new DateTime(selectedDate[2], selectedDate[1], selectedDate[0]);
+                return newdt.ToString("dd-MMM-yyyy").ToUpper();
+            }
+            else
+            {
+                return DateTime.Now.ToString("dd-MMM-yyyy").ToUpper();
+            }
+        }
+
         public static async Task AddColumn(DataTable dtAddColumn, string columnName, ColumnType columnType, string DefaultValue)
         {
             try

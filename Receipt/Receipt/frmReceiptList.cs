@@ -366,6 +366,7 @@ namespace Receipt
 
         private async void tolNext_Click(object sender, EventArgs e)
         {
+            tolNext.Enabled = true;
             try
             {
                 if (PageIndex >= PageCount)
@@ -379,6 +380,7 @@ namespace Receipt
                 await FillGridReceiptList(0);
             }
             catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
+            tolNext.Enabled = false;
         }
 
         private async void tolLast_Click(object sender, EventArgs e)

@@ -41,20 +41,6 @@
             this.txtEndNo = new System.Windows.Forms.TextBox();
             this.btnCreateFloarNumber = new System.Windows.Forms.Button();
             this.dgWingDetails = new System.Windows.Forms.DataGridView();
-            this.Wing_DetailsId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Wing_MasterId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FlatNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Wing_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Land = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Carpet = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.WB = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EAST = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.WEST = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NORTH = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SOUTH = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FlorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvWingMaster = new System.Windows.Forms.DataGridView();
             this.Wing_Master_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Wing_Names = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -69,6 +55,21 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblWing_Master = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
+            this.Wing_DetailsId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Wing_MasterId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FlatNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Wing_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Land = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Carpet = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.WB = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Open_Terrace = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EAST = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.WEST = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NORTH = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SOUTH = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FlorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tblWingMaster.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgWingDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvWingMaster)).BeginInit();
@@ -87,7 +88,7 @@
             this.tblWingMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tblWingMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
             this.tblWingMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tblWingMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 53F));
+            this.tblWingMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 54F));
             this.tblWingMaster.Controls.Add(this.lblWingName, 0, 1);
             this.tblWingMaster.Controls.Add(this.lblFloarCount, 0, 2);
             this.tblWingMaster.Controls.Add(this.lblHouseCount, 0, 3);
@@ -236,6 +237,7 @@
             this.Land,
             this.Carpet,
             this.WB,
+            this.Open_Terrace,
             this.Total,
             this.Amount,
             this.EAST,
@@ -253,98 +255,6 @@
             this.dgWingDetails.TabIndex = 14;
             this.dgWingDetails.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgWingDetails_CellLeave);
             this.dgWingDetails.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgWingDetails_EditingControlShowing);
-            // 
-            // Wing_DetailsId
-            // 
-            this.Wing_DetailsId.DataPropertyName = "Wing_DetailsId";
-            this.Wing_DetailsId.HeaderText = "Wing_DetailsId";
-            this.Wing_DetailsId.Name = "Wing_DetailsId";
-            this.Wing_DetailsId.Visible = false;
-            // 
-            // Wing_MasterId
-            // 
-            this.Wing_MasterId.DataPropertyName = "Wing_MasterId";
-            this.Wing_MasterId.HeaderText = "Wing_MasterId";
-            this.Wing_MasterId.Name = "Wing_MasterId";
-            this.Wing_MasterId.Visible = false;
-            // 
-            // FlatNo
-            // 
-            this.FlatNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.FlatNo.DataPropertyName = "Flat_No";
-            this.FlatNo.HeaderText = "Flat No";
-            this.FlatNo.Name = "FlatNo";
-            this.FlatNo.Width = 66;
-            // 
-            // Wing_Name
-            // 
-            this.Wing_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.Wing_Name.DataPropertyName = "Wing_Name";
-            this.Wing_Name.HeaderText = "Wing_Name";
-            this.Wing_Name.Name = "Wing_Name";
-            this.Wing_Name.ReadOnly = true;
-            this.Wing_Name.Width = 91;
-            // 
-            // Land
-            // 
-            this.Land.DataPropertyName = "Land";
-            this.Land.HeaderText = "Land";
-            this.Land.Name = "Land";
-            // 
-            // Carpet
-            // 
-            this.Carpet.DataPropertyName = "Carpet";
-            this.Carpet.HeaderText = "Carpet";
-            this.Carpet.Name = "Carpet";
-            // 
-            // WB
-            // 
-            this.WB.DataPropertyName = "WB";
-            this.WB.HeaderText = "W/B";
-            this.WB.Name = "WB";
-            // 
-            // Total
-            // 
-            this.Total.DataPropertyName = "Total";
-            this.Total.HeaderText = "Total";
-            this.Total.Name = "Total";
-            this.Total.ReadOnly = true;
-            // 
-            // Amount
-            // 
-            this.Amount.DataPropertyName = "Amount";
-            this.Amount.HeaderText = "Amount";
-            this.Amount.Name = "Amount";
-            // 
-            // EAST
-            // 
-            this.EAST.DataPropertyName = "EAST";
-            this.EAST.HeaderText = "EAST";
-            this.EAST.Name = "EAST";
-            // 
-            // WEST
-            // 
-            this.WEST.DataPropertyName = "WEST";
-            this.WEST.HeaderText = "WEST";
-            this.WEST.Name = "WEST";
-            // 
-            // NORTH
-            // 
-            this.NORTH.DataPropertyName = "NORTH";
-            this.NORTH.HeaderText = "NORTH";
-            this.NORTH.Name = "NORTH";
-            // 
-            // SOUTH
-            // 
-            this.SOUTH.DataPropertyName = "SOUTH";
-            this.SOUTH.HeaderText = "SOUTH";
-            this.SOUTH.Name = "SOUTH";
-            // 
-            // FlorName
-            // 
-            this.FlorName.DataPropertyName = "FlorName";
-            this.FlorName.HeaderText = "FlorName";
-            this.FlorName.Name = "FlorName";
             // 
             // dgvWingMaster
             // 
@@ -497,6 +407,104 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
+            // Wing_DetailsId
+            // 
+            this.Wing_DetailsId.DataPropertyName = "Wing_DetailsId";
+            this.Wing_DetailsId.HeaderText = "Wing_DetailsId";
+            this.Wing_DetailsId.Name = "Wing_DetailsId";
+            this.Wing_DetailsId.Visible = false;
+            // 
+            // Wing_MasterId
+            // 
+            this.Wing_MasterId.DataPropertyName = "Wing_MasterId";
+            this.Wing_MasterId.HeaderText = "Wing_MasterId";
+            this.Wing_MasterId.Name = "Wing_MasterId";
+            this.Wing_MasterId.Visible = false;
+            // 
+            // FlatNo
+            // 
+            this.FlatNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.FlatNo.DataPropertyName = "Flat_No";
+            this.FlatNo.HeaderText = "Flat No";
+            this.FlatNo.Name = "FlatNo";
+            this.FlatNo.Width = 66;
+            // 
+            // Wing_Name
+            // 
+            this.Wing_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.Wing_Name.DataPropertyName = "Wing_Name";
+            this.Wing_Name.HeaderText = "Wing_Name";
+            this.Wing_Name.Name = "Wing_Name";
+            this.Wing_Name.ReadOnly = true;
+            this.Wing_Name.Width = 91;
+            // 
+            // Land
+            // 
+            this.Land.DataPropertyName = "Land";
+            this.Land.HeaderText = "Land";
+            this.Land.Name = "Land";
+            // 
+            // Carpet
+            // 
+            this.Carpet.DataPropertyName = "Carpet";
+            this.Carpet.HeaderText = "Carpet";
+            this.Carpet.Name = "Carpet";
+            // 
+            // WB
+            // 
+            this.WB.DataPropertyName = "WB";
+            this.WB.HeaderText = "W/B";
+            this.WB.Name = "WB";
+            // 
+            // Open_Terrace
+            // 
+            this.Open_Terrace.DataPropertyName = "Open_Terrace";
+            this.Open_Terrace.HeaderText = "Open_Terrace";
+            this.Open_Terrace.Name = "Open_Terrace";
+            // 
+            // Total
+            // 
+            this.Total.DataPropertyName = "Total";
+            this.Total.HeaderText = "Total";
+            this.Total.Name = "Total";
+            this.Total.ReadOnly = true;
+            // 
+            // Amount
+            // 
+            this.Amount.DataPropertyName = "Amount";
+            this.Amount.HeaderText = "Amount";
+            this.Amount.Name = "Amount";
+            // 
+            // EAST
+            // 
+            this.EAST.DataPropertyName = "EAST";
+            this.EAST.HeaderText = "EAST";
+            this.EAST.Name = "EAST";
+            // 
+            // WEST
+            // 
+            this.WEST.DataPropertyName = "WEST";
+            this.WEST.HeaderText = "WEST";
+            this.WEST.Name = "WEST";
+            // 
+            // NORTH
+            // 
+            this.NORTH.DataPropertyName = "NORTH";
+            this.NORTH.HeaderText = "NORTH";
+            this.NORTH.Name = "NORTH";
+            // 
+            // SOUTH
+            // 
+            this.SOUTH.DataPropertyName = "SOUTH";
+            this.SOUTH.HeaderText = "SOUTH";
+            this.SOUTH.Name = "SOUTH";
+            // 
+            // FlorName
+            // 
+            this.FlorName.DataPropertyName = "FlorName";
+            this.FlorName.HeaderText = "FlorName";
+            this.FlorName.Name = "FlorName";
+            // 
             // Wing_Master
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -548,6 +556,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn House_Count;
         private System.Windows.Forms.DataGridViewTextBoxColumn Start_Number;
         private System.Windows.Forms.DataGridViewTextBoxColumn End_Number;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Wing_DetailsId;
         private System.Windows.Forms.DataGridViewTextBoxColumn Wing_MasterId;
         private System.Windows.Forms.DataGridViewTextBoxColumn FlatNo;
@@ -555,6 +565,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Land;
         private System.Windows.Forms.DataGridViewTextBoxColumn Carpet;
         private System.Windows.Forms.DataGridViewTextBoxColumn WB;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Open_Terrace;
         private System.Windows.Forms.DataGridViewTextBoxColumn Total;
         private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
         private System.Windows.Forms.DataGridViewTextBoxColumn EAST;
@@ -562,7 +573,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn NORTH;
         private System.Windows.Forms.DataGridViewTextBoxColumn SOUTH;
         private System.Windows.Forms.DataGridViewTextBoxColumn FlorName;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

@@ -68,7 +68,7 @@ namespace Receipt
                     DataRow drNew = dtReceiptDetails.NewRow();
                     drNew["Receipt_Id"] = receipt.Receipt_Id;
                     drNew["Receipt_No"] = receipt.Receipt_No;
-                    drNew["Receipt_Date"] = receipt.Receipt_Date;
+                    drNew["Receipt_Date"] = ClsUtil.getDateFormate(receipt.Receipt_Date);
                     drNew["Customer_Id"] = receipt.Customer_Id;
                     drNew["Customer_Name"] = receipt.Customer_Name;
                     drNew["Flate_ShopNo"] = receipt.Flate_ShopNo;
@@ -79,7 +79,7 @@ namespace Receipt
                     drNew["ReceivedAs"] = receipt.ReceivedAs;
                     drNew["Amount"] = receipt.Amount;
                     drNew["Amount_Word"] = receipt.Amount_Word;
-                    drNew["Payment_Date"] = receipt.PaymentDate;
+                    drNew["Payment_Date"] = ClsUtil.getDateFormate(receipt.PaymentDate);
                     dtReceiptDetails.Rows.Add(drNew);
                 });
             }

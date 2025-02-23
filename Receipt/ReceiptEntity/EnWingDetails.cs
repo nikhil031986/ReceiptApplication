@@ -25,11 +25,12 @@ namespace ReceiptEntity
         public string NORTH { get; set; }
         public string SOUTH { get; set; }
         public string FlorName { get; set;}
+        public decimal Open_Terrace { get; set; }
         public EnWingDetails()
         {
         }
         public EnWingDetails(int wing_DetailsId, int wing_Master_Id, string flatNo, string wing_Name, decimal land, decimal carpet, decimal wb, decimal amount, 
-            decimal total, string east, string west, string north, string south, string florName)
+            decimal total, string east, string west, string north, string south, string florName, decimal open_Terrace)
         {
             Wing_DetailsId = wing_DetailsId;
             Wing_Master_Id = wing_Master_Id;
@@ -47,6 +48,7 @@ namespace ReceiptEntity
             NORTH = north;
             SOUTH = south;
             FlorName = florName;
+            Open_Terrace = open_Terrace;
         }
     }
 }

@@ -55,6 +55,10 @@ namespace Receipt
 
                 PrintDocumentView();
 
+                // Get the default printer name
+                PrinterSettings settings = new PrinterSettings();
+                string defaultPrinterName = settings.PrinterName;
+
                 System.Threading.Thread.Sleep(1000);
                 PrintDialog printDlg = new PrintDialog();
                 //pdocument.DocumentName = "fileName";
@@ -62,6 +66,7 @@ namespace Receipt
                 printDlg.AllowSelection = true;
                 printDlg.AllowSomePages = true;
                 printDlg.PrinterSettings.Copies = 2;
+                printDlg.PrinterSettings.PrinterName = defaultPrinterName;
                 //Call ShowDialog
                 clsWaitForm.CloseWaitForm();
                 if (printDlg.ShowDialog() == DialogResult.OK)
@@ -185,13 +190,14 @@ namespace Receipt
                         replaceStr.Add("_DBFlatShopNo", receiptDetails.Flate_ShopNo.ToUpper());
                         replaceStr.Add("_DBAmountInWord", receiptDetails.Amount_Word.ToUpper());
                         replaceStr.Add("_DBCheqRtgsNeftImps", receiptDetails.Cheq_Rtgs_Neft_ImpsNo + "\t");
-                        replaceStr.Add("_DBDate", receiptDetails.PaymentDate);
+                        replaceStr.Add("_DBDate", ClsUtil.getDateFormate(receiptDetails.PaymentDate));
                         replaceStr.Add("_DBBankName", receiptDetails.Bank_Name.ToUpper());
                         replaceStr.Add("_DBBranch", receiptDetails.Branch_Name.ToUpper());
                         replaceStr.Add("_DBReceivedAs", receiptDetails.ReceivedAs);
                         replaceStr.Add("_DBAmount", receiptDetails.Amount.ToString() + "/-");
-                        replaceStr.Add("_DBReceiptDate", receiptDetails.Receipt_Date);
+                        replaceStr.Add("_DBReceiptDate", ClsUtil.getDateFormate(receiptDetails.PaymentDate));
                     });
+                System.Threading.Thread.Sleep(100);
             }
             catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
         }
@@ -211,21 +217,52 @@ namespace Receipt
                     {
                         if (i == 0)
                         {
-                            e.Graphics.DrawString(custmor[i] , new Font("Times New Roman", 12, FontStyle.Bold),
+                            e.Graphics.DrawString(custmor[i] +(custmor.Count()>1 ? " & ":"") , new Font("Times New Roman", 12, FontStyle.Bold),
                             Brushes.Black, floatx, floaty);
                         }
                         else if(i<custmor.Length-1)
                         {
                             floaty = floaty + 20;
-                            e.Graphics.DrawString("\t\t\t\t\t\t\t\t & "+ custmor[i] , new Font("Times New Roman", 12, FontStyle.Bold),
+                            e.Graphics.DrawString("\t\t\t\t\t\t\t\t\t  "+ custmor[i]+ (custmor.Count() > 2 ? " & " : ""), new Font("Times New Roman", 12, FontStyle.Bold),
                             Brushes.Black, floatx, floaty);
                         }
                         else
                         {
                             floaty = floaty + 20;
-                            e.Graphics.DrawString("\t\t\t\t\t\t\t\t & "+ custmor[i] + " ", new Font("Times New Roman", 12, FontStyle.Bold),
+                            e.Graphics.DrawString("\t\t\t\t\t\t\t\t  "+ custmor[i] + " ", new Font("Times New Roman", 12, FontStyle.Bold),
                             Brushes.Black, floatx, floaty);
                         }
+                    }
+                }
+                else if (strLine.ToUpper().Contains("RS.(IN WORDS)"))
+                {
+                    if (strLine.Length > 60)
+                    {
+                        string[] displaytxt = strLine.Split(' ');
+                        string displayadd = "";
+                        for(int ln = 0; ln < 10; ln++)
+                        {
+                            displayadd += displaytxt[ln]+" ";
+                        }
+                        floaty = floaty + 20;
+                        // e.Graphics.DrawString(strLine.Substring(0,74) + " ", new Font("Times New Roman", 12, FontStyle.Bold),
+                        //Brushes.Black, floatx, floaty);
+                        e.Graphics.DrawString(displayadd + " ", new Font("Times New Roman", 12, FontStyle.Bold),
+                        Brushes.Black, floatx, floaty);
+                        displayadd = "";
+                        for (int ln = 10; ln < displaytxt.Length; ln++)
+                        {
+                            displayadd += displaytxt[ln] + " ";
+                        }
+                        floaty = floaty + 20;
+                        e.Graphics.DrawString("\t\t\t\t\t\t\t   "+ displayadd + " ", new Font("Times New Roman", 12, FontStyle.Bold),
+                        Brushes.Black, floatx, floaty);
+                    }
+                    else
+                    {
+                        floaty = floaty + 20;
+                        e.Graphics.DrawString( strLine + " ", new Font("Times New Roman", 12, FontStyle.Bold),
+                        Brushes.Black, floatx, floaty);
                     }
                 }
                 else
@@ -272,7 +309,16 @@ namespace Receipt
             try
             {
 
-                var receiptFilePath = ClsUtil.getCurrentPath() + "ReceiptTemplate.txt";
+                string receiptFilePath = ClsUtil.getCurrentPath() + "ReceiptTemplate.txt";
+                try
+                {
+                    if (System.IO.File.Exists(ClsUtil.templateFolderPath + @"\ReceiptTemplate.txt"))
+                    {
+                        receiptFilePath = ClsUtil.templateFolderPath + @"\ReceiptTemplate.txt";
+                    }
+                }
+                catch
+                { }
                 printDocumentControls = System.IO.File.ReadAllLines(receiptFilePath);
                 foreach (var repl in replaceStr)
                 {
@@ -384,6 +430,10 @@ namespace Receipt
 
                 PrintDocumentView();
 
+                // Get the default printer name
+                PrinterSettings settings = new PrinterSettings();
+                string defaultPrinterName = settings.PrinterName;
+
                 System.Threading.Thread.Sleep(1000);
                 PrintDialog printDlg = new PrintDialog();
                 //pdocument.DocumentName = "fileName";
@@ -391,6 +441,7 @@ namespace Receipt
                 printDlg.AllowSelection = true;
                 printDlg.AllowSomePages = true;
                 printDlg.PrinterSettings.Copies = 2;
+                printDlg.PrinterSettings.PrinterName=defaultPrinterName;
                 //Call ShowDialog
                 clsWaitForm.CloseWaitForm();
                 if (printDlg.ShowDialog() == DialogResult.OK)

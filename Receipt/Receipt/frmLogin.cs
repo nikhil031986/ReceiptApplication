@@ -61,7 +61,9 @@ namespace Receipt
             {
                 EnSiteMaster dbName =(EnSiteMaster)cmbsiteName.SelectedItem;
                 ClsUtil.SiteDBName = dbName.DB_Name;
+                ClsUtil.SiteAddress = dbName.Site_Address;
                 ClsUtil.currentUserInfo = await BAUserDetails.GetUserDetails(txtUserID.Text.Trim(), txtPassword.Text.Trim());
+                ClsUtil.templateFolderPath = @"D:\ApplicationTemp";
                 if (ClsUtil.currentUserInfo != null && ClsUtil.currentUserInfo.UserId > 0)
                 {
                     ReceiptLog.clsLog.InstanceCreation().InsertLog("User Login User Name :"+txtUserID.Text, ReceiptLog.clsLog.logType.Info, "frmLogin.btnLogin");

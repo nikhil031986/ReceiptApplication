@@ -294,6 +294,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="rptBanakhat.rdlc" />
+    <EmbeddedResource Include="rptSubRptCust.rdlc" />
     <EmbeddedResource Include="Wing_Master.resx">
       <DependentUpon>Wing_Master.cs</DependentUpon>
     </EmbeddedResource>

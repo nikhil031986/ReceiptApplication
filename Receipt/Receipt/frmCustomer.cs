@@ -85,9 +85,9 @@ namespace Receipt
                     drNew["Pan3"] = customer.Pan3;
                     drNew["Aadhar3"] = customer.Aadhar3;
                     drNew["BanakhatNo"] = customer.BanakhatNo;
-                    drNew["BanakhatDate"] = customer.BanakhatDate;
+                    drNew["BanakhatDate"] = ClsUtil.getDateFormate(customer.BanakhatDate);
                     drNew["Dastavej_No"] = customer.Dastavg_No;
-                    drNew["Dastavej_Date"] = customer.Dastavg_Date;
+                    drNew["Dastavej_Date"] = ClsUtil.getDateFormate(customer.Dastavg_Date);
                     drNew["Dastavej_Amount"] = customer.Dastavej_Amount;
                     dtCustomer.Rows.Add(drNew);
                 });
@@ -341,9 +341,9 @@ namespace Receipt
                     drNew["Pan3"] = customer.Pan3;
                     drNew["Aadhar3"] = customer.Aadhar3;
                     drNew["BanakhatNo"] = customer.BanakhatNo;
-                    drNew["BanakhatDate"] = customer.BanakhatDate;
+                    drNew["BanakhatDate"] = ClsUtil.getDateFormate(customer.BanakhatDate);
                     drNew["Dastavej_No"] = customer.Dastavg_No;
-                    drNew["Dastavej_Date"] = customer.Dastavg_Date;
+                    drNew["Dastavej_Date"] = ClsUtil.getDateFormate(customer.Dastavg_Date);
                     drNew["Dastavej_Amount"] = customer.Dastavej_Amount;
                     dtExport.Rows.Add(drNew);
                     dgExport.Rows.Add(drNew.ItemArray);

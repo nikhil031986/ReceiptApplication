@@ -5,25 +5,24 @@
 
 
 
+					RECEIPT NO		 :- _DBReceiptNO				DATE	:- _DBReceiptDate
 
-RECEIPT NO		  :- _DBReceiptNO					DATE	:- _DBReceiptDate
+					NAME			 :- _DBCustomerName
 
-NAME			  :- _DBCustomerName
+					FLAT / SHOP NO 	:- _DBFlatShopNo
 
-FLAT / SHOP NO 	  :- _DBFlatShopNo
+					RS.(IN WORDS)		:- _DBAmountInWord
 
-RS.(IN WORDS)		  :- _DBAmountInWord
+					CH./RTGS/NEFT/IMPS NO:- _DBCheqRtgsNeftImps	 DATE	:- _DBDate
 
-CH./RTGS/NEFT/IMPS NO  :- _DBCheqRtgsNeftImps					DATE	:- _DBDate
+					BANK NAME		  :- _DBBankName
 
-BANK NAME		  :- _DBBankName
+					BRANCH		  :- _DBBranch
 
-BRANCH		  :- _DBBranch
+					Received As Deposit	  :- (_DBReceivedAs)
 
-Received As Deposit	  :- (_DBReceivedAs)
-
-RS.			  :- _DBAmount					FOR, RIDHAM ENTRPRISE
-										----------
-Subject To The Realization of Cheque					
-Subject To The Ahmedabad Jurisdiction					
-										----------
+					RS. 			  :- _DBAmount			    FOR, RIDHAM ENTERPRISE
+													  ----------
+					Subject To The Realization of Cheque					
+					Subject To The Ahmedabad Jurisdiction					
+													  ----------

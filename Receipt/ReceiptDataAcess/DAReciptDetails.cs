@@ -492,7 +492,7 @@ namespace ReceiptDataAcess
         }
         public static async Task<string> getReceiptNo()
         {
-            string strRetValeu = "00-00-000";
+            string strRetValeu = "00-00-0000";
             SQLiteCommand cmd = new SQLiteCommand();
             try
             {
@@ -509,10 +509,11 @@ namespace ReceiptDataAcess
 		                            ELSE CAST( substr(strftime('%Y',DATE()),3,2)+1 AS INT) END
 		                            ||'-'||
 	                            (	CASE  
-			                            length(CAST( CAST(substr(ifnull(Receipt_No,'00-00-000'),7,3) AS INT)+1 AS TEXT))
-		                            WHEN 1 THEN  '00'||CAST( CAST(substr(ifnull(Receipt_No,'00-00-000'),7,3) AS INT)+1 AS TEXT) 
-		                            WHEN 2 THEN  '0'||CAST( CAST(substr(ifnull(Receipt_No,'00-00-000'),7,3) AS INT)+1 AS TEXT) 
-		                            ELSE CAST( CAST(substr(ifnull(Receipt_No,'00-00-000'),7,3) AS INT)+1 AS TEXT) 
+			                            length(CAST( CAST(substr(ifnull(Receipt_No,'00-00-0000'),7,4) AS INT)+1 AS TEXT))
+		                            WHEN 1 THEN  '000'||CAST( CAST(substr(ifnull(Receipt_No,'00-00-0000'),7,4) AS INT)+1 AS TEXT) 
+		                            WHEN 2 THEN  '00'||CAST( CAST(substr(ifnull(Receipt_No,'00-00-0000'),7,4) AS INT)+1 AS TEXT) 
+									WHEN 3 THEN  '0'||CAST( CAST(substr(ifnull(Receipt_No,'00-00-0000'),7,4) AS INT)+1 AS TEXT)
+		                            ELSE CAST( CAST(substr(ifnull(Receipt_No,'00-00-0000'),7,4) AS INT)+1 AS TEXT) 
 	                            END )
                             FROM ReceiptDetail ORDER BY CAST(replace(Receipt_No,'-','') AS INT) DESC, Receipt_Id DESC LIMIT 1;";
                 cmd.CommandText = strCommand;
@@ -584,7 +585,7 @@ namespace ReceiptDataAcess
                 }
                 strCommand += @" AND RD.IsCancel=0 
                                 GROUP BY CM.Customer_Id
-                                HAVING ((minPayAmount-ReceiptAmount)<0);";
+                                HAVING ((minPayAmount-ReceiptAmount)<=0);";
                 cmd.CommandText = strCommand;
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.Parameters.Clear();
@@ -704,7 +705,7 @@ namespace ReceiptDataAcess
                         {
                             reDate = drImport[1].ToString().Split('-');
                         }
-                        var recDateNo = reDate[2] + (reDate[1].Length < 1 ? "0" : "") + reDate[1] + (reDate[0].Length < 1 ? "0" : "") + reDate[0];
+                        var recDateNo = reDate[2].Split(' ')[0] + (reDate[1].Length < 1 ? "0" : "") + reDate[1] + (reDate[0].Length < 1 ? "0" : "") + reDate[0];
                         enReceiptDetails.ReceiptDateNo = Convert.ToInt32(recDateNo);
                         enReceiptDetails.IsCancel = Convert.ToInt32(drImport[11]);
                         enReceiptDetails.IsPrint = Convert.ToInt32(drImport[12]);

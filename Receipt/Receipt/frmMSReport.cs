@@ -21,7 +21,6 @@ namespace Receipt
 
         private void frmMSReport_Load(object sender, EventArgs e)
         {
-
             this.reportViewer1.RefreshReport();
             getData();
         }

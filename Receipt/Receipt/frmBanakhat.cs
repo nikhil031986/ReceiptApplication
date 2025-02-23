@@ -70,7 +70,7 @@ namespace Receipt
                 strNewHTMLFile.AppendLine(@"<table border='1' cellpadding = '1' cellspacing = '1' style = 'width:100%' > ");
                 strNewHTMLFile.AppendLine(@"	<tbody>");
                 strNewHTMLFile.AppendLine(@"		<tr>");
-                strNewHTMLFile.AppendLine(@"			<td style='text-align:center'><strong>KARNAVATI APARTMENT - 6</strong></td>");
+                strNewHTMLFile.AppendLine(@"			<td style='text-align:center'><strong>" + ClsUtil.SiteAddress + "</strong></td>");
                 strNewHTMLFile.AppendLine(@"		</tr>");
                 strNewHTMLFile.AppendLine(@"		<tr>");
                 strNewHTMLFile.AppendLine(@"			<td style='text-align:center'><strong>REG. BANAKHAT</strong></td>");
@@ -85,18 +85,20 @@ namespace Receipt
                 strNewHTMLFile.AppendLine(@"						<td style='width:95px;background-color:#E8E8E8;'><strong>BLOCK.:-</strong></td>");
                 strNewHTMLFile.AppendLine(@"						<td colspan='2' rowspan = '1' style = 'text-align:center; width:340px' > " + ((EnCustomer)selectedCustomer).Wing_Name + " </ td > ");
                 strNewHTMLFile.AppendLine(@"						<td style='width:225px;background-color:#E8E8E8;'><strong>FLOOR.:-</strong></td>");
-                strNewHTMLFile.AppendLine(@"						<td style='width:168px'>" + selectedWingDetails.FlorName.ToUpper() + "</td>");
+                strNewHTMLFile.AppendLine(@"						<td style='width:168px' colspan='2'>" + selectedWingDetails.FlorName.ToUpper() + "</td>");
                 strNewHTMLFile.AppendLine(@"					</tr>");
                 strNewHTMLFile.AppendLine(@"					<tr>");
                 strNewHTMLFile.AppendLine(@"						<td style='width:108px;background-color:#E8E8E8;'><strong>LAND.:-</strong></td>");
                 strNewHTMLFile.AppendLine(@"						<td style='width:89px'>" + selectedWingDetails.Land.ToString() + "</td>");
                 strNewHTMLFile.AppendLine(@"						<td style='width:132px'>SQ.MTR</td>");
-                strNewHTMLFile.AppendLine(@"						<td style='width:95px;background-color:#E8E8E8;'><strong>TOTAL.:-</strong></td>");
+                strNewHTMLFile.AppendLine(@"						<td style='width:95px;background-color:#E8E8E8;'><strong>TOTAL.:-</strong></td>");                
                 strNewHTMLFile.AppendLine(@"						<td style='width:167px'>" + selectedWingDetails.Total.ToString() + "</td>");
                 strNewHTMLFile.AppendLine(@"						<td style='width:168px'>SQ.MTR</td>");
-                strNewHTMLFile.AppendLine(@"						<td style='width:225px;background-color:#E8E8E8;'><strong>AMT.:-</strong></td>");
-                strNewHTMLFile.AppendLine(@"						<td style='width:168px'>" + selectedWingDetails.Amount.ToString() + "</td>");
+                strNewHTMLFile.AppendLine(@"						<td style='width:225px;background-color:#E8E8E8;' rowspan='2'><strong>Open Tarrace :-</strong></td>");
+                strNewHTMLFile.AppendLine(@"						<td style='width:168px'  rowspan='2'>" + selectedWingDetails.Open_Terrace.ToString("0.00") + "</td>");
+                strNewHTMLFile.AppendLine(@"						<td style='width:168px'  rowspan='2'>SQ.MTR</td>");
                 strNewHTMLFile.AppendLine(@"					</tr>");
+                
                 strNewHTMLFile.AppendLine(@"					<tr>");
                 strNewHTMLFile.AppendLine(@"						<td style='width:108px;background-color:#E8E8E8;'><strong>CARPET.:-</strong></td>");
                 strNewHTMLFile.AppendLine(@"						<td style='width:89px'>" + selectedWingDetails.Carpet.ToString() + "</td>");
@@ -104,7 +106,14 @@ namespace Receipt
                 strNewHTMLFile.AppendLine(@"						<td style='width:95px;background-color:#E8E8E8;'><strong>W/B</strong></td>");
                 strNewHTMLFile.AppendLine(@"						<td style='width:167px'>" + selectedWingDetails.WB.ToString() + "</td>");
                 strNewHTMLFile.AppendLine(@"						<td style='width:168px'>SQ.MTR</td>");
-                strNewHTMLFile.AppendLine(@"						<td style='width:225px;background-color:#E8E8E8;'><strong>RELIGION.:-</strong></td>");
+
+               
+
+                strNewHTMLFile.AppendLine(@"					</tr>");
+                strNewHTMLFile.AppendLine(@"					<tr>");
+                strNewHTMLFile.AppendLine(@"						<td style='width:225px;background-color:#E8E8E8;' colspan='3'><strong>AMT.:-</strong></td>");
+                strNewHTMLFile.AppendLine(@"						<td style='width:168px' colspan='2'>" + selectedWingDetails.Amount.ToString() + "</td>");
+                strNewHTMLFile.AppendLine(@"						<td style='width:225px;background-color:#E8E8E8;'  colspan='3'><strong>RELIGION.:-</strong></td>");
                 strNewHTMLFile.AppendLine(@"						<td style='width:168px'>HINDU</td>");
                 strNewHTMLFile.AppendLine(@"					</tr>");
                 strNewHTMLFile.AppendLine(@"				</tbody>");
@@ -129,7 +138,7 @@ namespace Receipt
                     strNewHTMLFile.AppendLine(@"						<td style='background-color:#E8E8E8;'><strong>PAN NO.:-</strong></td>");
                     strNewHTMLFile.AppendLine(@"						<td>" + ((EnCustomer)selectedCustomer).Pan + "</td>");
                     strNewHTMLFile.AppendLine(@"						<td><strong>DATE:-</strong></td>");
-                    strNewHTMLFile.AppendLine(@"						<td>" + ((EnCustomer)selectedCustomer).BanakhatDate + "</td>");
+                    strNewHTMLFile.AppendLine(@"						<td>" + ClsUtil.getDateFormate( ((EnCustomer)selectedCustomer).BanakhatDate) + "</td>");
                     strNewHTMLFile.AppendLine(@"					</tr>");
                     strNewHTMLFile.AppendLine(@"					<tr>");
                     strNewHTMLFile.AppendLine(@"						<td style='background-color:#E8E8E8;'><strong>ADHAR NO.:-</strong></td>");
@@ -217,7 +226,7 @@ namespace Receipt
                     strNewHTMLFile.AppendLine(@"						<td style='width:404px'>" + receipt.Bank_Name + "</td>");
                     strNewHTMLFile.AppendLine(@"						<td style='text-align:center; width:229px'>" + receipt.Branch_Name + "</td>");
                     strNewHTMLFile.AppendLine(@"						<td style='text-align:center; width:232px'>" + receipt.Cheq_Rtgs_Neft_ImpsNo + "</td>");
-                    strNewHTMLFile.AppendLine(@"						<td style='text-align:center; width:144px'>" + receipt.PaymentDate.Replace("/", ".") + "</td>");
+                    strNewHTMLFile.AppendLine(@"						<td style='text-align:center; width:144px'>" + ClsUtil.getDateFormate(receipt.PaymentDate).Replace("/", ".") + "</td>");
                     strNewHTMLFile.AppendLine(@"					</tr>");
                     TotalAmount = TotalAmount + receipt.Amount;
                 }

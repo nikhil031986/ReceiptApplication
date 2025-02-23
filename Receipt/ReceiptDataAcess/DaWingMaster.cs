@@ -72,7 +72,7 @@ namespace ReceiptDataAcess
                         Convert.ToInt32(firstRow["Start_Number"]),
                         Convert.ToInt32(firstRow["End_Number"]));
                     command = new SQLiteCommand();
-                    command.CommandText = "SELECT Wing_DetailsId,Wing_MasterId,FlatNo,Wing_Name,IFNULL(Land, 0 ) as Land,IFNULL(Carpet, 0 ) as Carpet,IFNULL(WB, 0 ) as WB,IFNULL(Amount, 0 ) as Amount,IFNULL(Total, 0 ) as Total,EAST,WEST,NORTH,SOUTH,FlorName,CAST(FlatNo AS INT) AS INTFlat FROM Wing_Details WHERE Wing_MasterId=@Wing_MasterId order by INTFlat;";
+                    command.CommandText = "SELECT Wing_DetailsId,Wing_MasterId,FlatNo,Wing_Name,IFNULL(Land, 0 ) as Land,IFNULL(Carpet, 0 ) as Carpet,IFNULL(WB, 0 ) as WB,IFNULL(Amount, 0 ) as Amount,IFNULL(Total, 0 ) as Total,EAST,WEST,NORTH,SOUTH,FlorName,CAST(FlatNo AS INT) AS INTFlat,IFNULL(Open_Terrace,0) AS Open_Terrace FROM Wing_Details WHERE Wing_MasterId=@Wing_MasterId order by INTFlat;";
                     command.Parameters.Clear();
                     command.Parameters.AddWithValue("@Wing_MasterId", enWingMaster.Wing_Master_Id);
                     dtWingMaster = await DaDatabaseConnection.GetDataTable(command);
@@ -93,7 +93,8 @@ namespace ReceiptDataAcess
                                  Convert.ToString(x["WEST"]),
                                  Convert.ToString(x["NORTH"]),
                                  Convert.ToString(x["SOUTH"]),
-                                 Convert.ToString(x["FlorName"])
+                                 Convert.ToString(x["FlorName"]),
+                                 Convert.ToDecimal(x["Open_Terrace"])
                                 ));
                         });
                     }
@@ -132,7 +133,7 @@ namespace ReceiptDataAcess
                         Convert.ToInt32(firstRow["Start_Number"]),
                         Convert.ToInt32(firstRow["End_Number"]));
                     command = new SQLiteCommand();
-                    command.CommandText = "SELECT Wing_DetailsId,Wing_MasterId,FlatNo,Wing_Name,IFNULL(Land, 0 ) as Land,IFNULL(Carpet, 0 ) as Carpet,IFNULL(WB, 0 ) as WB,IFNULL(Amount, 0 ) as Amount,IFNULL(Total, 0 ) as Total,EAST,WEST,NORTH,SOUTH,FlorName FROM Wing_Details WHERE Wing_MasterId=@Wing_MasterId";
+                    command.CommandText = "SELECT Wing_DetailsId,Wing_MasterId,FlatNo,Wing_Name,IFNULL(Land, 0 ) as Land,IFNULL(Carpet, 0 ) as Carpet,IFNULL(WB, 0 ) as WB,IFNULL(Amount, 0 ) as Amount,IFNULL(Total, 0 ) as Total,EAST,WEST,NORTH,SOUTH,FlorName,IFNULL(Open_Terrace,0) AS Open_Terrace FROM Wing_Details WHERE Wing_MasterId=@Wing_MasterId";
                     command.Parameters.Clear();
                     command.Parameters.AddWithValue("@Wing_MasterId", wingMasterId);
                     dtWingMaster = await DaDatabaseConnection.GetDataTable(command);
@@ -153,7 +154,8 @@ namespace ReceiptDataAcess
                                  Convert.ToString(x["WEST"]),
                                  Convert.ToString(x["NORTH"]),
                                  Convert.ToString(x["SOUTH"]),
-                                 Convert.ToString(x["FlorName"])
+                                 Convert.ToString(x["FlorName"]),
+                                 Convert.ToDecimal(x["Open_Terrace"])
                                 ));
                         });
                     }
@@ -178,7 +180,7 @@ namespace ReceiptDataAcess
             SQLiteCommand cmd = new SQLiteCommand();
             try
             {
-                string cmdText = "SELECT Wing_DetailsId,Wing_MasterId,FlatNo,Wing_Name,printf(\"%.2f\",IFNULL(Land, 0 )) as Land,printf(\"%.2f\",IFNULL(Carpet, 0 )) as Carpet,printf(\"%.2f\", IFNULL(WB, 0 )) as WB,IFNULL(Amount, 0 ) as Amount,printf(\"%.2f\", IFNULL(Total, 0 )) as Total,EAST,WEST,NORTH,SOUTH,FlorName FROM Wing_Details" + (wingMasterId == 0 ? ";" : " WHERE Wing_MasterId=@Wing_MasterId;");
+                string cmdText = "SELECT Wing_DetailsId,Wing_MasterId,FlatNo,Wing_Name,printf(\"%.2f\",IFNULL(Land, 0 )) as Land,printf(\"%.2f\",IFNULL(Carpet, 0 )) as Carpet,printf(\"%.2f\", IFNULL(WB, 0 )) as WB,IFNULL(Amount, 0 ) as Amount,printf(\"%.2f\", IFNULL(Total, 0 )) as Total,EAST,WEST,NORTH,SOUTH,FlorName,printf(\"%.2f\",IFNULL(Open_Terrace, 0 )) AS Open_Terrace FROM Wing_Details" + (wingMasterId == 0 ? ";" : " WHERE Wing_MasterId=@Wing_MasterId;");
                 cmd.CommandText = cmdText;
                 if (wingMasterId > 0)
                 {
@@ -204,7 +206,8 @@ namespace ReceiptDataAcess
                         Convert.ToString(firstRow["WEST"]),
                         Convert.ToString(firstRow["NORTH"]),
                         Convert.ToString(firstRow["SOUTH"]),
-                        Convert.ToString(firstRow["FlorName"])
+                        Convert.ToString(firstRow["FlorName"]),
+                        Convert.ToDecimal(firstRow["Open_Terrace"])
                         ));
                     });
                 }
@@ -288,12 +291,12 @@ namespace ReceiptDataAcess
                 bool isEdit = false;
                 if (string.IsNullOrEmpty(Convert.ToString(wingDetail.Wing_DetailsId)) || wingDetail.Wing_DetailsId == 0)
                 {
-                    strCommand = "Insert into Wing_Details (Wing_MasterId,FlatNo,Wing_Name,Land,Carpet,WB,Amount,Total,EAST,WEST,NORTH,SOUTH,FlorName) VALUES(@Wing_MasterId,@FlatNo,@Wing_Name,@Land,@Carpet,@WB,@Amount,@Total,@East,@West,@North,@South,@FlorName); SELECT last_insert_rowid() FROM Wing_Details;";
+                    strCommand = "Insert into Wing_Details (Wing_MasterId,FlatNo,Wing_Name,Land,Carpet,WB,Amount,Total,EAST,WEST,NORTH,SOUTH,FlorName,Open_Terrace) VALUES(@Wing_MasterId,@FlatNo,@Wing_Name,@Land,@Carpet,@WB,@Amount,@Total,@East,@West,@North,@South,@FlorName,@Open_Terrace); SELECT last_insert_rowid() FROM Wing_Details;";
                 }
                 else
                 {
                     isEdit = true;
-                    strCommand = "Update Wing_Details set Wing_MasterId=@Wing_MasterId,FlatNo=@FlatNo,Wing_Name=@Wing_Name,Land=@Land,Carpet=@Carpet,WB=@WB,Amount=@Amount,Total=@Total,EAST=@East,WEST=@West,NORTH=@North,SOUTH=@South,FlorName=@FlorName WHERE Wing_DetailsId=@Wing_DetailsId; SELECT @Wing_DetailsId;";
+                    strCommand = "Update Wing_Details set Wing_MasterId=@Wing_MasterId,FlatNo=@FlatNo,Wing_Name=@Wing_Name,Land=@Land,Carpet=@Carpet,WB=@WB,Amount=@Amount,Total=@Total,EAST=@East,WEST=@West,NORTH=@North,SOUTH=@South,FlorName=@FlorName,Open_Terrace=@Open_Terrace WHERE Wing_DetailsId=@Wing_DetailsId; SELECT @Wing_DetailsId;";
                 }
                 cmd.CommandText = strCommand;
                 cmd.CommandType = System.Data.CommandType.Text;
@@ -312,6 +315,7 @@ namespace ReceiptDataAcess
                 cmd.Parameters.AddWithValue("@North", wingDetail.NORTH);
                 cmd.Parameters.AddWithValue("@South", wingDetail.SOUTH);
                 cmd.Parameters.AddWithValue("@FlorName", wingDetail.FlorName);
+                cmd.Parameters.AddWithValue("@Open_Terrace", wingDetail.Open_Terrace);
 
                 if (isEdit)
                 {
@@ -345,12 +349,12 @@ namespace ReceiptDataAcess
                     bool isEdit = false;
                     if (string.IsNullOrEmpty(Convert.ToString(wingDetail.Wing_DetailsId)) || wingDetail.Wing_DetailsId == 0)
                     {
-                        strCommand = "Insert into Wing_Details (Wing_MasterId,FlatNo,Wing_Name,Land,Carpet,WB,Amount,Total,EAST,WEST,NORTH,SOUTH,FlorName) VALUES(@Wing_MasterId,@FlatNo,@Wing_Name,@Land,@Carpet,@WB,@Amount,@Total,@East,@West,@North,@South,@FlorName); SELECT last_insert_rowid() FROM Wing_Details;";
+                        strCommand = "Insert into Wing_Details (Wing_MasterId,FlatNo,Wing_Name,Land,Carpet,WB,Amount,Total,EAST,WEST,NORTH,SOUTH,FlorName,Open_Terrace) VALUES(@Wing_MasterId,@FlatNo,@Wing_Name,@Land,@Carpet,@WB,@Amount,@Total,@East,@West,@North,@South,@FlorName,@Open_Terrace); SELECT last_insert_rowid() FROM Wing_Details;";
                     }
                     else
                     {
                         isEdit = true;
-                        strCommand = "Update Wing_Details set Wing_MasterId=@Wing_MasterId,FlatNo=@FlatNo,Wing_Name=@Wing_Name,Land=@Land,Carpet=@Carpet,WB=@WB,Amount=@Amount,Total=@Total,EAST=@East,WEST=@West,NORTH=@North,SOUTH=@South,FlorName=@FlorName WHERE Wing_DetailsId=@Wing_DetailsId; SELECT @Wing_DetailsId;";
+                        strCommand = "Update Wing_Details set Wing_MasterId=@Wing_MasterId,FlatNo=@FlatNo,Wing_Name=@Wing_Name,Land=@Land,Carpet=@Carpet,WB=@WB,Amount=@Amount,Total=@Total,EAST=@East,WEST=@West,NORTH=@North,SOUTH=@South,FlorName=@FlorName,Open_Terrace=@Open_Terrace WHERE Wing_DetailsId=@Wing_DetailsId; SELECT @Wing_DetailsId;";
                     }
                     cmd.CommandText = strCommand;
                     cmd.CommandType = System.Data.CommandType.Text;
@@ -369,6 +373,7 @@ namespace ReceiptDataAcess
                     cmd.Parameters.AddWithValue("@North", wingDetail.NORTH);
                     cmd.Parameters.AddWithValue("@South", wingDetail.SOUTH);
                     cmd.Parameters.AddWithValue("@FlorName", wingDetail.FlorName);
+                    cmd.Parameters.AddWithValue("@Open_Terrace", wingDetail.Open_Terrace);
 
                     if (isEdit)
                     {

@@ -8,6 +8,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Office.Interop.Word;
+using Microsoft.ReportingServices.RdlExpressions.ExpressionHostObjectModel;
 using ReceiptBAccess;
 using ReceiptEntity;
 using ReceiptLog;
@@ -16,8 +18,8 @@ namespace Receipt
 {
     public partial class Wing_Master : Form
     {
-        private DataTable dtWingDetails;
-        private DataTable dtWingMaster;
+        private System.Data.DataTable dtWingDetails;
+        private System.Data.DataTable dtWingMaster;
         public event EventHandler CloseUserDetails;
         public Wing_Master()
         {
@@ -31,7 +33,7 @@ namespace Receipt
             }
             catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
         }
-        private async Task FillGridWingMaster(int wingMasterId = 0)
+        private async System.Threading.Tasks.Task FillGridWingMaster(int wingMasterId = 0)
         {
             try
             {
@@ -77,11 +79,11 @@ namespace Receipt
             }
 
         }
-        private async Task AddContrial()
+        private async System.Threading.Tasks.Task AddContrial()
         {
             try
             {
-                dtWingDetails = new DataTable();
+                dtWingDetails = new System.Data.DataTable();
                 await ClsUtil.AddColumn(dtWingDetails, "Wing_DetailsId", ClsUtil.ColumnType.dbLong, "0");
                 await ClsUtil.AddColumn(dtWingDetails, "Wing_MasterId", ClsUtil.ColumnType.dbLong, "0");
                 await ClsUtil.AddColumn(dtWingDetails, "Flat_No", ClsUtil.ColumnType.dbString, "");
@@ -96,8 +98,9 @@ namespace Receipt
                 await ClsUtil.AddColumn(dtWingDetails, "NORTH", ClsUtil.ColumnType.dbString, "");
                 await ClsUtil.AddColumn(dtWingDetails, "SOUTH", ClsUtil.ColumnType.dbString, "");
                 await ClsUtil.AddColumn(dtWingDetails, "FlorName", ClsUtil.ColumnType.dbString, "");
+                await ClsUtil.AddColumn(dtWingDetails, "Open_Terrace", ClsUtil.ColumnType.dbDecimal, "0");
                 dgWingDetails.DataSource = dtWingDetails;
-                dtWingMaster = new DataTable();
+                dtWingMaster = new System.Data.DataTable();
                 await ClsUtil.AddColumn(dtWingMaster, "Wing_Master_Id", ClsUtil.ColumnType.dbLong, "0");
                 await ClsUtil.AddColumn(dtWingMaster, "Wing_Names", ClsUtil.ColumnType.dbString, "");
                 await ClsUtil.AddColumn(dtWingMaster, "Floar_Count", ClsUtil.ColumnType.dbInt, "");
@@ -136,7 +139,7 @@ namespace Receipt
             int TotalFloar = Convert.ToInt32(txtFloar_Count.Text);
             int FlatNo = 0;
             int florNumber = 0;
-            await Task.Run(() =>
+            await System.Threading.Tasks.Task.Run(() =>
             {
                 try
                 {
@@ -164,6 +167,7 @@ namespace Receipt
                                 drNew["NORTH"] = 0;
                                 drNew["SOUTH"] = 0;
                                 drNew["FlorName"] = ClsUtil.ConvertWord(florNumber);
+                                drNew["Open_Terrace"] = 0;
                                 dtWingDetails.Rows.Add(drNew);
                             }
                             else
@@ -194,6 +198,7 @@ namespace Receipt
                                     drNew["NORTH"] = 0;
                                     drNew["SOUTH"] = 0;
                                     drNew["FlorName"] = ClsUtil.ConvertWord(florNumber);
+                                    drNew["Open_Terrace"] = 0;
                                     dtWingDetails.Rows.Add(drNew);
                                 }
                             }
@@ -210,9 +215,9 @@ namespace Receipt
             });
             dtWingDetails.AcceptChanges();
         }
-        private async Task ClearControlData()
+        private async System.Threading.Tasks.Task ClearControlData()
         {
-            await Task.Run(() => this.Invoke(new MethodInvoker(() =>
+            await System.Threading.Tasks.Task.Run(() => this.Invoke(new MethodInvoker(() =>
               {
                   dtWingDetails.Rows.Clear();
                   txtEndNo.Text = "0";
@@ -282,7 +287,8 @@ namespace Receipt
                         Convert.ToString(x["WEST"]),
                         Convert.ToString(x["NORTH"]),
                         Convert.ToString(x["SOUTH"]),
-                        Convert.ToString(x["FlorName"])
+                        Convert.ToString(x["FlorName"]),
+                        Convert.ToDecimal(x["Open_Terrace"])
                         ));
                 });
                 var result = await BaWingMaster.InsertWingMaster(enWingMaster, enWingDetails, 1);
@@ -339,6 +345,7 @@ namespace Receipt
                         drNew["NORTH"] = wingDetails.NORTH;
                         drNew["SOUTH"] = wingDetails.SOUTH;
                         drNew["FlorName"] = wingDetails.FlorName;
+                        drNew["Open_Terrace"]= wingDetails.Open_Terrace;
                         dtWingDetails.Rows.Add(drNew);
                     });
                 }
@@ -373,7 +380,8 @@ namespace Receipt
                 e.Control.KeyPress -= new KeyPressEventHandler(Column1_KeyPress);
                 if (dgWingDetails.CurrentCell.OwningColumn.Name == "Land" ||
                     dgWingDetails.CurrentCell.OwningColumn.Name == "Carpet" ||
-                    dgWingDetails.CurrentCell.OwningColumn.Name == "WB" || dgWingDetails.CurrentCell.OwningColumn.Name == "Amount") //Desired Column
+                    dgWingDetails.CurrentCell.OwningColumn.Name == "WB" || dgWingDetails.CurrentCell.OwningColumn.Name == "Amount"
+                    || dgWingDetails.CurrentCell.OwningColumn.Name== "Open_Terrace") //Desired Column
                 {
                     TextBox tb = e.Control as TextBox;
                     if (tb != null)

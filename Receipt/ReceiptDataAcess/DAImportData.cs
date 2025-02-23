@@ -161,6 +161,10 @@ namespace ReceiptDataAcess
                                 {
                                     wingDetails.Amount = Convert.ToDecimal(drImport["Amount"]);
                                 }
+                                if (dtForImport.Columns.Contains("Open_Terrace"))
+                                {
+                                    wingDetails.Open_Terrace = Convert.ToDecimal(drImport["Open_Terrace"]);
+                                }
                                 decimal totals = wingDetails.Carpet + wingDetails.WB;
                                 wingDetails.Total = totals;
                                 if (dtForImport.Columns.Contains("WEST"))
@@ -206,7 +210,7 @@ namespace ReceiptDataAcess
                                                                        Convert.ToDecimal(drImport["Carpet"]), Convert.ToDecimal(drImport["w_B"]),
                                                                        Convert.ToDecimal(drImport["Amount"]), totals, Convert.ToString(drImport["EAST"]),
                                                                        Convert.ToString(drImport["WEST"]), Convert.ToString(drImport["NORTH"]),
-                                                                       Convert.ToString(drImport["SOUTH"]), convertNumberToWord(numberConvert));
+                                                                       Convert.ToString(drImport["SOUTH"]), convertNumberToWord(numberConvert), Convert.ToDecimal(drImport["Open_Terrace"]));
                                 int wingDetailId = await DaWingMaster.InsertUpdateWingDetails(enWingDetails, wingMaster.Wing_Master_Id);
                                 drImport["Wing_DetailsId"] = enWingDetails.Wing_DetailsId;
                             }
@@ -230,7 +234,8 @@ namespace ReceiptDataAcess
                                                                            Convert.ToDecimal(drImport["Carpet"]), Convert.ToDecimal(drImport["w_B"]),
                                                                            Convert.ToDecimal(drImport["Amount"]), totals, Convert.ToString(drImport["EAST"]),
                                                                            Convert.ToString(drImport["WEST"]), Convert.ToString(drImport["NORTH"]),
-                                                                           Convert.ToString(drImport["SOUTH"]), convertNumberToWord(numberConvert));
+                                                                           Convert.ToString(drImport["SOUTH"]), convertNumberToWord(numberConvert),
+                                                                           Convert.ToDecimal(drImport["Open_Terrace"]));
                             List<EnWingDetails> enWingDetailsList = new List<EnWingDetails>();
                             enWingDetailsList.Add(enWingDetails);
                             var wingMasterID = await DaWingMaster.InsertWingMaster(enWingMaster, enWingDetailsList, 1);
@@ -342,7 +347,8 @@ namespace ReceiptDataAcess
                                                                        Convert.ToDecimal(drImport["Carpet"]), Convert.ToDecimal(drImport["w_B"]),
                                                                        Convert.ToDecimal(drImport["Amount"]), totals, Convert.ToString(drImport["EAST"]),
                                                                        Convert.ToString(drImport["WEST"]), Convert.ToString(drImport["NORTH"]),
-                                                                       Convert.ToString(drImport["SOUTH"]), convertNumberToWord(numberConvert));
+                                                                       Convert.ToString(drImport["SOUTH"]), convertNumberToWord(numberConvert),
+                                                                       Convert.ToDecimal(drImport["Open_Terrace"]));
                                 int wingDetailId = await DaWingMaster.InsertUpdateWingDetails(enWingDetails, wingMaster.Wing_Master_Id);
                                 drImport["Wing_DetailsId"] = enWingDetails.Wing_DetailsId;
                             }
@@ -366,7 +372,8 @@ namespace ReceiptDataAcess
                                                                            Convert.ToDecimal(drImport["Carpet"]), Convert.ToDecimal(drImport["w_B"]),
                                                                            Convert.ToDecimal(drImport["Amount"]), totals, Convert.ToString(drImport["EAST"]),
                                                                            Convert.ToString(drImport["WEST"]), Convert.ToString(drImport["NORTH"]),
-                                                                           Convert.ToString(drImport["SOUTH"]), convertNumberToWord(numberConvert));
+                                                                           Convert.ToString(drImport["SOUTH"]), convertNumberToWord(numberConvert),
+                                                                           Convert.ToDecimal(drImport["Open_Terrace"]));
                             List<EnWingDetails> enWingDetailsList = new List<EnWingDetails>();
                             enWingDetailsList.Add(enWingDetails);
                             var wingMasterID = await DaWingMaster.InsertWingMaster(enWingMaster, enWingDetailsList, 1);

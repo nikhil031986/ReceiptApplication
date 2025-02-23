@@ -186,7 +186,6 @@ D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\bin\Debug\ru\Microsoft.Repo
 D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\bin\Debug\zh-CHS\Microsoft.ReportViewer.WinForms.resources.dll
 D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\bin\Debug\zh-CHT\Microsoft.ReportViewer.WinForms.resources.dll
 D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.csproj.AssemblyReference.cache
-D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.csproj.SuggestedBindingRedirects.cache
 D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.frmBanakhat.resources
 D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.frmBanakhatList.resources
 D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.frmCheqDetail.resources
@@ -210,6 +209,6 @@ D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.Propertie
 D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.Wing_Master.resources
 D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.csproj.GenerateResource.cache
 D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.csproj.CoreCompileInputs.cache
-D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.csproj.CopyComplete
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.csproj.Up2Date
 D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.exe
 D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.pdb
