@@ -1,22 +1,12 @@
 ﻿using ReceiptBAccess;
+using ReceiptLog;
 using System;
-using System.CodeDom.Compiler;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Net.NetworkInformation;
-using System.Security.Permissions;
-using System.Text;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Text.RegularExpressions;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using ReceiptEntity;
-using ReceiptLog;
-using System.Reflection;
-using System.Web.UI;
 
 namespace Receipt
 {
@@ -309,7 +299,7 @@ namespace Receipt
             var dtExport = dtCustomer.Clone();
             try
             {
-                foreach(DataGridViewColumn dgColumn in dgCustomer.Columns)
+                foreach (DataGridViewColumn dgColumn in dgCustomer.Columns)
                 {
                     dgExport.Columns.Add(dgColumn.Clone() as DataGridViewColumn);
                 }
@@ -351,7 +341,7 @@ namespace Receipt
                 ClsUtil.ExportDataToExcel(dgExport);
             }
             catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
-            finally 
+            finally
             {
                 dgExport.Dispose();
                 dtExport.Dispose();

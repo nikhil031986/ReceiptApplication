@@ -355,7 +355,7 @@ namespace Receipt
         }
         public static string getCurrentPath()
         {
-            return System.Reflection.Assembly.GetExecutingAssembly().Location.ToString().Replace("WEBAPISYCAPP.exe", "");
+            return System.Reflection.Assembly.GetExecutingAssembly().Location.ToString().Replace("Receipt.exe", "");
         }
 
         public static string getDateFormate(string dt)
