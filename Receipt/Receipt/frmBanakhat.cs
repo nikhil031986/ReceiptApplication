@@ -570,5 +570,24 @@ namespace Receipt
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void btnSendToExcel_Click(object sender, EventArgs e)
+        {
+            clsWaitForm.ShowWaitForm();
+            try
+            {
+                EnCustomer selectedCustomer = (EnCustomer)cmbCustomer.SelectedItem;
+                ClsUtil.SendToExcelBanakhat(selectedCustomer);
+            }
+            catch (Exception ex)
+            {
+                clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name);
+            }
+            finally
+            {
+                clsWaitForm.CloseWaitForm();
+                GC.Collect();
+            }
+        }
     }
 }
