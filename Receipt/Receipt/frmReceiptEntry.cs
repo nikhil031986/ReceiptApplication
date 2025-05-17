@@ -87,7 +87,7 @@ namespace Receipt
                 receiptDetails = new EnReceiptDetails();
                 Receipt_ID = receiptId;
                 FillBankNameAndBranchName();
-                Task.Run(()=> GetReceiptDetails(receiptId)).Wait();
+                Task.Run(() => GetReceiptDetails(receiptId)).Wait();
                 cmbReceivedAs.SelectedIndex = 0;
                 dtpReceiptDate.Focus();
 
@@ -217,19 +217,19 @@ namespace Receipt
                     {
                         if (i == 0)
                         {
-                            e.Graphics.DrawString(custmor[i] +(custmor.Count()>1 ? " & ":"") , new Font("Times New Roman", 12, FontStyle.Bold),
+                            e.Graphics.DrawString(custmor[i] + (custmor.Count() > 1 ? " & " : ""), new Font("Times New Roman", 12, FontStyle.Bold),
                             Brushes.Black, floatx, floaty);
                         }
-                        else if(i<custmor.Length-1)
+                        else if (i < custmor.Length - 1)
                         {
                             floaty = floaty + 20;
-                            e.Graphics.DrawString("\t\t\t\t\t\t\t\t\t  "+ custmor[i]+ (custmor.Count() > 2 ? " & " : ""), new Font("Times New Roman", 12, FontStyle.Bold),
+                            e.Graphics.DrawString("\t\t\t\t\t\t\t\t\t  " + custmor[i] + (custmor.Count() > 2 ? " & " : ""), new Font("Times New Roman", 12, FontStyle.Bold),
                             Brushes.Black, floatx, floaty);
                         }
                         else
                         {
                             floaty = floaty + 20;
-                            e.Graphics.DrawString("\t\t\t\t\t\t\t\t  "+ custmor[i] + " ", new Font("Times New Roman", 12, FontStyle.Bold),
+                            e.Graphics.DrawString("\t\t\t\t\t\t\t\t  " + custmor[i] + " ", new Font("Times New Roman", 12, FontStyle.Bold),
                             Brushes.Black, floatx, floaty);
                         }
                     }
@@ -240,9 +240,9 @@ namespace Receipt
                     {
                         string[] displaytxt = strLine.Split(' ');
                         string displayadd = "";
-                        for(int ln = 0; ln < 10; ln++)
+                        for (int ln = 0; ln < 10; ln++)
                         {
-                            displayadd += displaytxt[ln]+" ";
+                            displayadd += displaytxt[ln] + " ";
                         }
                         floaty = floaty + 20;
                         // e.Graphics.DrawString(strLine.Substring(0,74) + " ", new Font("Times New Roman", 12, FontStyle.Bold),
@@ -255,13 +255,13 @@ namespace Receipt
                             displayadd += displaytxt[ln] + " ";
                         }
                         floaty = floaty + 20;
-                        e.Graphics.DrawString("\t\t\t\t\t\t\t   "+ displayadd + " ", new Font("Times New Roman", 12, FontStyle.Bold),
+                        e.Graphics.DrawString("\t\t\t\t\t\t\t   " + displayadd + " ", new Font("Times New Roman", 12, FontStyle.Bold),
                         Brushes.Black, floatx, floaty);
                     }
                     else
                     {
                         floaty = floaty + 20;
-                        e.Graphics.DrawString( strLine + " ", new Font("Times New Roman", 12, FontStyle.Bold),
+                        e.Graphics.DrawString(strLine + " ", new Font("Times New Roman", 12, FontStyle.Bold),
                         Brushes.Black, floatx, floaty);
                     }
                 }
@@ -347,7 +347,7 @@ namespace Receipt
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
-            btnSave.Enabled= false;
+            btnSave.Enabled = false;
             try
             {
                 clsWaitForm.ShowWaitForm();
@@ -441,7 +441,7 @@ namespace Receipt
                 printDlg.AllowSelection = true;
                 printDlg.AllowSomePages = true;
                 printDlg.PrinterSettings.Copies = 2;
-                printDlg.PrinterSettings.PrinterName=defaultPrinterName;
+                printDlg.PrinterSettings.PrinterName = defaultPrinterName;
                 //Call ShowDialog
                 clsWaitForm.CloseWaitForm();
                 if (printDlg.ShowDialog() == DialogResult.OK)
@@ -468,14 +468,24 @@ namespace Receipt
             catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }
         }
 
-        private void txtFlatShopNo_Validated(object sender, EventArgs e)
+        private async void CreateCustomer(string flatNo)
         {
-            try
+            if (MessageBox.Show("Are you want to add customer in system", "Customer", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
             {
-                if (txtFlatShopNo.Text.ToString().ToUpper().Contains("-"))
+                var frmCustomer = new frmCustomerEntry();
+                frmCustomer.ShowDialog();
+                var customer = await BACustomerMaster.GetCustomer();
+                cmbCustomerName.BeginInvoke(new Action(() =>
                 {
+                    cmbCustomerName.DataSource = null;
+                    cmbCustomerName.Items.Clear();
+                    cmbCustomerName.DataSource = null;
+                    cmbCustomerName.DisplayMember = "Customer_Name";
+                    cmbCustomerName.ValueMember = "Customer_Id";
+                    cmbCustomerName.DataSource = customer;
+                    cmbCustomerName.SelectedIndex = -1;
                     int selectedindex = 0;
-                    string[] strWingFlat = txtFlatShopNo.Text.Split('-');
+                    string[] strWingFlat = flatNo.Split('-');
                     if (strWingFlat.Length >= 1)
                     {
                         foreach (EnCustomer items in cmbCustomerName.Items)
@@ -492,10 +502,48 @@ namespace Receipt
                     {
                         cmbCustomerName.SelectedIndex = -1;
                     }
+                }));
+                
+                
+            }
+
+        }
+
+        private async void txtFlatShopNo_Validated(object sender, EventArgs e)
+        {
+            bool IsFound = false;
+            try
+            {
+                if (txtFlatShopNo.Text.ToString().ToUpper().Contains("-"))
+                {
+                    int selectedindex = 0;
+                    string[] strWingFlat = txtFlatShopNo.Text.Split('-');
+                    if (strWingFlat.Length >= 1)
+                    {
+                        foreach (EnCustomer items in cmbCustomerName.Items)
+                        {
+                            if (items.Wing_Name.Trim().ToUpper() == strWingFlat[0].Trim().ToUpper() && items.FlatNo.ToUpper() == strWingFlat[1].ToUpper())
+                            {
+                                cmbCustomerName.SelectedIndex = selectedindex;
+                                IsFound = true;
+                                break;
+                            }
+                            selectedindex = selectedindex + 1;
+                        }
+                    }
+                    else
+                    {
+                        cmbCustomerName.SelectedIndex = -1;
+                    }
                 }
                 else
                 {
                     cmbCustomerName.SelectedIndex = -1;
+                }
+
+                if (!IsFound)
+                {
+                    await Task.Run(() => CreateCustomer(txtFlatShopNo.Text));
                 }
             }
             catch (Exception ex) { clsLog.InstanceCreation().InsertLog(ex.ToString(), clsLog.logType.Error, MethodBase.GetCurrentMethod().Name); }

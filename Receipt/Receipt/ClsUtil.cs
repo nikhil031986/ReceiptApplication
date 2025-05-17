@@ -450,11 +450,11 @@ namespace Receipt
                         dcNewColumn.DataType = typeof(decimal);
                         if (string.IsNullOrEmpty(DefaultValue))
                         {
-                            dcNewColumn.DefaultValue = 0.0;
+                            dcNewColumn.DefaultValue = 0.00m;
                         }
                         else
                         {
-                            dcNewColumn.DefaultValue = Convert.ToDecimal(DefaultValue);
+                            dcNewColumn.DefaultValue = 0.00m;
                         }
                         break;
                 }

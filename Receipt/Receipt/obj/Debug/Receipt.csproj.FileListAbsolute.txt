@@ -212,3 +212,4 @@ D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.csproj.Co
 D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.csproj.Up2Date
 D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.exe
 D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.pdb
+D:\Hemang_Project\ReceiptApplication\Receipt\Receipt\obj\Debug\Receipt.exe.config

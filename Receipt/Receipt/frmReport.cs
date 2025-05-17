@@ -47,6 +47,7 @@ namespace Receipt
                 clsColumns.Add(new clsColumn("Amount", ClsUtil.ColumnType.dbDecimal, "0.0"));
                 clsColumns.Add(new clsColumn("Amount_Word", ClsUtil.ColumnType.dbString, ""));
                 clsColumns.Add(new clsColumn("Payment_Date", ClsUtil.ColumnType.dbString, ""));
+                clsColumns.Add(new clsColumn("IsCancel", ClsUtil.ColumnType.dbInt, "0"));
                 await ClsUtil.AddColumn(dtReceiptDetails, clsColumns);
                 dgvReport.DataSource = dtReceiptDetails;
                 dtReceiptDetails.TableName = "ReceipList";
@@ -80,6 +81,7 @@ namespace Receipt
                     drNew["Amount"] = receipt.Amount;
                     drNew["Amount_Word"] = receipt.Amount_Word;
                     drNew["Payment_Date"] = ClsUtil.getDateFormate(receipt.PaymentDate);
+                    drNew["IsCancel"] = receipt.IsCancel;
                     dtReceiptDetails.Rows.Add(drNew);
                 });
             }

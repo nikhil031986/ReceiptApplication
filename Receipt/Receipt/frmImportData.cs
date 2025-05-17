@@ -156,6 +156,7 @@ namespace Receipt
                                 break;
                         }
                     }
+                    clsWaitForm.CloseWaitForm();
                     MessageBox.Show("Data Import in the system.\n if any error for import data see the isimport column value and contact to administrator.", "Receipt Application", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     //if(!string.IsNullOrWhiteSpace(cboTableName.Text) && cboTableName.Text.Trim().ToLower()== "receiptdetail")
                     //{
