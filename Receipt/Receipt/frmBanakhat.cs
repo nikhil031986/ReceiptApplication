@@ -73,7 +73,7 @@ namespace Receipt
                 strNewHTMLFile.AppendLine(@"			<td style='text-align:center'><strong>" + ClsUtil.SiteAddress + "</strong></td>");
                 strNewHTMLFile.AppendLine(@"		</tr>");
                 strNewHTMLFile.AppendLine(@"		<tr>");
-                strNewHTMLFile.AppendLine(@"			<td style='text-align:center'><strong>REG. BANAKHAT</strong></td>");
+                strNewHTMLFile.AppendLine(@"			<td style='text-align:center'><strong>REG. BANAKHAT / DASTAVEJ.</strong></td>");
                 strNewHTMLFile.AppendLine(@"		</tr>");
                 strNewHTMLFile.AppendLine(@"		<tr>");
                 strNewHTMLFile.AppendLine(@"			<td>");

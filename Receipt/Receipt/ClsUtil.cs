@@ -499,7 +499,7 @@ namespace Receipt
                 range.Interior.ThemeColor = (int)Microsoft.Office.Interop.Excel.XlThemeColor.xlThemeColorDark1;
                 range.Interior.TintAndShade = -0.349986266670736;
                 rowNumber++;
-                XcelApp.Cells[rowNumber, columnNumber] = "REG. BANAKHAT";
+                XcelApp.Cells[rowNumber, columnNumber] = "REG. BANAKHAT / DASTAVEJ.";
                 range = XcelApp.Range["A2", "I2"];
 
                 // Apply formatting
