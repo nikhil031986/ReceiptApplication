@@ -310,11 +310,29 @@ namespace Receipt
             {
 
                 string receiptFilePath = ClsUtil.getCurrentPath() + "ReceiptTemplate.txt";
+                if (ClsUtil.SiteDBName.ToUpper() != "K8")
+                {
+                    receiptFilePath = ClsUtil.getCurrentPath() + "ReceiptTemplate.txt";
+                }
+                else
+                {
+                    receiptFilePath = ClsUtil.getCurrentPath() + "ReceiptTemplateK8.txt";
+                }
                 try
                 {
-                    if (System.IO.File.Exists(ClsUtil.templateFolderPath + @"\ReceiptTemplate.txt"))
+                    if (ClsUtil.SiteDBName.ToUpper() != "K8")
                     {
-                        receiptFilePath = ClsUtil.templateFolderPath + @"\ReceiptTemplate.txt";
+                        if (System.IO.File.Exists(ClsUtil.templateFolderPath + @"\ReceiptTemplate.txt"))
+                        {
+                            receiptFilePath = ClsUtil.templateFolderPath + @"\ReceiptTemplate.txt";
+                        }
+                    }
+                    else
+                    {
+                        if (System.IO.File.Exists(ClsUtil.templateFolderPath + @"\ReceiptTemplateK8.txt"))
+                        {
+                            receiptFilePath = ClsUtil.templateFolderPath + @"\ReceiptTemplateK8.txt";
+                        }
                     }
                 }
                 catch
@@ -503,8 +521,8 @@ namespace Receipt
                         cmbCustomerName.SelectedIndex = -1;
                     }
                 }));
-                
-                
+
+
             }
 
         }

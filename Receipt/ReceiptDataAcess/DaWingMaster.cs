@@ -51,6 +51,34 @@ namespace ReceiptDataAcess
                 dtWingMaster.Dispose();
             }
         }
+        public static async Task<DataTable> GetAllWingWithCustomer()
+        {       
+            DataTable dtWingMaster = new DataTable();
+            SQLiteCommand cmd = new SQLiteCommand();
+            try
+            {
+                cmd.CommandText = "SELECT WM.Wing_Name,WD.FlatNo,WD.Land,WD.Carpet,WD.Open_Terrace,WD.Total,WD.EAST,WD.WEST,WD.NORTH,WD.SOUTH,WD.FlorName,WD.Amount,"
+                                   +"IFNULL(CM.Customer_Name,'') AS Customer_Name,IFNULL(CM.Customer_Wing_Name,'') AS CustomerWingName "
+                                   +"FROM Wing_Master WM "
+                                   +"INNER JOIN Wing_Details WD "
+                                   +"ON WM.Wing_Master_Id = WD.Wing_MasterId "
+                                   +"LEFT JOIN Customer_Master CM "
+                                   +"ON CM.Wing_Master_Id=WM.Wing_Master_Id "
+                                   +"AND CM.Wing_Details_Id=WD.Wing_DetailsId " 
+                                   +"Order By WM.Wing_Name,CAST(WD.FlatNo AS INT);";
+                dtWingMaster = await DaDatabaseConnection.GetDataTable(cmd);
+                return dtWingMaster;
+            }
+            catch (Exception ex)
+            {
+                ReceiptLog.clsLog.InstanceCreation().InsertLog(ex.Message, ReceiptLog.clsLog.logType.Error, "DaWingMaster.GetAllWingWithCustomer");
+                throw ex;
+            }
+            finally
+            {
+                cmd.Dispose();
+            }
+        }
         public static async Task<EnWingMaster> GetWingMasterByName(string wingName)
         {
             EnWingMaster enWingMaster = new EnWingMaster();

@@ -1,6 +1,7 @@
 ﻿using ReceiptEntity;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,9 @@ namespace ReceiptBAccess
 {
     public static class BaWingMaster
     {
+        public static async Task<DataTable> GetAllWingWithCustomer()
+            => await ReceiptDataAcess.DaWingMaster.GetAllWingWithCustomer();
+
         public static async Task<int> InsertWingMaster(EnWingMaster wingMaster, List<EnWingDetails> wingDetails, int UserId)
         =>await ReceiptDataAcess.DaWingMaster.InsertWingMaster(wingMaster, wingDetails, UserId);
 
